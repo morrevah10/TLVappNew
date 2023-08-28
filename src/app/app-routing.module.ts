@@ -10,6 +10,10 @@ import { RantalComponent } from './pages/rantal/rantal.component';
 import { ApartmentListComponent } from './cmps/apartment/apartment-list/apartment-list.component';
 import { ApartmentDetailsComponent } from './cmps/apartment/apartment-details/apartment-details.component';
 import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
+import { AboutComponent } from './pages/about/about.component';
+import { MyReviewsComponent } from './pages/my-reviews/my-reviews.component';
+import { myPostsComponent } from './pages/my-posts/my-posts.component';
+import { TermsComponent } from './pages/terms/terms.component';
 
 const routes: Routes = [
   { path: '', component: LandPageComponent },
@@ -20,6 +24,10 @@ const routes: Routes = [
   { path: 'apartment', component: ApartmentListComponent },
   { path: 'apartment/:id', component: ApartmentDetailsComponent },
   { path: 'personalInfo', component: PersonalInfoComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'reviews', component: MyReviewsComponent },
+  { path: 'myposts', component: myPostsComponent },
+  { path: 'terms', component: TermsComponent },
   
 ];
 

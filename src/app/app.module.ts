@@ -13,6 +13,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+
+
 import { ToastrModule } from 'ngx-toastr';
 
 import { UserService } from './srvices/user.service';
@@ -31,6 +37,10 @@ import { FooterComponent } from './cmps/footer/footer.component';
 import { ApartmentListComponent } from './cmps/apartment/apartment-list/apartment-list.component';
 import { ApartmentDetailsComponent } from './cmps/apartment/apartment-details/apartment-details.component';
 import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
+import { myPostsComponent } from './pages/my-posts/my-posts.component';
+import { MyReviewsComponent } from './pages/my-reviews/my-reviews.component';
+import { AboutComponent } from './pages/about/about.component';
+import { TermsComponent } from './pages/terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +55,10 @@ import { PersonalInfoComponent } from './pages/personal-info/personal-info.compo
     ApartmentListComponent,
     ApartmentDetailsComponent,
     PersonalInfoComponent,
+    myPostsComponent,
+    MyReviewsComponent,
+    AboutComponent,
+    TermsComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,11 +71,13 @@ import { PersonalInfoComponent } from './pages/personal-info/personal-info.compo
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-
     FormsModule,
 
 
-    
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
 
     
   ],

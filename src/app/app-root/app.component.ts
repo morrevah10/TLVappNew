@@ -12,6 +12,7 @@ import { User } from '../models/user.model';
 export class AppComponent {
   title = 'TLVapp';
   currentUser!: User;
+  opened=false;
 
 
   constructor(
