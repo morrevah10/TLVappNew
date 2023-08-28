@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -19,10 +19,18 @@ export class PostService {
   }
 
 
-  getApartmentPosts(): Observable<any[]> {
-    const url = this.APIurl + `feed_posts/`;
-    return this.http.get<any[]>(url);
+
+  getApartmentPosts(searchParams?: any): Observable<any[]> {
+    const url = this.APIurl + 'feed_posts/';
+    console.log('searchParams new',searchParams)
+    // Use the responseType option to specify the expected response type
+    return this.http.get<any[]>(url, { params: searchParams, responseType: 'json' });
   }
+  
+
+
+
+
 
   getApartmentDetails(post_id: number): Observable<any> {
     console.log('post_id',post_id)
@@ -35,13 +43,13 @@ export class PostService {
 
 
   //! save to local only for check
-  savePostsToLocal(posts: any[]): void {
-    localStorage.setItem('apartmentPosts', JSON.stringify(posts));
-  }
+  // savePostsToLocal(posts: any[]): void {
+  //   localStorage.setItem('apartmentPosts', JSON.stringify(posts));
+  // }
 
-  getPostsFromLocal(): any[] {
-    const storedPosts = localStorage.getItem('apartmentPosts');
-    return storedPosts ? JSON.parse(storedPosts) : [];
-  }
+  // getPostsFromLocal(): any[] {
+  //   const storedPosts = localStorage.getItem('apartmentPosts');
+  //   return storedPosts ? JSON.parse(storedPosts) : [];
+  // }
 }
 

@@ -20,13 +20,13 @@ export class UserService {
 
     return this.http.post<any>(this.APIurl + 'login/', user_data).pipe(
       tap((response) => {
-        console.log('user obj',response)
+        // console.log('user obj',response)
         this.setUser(response);
       })
     );
   }
   setUser(user: User) {
-    console.log(user);
+    // console.log(user);
     this.userSubject.next(user);
   }
 

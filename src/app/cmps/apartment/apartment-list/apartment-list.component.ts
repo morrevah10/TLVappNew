@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/srvices/post.service';
@@ -17,8 +18,42 @@ export class ApartmentListComponent implements OnInit {
     private searchService: SearchService
   ) {}
 
+  // ngOnInit() {
+  //   this.postService.getApartmentPosts().subscribe(
+  //     (apartments) => {
+  //       this.apartments = apartments;
+  //       console.log('apartments:', apartments);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching apartment posts:', error);
+  //     }
+  //   );
+  // }
+  // ngOnInit() {
+  //   this.fetchApartments(); // Fetch apartments when the component initializes
+  // }
   ngOnInit() {
-    this.postService.getApartmentPosts().subscribe(
+    this.searchService.searchQuery$.subscribe(searchParams => {
+      this.fetchApartments(searchParams); 
+    });
+  }
+
+
+
+  // fetchApartments(searchParams?: any) {
+  //   console.log('searchParams',searchParams)
+  //   this.postService.getApartmentPosts(searchParams).subscribe(
+  //     (apartments) => {
+  //       this.apartments = apartments;
+  //       console.log('apartments:', apartments);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching apartment posts:', error);
+  //     }
+  //   );
+  // }
+  fetchApartments(searchParams?: any) {
+    this.postService.getApartmentPosts(searchParams).subscribe(
       (apartments) => {
         this.apartments = apartments;
         console.log('apartments:', apartments);
@@ -30,30 +65,37 @@ export class ApartmentListComponent implements OnInit {
   }
 
 
-  applyFilter() {
-    const searchQuery = this.searchService.getSearchQuery();
-    if (searchQuery) {
-      this.filteredApartments = this.apartments.filter(apartment =>
-        this.filterApartment(apartment, searchQuery)
-      );
-    } else {
-      this.filteredApartments = this.apartments;
-    }
-  }
 
-  filterApartment(apartment: any, searchQuery: string): boolean {
-    if (!searchQuery) {
-      return true; 
-    }
-    const normalizedSearch = searchQuery.toLowerCase();
 
-    return (
-    apartment.post_city.toLowerCase().includes(normalizedSearch) ||
-    apartment.post_street.toLowerCase().includes(normalizedSearch) ||
-    apartment.post_apartment_number.toLowerCase().includes(normalizedSearch)
+
+
+
+
+
+  // applyFilter() {
+  //   const searchQuery = this.searchService.getSearchQuery();
+  //   if (searchQuery) {
+  //     this.filteredApartments = this.apartments.filter(apartment =>
+  //       this.filterApartment(apartment, searchQuery)
+  //     );
+  //   } else {
+  //     this.filteredApartments = this.apartments;
+  //   }
+  // }
+
+  // filterApartment(apartment: any, searchQuery: string): boolean {
+  //   if (!searchQuery) {
+  //     return true; 
+  //   }
+  //   const normalizedSearch = searchQuery.toLowerCase();
+
+  //   return (
+  //   apartment.post_city.toLowerCase().includes(normalizedSearch) ||
+  //   apartment.post_street.toLowerCase().includes(normalizedSearch) ||
+  //   apartment.post_apartment_number.toLowerCase().includes(normalizedSearch)
    
-  );
-  }
+  // );
+  // }
 
 
   viewApartmentDetails(apartmentId: number) {
