@@ -1,0 +1,176 @@
+<section class="register-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onFormSubmit()">
+    <h3>User Registration</h3>
+    <!-- <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.get('firstName')?.errors }" placeholder="Enter First Name here"/>
+      <div *ngIf="submitted && registerForm.get('firstName')?.errors" class="invalid-feedback">
+        <div class="required" *ngIf="registerForm.get('firstName')?.hasError('required')">First Name is required</div>
+      </div>
+    </div> -->
+
+    <div class="form-group">
+      <label for="user_full_name">Full Name:</label>
+      <input
+        type="text"
+        formControlName="user_full_name"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.get('user_full_name')?.errors
+        }"
+        placeholder="Enter Full Name here"
+      />
+      <div
+        *ngIf="submitted && registerForm.get('user_full_name')?.errors"
+        class="invalid-feedback"
+      >
+        <div
+          class="required"
+          *ngIf="registerForm.get('user_full_name')?.hasError('required')"
+        >
+          Full Name is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_email">Email:</label>
+      <input
+        type="text"
+        formControlName="user_email"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid':
+            submitted &&
+            (registerForm.get('user_email')?.errors || errorMessages.user_email)
+        }"
+        placeholder="Enter email here"
+      />
+      <div
+        *ngIf="
+          submitted && registerForm.get('user_email')?.hasError('required')
+        "
+        class="invalid-feedback"
+      >
+        Email is required
+      </div>
+      <div
+        *ngIf="
+          submitted &&
+          registerForm.get('user_email')?.hasError('email') &&
+          !registerForm.get('user_email')?.hasError('required')
+        "
+        class="invalid-feedback"
+      >
+        Enter valid email address
+      </div>
+      <div
+        *ngIf="
+          submitted && registerForm.get('user_email')?.hasError('serverError')
+        "
+        class="invalid-feedback"
+      >
+         {{errorMessages.user_email}} 
+      </div>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="user_email">Email:</label>
+      <input type="text" formControlName="user_email" class="form-control" [ngClass]="{ 'is-invalid': submitted && (registerForm.get('user_email')?.errors || errorMessages.user_email) }" placeholder="Enter email here"/>
+      <div *ngIf="submitted && (registerForm.get('user_email')?.errors || errorMessages.user_email) " class="invalid-feedback">
+        <div class="required" *ngIf="registerForm.get('user_email')?.hasError('required') || errorMessages.user_full_name ">Email is required</div>
+        <div *ngIf="registerForm.get('user_email')?.hasError('email')">Enter valid email address</div>
+      </div>
+    </div> -->
+    <div class="form-group">
+      <label for="user_phone">Phone:</label>
+      <input
+        type="text"
+        formControlName="user_phone"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.get('user_phone')?.errors
+        }"
+        placeholder="Enter Phone here"
+      />
+      <div
+        *ngIf="submitted && registerForm.get('user_phone')?.errors"
+        class="invalid-feedback"
+      >
+        <div
+          class="required"
+          *ngIf="registerForm.get('user_phone')?.hasError('required')"
+        >
+          Phone is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_password">Password:</label>
+      <input
+        type="password"
+        formControlName="user_password"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.get('user_password')?.errors
+        }"
+        placeholder="Enter Password here"
+      />
+      <div
+        *ngIf="submitted && registerForm.get('user_password')?.errors"
+        class="invalid-feedback"
+      >
+        <div
+          class="required"
+          *ngIf="registerForm.get('user_password')?.hasError('required')"
+        >
+          Password is required
+        </div>
+        <div *ngIf="registerForm.get('user_password')?.hasError('minlength')">
+          Password must be at least 6 characters
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_password_2">Password Confirmtaion:</label>
+      <input
+        type="password"
+        formControlName="user_password_2"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.get('user_password_2')?.errors
+        }"
+        placeholder="Enter Password here"
+      />
+      <div
+        *ngIf="submitted && registerForm.get('user_password_2')?.errors"
+        class="invalid-feedback"
+      >
+        <div
+          class="required"
+          *ngIf="registerForm.get('user_password_2')?.hasError('required')"
+        >
+          Password is required
+        </div>
+        <div *ngIf="registerForm.get('user_password_2')?.hasError('minlength')">
+          Password must be at least 6 characters
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group buttons">
+      <button [disabled]="loading" class="btn">
+        <span *ngIf="loading" class=""></span>
+        Register
+      </button>
+      <button [disabled]="loading" class="btn">
+        <span routerLink="/login" class="">Login to continue</span>
+      </button>
+    </div>
+  </form>
+
+
+  <p class="invalid">{{errorMessages.user_email}}</p>
+</section>

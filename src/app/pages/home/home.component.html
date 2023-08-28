@@ -1,0 +1,26 @@
+<section class="home-container">
+  <h1>Hi {{logedinUser?.user_full_name}}</h1>
+
+  <p>Welcome to home page!!</p>
+  <P>let's get started</P>
+  <button (click)="navigateToPersonalInfo()">אזור אישי</button>
+
+  <div class="search-container">
+    <mat-form-field>
+      <!-- <input matInput placeholder="Search for apartments" [(ngModel)]="searchQuery" (input)="searchApartments()"> -->
+      <input matInput placeholder="Search for apartments" >
+    </mat-form-field>
+  </div>
+
+  <p>חיפוש</p>
+  <!-- <div> הדירות שלי</div> -->
+  <button (click)="navigateToApartmentForm()">+</button>
+  <section>
+
+
+    <app-apartment-list>
+
+    </app-apartment-list>
+    
+  </section>
+</section>

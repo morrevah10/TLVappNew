@@ -1,0 +1,60 @@
+.rantal-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+    border-radius: 25px;
+    margin: 20px;
+    padding: 20px;
+
+}
+
+
+.form-control {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+  
+  .form-control.is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+  }
+
+  input {
+    margin: 10px;
+  }
+
+  .required{
+    margin-bottom: 10px;
+  }
+
+  .btn{
+    color: blue; 
+    padding: 10px 20px; 
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    // font-size:  24px; ;
+  
+  }
+
+  .btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

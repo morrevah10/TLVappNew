@@ -1,0 +1,12 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 20px; /* Adjust gap between cards */
+  }
+  
+  .apartment-card {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ddd;
+  }
+  

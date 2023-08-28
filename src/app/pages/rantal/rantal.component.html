@@ -1,0 +1,71 @@
+
+<section class="rantal-container">
+  <h3>Rental Form :</h3>
+
+  <form [formGroup]="apartmentForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <label for="post_city">City:</label>
+    <input type="text" id="post_city" formControlName="post_city" class="form-control">
+
+    <label for="post_street">Street Name:</label>
+    <input type="text" id="post_street" formControlName="post_street" class="form-control">
+
+    <label for="post_apartment_number">Apartment Number:</label>
+    <input type="text" id="post_apartment_number" formControlName="post_apartment_number" class="form-control">
+
+    <label for="post_apartment_price">Price of Apartment:</label>
+    <input type="text" id="post_apartment_price" formControlName="post_apartment_price" class="form-control">
+
+    <label for="post_rent_start">Entry Date:</label>
+    <input type="date" id="post_rent_start" formControlName="post_rent_start" class="form-control">
+
+    <label for="post_rent_end">Release Date:</label>
+    <input type="date" id="post_rent_end" formControlName="post_rent_end" class="form-control">
+
+    <!-- Image Upload -->
+    <label for="proof_image">Proof Image:</label>
+    <input type="file" (change)="onImageSelected($event, 'proof_image')" class="form-control">
+
+    <label for="driving_license">Driving License:</label>
+    <input type="file" (change)="onImageSelected($event, 'driving_license')" class="form-control">
+
+    <label for="apartment_pic_1">Apartment Images:</label>
+    <input type="file" multiple (change)="onImageSelected($event, 'apartment_pic_1')" class="form-control">
+
+    <label for="post_description">Description:</label>
+    <input type="text" id="post_description" formControlName="post_description" class="form-control">
+
+    <div class="btn-container">
+      <button type="submit" class="btn">Submit</button>
+    </div>
+
+
+  </form>
+      
+  </section>
+
+
+
+
+  <!-- <section class="submitted-info">
+    <h2>Submitted Information</h2>
+    <div *ngIf="formData">
+      <p><strong>City:</strong> {{ formData.post_city }}</p>
+      <p><strong>Street :</strong> {{ formData.post_street }}</p>
+      <p><strong>Apartment Number:</strong> {{ formData.post_apartment_number }}</p>
+      <p><strong>Apartment Price:</strong> {{ formData.post_apartment_price }}</p>
+      <p><strong>Rent Start:</strong>{{ formData.post_rent_start }}</p>
+      <p><strong>Rent End:</strong>{{ formData.post_rent_end }}</p>
+      <p><strong>Description:</strong>{{ formData.post_description }}</p>
+
+      <img [src]="formData.proof_image" alt="proof_image">
+  
+      <p><strong>Driving License:</strong></p>
+      <img [src]="formData.driving_license" alt="driving_license">
+  
+      <p><strong>Apartment Images:</strong></p>
+      <div *ngFor="let image of formData.apartment_pic_1">
+        <img [src]="image" alt="apartment_pic_1">
+      </div>
+    </div>
+  </section> -->
+

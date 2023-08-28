@@ -1,0 +1,27 @@
+
+<!-- <p>apartment-list works!</p> -->
+
+<section class="apartment-list-container">
+  <div class="grid-container">
+    <mat-card
+      *ngFor="let apartment of apartments"
+      class="apartment-card"
+      (click)="viewApartmentDetails(apartment.post_id)"
+    >
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title> city :{{ apartment.post_city }}</mat-card-title>
+          <mat-card-subtitle 
+            > street :{{ apartment.post_street }},{{
+              apartment.post_apartment_number
+            }}</mat-card-subtitle
+          >
+          <img mat-card-md-image src="{{ apartment.apartment_pic_1 }}" alt="" />
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <p>price : {{ apartment.post_apartment_price }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>
