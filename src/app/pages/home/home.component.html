@@ -5,69 +5,22 @@
   <P>let's get started</P>
   <button (click)="navigateToPersonalInfo()">אזור אישי</button>
 
-  <!-- <div class="search-container">
-    <mat-form-field>
-      <input matInput placeholder="Search for apartments" [(ngModel)]="searchQuery" (input)="searchApartments()">
-      <input matInput placeholder="Search for apartments" >
-    </mat-form-field>
-  </div> -->
-
-  <!-- <div class="search-container">
-    <mat-form-field>
-      <input matInput placeholder="City" [(ngModel)]="search.city">
-      <input matInput placeholder="Street" [(ngModel)]="search.street">
-      <input matInput placeholder="Apartment Number" [(ngModel)]="search.apartmentNumber">
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="searchApartments()">Search</button>
-  </div> -->
-
-  <!-- <div class="search-container">
-    <mat-form-field>
-      <input matInput placeholder="City" [(ngModel)]="search.city">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Street" [(ngModel)]="search.street">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Apartment Number" [(ngModel)]="search.apartmentNumber">
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="searchApartments()">Search</button>
-  </div> -->
-
-
-  <!-- <div class="form-field" id="city-selection">
-    <label for="city-choice">Choose a city:</label>
-    <input matInput id="city-choice" name="city-choice" list="cities-data" [(ngModel)]="search.city">
-    <datalist id="cities-data">
-      <option value="" *ngFor="let city of citySuggestions">{{ city }}</option>
-    </datalist>
-  </div>
-  
-  <div class="form-field" id="street-selection">
-    <label for="street-choice">Choose a street:</label>
-    <input matInput id="street-choice" name="street-choice" list="streets-data" [(ngModel)]="search.street">
-    <datalist id="streets-data">
-      <option value="" *ngFor="let street of streetSuggestions">{{ street }}</option>
-    </datalist>
-  </div> -->
-
   <div class="search-container">
     <mat-form-field>
-      <input matInput placeholder="City" list="city-suggestions" [(ngModel)]="search.post_city">
-      <datalist id="city-suggestions">
-        <option *ngFor="let city of citySuggestions" [value]="city"></option>
-      </datalist>
+      <input matInput placeholder="City" [formControl]="cityControl" [matAutocomplete]="cityAuto">
+      <mat-autocomplete #cityAuto="matAutocomplete">
+        <mat-option *ngFor="let city of filteredCities | async" [value]="city.town_name">
+          {{ city.town_name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     
     <mat-form-field>
-      <input matInput placeholder="Street" list="street-suggestions" [(ngModel)]="search.post_street">
-      <datalist id="street-suggestions">
-        <option *ngFor="let street of streetSuggestions" [value]="street"></option>
-      </datalist>
+      <input matInput placeholder="Street" >
     </mat-form-field>
     
     <mat-form-field>
-      <input matInput placeholder="Apartment Number" [(ngModel)]="search.post_apartment_number">
+      <input matInput placeholder="Apartment Number">
     </mat-form-field>
     
     <button mat-raised-button color="primary" (click)="searchApartments()">Search</button>

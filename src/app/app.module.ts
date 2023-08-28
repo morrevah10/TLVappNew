@@ -17,6 +17,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 import { ToastrModule } from 'ngx-toastr';
@@ -78,6 +79,7 @@ import { TermsComponent } from './pages/terms/terms.component';
     MatIconModule,
     MatListModule,
     MatToolbarModule,
+    MatAutocompleteModule,
 
     
   ],
