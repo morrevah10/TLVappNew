@@ -14,21 +14,22 @@ import { AboutComponent } from './pages/about/about.component';
 import { MyReviewsComponent } from './pages/my-reviews/my-reviews.component';
 import { myPostsComponent } from './pages/my-posts/my-posts.component';
 import { TermsComponent } from './pages/terms/terms.component';
+import { ChangPasswordComponent } from './pages/chang-password/chang-password.component';
 
 const routes: Routes = [
   { path: '', component: LandPageComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'login',component: LoginComponent,},
-  {path: 'register',component: RegisterComponent,},
-  {path: 'rantal',component: RantalComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'rantal', component: RantalComponent },
   { path: 'apartment', component: ApartmentListComponent },
   { path: 'apartment/:id', component: ApartmentDetailsComponent },
   { path: 'personalInfo', component: PersonalInfoComponent },
+  { path: 'personalInfo/changPassword', component: ChangPasswordComponent },
   { path: 'about', component: AboutComponent },
   { path: 'reviews', component: MyReviewsComponent },
   { path: 'myposts', component: myPostsComponent },
   { path: 'terms', component: TermsComponent },
-  
 ];
 
 @NgModule({

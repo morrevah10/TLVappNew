@@ -3,22 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
-
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-
-
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -42,6 +40,8 @@ import { myPostsComponent } from './pages/my-posts/my-posts.component';
 import { MyReviewsComponent } from './pages/my-reviews/my-reviews.component';
 import { AboutComponent } from './pages/about/about.component';
 import { TermsComponent } from './pages/terms/terms.component';
+import { ChangPasswordComponent } from './pages/chang-password/chang-password.component';
+import { ImgUploadModalComponent } from './cmps/img-upload-modal/img-upload-modal.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +60,8 @@ import { TermsComponent } from './pages/terms/terms.component';
     MyReviewsComponent,
     AboutComponent,
     TermsComponent,
+    ChangPasswordComponent,
+    ImgUploadModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,16 +76,15 @@ import { TermsComponent } from './pages/terms/terms.component';
     MatFormFieldModule,
     FormsModule,
 
-
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatToolbarModule,
     MatAutocompleteModule,
-
-    
+    MatDialogModule,
+    MatDividerModule,
   ],
-  providers: [AuthService,UserService,PostService],
-  bootstrap: [AppComponent]
+  providers: [AuthService, UserService, PostService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

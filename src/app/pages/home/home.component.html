@@ -3,28 +3,34 @@
 
   <p>Welcome to home page!!</p>
   <P>let's get started</P>
-  <button (click)="navigateToPersonalInfo()">אזור אישי</button>
+  <!-- <button (click)="navigateToPersonalInfo()">אזור אישי</button> -->
 
-  <div class="search-container">
-    <mat-form-field>
-      <input matInput placeholder="City" [formControl]="cityControl" [matAutocomplete]="cityAuto">
-      <mat-autocomplete #cityAuto="matAutocomplete">
-        <mat-option *ngFor="let city of filteredCities | async" [value]="city.town_name">
-          {{ city.town_name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    
-    <mat-form-field>
-      <input matInput placeholder="Street" >
-    </mat-form-field>
-    
-    <mat-form-field>
-      <input matInput placeholder="Apartment Number">
-    </mat-form-field>
-    
-    <button mat-raised-button color="primary" (click)="searchApartments()">Search</button>
-  </div>
+
+     <div class="search-container">
+      <mat-form-field>
+        <input matInput placeholder="City" [formControl]="cityControl" [matAutocomplete]="cityAuto">
+        <mat-autocomplete #cityAuto="matAutocomplete">
+          <mat-option *ngFor="let city of filteredCities | async" [value]="getDisplayCityName(city)" (click)="onCityOptionSelected(city.city_name)">
+            {{ getDisplayCityName(city) }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Street" [formControl]="streetControl" [matAutocomplete]="streetAuto">
+          <mat-autocomplete #streetAuto="matAutocomplete">
+            <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
+              {{ street }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field> 
+      
+      <mat-form-field>
+        <input matInput placeholder="Apartment Number" [formControl]="apartmentControl">
+      </mat-form-field>
+      
+      <button mat-raised-button color="primary" (click)="searchApartments()">Search</button>
+    </div>
   
   <!-- <button mat-raised-button color="primary" (click)="searchApartments()">Search</button> -->
 
@@ -53,9 +59,10 @@
     <button mat-raised-button color="primary" (click)="searchApartments()">Search</button>
   </div> -->
 
-  <p>חיפוש</p>
+  <!-- <p>חיפוש</p> -->
   <!-- <div> הדירות שלי</div> -->
-  <button (click)="navigateToApartmentForm()">+</button>
+
+  <button (click)="navigateToApartmentForm()">הוספת פוסט</button>
   <section>
 
 

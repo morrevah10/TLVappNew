@@ -14,28 +14,33 @@ export class PostService {
 
   addPost(formData: any): Observable<any> {
     const url = this.APIurl + `add_post/`;
-    // console.log('formData', formData);
     return this.http.post(url, formData);
   }
 
 
 
-  getApartmentPosts(searchParams?: any): Observable<any[]> {
+  getApartmentPosts(): Observable<any[]> {
     const url = this.APIurl + 'feed_posts/';
-    console.log('searchParams new',searchParams)
+    console.log('old function works',)
     // Use the responseType option to specify the expected response type
-    return this.http.get<any[]>(url, { params: searchParams, responseType: 'json' });
+    return this.http.get<any[]>(url);
   }
   
-
+  getApartmentFilteredPosts(searchData: { post_city: string; post_street: string; post_apartment_number: string; }): Observable<any[]> {
+    const url = this.APIurl + 'get_post_by_parm/';
+    let queryParams = searchData
+    console.log('searchData new',searchData)
+    // Use the responseType option to specify the expected response type
+    return this.http.get<any[]>(url,{params:queryParams});
+  }
 
 
 
 
   getApartmentDetails(post_id: number): Observable<any> {
-    console.log('post_id',post_id)
-    const url = this.APIurl +`get_post/`
-    return this.http.post<any>(url,post_id);
+    console.log('post_id', post_id);
+    const url = `${this.APIurl}get_post/`;
+    return this.http.get<any>(url, { params: { post_id: post_id.toString() } });
   }
 
 

@@ -1,0 +1,7 @@
+<h2>Select Profile Picture</h2>
+<input type="file" (change)="onFileChange($event)" accept="image/*" />
+<button (click)="confirmSelection()">Confirm</button>
+<button (click)="onCancelClick()">Cancel</button>
+
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+

@@ -10,6 +10,7 @@ import { SearchService } from 'src/app/srvices/search.service';
 })
 export class ApartmentListComponent implements OnInit {
   apartments: any[] = [];
+  afterSearchApartments: any[] = [];
   filteredApartments: any[] = [];
 
   constructor(
@@ -33,8 +34,10 @@ export class ApartmentListComponent implements OnInit {
   //   this.fetchApartments(); // Fetch apartments when the component initializes
   // }
   ngOnInit() {
-    this.searchService.searchQuery$.subscribe(searchParams => {
-      this.fetchApartments(searchParams); 
+    this.searchService.searchData$.subscribe(searchParams => {
+      console.log('searchParams',searchParams)
+      // this.fetchApartments(); 
+      //#אם נחזיר את זה אז נראה את כל הפוסטים בדף הבית איך שהוא מעולה
     });
   }
 
@@ -52,8 +55,8 @@ export class ApartmentListComponent implements OnInit {
   //     }
   //   );
   // }
-  fetchApartments(searchParams?: any) {
-    this.postService.getApartmentPosts(searchParams).subscribe(
+  fetchApartments() {
+    this.postService.getApartmentPosts().subscribe(
       (apartments) => {
         this.apartments = apartments;
         console.log('apartments:', apartments);
@@ -64,8 +67,43 @@ export class ApartmentListComponent implements OnInit {
     );
   }
 
+  fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; }) {
+    this.postService.getApartmentFilteredPosts(searchData).subscribe(
+      (apartments) => {
+        this.apartments = apartments;
+        console.log('this.afterSearchApartments:', this.afterSearchApartments);
+      },
+      (error) => {
+        console.error('Error fetching apartment posts:', error);
+      }
+    );
+  }
 
+  // fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; }) {
+  //   this.postService.getApartmentFilteredPosts(searchData).subscribe(
+  //     (apartments) => {
+  //       this.afterSearchApartments = apartments;
+  //       console.log('this.afterSearchApartments:', this.afterSearchApartments);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching apartment posts:', error);
+  //     }
+  //   );
+  // }
 
+ 
+  
+  // fetchApartments(searchParams?: any) {
+  //   this.postService.getApartmentPosts(searchParams).subscribe(
+  //     (apartments) => {
+  //       this.apartments = apartments;
+  //       console.log('apartments:', apartments);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching apartment posts:', error);
+  //     }
+  //   );
+  // }
 
 
 

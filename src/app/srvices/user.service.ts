@@ -65,10 +65,29 @@ export class UserService {
  
 
   updateUserDetails(user: any): Observable<any> {
-    console.log()
+    console.log('user',user)
     const url = this.APIurl + `change_personal_info/`;
     return this.http.put(url, user);
   }
+
+
+  updateUserPassword(userData:any): Observable<any>{
+    console.log('userData',userData)
+    const url = this.APIurl + `change_password/`
+    return this.http.put(url, userData);
+  }
+
+  updateUserProfilePicture(data: { user_id: string, profile_image: string }): Observable<any> {
+    const url = `${this.APIurl}change_profile_pic/`; 
+console.log('data',data)
+    return this.http.put(url, data);
+  }
+
+
+
+
+
+
 
 
 }
