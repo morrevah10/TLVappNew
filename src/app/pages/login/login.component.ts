@@ -81,28 +81,4 @@ export class LoginComponent implements OnInit {
 
   }
 }
-    // const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-    // const matchingUser = users.find((user: any) => user.email === email && user.password === password);
-    // if (matchingUser) {
-    //   this.router.navigate(['/home']);
-    //   localStorage.setItem('loggedInUser', JSON.stringify(matchingUser));
-
-    //   console.log('Matching User:', matchingUser);
-    // } else {
-    //   this.toastr.error('User not found', 'Error');
-    //   this.loading = false;
-    // }
-  // }
-// }
-
-// this.authenticationService
-//   .login(this.fval['email'].value, this.fval['password'].value)
-//   .subscribe(
-//     (data) => {
-//       this.router.navigate(['/']);
-//     },
-//     (error) => 
-//       this.toastr.error(error.error.message, 'Error');
-//       this.loading = false;
-//     }
-  // );
+   

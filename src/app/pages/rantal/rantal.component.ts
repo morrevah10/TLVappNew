@@ -12,8 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 //RantalComponent
 export class RantalComponent implements OnInit {
+
   apartmentForm!: FormGroup;
   formData: any;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,6 +50,8 @@ export class RantalComponent implements OnInit {
     };
     console.log('this.formData befor user', this.formData);
 
+    this.loading = true;
+    
     this.userService.user$.subscribe((user) => {
       if (user) {
         this.formData.user = user;

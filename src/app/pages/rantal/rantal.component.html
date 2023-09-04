@@ -34,8 +34,18 @@
     <label for="post_description">Description:</label>
     <input type="text" id="post_description" formControlName="post_description" class="form-control">
 
-    <div class="btn-container">
+    <!-- <div class="btn-container">
       <button type="submit" class="btn">Submit</button>
+    </div>
+
+    <button [disabled]="loading" class="btn ">
+      <span *ngIf="!loading" type="submit" class="">Submit</span>
+    </button> -->
+    <div class="btn-container">
+      <button [disabled]="loading" class="btn" type="submit">
+        <span *ngIf="!loading">Submit</span>
+        <span *ngIf="loading">Submitting...</span>
+      </button>
     </div>
 
 
