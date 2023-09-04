@@ -1,0 +1,50 @@
+.cards-container{
+    height: 480px;
+    width: 240px;
+}
+.card {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.card img {
+    max-width: 100px;
+    float: left;
+    margin-right: 10px;
+}
+.card-info {
+    float: left;
+}
+.divider {
+    clear: both;
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+}
+.btn {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.details{
+    background-color: #007bff;
+}
+
+.delet{
+    background-color: #ff0000;
+   
+}
+
+.comment{
+    background-color: #24d900;
+}
+
+.action{
+    display: flex;
+    flex-direction: column;
+}

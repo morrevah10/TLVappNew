@@ -4,6 +4,8 @@ import { UserService } from 'src/app/srvices/user.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ImgUploadModalComponent } from '../../cmps/img-upload-modal/img-upload-modal.component';
+import { PostService } from 'src/app/srvices/post.service';
+
 
 @Component({
   selector: 'app-personal-info',
@@ -11,17 +13,21 @@ import { ImgUploadModalComponent } from '../../cmps/img-upload-modal/img-upload-
   styleUrls: ['./personal-info.component.scss'],
 })
 export class PersonalInfoComponent implements OnInit {
+  
   PersonalForm!: FormGroup;
   submittedForm: any;
   user: any;
+  userImg: any =''
 
   profilePicture: string | ArrayBuffer | null = null;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private http: HttpClient,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private postService :PostService,
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +42,17 @@ export class PersonalInfoComponent implements OnInit {
       user_phone: [''],
       user_id: this.user.user_id,
     });
+
+
+    //function 
+    if(this.user){
+      this.loadUserImg(this.user.user_id) 
+      console.log('this.user.user_id',this.user.user_id)
+
+    }else{
+      console.log('problemmm')
+    }
+
   }
 
   onProfilePictureChange(event: any) {
@@ -72,8 +89,8 @@ export class PersonalInfoComponent implements OnInit {
       }
     );
     // this.PersonalForm.reset();
-  }
-
+  
+}
 
   openImageUploadModal() {
     console.log('clicked!!')
@@ -104,4 +121,16 @@ export class PersonalInfoComponent implements OnInit {
   formatUser(): string {
     return `email: ${this.user.user_email}, : ${this.user.user_full_name}, : ${this.user.user_id},:${this.user.user_phone}`;
   }
+
+  loadUserImg(user_id: any) {
+    this.postService.getProfileImg(user_id).subscribe((img) => {
+      console.log('User Posts:', img);
+      this.userImg = img;
+   });
+  }
+
+
+
 }
+
+

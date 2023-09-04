@@ -46,6 +46,42 @@ export class PostService {
 
 
 
+  getUserPosts(user_id: any){
+    console.log('user_id',user_id)
+    const url =  this.APIurl + 'get_post_by_user_id/';
+    let queryParams = {user_id:user_id}
+    console.log('searchData new',queryParams.user_id)
+    return this.http.get<any[]>(url,{params:queryParams});
+  }
+
+  getProfileImg(user_id: any){
+    console.log('user_id',user_id)
+    const url =  this.APIurl + 'get_profile_pic/';
+    let queryParams = {user_id:user_id}
+    console.log('searchData new',user_id)
+    console.log('searchData new',queryParams)
+    return this.http.get<any[]>(url,{params:queryParams});
+  }
+
+
+
+
+
+  deletePost(apartmentId: number) {
+    const url = this.APIurl + 'delete_post/';
+    const queryParams = { post_id: apartmentId };
+  
+    return this.http.delete<any[]>(url, { params: queryParams })
+  }
+
+  // editPostDescreption(apartmentId: number,user_id:number){
+  //   console.log('apartmentId',apartmentId)
+  //   console.log('user_id',user_id)
+  //   const url =  this.APIurl + 'get_profile_pic/';/// 
+  //   let queryParams = {apartmentId:apartmentId ,user_id:user_id }
+  //   return this.http.delete<any[]>(url,{params:queryParams});
+  // }
+
 
   //! save to local only for check
   // savePostsToLocal(posts: any[]): void {

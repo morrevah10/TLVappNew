@@ -29,38 +29,12 @@
         <input matInput placeholder="Apartment Number" [formControl]="apartmentControl">
       </mat-form-field>
       
-      <button mat-raised-button color="primary" (click)="searchApartments()">Search</button>
+      <button class="newBTN"  (click)="searchApartments()">Search</button>
+      <button class="css-btn"  (click)="searchApartments()">Search</button>
     </div>
   
   <!-- <button mat-raised-button color="primary" (click)="searchApartments()">Search</button> -->
 
-
-<!-- #הכנה לדרופ דאון  -->
-<!-- 
-  <div class="search-container">
-    <mat-form-field>
-      <input matInput placeholder="City" list="city-suggestions" [(ngModel)]="search.city">
-      <datalist id="city-suggestions">
-        <option *ngFor="let city of citySuggestions" [value]="city"></option>
-      </datalist>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input matInput placeholder="Street" list="street-suggestions" [(ngModel)]="search.street">
-      <datalist id="street-suggestions">
-        <option *ngFor="let street of streetSuggestions" [value]="street"></option>
-      </datalist>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input matInput placeholder="Apartment Number" [(ngModel)]="search.apartmentNumber">
-    </mat-form-field>
-  
-    <button mat-raised-button color="primary" (click)="searchApartments()">Search</button>
-  </div> -->
-
-  <!-- <p>חיפוש</p> -->
-  <!-- <div> הדירות שלי</div> -->
 
   <button (click)="navigateToApartmentForm()">הוספת פוסט</button>
   <section>

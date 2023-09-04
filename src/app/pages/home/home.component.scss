@@ -1,6 +1,63 @@
-.home-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.newBTN {
+  color: blue;
+  padding: 10px 20px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  transition: background 0.3s, color 0.3s; /* Add a smooth transition effect */
+
+  /* Gradient background */
+  background-image: linear-gradient(to bottom, #87b7ff, #3161a8);
+  background-clip: text; /* Clip the background to the text */
+  -webkit-background-clip: text; /* For older webkit browsers */
+  color: transparent; /* Make the text transparent */
+  transition: background 0.9s ease, color 0.9s ease;
+}
+
+.newBTN:hover {
+    background: linear-gradient(to bottom, #87b7ff, #3161a8); /* Change the gradient on hover */
+    color: white; /* Change text color to white on hover */
+    border-radius: 10%;
+}
+
+
+
+.css-btn {
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #87b7ff;
+  background-image: linear-gradient(45deg, #3161a8 0%, #87b7ff  51%, #3161a8  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.css-btn:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.css-btn:active {
+  transform: scale(0.95);
 }
