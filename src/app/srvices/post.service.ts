@@ -74,13 +74,18 @@ export class PostService {
     return this.http.delete<any[]>(url, { params: queryParams })
   }
 
-  // editPostDescreption(apartmentId: number,user_id:number){
-  //   console.log('apartmentId',apartmentId)
-  //   console.log('user_id',user_id)
-  //   const url =  this.APIurl + 'get_profile_pic/';/// 
-  //   let queryParams = {apartmentId:apartmentId ,user_id:user_id }
-  //   return this.http.delete<any[]>(url,{params:queryParams});
+
+
+  // getPostByPostId(post_id: number){
+  //   console.log('post_id',post_id)
+  //   const url =  this.APIurl + '/';
+  //   let queryParams = {post_id:post_id}
+  //   console.log('queryParams new',queryParams)
+  //   // return this.http.get<any[]>(url,{params:queryParams});
   // }
+
+
+
 
 
   //! save to local only for check

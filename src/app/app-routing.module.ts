@@ -15,6 +15,7 @@ import { MyReviewsComponent } from './pages/my-reviews/my-reviews.component';
 import { myPostsComponent } from './pages/my-posts/my-posts.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import { ChangPasswordComponent } from './pages/chang-password/chang-password.component';
+import { EditDescriptionComponent } from './cmps/edit-description/edit-description.component';
 
 const routes: Routes = [
   { path: '', component: LandPageComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'rantal', component: RantalComponent },
   { path: 'apartment', component: ApartmentListComponent },
+  {path: 'apartment/edit/:id', component : EditDescriptionComponent},
   { path: 'apartment/:id', component: ApartmentDetailsComponent },
   { path: 'personalInfo', component: PersonalInfoComponent },
   { path: 'personalInfo/changPassword', component: ChangPasswordComponent },

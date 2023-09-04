@@ -64,11 +64,13 @@ export class RantalComponent implements OnInit {
       (response) => {
         console.log('Form submitted successfully:', response);
         this.toastr.success('Post add successfully!!');
+        this.loading = false;
         setTimeout(() => {
           this.router.navigate(['/home']);
         }, 2000);
       },
       (error) => {
+        this.loading = false;
         console.error('Error submitting form:', error);
       }
     );

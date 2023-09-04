@@ -43,6 +43,7 @@ import { TermsComponent } from './pages/terms/terms.component';
 import { ChangPasswordComponent } from './pages/chang-password/chang-password.component';
 import { ImgUploadModalComponent } from './cmps/img-upload-modal/img-upload-modal.component';
 import { DeletDialogComponent } from './cmps/delet-dialog/delet-dialog.component';
+import { EditDescriptionComponent } from './cmps/edit-description/edit-description.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { DeletDialogComponent } from './cmps/delet-dialog/delet-dialog.component
     ChangPasswordComponent,
     ImgUploadModalComponent,
     DeletDialogComponent,
+    EditDescriptionComponent,
   ],
   imports: [
     BrowserModule,

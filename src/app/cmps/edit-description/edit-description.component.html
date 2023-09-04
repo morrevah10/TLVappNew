@@ -1,0 +1,47 @@
+<p>edit-description works!</p>
+
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="post_city">city:</label>
+      <input type="text" class="form-control" id="post_city" name="post_city" [(ngModel)]="this.apartmentData.post_city"  [disabled]="true"/>
+    </div>
+
+    <div class="form-group">
+        <label for="post_street">street:</label>
+        <input type="text" class="form-control" id="post_street" name="post_street" [(ngModel)]="this.apartmentData.post_street" [disabled]="true"/>
+      </div>
+
+      <div class="form-group">
+        <label for=" post_apartment_number">apartment_number:</label>
+        <input type="text" class="form-control" id=" post_apartment_number" name="post_apartment_number" [(ngModel)]="this.apartmentData.post_apartment_number"  [disabled]="true"/>
+      </div>
+
+      <div class="form-group">
+        <label for="post_apartment_price">apartment_price:</label>
+        <input type="text" class="form-control" id="post_apartment_price" name="post_apartment_price" [(ngModel)]="this.apartmentData.post_apartment_price" [disabled]="true"/>
+      </div>
+
+      
+      <div class="form-group">
+          <label for="post_rent_end">rent_end:</label>
+          <input type="text" class="form-control" id="post_rent_end" name="post_rent_end" [(ngModel)]="this.apartmentData.post_rent_end" [disabled]="true" />
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="post_rent_start">rent_start:</label>
+            <input type="text" class="form-control" id=" post_rent_start" name="post_rent_start" [(ngModel)]="this.apartmentData.post_rent_start" [disabled]="true" />
+        </div>
+
+        <div class="form-group">
+            <label for="apartment_pic_1">apartment pic:</label>
+            <img src="{{this.apartmentData.apartment_pic_1}}" alt="">
+        </div>
+        
+        <div class="form-group">
+          <label for="post_description">post description:</label>
+          <input type="text" class="form-control" id="post_description" name="post_description" [(ngModel)]="this.apartmentData.post_description" />
+        </div>
+        
+    <button type="submit">Save Changes</button>
+  </form>

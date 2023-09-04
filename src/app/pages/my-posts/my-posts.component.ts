@@ -45,30 +45,23 @@ export class myPostsComponent implements OnInit {
       });
   }
 
-
+  
   viewApartmentDetails(apartmentId: number) {
     this.router.navigate(['/apartment', apartmentId]);
   }
 
-  // deletePost(apartmentId: number){
-  //   console.log('apartmentId',apartmentId)
-  //   this.postService.deletePost(apartmentId)
-  // }
 
-  // deletePost(apartmentId: number) {
-  //   console.log('apartmentId', apartmentId);
-  //   this.postService.deletePost(apartmentId).subscribe(
-  //     (response: any) => {
-  //       console.log('Delete successful', response);
-  //       this.removePost(apartmentId); 
-  //     },
-  //     (error) => {
-  //       console.error('Error deleting post', error);
-  //     }
-  //   );
-  // }
-  
-  
+  editApartmentDetails(post_id : any){
+    console.log('apartment',post_id)
+    console.log('apartment.apartment_id',post_id
+    )
+
+    this.router.navigate(['/apartment/edit/', post_id
+  ]);
+  }
+
+
+
 
   deletePost(apartmentId: number) {
     // Open the confirmation dialog
