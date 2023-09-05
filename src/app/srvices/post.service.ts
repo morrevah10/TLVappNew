@@ -76,13 +76,22 @@ export class PostService {
 
 
 
-  // getPostByPostId(post_id: number){
-  //   console.log('post_id',post_id)
-  //   const url =  this.APIurl + '/';
-  //   let queryParams = {post_id:post_id}
-  //   console.log('queryParams new',queryParams)
-  //   // return this.http.get<any[]>(url,{params:queryParams});
+  updatePost(updatedData: any): Observable<any> {
+    console.log('updatedData',updatedData)
+    const body  = { post_id: updatedData.post_id , post_description:updatedData.post_description};
+    console.log('queryParams.post_id',body .post_id)
+    console.log('queryParams.post_description',body .post_description)
+    const url = this.APIurl + `update_description_post/`;
+    return this.http.put(url, body );
+  }
+
+  // updatePost(updatedData: any): Observable<any> {
+  //   console.log('updatedData',updatedData)
+  //   const url = this.APIurl + `update_description_post/`;
+  //   return this.http.put(url, updatedData);
   // }
+
+
 
 
 

@@ -44,6 +44,8 @@ import { ChangPasswordComponent } from './pages/chang-password/chang-password.co
 import { ImgUploadModalComponent } from './cmps/img-upload-modal/img-upload-modal.component';
 import { DeletDialogComponent } from './cmps/delet-dialog/delet-dialog.component';
 import { EditDescriptionComponent } from './cmps/edit-description/edit-description.component';
+import { ForgotPasswordComponent } from './cmps/password/forgot-password/forgot-password.component';
+import { RestPasswordComponent } from './cmps/password/rest-password/rest-password.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { EditDescriptionComponent } from './cmps/edit-description/edit-descripti
     ImgUploadModalComponent,
     DeletDialogComponent,
     EditDescriptionComponent,
+    ForgotPasswordComponent,
+    RestPasswordComponent,
   ],
   imports: [
     BrowserModule,

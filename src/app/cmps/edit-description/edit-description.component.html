@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <label for="apartment_pic_1">apartment pic:</label>
-            <img src="{{this.apartmentData.apartment_pic_1}}" alt="">
+            <img class="img-description" src="{{this.apartmentData.apartment_pic_1}}" alt="">
         </div>
         
         <div class="form-group">
@@ -44,4 +44,8 @@
         </div>
         
     <button type="submit">Save Changes</button>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
   </form>

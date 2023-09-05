@@ -41,7 +41,6 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
-
   private handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -62,33 +61,36 @@ export class UserService {
     return this.http.post(url, formData);
   }
 
- 
-
   updateUserDetails(user: any): Observable<any> {
-    console.log('user',user)
+    console.log('user', user);
     const url = this.APIurl + `change_personal_info/`;
     return this.http.put(url, user);
   }
 
-
-  updateUserPassword(userData:any): Observable<any>{
-    console.log('userData',userData)
-    const url = this.APIurl + `change_password/`
+  updateUserPassword(userData: any): Observable<any> {
+    console.log('userData', userData);
+    const url = this.APIurl + `change_password/`;
     return this.http.put(url, userData);
   }
 
-  updateUserProfilePicture(data: { user_id: string, profile_image: string }): Observable<any> {
-    const url = `${this.APIurl}change_profile_pic/`; 
-console.log('data',data)
+  updateUserProfilePicture(data: {
+    user_id: string;
+    profile_image: string;
+  }): Observable<any> {
+    const url = `${this.APIurl}change_profile_pic/`;
+    console.log('data', data);
     return this.http.put(url, data);
   }
 
 
+  forgetPassword(email:string){
+    console.log('email',email)
+    const url = this.APIurl + 'forget_password/';
+    const queryParams = { user_email: email };
+    console.log('queryParams',queryParams)
+    return this.http.get<any[]>(url, { params: queryParams })
 
 
-
-
-
+  }
 
 }
-

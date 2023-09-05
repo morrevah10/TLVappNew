@@ -16,6 +16,8 @@ import { myPostsComponent } from './pages/my-posts/my-posts.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import { ChangPasswordComponent } from './pages/chang-password/chang-password.component';
 import { EditDescriptionComponent } from './cmps/edit-description/edit-description.component';
+import { ForgotPasswordComponent } from './cmps/password/forgot-password/forgot-password.component';
+import { RestPasswordComponent } from './cmps/password/rest-password/rest-password.component';
 
 const routes: Routes = [
   { path: '', component: LandPageComponent },
@@ -24,7 +26,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'rantal', component: RantalComponent },
   { path: 'apartment', component: ApartmentListComponent },
-  {path: 'apartment/edit/:id', component : EditDescriptionComponent},
+  { path: 'apartment/edit/:id', component: EditDescriptionComponent },
   { path: 'apartment/:id', component: ApartmentDetailsComponent },
   { path: 'personalInfo', component: PersonalInfoComponent },
   { path: 'personalInfo/changPassword', component: ChangPasswordComponent },
@@ -32,6 +34,8 @@ const routes: Routes = [
   { path: 'reviews', component: MyReviewsComponent },
   { path: 'myposts', component: myPostsComponent },
   { path: 'terms', component: TermsComponent },
+  { path: 'forgetPassword', component: ForgotPasswordComponent },
+  { path: 'resetPassword', component: RestPasswordComponent },
 ];
 
 @NgModule({
