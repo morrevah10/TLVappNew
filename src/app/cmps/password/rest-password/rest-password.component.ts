@@ -17,6 +17,8 @@ export class RestPasswordComponent implements OnInit {
   loading = false;
   submitted = false;
   response:any;
+  showPassword=false
+  showPasswordConfirmation= false
 
   constructor(
     private formBuilder: FormBuilder,
@@ -74,6 +76,14 @@ export class RestPasswordComponent implements OnInit {
 
   
       
+    }
+
+    togglePasswordVisibility(){
+      this.showPassword = !this.showPassword
+    }
+
+    togglePasswordConfirmationVisibility(){
+      this.showPasswordConfirmation = !this.showPasswordConfirmation
     }
   }
 

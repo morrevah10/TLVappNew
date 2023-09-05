@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl!: string;
+  showPassword=false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,6 +80,11 @@ export class LoginComponent implements OnInit {
     );
 
 
+  }
+
+
+  togglePasswordVisibility(){
+    this.showPassword = !this.showPassword
   }
 }
    

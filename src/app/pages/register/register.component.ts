@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   loading = false;
   submitted = false;
   showPassword = false;
+  showPasswordConfirmation = false;
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -84,8 +85,9 @@ export class RegisterComponent implements OnInit {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
-
-
+  togglePasswordConfirmationVisibility(){
+    this.showPasswordConfirmation = !this.showPasswordConfirmation;
+  }
 
 }
 

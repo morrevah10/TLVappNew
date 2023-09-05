@@ -3,6 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PostService } from 'src/app/srvices/post.service';
 import { Router } from '@angular/router';
+import { PopupComponent } from '../popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
+
+
 
 // import { HttpClient } from '@angular/common/http'; // Import HttpClient
 
@@ -21,6 +25,7 @@ export class EditDescriptionComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private postService: PostService,
+    private dialog: MatDialog,
     private router: Router
   ) {
 
@@ -51,7 +56,17 @@ export class EditDescriptionComponent implements OnInit {
     this.postService.updatePost(this.apartmentData).subscribe(
       (response) => {
         console.log('Post updated successfully:', response);
-        this.router.navigate(['myposts']);
+        
+        const dialogRef = this.dialog.open(PopupComponent, {
+          data: {
+            message: 'Post updated successfully!'
+          }
+        });
+
+        // Navigate to 'myposts' after the dialog closes
+        dialogRef.afterClosed().subscribe(() => {
+          this.router.navigate(['myposts']);
+        });
       },
       (error) => {
         console.error('Error updating post:', error);

@@ -1,25 +1,67 @@
-
 <section class="login-container">
-
   <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
     <h3>User Login</h3>
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && loginForm.get('email')?.errors }" placeholder="Enter email here"/>
-      <div *ngIf="submitted && loginForm.get('email')?.errors" class="invalid-feedback">
-        <div class="required" *ngIf="loginForm.get('email')?.hasError('required')">Email is required</div>
-        <div *ngIf="loginForm.get('email')?.hasError('email')">Enter valid email address</div>
+      <input
+        type="text"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': submitted && loginForm.get('email')?.errors
+        }"
+        placeholder="Enter email here"
+      />
+      <div
+        *ngIf="submitted && loginForm.get('email')?.errors"
+        class="invalid-feedback"
+      >
+        <div
+          class="required"
+          *ngIf="loginForm.get('email')?.hasError('required')"
+        >
+          Email is required
+        </div>
+        <div *ngIf="loginForm.get('email')?.hasError('email')">
+          Enter valid email address
+        </div>
       </div>
     </div>
-    <div class="form-group">
+
+    <!-- <div class="form-group">
       <label for="password">Password</label>
       <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && loginForm.get('password')?.errors }" placeholder="Enter password here" />
       <div *ngIf="submitted && loginForm.get('password')?.errors" class="invalid-feedback">
         <div class="required" *ngIf="loginForm.get('password')?.hasError('required')">Password is required</div>
       </div>
-    </div>
+    </div> -->
+
     <div class="form-group">
-      <button [disabled]="loading" class="btn ">
+      <label for="password">Password</label>
+      <div class="password-input-container">
+        <input
+          type="{{ showPassword ? 'text' : 'password' }}"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && loginForm.get('password')?.errors }"
+          placeholder="Enter password here"
+        />
+        <button type="button" (click)="togglePasswordVisibility()">
+          <img
+            class="showPaasImg"
+            [src]="showPassword ? '../../../assets/img/eye-open.png' : '../../../assets/img/eye-close.png'"
+            alt="{{ showPassword ? 'Hide Password' : 'Show Password' }}"
+          />
+        </button>
+      </div>
+      <div *ngIf="submitted && loginForm.get('password')?.errors" class="invalid-feedback">
+        <div class="required" *ngIf="loginForm.get('password')?.hasError('required')">Password is required</div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <button [disabled]="loading" class="btn">
         <span *ngIf="loading" class=""></span>
         Login
       </button>
@@ -29,12 +71,10 @@
       <button [disabled]="loading" class="btn">
         <span routerLink="/forgetPassword" class="">forget password ?</span>
       </button>
-      <!-- <a routerLink="/register" class="btn btn-link">Register</a> -->
     </div>
   </form>
 </section>
 <div>
-
   <p>eranlevy9@gmail.com</p>
   <p>Eran6896</p>
 </div>

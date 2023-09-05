@@ -106,7 +106,7 @@
         />
         <button type="button" (click)="togglePasswordVisibility()">
           <img class="showPaasImg"
-          [src]="showPassword ? '../../../assets/img/eye-open.png' : '../../../assets/img/eye-close.png'"
+            [src]="showPassword ? '../../../assets/img/eye-open.png' : '../../../assets/img/eye-close.png'"
             alt="{{ showPassword ? 'Hide Password' : 'Show Password' }}"
           />
         </button>
@@ -126,18 +126,26 @@
         </div>
       </div>
     </div>
-
+    
     <div class="form-group">
-      <label for="user_password_2">Password Confirmtaion:</label>
-      <input
-      type="{{ showPassword ? 'text' : 'password' }}"
-        formControlName="user_password_2"
-        class="form-control"
-        [ngClass]="{
-          'is-invalid': submitted && registerForm.get('user_password')?.errors
-        }"
-        placeholder="Enter Password here"
-      />
+      <label for="user_password_2">Password Confirmation:</label>
+      <div class="password-input-container">
+        <input
+          type="{{ showPasswordConfirmation ? 'text' : 'password' }}"
+          formControlName="user_password_2"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && registerForm.get('user_password_2')?.errors
+          }"
+          placeholder="Enter Password here"
+        />
+        <button type="button" (click)="togglePasswordConfirmationVisibility()">
+          <img class="showPaasImg"
+            [src]="showPasswordConfirmation ? '../../../assets/img/eye-open.png' : '../../../assets/img/eye-close.png'"
+            alt="{{ showPasswordConfirmation ? 'Hide Password' : 'Show Password' }}"
+          />
+        </button>
+      </div>
       <div
         *ngIf="submitted && registerForm.get('user_password_2')?.errors"
         class="invalid-feedback"

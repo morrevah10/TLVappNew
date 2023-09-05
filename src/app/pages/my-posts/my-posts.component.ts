@@ -4,7 +4,8 @@ import { UserService } from 'src/app/srvices/user.service';
 import { PostService } from 'src/app/srvices/post.service';
 import { DialogService } from 'src/app/srvices/dialog.service';
 import { Router } from '@angular/router';
-
+import { PopupComponent } from 'src/app/cmps/popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class myPostsComponent implements OnInit {
     private postService: PostService,
     private router: Router,
     private dialogService: DialogService,
+    private dialog: MatDialog,
 
   ) {}
 
@@ -75,15 +77,34 @@ export class myPostsComponent implements OnInit {
         this.postService.deletePost(apartmentId).subscribe(
           (response: any) => {
             console.log('Delete successful', response);
-            this.removePost(apartmentId);
+            const dialogRef = this.dialog.open(PopupComponent, {
+              data: {
+                message: 'Post deleted successfully!'
+              }
+            });
+            dialogRef.afterClosed().subscribe(() => {
+              this.removePost(apartmentId);
+            });
+          
           },
           (error) => {
             console.error('Error deleting post', error);
+            const dialogRef = this.dialog.open(PopupComponent, {
+              data: {
+                message: 'Error deleting post '+ error
+              }
+            });
+            dialogRef.afterClosed()
+            
           }
         );
       }
     });
   }
+  
+
+
+  
   
   
 
@@ -106,6 +127,37 @@ export class myPostsComponent implements OnInit {
 
 
 
+
+
+
+
+
+
+
+  displaySuccessMessage(message: string) {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      data: {
+        message: message,
+      },
+    });
+  
+    dialogRef.afterClosed().subscribe(() => {
+      // Do something after the success message dialog closes, if needed.
+    });
+  }
+  
+  displayInfoMessage(message: string) {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      data: {
+        message: message,
+      },
+    });
+  
+    dialogRef.afterClosed().subscribe(() => {
+      // Do something after the info message dialog closes, if needed.
+    });
+  }
+  
+
 }
 
-// getUserPosts

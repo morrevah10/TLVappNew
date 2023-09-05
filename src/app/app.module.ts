@@ -46,6 +46,7 @@ import { DeletDialogComponent } from './cmps/delet-dialog/delet-dialog.component
 import { EditDescriptionComponent } from './cmps/edit-description/edit-description.component';
 import { ForgotPasswordComponent } from './cmps/password/forgot-password/forgot-password.component';
 import { RestPasswordComponent } from './cmps/password/rest-password/rest-password.component';
+import { PopupComponent } from './cmps/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { RestPasswordComponent } from './cmps/password/rest-password/rest-passwo
     EditDescriptionComponent,
     ForgotPasswordComponent,
     RestPasswordComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,

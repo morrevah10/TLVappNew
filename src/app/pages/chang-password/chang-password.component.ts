@@ -14,6 +14,10 @@ export class ChangPasswordComponent implements OnInit{
     // submittedForm: any;
     user: any;
   // PersonalForm: any;
+  showPasswordConfirmation=false
+  showPassword=false
+  submitted=false
+
   
     constructor(
       private formBuilder: FormBuilder,
@@ -57,15 +61,12 @@ export class ChangPasswordComponent implements OnInit{
         });
       }
   
+      togglePasswordVisibility() {
+        this.showPassword = !this.showPassword;
+      }
+      togglePasswordConfirmationVisibility(){
+        this.showPasswordConfirmation = !this.showPasswordConfirmation;
+      }
   
      
-  
-  
-  
-  
-  
-  
-      formatUser(): string {
-        return `email: ${this.user.user_email}, : ${this.user.user_full_name}, : ${this.user.user_id},:${this.user.user_phone}`;
-      }
     }
