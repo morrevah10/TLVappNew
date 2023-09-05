@@ -70,10 +70,15 @@ export class EditDescriptionComponent implements OnInit {
       },
       (error) => {
         console.error('Error updating post:', error);
-        this.errorMessage = 'Error updating post: ' + error.message;
+        const dialogRef = this.dialog.open(PopupComponent, {
+          data: {
+            message: 'Error updating post: ' + error.error
+          }
+        });
       }
     );
   }
 }
 
   
+// this.errorMessage = 'Error updating post: ' + error.error;

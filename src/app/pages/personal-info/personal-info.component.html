@@ -55,6 +55,11 @@
         update personal info
       </button>
     </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    
   </form>
 </section>
 

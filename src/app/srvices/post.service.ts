@@ -67,9 +67,9 @@ export class PostService {
 
 
 
-  deletePost(apartmentId: number) {
+  deletePost(apartmentId: any,user_id : any) {
     const url = this.APIurl + 'delete_post/';
-    const queryParams = { post_id: apartmentId };
+    const queryParams = { post_id: apartmentId ,post_user_id :user_id };
   
     return this.http.delete<any[]>(url, { params: queryParams })
   }

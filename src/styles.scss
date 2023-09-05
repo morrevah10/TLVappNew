@@ -68,6 +68,8 @@ i{
 }
 
 
+
+//popup:
 .password-input-container {
   position: relative;
 }
@@ -89,4 +91,11 @@ i{
 .showPaasImg{
   height: 20px;
   width: 20px;
+}
+
+
+//error 
+.error-message{
+  color:red;
+  font-weight: bold;
 }

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ImgUploadModalComponent } from '../../cmps/img-upload-modal/img-upload-modal.component';
 import { PostService } from 'src/app/srvices/post.service';
+import { PopupComponent } from 'src/app/cmps/popup/popup.component';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class PersonalInfoComponent implements OnInit {
   submittedForm: any;
   user: any;
   userImg: any =''
+  errorMessage:string =''
 
   profilePicture: string | ArrayBuffer | null = null;
 
@@ -83,9 +85,18 @@ export class PersonalInfoComponent implements OnInit {
     this.userService.updateUserDetails(payload).subscribe(
       (response) => {
         console.log('User successfully update:', response);
+
+        const dialogRef = this.dialog.open(PopupComponent, {
+          data: {
+            message: 'User successfully update!'
+          }
+        });
+        dialogRef.afterClosed()
+
       },
       (error) => {
         console.error('Error update user:', error);
+        this.errorMessage = 'Error updating post: ' + error.error;
       }
     );
     // this.PersonalForm.reset();

@@ -66,7 +66,7 @@ export class myPostsComponent implements OnInit {
 
 
 
-  deletePost(apartmentId: number) {
+  deletePost(apartmentId: any) {
     // Open the confirmation dialog
     const dialogRef = this.dialogService.openConfirmationDialog(apartmentId);
 
@@ -74,7 +74,7 @@ export class myPostsComponent implements OnInit {
       if (result === 'yes') {
         // User confirmed deletion, proceed with deletion
         console.log('apartmentId', apartmentId);
-        this.postService.deletePost(apartmentId).subscribe(
+        this.postService.deletePost(apartmentId,this.currentUser.user_id).subscribe(
           (response: any) => {
             console.log('Delete successful', response);
             const dialogRef = this.dialog.open(PopupComponent, {
@@ -91,7 +91,7 @@ export class myPostsComponent implements OnInit {
             console.error('Error deleting post', error);
             const dialogRef = this.dialog.open(PopupComponent, {
               data: {
-                message: 'Error deleting post '+ error
+                message: 'Error deleting post '+ error.error
               }
             });
             dialogRef.afterClosed()

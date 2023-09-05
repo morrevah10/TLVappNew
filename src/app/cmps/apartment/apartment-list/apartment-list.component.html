@@ -1,5 +1,5 @@
 <!-- <p>apartment-list works!</p> -->
-
+<!-- 
 <section class="apartment-list-container">
   <div class="grid-container">
     <mat-card
@@ -23,12 +23,13 @@
       </mat-card-content>
     </mat-card>
   </div>
-</section>
+</section> -->
 
 <div
   *ngFor="let apartment of apartments"
   class="container"
   style="margin-top: 50px"
+  (click)="viewApartmentDetails(apartment.post_id)"
 >
   <div class="row">
     <div class="col-md-3">
@@ -47,7 +48,9 @@
         <div class="card-text">
           price : {{ apartment.post_apartment_price }}
         </div>
-        <a href="#" class="card-button"> Details</a>
+        <a (click)="viewApartmentDetails(apartment.post_id)" class="card-button"> 
+        Details
+        </a>
       </div>
     </div>
   </div>
