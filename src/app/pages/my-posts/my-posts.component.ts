@@ -8,6 +8,8 @@ import { PopupComponent } from 'src/app/cmps/popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
 
 
+
+
 @Component({
   selector: 'app-rmy-posts',
   templateUrl: './my-posts.component.html',
@@ -16,6 +18,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class myPostsComponent implements OnInit {
   userPosts!: any[];
   currentUser!: any;
+
+
 
   constructor(
     private http: HttpClient,
@@ -66,7 +70,7 @@ export class myPostsComponent implements OnInit {
 
 
 
-  deletePost(apartmentId: any) {
+  deletePost(apartmentId: any,user_id : number) {
     // Open the confirmation dialog
     const dialogRef = this.dialogService.openConfirmationDialog(apartmentId);
 

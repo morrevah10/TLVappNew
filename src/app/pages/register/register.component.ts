@@ -10,14 +10,9 @@ import { UserService } from 'src/app/srvices/user.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  errorMessages = {
-    user_full_name: '',
-    user_email: '',
-    user_phone: '',
-    user_password: '',
-    user_password_2: '',
-  };
 
+
+  errorMessage=''
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,17 +62,14 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        // this.submitted = false;
         console.error(error);
-        if (error == 'Email already exists') {
-          this.errorMessages = { ...this.errorMessages, user_email: error };
-          console.log(
-            'this.errorMessages.user_email :',
-            this.errorMessages.user_email
-          );
-        }
+        this.errorMessage = error
+        console.log('this.errorMessage',this.errorMessage)
+
+
+
+        
         this.loading = false;
-        // Handle error here
       }
     );
   }

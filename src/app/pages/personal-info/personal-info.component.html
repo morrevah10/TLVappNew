@@ -11,6 +11,11 @@
     <img src="{{userImg.user_profile_pic}}" alt="לא ניתן להציג">
   </div>
 
+  <div class="delete-user">
+    <button (click)="deleteUser(user.user_id)" >delete account</button>
+    <button (click)="logout()">log out</button>
+  </div>
+
   <mat-divider></mat-divider>
   <mat-divider></mat-divider>
   <mat-divider></mat-divider>

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 
 export class PostService {
-//   [x: string]: any;
+
 
   readonly APIurl = 'https://telavivback-production.up.railway.app/';
 
@@ -13,6 +13,7 @@ export class PostService {
 
 
   addPost(formData: any): Observable<any> {
+    console.log('formData',formData)
     const url = this.APIurl + `add_post/`;
     return this.http.post(url, formData);
   }
@@ -22,7 +23,6 @@ export class PostService {
   getApartmentPosts(): Observable<any[]> {
     const url = this.APIurl + 'feed_posts/';
     console.log('old function works',)
-    // Use the responseType option to specify the expected response type
     return this.http.get<any[]>(url);
   }
   
@@ -30,7 +30,6 @@ export class PostService {
     const url = this.APIurl + 'get_post_by_parm/';
     let queryParams = searchData
     console.log('searchData new',searchData)
-    // Use the responseType option to specify the expected response type
     return this.http.get<any[]>(url,{params:queryParams});
   }
 
@@ -69,7 +68,8 @@ export class PostService {
 
   deletePost(apartmentId: any,user_id : any) {
     const url = this.APIurl + 'delete_post/';
-    const queryParams = { post_id: apartmentId ,post_user_id :user_id };
+    const queryParams = { post_id: apartmentId ,user_id :user_id };
+    console.log('queryParams',queryParams)
   
     return this.http.delete<any[]>(url, { params: queryParams })
   }

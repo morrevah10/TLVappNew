@@ -1,22 +1,62 @@
-
 <h1>My Posts</h1>
-<p>User connected: <span>{{ currentUser.user_full_name }}</span></p>
+<p>
+  User connected: <span>{{ currentUser.user_full_name }}</span>
+</p>
 
 <section class="cards-container">
-     <div class="card" *ngFor="let apartment of userPosts">
-         <img [src]="apartment.apartment_pic_1
-         " alt="Apartment Image">
-         <div class="card-info">
-             <h2>City: {{ apartment.post_city }}</h2>
-             <p>Street: {{ apartment.post_street }}</p>
-             <p>Building: {{ apartment.post_apartment_number }}</p>
-         </div>
-         <div class="divider"></div>
-         <button  (click)="viewApartmentDetails(apartment.post_id)" class="btn details">More Details</button>
-         <div class="divider"></div>
-         <div class="action">
-             <button (click)="deletePost(apartment.post_id)" class="btn delet">Delete post</button>
-             <button (click)="editApartmentDetails(apartment.post_id)" class="btn comment">Edit comment</button>
-         </div>
-     </div>
+  <div class="card" *ngFor="let apartment of userPosts">
+    <img [src]="apartment.apartment_pic_1" alt="Apartment Image" />
+    <div class="card-info">
+      <h2>City: {{ apartment.post_city }}</h2>
+      <p>Street: {{ apartment.post_street }}</p>
+      <p>Building: {{ apartment.post_apartment_number }}</p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- <mat-chip class="aproval" *ngIf="apartment.proof_image_confirmed">
+      Approval <mat-icon>done</mat-icon>
+    </mat-chip>
+    <mat-chip class="pending" *ngIf="!apartment.proof_image_confirmed">
+      Pending
+    </mat-chip> -->
+
+    
+
+      <div class="custom-chip approval" *ngIf="apartment.proof_image_confirmed">
+        Approval <mat-icon>done</mat-icon>>
+      </div>
+
+      <div class="custom-chip pending" *ngIf="!apartment.proof_image_confirmed">
+        Pending <mat-icon>schedule</mat-icon>
+    </div>
+
+    
+
+
+
+
+
+
+    <div class="divider"></div>
+    <div class="action">
+      <button
+        (click)="viewApartmentDetails(apartment.post_id)"
+        class="btn details"
+      >
+        More Details
+      </button>
+      <button
+        (click)="deletePost(apartment.post_id, currentUser.user_id)"
+        class="btn delet"
+      >
+        Delete post
+      </button>
+      <button
+        (click)="editApartmentDetails(apartment.post_id)"
+        class="btn comment"
+      >
+        Edit comment
+      </button>
+    </div>
+  </div>
 </section>

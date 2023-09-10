@@ -35,6 +35,15 @@ export class UserService {
     this.userSubject.next(null);
   }
 
+
+  //לבדוק ולעשות עם ערן 
+// deleteUser(user_id: any) : Observable<any> {
+//   const url = this.APIurl + `delete_user/`;
+//   return this.http.delete(url,user_id);
+// }
+
+
+
   addUser(userData: any) {
     return this.http
       .post(this.APIurl + `register/`, userData)

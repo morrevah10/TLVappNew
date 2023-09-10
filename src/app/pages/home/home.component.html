@@ -31,12 +31,17 @@
       
       <button class="newBTN"  (click)="searchApartments()">Search</button>
       <!-- <button class="newBTN"  (click)="searchApartments()">Search</button> -->
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
     </div>
   
   <!-- <button mat-raised-button color="primary" (click)="searchApartments()">Search</button> -->
 
 
   <button class="css-btn" (click)="navigateToApartmentForm()">הוספת פוסט</button>
+
   <section>
 
 

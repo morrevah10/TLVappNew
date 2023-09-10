@@ -16,6 +16,7 @@ export class RantalComponent implements OnInit {
   apartmentForm!: FormGroup;
   formData: any;
   loading = false;
+  post_id: number = 101;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,6 +48,7 @@ export class RantalComponent implements OnInit {
       proof_image: this.apartmentForm.get('proof_image')?.value,
       driving_license: this.apartmentForm.get('driving_license')?.value,
       apartment_pic_1: this.apartmentForm.get('apartment_pic_1')?.value,
+      post_id: this.post_id,
     };
     console.log('this.formData befor user', this.formData);
 
@@ -65,6 +67,9 @@ export class RantalComponent implements OnInit {
         console.log('Form submitted successfully:', response);
         this.toastr.success('Post add successfully!!');
         this.loading = false;
+
+        this.post_id = this.post_id + 1;
+        
         setTimeout(() => {
           this.router.navigate(['/home']);
         }, 2000);

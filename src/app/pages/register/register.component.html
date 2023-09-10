@@ -35,7 +35,7 @@
         [ngClass]="{
           'is-invalid':
             submitted &&
-            (registerForm.get('user_email')?.errors || errorMessages.user_email)
+            (registerForm.get('user_email')?.errors)
         }"
         placeholder="Enter email here"
       />
@@ -63,7 +63,6 @@
         "
         class="invalid-feedback"
       >
-         {{errorMessages.user_email}} 
       </div>
     </div>
 
@@ -162,17 +161,26 @@
       </div>
     </div>
 
+    <div class="error-message" *ngIf="this.errorMessage">
+      {{this.errorMessage}}
+    </div>
+
+
+
     <div class="form-group buttons">
       <button [disabled]="loading" class="btn">
         <span *ngIf="loading" class=""></span>
         Register
       </button>
+
+        Already have a user?
+    
       <button [disabled]="loading" class="btn">
-        <span routerLink="/login" class="">Login to continue</span>
+        <span routerLink="/login" class="">
+          Log in!</span>
       </button>
     </div>
   </form>
 
 
-  <p class="invalid">{{errorMessages.user_email}}</p>
 </section>

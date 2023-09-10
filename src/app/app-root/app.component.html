@@ -14,7 +14,7 @@
 
   <mat-toolbar> 
     <mat-toolbar-row>
-      <button mat-button (click)="opened=!opened">
+      <button mat-button *ngIf="isAuthenticated" (click)="opened=!opened">
         <mat-icon>menu</mat-icon>
       </button>
       <h4>TLLVapp</h4>
@@ -30,7 +30,6 @@
   <mat-list-item><a routerLink="/home">Home</a></mat-list-item>
   <mat-list-item><a routerLink="/personalInfo">info</a></mat-list-item>
   <mat-list-item><a routerLink="/myposts">my posts</a></mat-list-item>
-  <mat-list-item><a routerLink="/reviews">my reviews</a></mat-list-item>
   <mat-list-item><a routerLink="/about">about</a></mat-list-item>
   <mat-list-item><a routerLink="/terms">terms</a></mat-list-item>
 

@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/srvices/user.service';
+import { AuthService } from '../../srvices/auth.service';
+
 
 
 // import { AuthenticationService } from '../../srvices/auth.service';
@@ -18,14 +20,16 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl!: string;
   showPassword=false;
+  errorMassege = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    // private authenticationService : AuthenticationService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
+
   ) {}
 
   ngOnInit() {
@@ -57,7 +61,8 @@ export class LoginComponent implements OnInit {
       (response) => {
         console.log('response:', response);
         this.userService.setUser(response.user);
-        this.toastr.success('User Registered successfully!!');
+        this.authService.login()
+        // this.toastr.success('User Registered successfully!!');
         setTimeout(() => {
           this.router.navigate(['/home']);
         }, 2000);
@@ -67,15 +72,9 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         // this.submitted = false;
         console.error(error);
-        // if (error == 'Email already exists') {
-        //   this.errorMessages = { ...this.errorMessages, user_email: error };
-        //   console.log(
-        //     'this.errorMessages.user_email :',
-        //     this.errorMessages.user_email
-        //   );
-        // }
-        // this.loading = false;
-        // Handle error here
+        this.errorMassege= error.error
+        console.log(' this.errorMassege', this.errorMassege)
+        
       }
     );
 

@@ -1,22 +1,33 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/srvices/post.service';
 import { SearchService } from 'src/app/srvices/search.service';
+import { PopupComponent } from '../../popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
+import { catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+
+
+
 @Component({
   selector: 'app-apartment-list',
   templateUrl: './apartment-list.component.html',
   styleUrls: ['./apartment-list.component.scss'],
 })
 export class ApartmentListComponent implements OnInit {
-  apartments: any[] = [];
+  @Input() apartments!: any[];
+  // apartments: any[] = [];
   afterSearchApartments: any[] = [];
   filteredApartments: any[] = [];
+  errorMessage=''
 
   constructor(
     private postService: PostService,
     private router: Router,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private dialog: MatDialog,
+
   ) {}
 
   // ngOnInit() {
@@ -67,22 +78,10 @@ export class ApartmentListComponent implements OnInit {
     );
   }
 
-  fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; }) {
-    this.postService.getApartmentFilteredPosts(searchData).subscribe(
-      (apartments) => {
-        this.apartments = apartments;
-        console.log('this.afterSearchApartments:', this.afterSearchApartments);
-      },
-      (error) => {
-        console.error('Error fetching apartment posts:', error);
-      }
-    );
-  }
-
   // fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; }) {
   //   this.postService.getApartmentFilteredPosts(searchData).subscribe(
   //     (apartments) => {
-  //       this.afterSearchApartments = apartments;
+  //       this.apartments = apartments;
   //       console.log('this.afterSearchApartments:', this.afterSearchApartments);
   //     },
   //     (error) => {
@@ -91,49 +90,21 @@ export class ApartmentListComponent implements OnInit {
   //   );
   // }
 
- 
-  
-  // fetchApartments(searchParams?: any) {
-  //   this.postService.getApartmentPosts(searchParams).subscribe(
-  //     (apartments) => {
-  //       this.apartments = apartments;
-  //       console.log('apartments:', apartments);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching apartment posts:', error);
-  //     }
-  //   );
-  // }
 
 
+  fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; }): Observable<any> {
+    return this.postService.getApartmentFilteredPosts(searchData).pipe(
+      catchError((error) => {
+        console.error('Error fetching apartment posts:', error);
+        // You can show the error to the user here, for example, by displaying a message.
+        // You can also re-throw the error if you want to handle it further up the chain.
+        return throwError(error.error); // Re-throwing the error
+        // return EMPTY; // Return an empty observable or handle the error as needed
+      })
+    );
+ }
 
 
-
-
-  // applyFilter() {
-  //   const searchQuery = this.searchService.getSearchQuery();
-  //   if (searchQuery) {
-  //     this.filteredApartments = this.apartments.filter(apartment =>
-  //       this.filterApartment(apartment, searchQuery)
-  //     );
-  //   } else {
-  //     this.filteredApartments = this.apartments;
-  //   }
-  // }
-
-  // filterApartment(apartment: any, searchQuery: string): boolean {
-  //   if (!searchQuery) {
-  //     return true; 
-  //   }
-  //   const normalizedSearch = searchQuery.toLowerCase();
-
-  //   return (
-  //   apartment.post_city.toLowerCase().includes(normalizedSearch) ||
-  //   apartment.post_street.toLowerCase().includes(normalizedSearch) ||
-  //   apartment.post_apartment_number.toLowerCase().includes(normalizedSearch)
-   
-  // );
-  // }
 
 
   viewApartmentDetails(apartmentId: number) {

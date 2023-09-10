@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ImgUploadModalComponent } from '../../cmps/img-upload-modal/img-upload-modal.component';
 import { PostService } from 'src/app/srvices/post.service';
 import { PopupComponent } from 'src/app/cmps/popup/popup.component';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -14,22 +16,21 @@ import { PopupComponent } from 'src/app/cmps/popup/popup.component';
   styleUrls: ['./personal-info.component.scss'],
 })
 export class PersonalInfoComponent implements OnInit {
-  
   PersonalForm!: FormGroup;
   submittedForm: any;
   user: any;
-  userImg: any =''
-  errorMessage:string =''
+  userImg: any = '';
+  errorMessage: string = '';
 
   profilePicture: string | ArrayBuffer | null = null;
-
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private http: HttpClient,
     private dialog: MatDialog,
-    private postService :PostService,
+    private postService: PostService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,16 +46,13 @@ export class PersonalInfoComponent implements OnInit {
       user_id: this.user.user_id,
     });
 
-
-    //function 
-    if(this.user){
-      this.loadUserImg(this.user.user_id) 
-      console.log('this.user.user_id',this.user.user_id)
-
-    }else{
-      console.log('problemmm')
+    //function
+    if (this.user) {
+      this.loadUserImg(this.user.user_id);
+      console.log('this.user.user_id', this.user.user_id);
+    } else {
+      console.log('problemmm');
     }
-
   }
 
   onProfilePictureChange(event: any) {
@@ -88,11 +86,10 @@ export class PersonalInfoComponent implements OnInit {
 
         const dialogRef = this.dialog.open(PopupComponent, {
           data: {
-            message: 'User successfully update!'
-          }
+            message: 'User successfully update!',
+          },
         });
-        dialogRef.afterClosed()
-
+        dialogRef.afterClosed();
       },
       (error) => {
         console.error('Error update user:', error);
@@ -100,11 +97,10 @@ export class PersonalInfoComponent implements OnInit {
       }
     );
     // this.PersonalForm.reset();
-  
-}
+  }
 
   openImageUploadModal() {
-    console.log('clicked!!')
+    console.log('clicked!!');
     const dialogRef = this.dialog.open(ImgUploadModalComponent, {
       width: '300px',
     });
@@ -137,11 +133,29 @@ export class PersonalInfoComponent implements OnInit {
     this.postService.getProfileImg(user_id).subscribe((img) => {
       console.log('User Posts:', img);
       this.userImg = img;
-   });
+    });
   }
 
-
-
+  deleteUser(user_id: any) {
+    console.log('user_id', user_id);
+    // this.userService.deleteUser(user_id).subscribe(
+    //   (response) => {
+    //     console.log('User successfully deleted:', response);
+    //     this.userService.clearUser()
+    //     this.router.navigate(['/login']);
+    //   },
+    //   (error) => {
+    //     console.error('Error delete user:', error);
+    //     this.errorMessage = 'Error delet user: ' + error.error;
+    //   }
+    // );
+  
 }
 
 
+logout(){
+  console.log('logedout!!!');
+  // this.userService.clearUser()
+  // this.router.navigate(['/login']);}
+}
+}

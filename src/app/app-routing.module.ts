@@ -11,7 +11,6 @@ import { ApartmentListComponent } from './cmps/apartment/apartment-list/apartmen
 import { ApartmentDetailsComponent } from './cmps/apartment/apartment-details/apartment-details.component';
 import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
 import { AboutComponent } from './pages/about/about.component';
-import { MyReviewsComponent } from './pages/my-reviews/my-reviews.component';
 import { myPostsComponent } from './pages/my-posts/my-posts.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import { ChangPasswordComponent } from './pages/chang-password/chang-password.component';
@@ -31,7 +30,6 @@ const routes: Routes = [
   { path: 'personalInfo', component: PersonalInfoComponent },
   { path: 'personalInfo/changPassword', component: ChangPasswordComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'reviews', component: MyReviewsComponent },
   { path: 'myposts', component: myPostsComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'forgetPassword', component: ForgotPasswordComponent },

@@ -37,7 +37,6 @@ import { ApartmentListComponent } from './cmps/apartment/apartment-list/apartmen
 import { ApartmentDetailsComponent } from './cmps/apartment/apartment-details/apartment-details.component';
 import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
 import { myPostsComponent } from './pages/my-posts/my-posts.component';
-import { MyReviewsComponent } from './pages/my-reviews/my-reviews.component';
 import { AboutComponent } from './pages/about/about.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import { ChangPasswordComponent } from './pages/chang-password/chang-password.component';
@@ -47,6 +46,9 @@ import { EditDescriptionComponent } from './cmps/edit-description/edit-descripti
 import { ForgotPasswordComponent } from './cmps/password/forgot-password/forgot-password.component';
 import { RestPasswordComponent } from './cmps/password/rest-password/rest-password.component';
 import { PopupComponent } from './cmps/popup/popup.component';
+
+import {MatChipsModule} from '@angular/material/chips';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +64,6 @@ import { PopupComponent } from './cmps/popup/popup.component';
     ApartmentDetailsComponent,
     PersonalInfoComponent,
     myPostsComponent,
-    MyReviewsComponent,
     AboutComponent,
     TermsComponent,
     ChangPasswordComponent,
@@ -93,6 +94,7 @@ import { PopupComponent } from './cmps/popup/popup.component';
     MatAutocompleteModule,
     MatDialogModule,
     MatDividerModule,
+    MatChipsModule,
   ],
   providers: [AuthService, UserService, PostService],
   bootstrap: [AppComponent],

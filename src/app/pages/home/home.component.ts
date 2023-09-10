@@ -51,6 +51,8 @@ export class HomeComponent implements OnInit {
 
   apartmentControl = new FormControl();
   cityData: string[] = [];
+
+  errorMessage='';
   
   constructor(
     private router: Router,
@@ -209,7 +211,27 @@ export class HomeComponent implements OnInit {
     }
     console.log('1111searchData111',searchData)
     this.searchService.setSearchData(searchData);
-    this.apartmentList.fetchApartmentsFiltered(searchData);
+    
+    // this.apartmentList.fetchApartmentsFiltered(searchData)
+    
+    this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
+      (apartments) => {
+        console.log('Fetched apartments:', apartments);
+        this.apartmentList.apartments = apartments;
+
+      },
+      (error) => {
+        console.log('Error fetching apartment posts:', error);
+  
+        
+        this.errorMessage = 'An error occurred while fetching apartments :'+ error ;
+      }
+    );
+
+
+
+
+
   }
 
   navigateToApartmentForm() {

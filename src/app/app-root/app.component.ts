@@ -1,25 +1,28 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../srvices/auth.service';
+import {UserService} from '../srvices/user.service';
 import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'TLVapp';
-  currentUser!: User;
-  opened=false;
+  currentUser: User | null = null;
+  opened = false;
+  isAuthenticated = false;
 
 
-  constructor(
-    private router: Router,
-    private AuthService: AuthService
-    ) {
-   
-    }
-     
+
+  constructor(private authService: AuthService,
+    private userService: UserService
+    ) {}
+
+  ngOnInit() {
+    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+    });
+  }
 }
