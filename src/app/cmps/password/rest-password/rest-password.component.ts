@@ -19,6 +19,8 @@ export class RestPasswordComponent implements OnInit {
   response:any;
   showPassword=false
   showPasswordConfirmation= false
+  errorMessage='';
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -71,6 +73,7 @@ export class RestPasswordComponent implements OnInit {
         (error) => {
           console.error('Error sending email:', error);
           this.submitted = false;
+          this.errorMessage=error.error;
         }
       );
 

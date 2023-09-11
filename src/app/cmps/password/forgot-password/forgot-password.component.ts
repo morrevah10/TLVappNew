@@ -13,6 +13,7 @@ export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm!: FormGroup;
   loading = false;
   submitted = false;
+  errorMessage='';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,7 +45,9 @@ export class ForgotPasswordComponent implements OnInit {
           this.router.navigate(['resetPassword/']);
         },
         (error) => {
-          console.error('Error sending email:', error);
+          // console.error('Error sending email:', error);
+          this.errorMessage=error.error
+          console.log('this.errorMessage',this.errorMessage)
           this.submitted = false;
         }
       );

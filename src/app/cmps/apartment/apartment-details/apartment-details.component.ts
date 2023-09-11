@@ -14,12 +14,14 @@ export class ApartmentDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private postService: PostService) { }
 
+  
   ngOnInit() {
     this.route.params.subscribe(params => {
       const apartmentId = params['id'];
       this.postService.getApartmentDetails(apartmentId).subscribe(
         (apartment) => {
           this.apartment = apartment;
+          console.log('this.apartment',this.apartment)
         },
         (error) => {
           console.error('Error fetching apartment details:', error);

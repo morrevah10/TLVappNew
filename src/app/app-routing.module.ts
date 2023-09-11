@@ -33,8 +33,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent,canActivate: [AuthGuard] },
   { path: 'myposts', component: myPostsComponent,canActivate: [AuthGuard] },
   { path: 'terms', component: TermsComponent,canActivate: [AuthGuard] },
-  { path: 'forgetPassword', component: ForgotPasswordComponent,canActivate: [AuthGuard] },
-  { path: 'resetPassword', component: RestPasswordComponent,canActivate: [AuthGuard] },
+  { path: 'forgetPassword', component: ForgotPasswordComponent },
+  { path: 'resetPassword', component: RestPasswordComponent },
   { path: 'accessDenied', component: AccessDeniedComponent },
 ];
 

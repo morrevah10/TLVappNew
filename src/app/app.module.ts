@@ -49,6 +49,8 @@ import { PopupComponent } from './cmps/popup/popup.component';
 
 import {MatChipsModule} from '@angular/material/chips';
 import { AccessDeniedComponent } from './cmps/access-denied/access-denied.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+
 
 
 @NgModule({
@@ -97,6 +99,7 @@ import { AccessDeniedComponent } from './cmps/access-denied/access-denied.compon
     MatDialogModule,
     MatDividerModule,
     MatChipsModule,
+    CarouselModule.forRoot(),
   ],
   providers: [AuthService, UserService, PostService],
   bootstrap: [AppComponent],

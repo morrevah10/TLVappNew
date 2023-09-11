@@ -1,4 +1,4 @@
-<!-- <p>apartment-details works!</p> --> 
+<!-- <p>apartment-details works!</p> -->
 <!-- <section class="apartment-details-container">
   <p>Apartment Details</p>
   <div class="apartment-details">
@@ -35,11 +35,11 @@
     <div class="detail-row">
       <label>pics:</label>
      <p>{{ apartment?.apartment_pic_1 }}</p> -->
-      <!-- <img src="{{ apartment?.apartment_pic_1 }}" alt=""> -->
-    <!-- </div> -->
+<!-- <img src="{{ apartment?.apartment_pic_1 }}" alt=""> -->
+<!-- </div> -->
 
-    <!-- Add more fields as needed -->
-  <!-- </div> -->
+<!-- Add more fields as needed -->
+<!-- </div> -->
 <!-- </section> -->
 
 <section class="apartment-details-container">
@@ -73,12 +73,40 @@
       <label>Description:</label>
       <p>{{ apartment?.post_description }}</p>
     </div>
+    <!-- <div class="detail-row">
+      <label>pics:</label>
+      <img src="{{ apartment?.apartment_pic_1 }}" alt="">
+    </div> -->
+
+
+    <!-- chang apartment_pic_1 to array on back  -->
     <div class="detail-row">
       <label>pics:</label>
-      <!-- <p>{{ apartment?.apartment_pic_1 }}</p> -->
-      <img src="{{ apartment?.apartment_pic_1 }}" alt="">
+      <carousel [isAnimated]="true">
+        <slide>
+          <img
+            src="{{ apartment?.apartment_pic_1 }}"
+            alt="first slide"
+            style="display: block; width: 100%"
+          />
+        </slide>
+        <slide>
+          <img
+            src="assets/images/nature/2.jpg"
+            alt="second slide"
+            style="display: block; width: 100%"
+          />
+        </slide>
+        <slide>
+          <img
+            src="assets/images/nature/3.jpg"
+            alt="third slide"
+            style="display: block; width: 100%"
+          />
+        </slide>
+      </carousel>
     </div>
+
     <!-- Add more fields as needed -->
   </div>
 </section>
-
