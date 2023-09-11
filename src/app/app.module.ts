@@ -48,6 +48,7 @@ import { RestPasswordComponent } from './cmps/password/rest-password/rest-passwo
 import { PopupComponent } from './cmps/popup/popup.component';
 
 import {MatChipsModule} from '@angular/material/chips';
+import { AccessDeniedComponent } from './cmps/access-denied/access-denied.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import {MatChipsModule} from '@angular/material/chips';
     ForgotPasswordComponent,
     RestPasswordComponent,
     PopupComponent,
+    AccessDeniedComponent,
   ],
   imports: [
     BrowserModule,

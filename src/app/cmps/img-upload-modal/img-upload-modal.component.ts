@@ -32,35 +32,7 @@ export class ImgUploadModalComponent implements OnInit {
     this.selectedImage = event.target.files[0];
   }
 
-  // confirmSelection() {
-  //   if (this.selectedImage) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       this.imageSelected.emit({ base64Image: reader.result as string });
-  //     };
-  //     reader.readAsDataURL(this.selectedImage);
-  //   }
-  //   this.dialogRef!.close()
-  // }
 
-  // confirmSelection() {
-  //   if (this.selectedImage) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       this.userService.updateUserProfilePicture(imageAndUserId).subscribe(
-  //         (response) => {
-  //           console.log('Profile picture updated successfully:', response);
-  //           this.dialogRef!.close(); // Close the modal on success
-  //         },
-  //         (error) => {
-  //           console.error('Error updating profile picture:', error);
-  //           this.errorMessage = 'Error updating profile picture. Please try again.'; // Set the error message
-  //         }
-  //       );
-  //     };
-  //     reader.readAsDataURL(this.selectedImage);
-  //   }
-  // }
   confirmSelection() {
     if (this.selectedImage) {
       const reader = new FileReader();
