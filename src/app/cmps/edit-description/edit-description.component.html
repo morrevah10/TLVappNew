@@ -40,10 +40,10 @@
         
         <div class="form-group">
           <label for="post_description">post description:</label>
-          <input type="text" class="form-control" id="post_description" name="post_description" [(ngModel)]="this.apartmentData.post_description" />
+          <input type="text" class="form-control" id="post_description" name="post_description" (click)="enableButton()" [(ngModel)]="this.apartmentData.post_description" />
         </div>
         
-    <button type="submit">Save Changes</button>
+    <button type="submit" [disabled]="isButtonDisabled" >Save Changes</button>
 
     <div *ngIf="errorMessage" class="error-message">
       {{ errorMessage }}

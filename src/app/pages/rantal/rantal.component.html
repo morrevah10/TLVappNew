@@ -28,8 +28,20 @@
     <label for="driving_license">Driving License:</label>
     <input type="file" (change)="onImageSelected($event, 'driving_license')" class="form-control">
 
-    <label for="apartment_pic_1">Apartment Images:</label>
-    <input type="file" multiple (change)="onImageSelected($event, 'apartment_pic_1')" class="form-control">
+    <label for="apartment_pic_1">Apartment Images 1:</label>
+    <input type="file" (change)="onImageSelected($event, 'apartment_pic_1')" class="form-control">
+
+    <label for="apartment_pic_2">Apartment Images 2:</label>
+    <input type="file" (change)="onImageSelected($event, 'apartment_pic_2')" class="form-control">
+
+    <label for="apartment_pic_3">Apartment Images 3:</label>
+    <input type="file" (change)="onImageSelected($event, 'apartment_pic_3')" class="form-control">
+
+    <label for="apartment_pic_4">Apartment Images 4:</label>
+    <input type="file" (change)="onImageSelected($event, 'apartment_pic_4')" class="form-control">
+
+  
+
 
     <label for="post_description">Description:</label>
     <input type="text" id="post_description" formControlName="post_description" class="form-control">

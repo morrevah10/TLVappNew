@@ -7,9 +7,21 @@
 
   <!-- <app-img-upload-modal></app-img-upload-modal> -->
 
+  <!-- <div class="profile-img">
+    <img src="{{userImg.user_profile_pic}}" alt="../../../assets/img/user.png">
+  </div> -->
+
   <div class="profile-img">
-    <img src="{{userImg.user_profile_pic}}" alt="לא ניתן להציג">
+    <img *ngIf="userImg.user_profile_pic; else defaultImage" [src]="userImg.user_profile_pic" alt="User Profile Picture">
   </div>
+  
+  <ng-template #defaultImage>
+    <img src="../../../assets/img/user.png" alt="User Profile Picture">
+  </ng-template>
+
+
+
+
 
   <div class="delete-user">
     <button (click)="deleteUser(user.user_id)" >delete account</button>

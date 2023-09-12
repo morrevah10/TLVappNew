@@ -138,24 +138,26 @@ export class PersonalInfoComponent implements OnInit {
 
   deleteUser(user_id: any) {
     console.log('user_id', user_id);
-    // this.userService.deleteUser(user_id).subscribe(
-    //   (response) => {
-    //     console.log('User successfully deleted:', response);
-    //     this.userService.clearUser()
-    //     this.router.navigate(['/login']);
-    //   },
-    //   (error) => {
-    //     console.error('Error delete user:', error);
-    //     this.errorMessage = 'Error delet user: ' + error.error;
-    //   }
-    // );
+    this.userService.deleteUser(user_id).subscribe(
+      (response) => {
+        console.log('User successfully deleted:', response);
+        this.userService.clearUser()
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Error delete user:', error);
+        this.errorMessage = 'Error delet user: ' + error.error;
+      }
+    );
   
 }
 
 
 logout(){
   console.log('logedout!!!');
-  // this.userService.clearUser()
-  // this.router.navigate(['/login']);}
+  this.userService.clearUser()
+  this.router.navigate(['/login']);}
+
+  
 }
-}
+

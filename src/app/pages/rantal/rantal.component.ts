@@ -38,6 +38,9 @@ export class RantalComponent implements OnInit {
       proof_image: [],
       driving_license: [],
       apartment_pic_1: [],
+      apartment_pic_2: [],
+      apartment_pic_3: [],
+      apartment_pic_4: [],
       post_description: '',
     });
   }
@@ -48,6 +51,10 @@ export class RantalComponent implements OnInit {
       proof_image: this.apartmentForm.get('proof_image')?.value,
       driving_license: this.apartmentForm.get('driving_license')?.value,
       apartment_pic_1: this.apartmentForm.get('apartment_pic_1')?.value,
+      apartment_pic_2: this.apartmentForm.get('apartment_pic_2')?.value,
+      apartment_pic_3: this.apartmentForm.get('apartment_pic_3')?.value,
+      apartment_pic_4: this.apartmentForm.get('apartment_pic_4')?.value,
+      
     };
     console.log('this.formData befor user', this.formData);
 

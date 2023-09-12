@@ -19,7 +19,8 @@ export class EditDescriptionComponent implements OnInit {
   // editForm: FormGroup;
   apartmentId!: number;
   apartmentData: any;
-  errorMessage!: string;
+  errorMessage!: '';
+  isButtonDisabled : boolean = true
 
   constructor(
     private route: ActivatedRoute,
@@ -74,9 +75,17 @@ export class EditDescriptionComponent implements OnInit {
           data: {
             message: 'Error updating post: ' + error.error
           }
+          
         });
+        this.errorMessage = error.error
       }
+      
     );
+  }
+
+  enableButton() {
+    console.log('click')
+    this.isButtonDisabled = false;
   }
 }
 

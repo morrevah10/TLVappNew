@@ -90,16 +90,23 @@
             style="display: block; width: 100%"
           />
         </slide>
-        <slide>
+        <slide *ngIf="apartment?.apartment_pic_2">
           <img
-            src="assets/images/nature/2.jpg"
+            src="{{ apartment?.apartment_pic_2 }}"
             alt="second slide"
             style="display: block; width: 100%"
           />
         </slide>
-        <slide>
+        <slide *ngIf="apartment?.apartment_pic_3">
           <img
-            src="assets/images/nature/3.jpg"
+            src="{{ apartment?.apartment_pic_3 }}"
+            alt="third slide"
+            style="display: block; width: 100%"
+          />
+        </slide>
+        <slide *ngIf="apartment?.apartment_pic_4">
+          <img
+            src="{{ apartment?.apartment_pic_4 }}"
             alt="third slide"
             style="display: block; width: 100%"
           />

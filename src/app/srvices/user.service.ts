@@ -37,10 +37,13 @@ export class UserService {
 
 
   //לבדוק ולעשות עם ערן 
-// deleteUser(user_id: any) : Observable<any> {
-//   const url = this.APIurl + `delete_user/`;
-//   return this.http.delete(url,user_id);
-// }
+deleteUser(user_id: any) : Observable<any> {
+  console.log('user_id',user_id)
+  let queryParams = {user_id:user_id}
+  console.log('queryParams',queryParams)
+  const url = this.APIurl + `delete_user/`;
+  return this.http.delete(url,{params:queryParams});
+}
 
 
 

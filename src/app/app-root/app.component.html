@@ -12,17 +12,19 @@
   <!-- </app-haeder> --> 
 
 
-  <mat-toolbar> 
+  <!-- <mat-toolbar dir="rtl">  -->
+    <mat-toolbar> 
     <mat-toolbar-row>
       <button mat-button *ngIf="isAuthenticated" (click)="opened=!opened">
         <mat-icon>menu</mat-icon>
       </button>
-      <h4>TLLVapp</h4>
+      <!-- <h4>RentBuzz</h4> -->
+      <img class="rentbuzz-logo" src="../../assets/img/rentbuzz-logo.svg" alt="">
     </mat-toolbar-row>
   </mat-toolbar>
 
-
-<mat-sidenav-container>
+  <mat-sidenav-container>
+<!-- <mat-sidenav-container dir="rtl"> -->
   <mat-sidenav [(opened)]="opened" mode="over">
 
 <mat-list>
