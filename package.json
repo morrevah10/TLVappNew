@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "github:ngx-translate/http-loader",
     "bootstrap": "^5.3.1",
     "ngx-bootstrap": "^11.0.2",
     "ngx-image-cropper": "^7.0.2",

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
@@ -53,6 +52,18 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 
+import { TranslateLoaderImpl } from './helpers/translate.loader';
+
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+// import { TranslateHttpLoader } from '../assets/i18/';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { LanguageSwitcherComponent } from './cmps/language-switcher/language-switcher.component';
+import { LanguageDirective } from './helpers/language.directive';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +88,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     RestPasswordComponent,
     PopupComponent,
     AccessDeniedComponent,
+    LanguageSwitcherComponent,
+    LanguageDirective,
   ],
   imports: [
     BrowserModule,
@@ -100,8 +113,19 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     MatDividerModule,
     MatChipsModule,
     CarouselModule.forRoot(),
+
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useClass: TranslateLoaderImpl
+      }
+    })
+
+
+
   ],
-  providers: [AuthService, UserService, PostService],
+  providers: [AuthService, UserService, PostService,TranslateLoaderImpl],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

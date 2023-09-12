@@ -41,15 +41,15 @@
         <!-- <a class="card-action" href="#"><i class="fa fa-heart"></i></a> -->
         <!-- for like option -->
 
-        <div class="card-heading">city :{{ apartment.post_city }}</div>
+        <div class="card-heading">{{"search_post_card_city_txt"| translate}} :{{ apartment.post_city }}</div>
         <div class="card-text">
-          street :{{ apartment.post_street }},{{ apartment.post_apartment_number}}
+          {{"search_post_card_street_txt"| translate}} :{{ apartment.post_street }},{{ apartment.post_apartment_number}}
         </div>
         <div class="card-text">
-          price : {{ apartment.post_apartment_price }}
+          {{"search_post_card_rent_price_txt"| translate}} : {{ apartment.post_apartment_price }}
         </div>
         <a (click)="viewApartmentDetails(apartment.post_id)" class="card-button"> 
-        Details
+          {{"search_post_card_more_details_btn"| translate}}
         </a>
       </div>
     </div>

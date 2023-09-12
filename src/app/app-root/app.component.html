@@ -20,6 +20,7 @@
       </button>
       <!-- <h4>RentBuzz</h4> -->
       <img class="rentbuzz-logo" src="../../assets/img/rentbuzz-logo.svg" alt="">
+      <app-language-switcher></app-language-switcher>
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -29,11 +30,11 @@
 
 <mat-list>
 
-  <mat-list-item><a routerLink="/home">Home</a></mat-list-item>
-  <mat-list-item><a routerLink="/personalInfo">info</a></mat-list-item>
-  <mat-list-item><a routerLink="/myposts">my posts</a></mat-list-item>
-  <mat-list-item><a routerLink="/about">about</a></mat-list-item>
-  <mat-list-item><a routerLink="/terms">terms</a></mat-list-item>
+  <mat-list-item><a routerLink="/home">{{"menu_page_home_btn"| translate}}</a></mat-list-item>
+  <mat-list-item><a routerLink="/personalInfo">{{"menu_page_personal_info_btn"| translate}}</a></mat-list-item>
+  <mat-list-item><a routerLink="/myposts">{{"menu_page_my_review_btn"| translate}}</a></mat-list-item>
+  <mat-list-item><a routerLink="/about">{{"menu_page_about_btn"| translate}}</a></mat-list-item>
+  <mat-list-item><a routerLink="/terms">{{"menu_page_terms_and_conditions_btn"| translate}}</a></mat-list-item>
 
 </mat-list>
   </mat-sidenav>

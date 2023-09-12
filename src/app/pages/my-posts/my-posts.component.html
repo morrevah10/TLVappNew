@@ -7,27 +7,18 @@
   <div class="card" *ngFor="let apartment of userPosts">
     <img [src]="apartment.apartment_pic_1" alt="Apartment Image" />
     <div class="card-info">
-      <h2>City: {{ apartment.post_city }}</h2>
-      <p>Street: {{ apartment.post_street }}</p>
-      <p>Building: {{ apartment.post_apartment_number }}</p>
+      <h2>{{"my_post_card_city_txt"| translate}}: {{ apartment.post_city }}</h2>
+      <p>{{"my_post_card_street_txt"| translate}}: {{ apartment.post_street }}</p>
+      <p>{{"my_post_card_apartment_number_txt"| translate}}: {{ apartment.post_apartment_number }}</p>
     </div>
     <div class="divider"></div>
 
-    <!-- <mat-chip class="aproval" *ngIf="apartment.proof_image_confirmed">
-      Approval <mat-icon>done</mat-icon>
-    </mat-chip>
-    <mat-chip class="pending" *ngIf="!apartment.proof_image_confirmed">
-      Pending
-    </mat-chip> -->
-
-    
-
       <div class="custom-chip approval" *ngIf="apartment.proof_image_confirmed">
-        Approval <mat-icon>done</mat-icon>
+        {{"my_post_card_approved_txt"| translate}} <mat-icon>done</mat-icon>
       </div>
 
       <div class="custom-chip pending" *ngIf="!apartment.proof_image_confirmed">
-        Pending <mat-icon>schedule</mat-icon>
+        {{"my_post_card_pending_txt"| translate}} <mat-icon>schedule</mat-icon>
     </div>
 
     
@@ -43,19 +34,19 @@
         (click)="viewApartmentDetails(apartment.post_id)"
         class="btn details"
       >
-        More Details
+      {{"my_post_card_more_details_btn"| translate}}
       </button>
       <button
         (click)="deletePost(apartment.post_id, currentUser.user_id)"
         class="btn delet"
       >
-        Delete post
+      {{"my_post_card_delete_btn"| translate}}
       </button>
       <button
         (click)="editApartmentDetails(apartment.post_id)"
         class="btn comment"
       >
-        Edit comment
+      {{"my_post_card_edit_review_btn"| translate}}
       </button>
     </div>
   </div>

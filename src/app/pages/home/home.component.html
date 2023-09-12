@@ -1,4 +1,4 @@
-<section class="home-container">
+<section [appLanguage]="'ltr'" class="home-container">
   <h1>Hi {{logedinUser?.user_full_name}}</h1>
 
   <p>Welcome to home page!!</p>
@@ -8,7 +8,7 @@
 
      <div class="search-container">
       <mat-form-field>
-        <input matInput placeholder="City" [formControl]="cityControl" [matAutocomplete]="cityAuto">
+        <input matInput [formControl]="cityControl" [matAutocomplete]="cityAuto">
         <mat-autocomplete #cityAuto="matAutocomplete">
           <mat-option *ngFor="let city of filteredCities | async" [value]="getDisplayCityName(city)" (click)="onCityOptionSelected(city.city_name)">
             {{ getDisplayCityName(city) }}
@@ -17,7 +17,7 @@
       </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Street" [formControl]="streetControl" [matAutocomplete]="streetAuto">
+          <input matInput  [formControl]="streetControl" [matAutocomplete]="streetAuto">
           <mat-autocomplete #streetAuto="matAutocomplete">
             <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
               {{ street }}
@@ -26,10 +26,10 @@
         </mat-form-field> 
       
       <mat-form-field>
-        <input matInput placeholder="Apartment Number" [formControl]="apartmentControl">
+        <input matInput  [formControl]="apartmentControl">
       </mat-form-field>
       
-      <button class="newBTN"  (click)="searchApartments()">Search</button>
+      <button class="newBTN"  (click)="searchApartments()">{{"search_post_page_search_btn"| translate}}</button>
       <!-- <button class="newBTN"  (click)="searchApartments()">Search</button> -->
 
       <div *ngIf="errorMessage" class="error-message">
@@ -40,7 +40,7 @@
   <!-- <button mat-raised-button color="primary" (click)="searchApartments()">Search</button> -->
 
 
-  <button class="css-btn" (click)="navigateToApartmentForm()">הוספת פוסט</button>
+  <button class="css-btn" (click)="navigateToApartmentForm()">{{"search_post_page_add_post_btn"| translate}}</button>
 
   <section>
 

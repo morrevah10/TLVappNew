@@ -1,9 +1,9 @@
 <section class="register-container">
   <form [formGroup]="registerForm" (ngSubmit)="onFormSubmit()">
-    <h3>User Registration</h3>
+    <h3>{{"register_form_title"| translate}}</h3>
 
     <div class="form-group">
-      <label for="user_full_name">Full Name:</label>
+      <label for="user_full_name">{{"register_form_full_name_txt"| translate}}:</label>
       <input
         type="text"
         formControlName="user_full_name"
@@ -27,7 +27,7 @@
     </div>
 
     <div class="form-group">
-      <label for="user_email">Email:</label>
+      <label for="user_email">{{"register_form_email_txt"| translate}}:</label>
       <input
         type="text"
         formControlName="user_email"
@@ -68,7 +68,7 @@
 
 
     <div class="form-group">
-      <label for="user_phone">Phone:</label>
+      <label for="user_phone">{{"register_form_phone_txt"| translate}}:</label>
       <input
         type="text"
         formControlName="user_phone"
@@ -92,7 +92,7 @@
     </div>
 
     <div class="form-group">
-      <label for="user_password">Password:</label>
+      <label for="user_password">{{"register_form_password_txt"| translate}}:</label>
       <div class="password-input-container">
         <input
           type="{{ showPassword ? 'text' : 'password' }}"
@@ -127,7 +127,7 @@
     </div>
     
     <div class="form-group">
-      <label for="user_password_2">Password Confirmation:</label>
+      <label for="user_password_2">{{"register_form_password_confirm_txt"| translate}}:</label>
       <div class="password-input-container">
         <input
           type="{{ showPasswordConfirmation ? 'text' : 'password' }}"
@@ -170,14 +170,15 @@
     <div class="form-group buttons">
       <button [disabled]="loading" class="btn">
         <span *ngIf="loading" class=""></span>
-        Register
+        {{"register_form_create_account_btn"| translate}}
       </button>
 
-        Already have a user?
+      {{"register_form_already_have_account_txt"| translate}}
     
       <button [disabled]="loading" class="btn">
         <span routerLink="/login" class="">
-          Log in!</span>
+          {{"register_form_login_btn"| translate}}
+        </span>
       </button>
     </div>
   </form>

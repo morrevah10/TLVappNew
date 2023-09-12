@@ -1,0 +1,118 @@
+{   
+    "home_page_login_btn" : "התחברות",
+    "home_page_register_btn" : "צור חשבון",
+
+
+    "register_form_title" : "יצירת חשבון",
+    "register_form_full_name_txt" : "שם מלא",
+    "register_form_email_txt" : "אימייל",
+    "register_form_phone_txt" : "טלפון נייד",
+    "register_form_password_txt" : "סיסמה",
+    "register_form_password_confirm_txt" : "אימות סיסמה",
+    "register_form_create_account_btn" : "צור חשבון",
+    "register_form_already_have_account_txt" : "יש לך משתמש קיים?",
+    "register_form_login_btn" : "התחברות",
+
+
+    "login_form_title" : "התחברות",
+    "login_form_email_txt" : "אימייל",
+    "login_form_password_txt" : "סיסמה",
+    "login_form_login_btn" : "התחברות",
+    "login_form_register_btn" : "צור חשבון",
+    "login_form_forget_password_btn" : "שחכת סיסמה?",
+
+
+    "forget_password_form_title" : "איפוס סיסמה",
+    "forget_password_form_email_txt" : "אימייל",
+    "forget_password_form_send_btn" : "שלח מייל אימות",
+
+
+    "forget_password_step_2_form_verify_code_txt" : "קוד אימות",
+    "forget_password_step_2_form_new_password_txt" : "סיסמה חדשה",
+    "forget_password_step_2_form_confirm_new_password_txt" : "אימות סיסמה",
+    "forget_password_step_2_form_reset_password_btn" : "אפס סיסמה",
+
+
+    "search_post_page_search_btn" : "חפש דירה",
+    "search_post_page_add_post_btn" : "הוסף את החוויה שלך",
+    "search_post_page_city_txt" : "עיר",
+    "search_post_page_street_txt" : "רחוב",
+    "search_post_page_apartment_number_txt" : "מספר דירה",
+
+
+    "add_post_page_city_txt" : "עיר",
+    "add_post_page_street_txt" : "רחוב",
+    "add_post_page_apartment_number_txt" : "מספר דירה",
+    "add_post_page_rent_price_txt" : "מחיר שכירות",
+    "add_post_page_entry_date_txt" : "תאריך כניסה",
+    "add_post_page_exit_date_txt" : "תאריך יציאה",
+    "add_post_page_rental_contract_file" : "חוזה שכירות",
+    "add_post_page_identification_document" : "תעודה מזהה",
+    "add_post_page_apartment_image_1" : "תמונה 1",
+    "add_post_page_apartment_image_2" : "תמונה 2",
+    "add_post_page_apartment_image_3" : "תמונה 3",
+    "add_post_page_apartment_image_4" : "תמונה 4",
+    "add_post_page_review_txt" : "החוויה שלך",
+    "add_post_page_add_post_btn" : "שתף את החוויה שלך",
+
+
+    "menu_page_home_btn" : "דף הבית",
+    "menu_page_personal_info_btn" : "איזור אישי",
+    "menu_page_my_review_btn" : "הדירות שלי",
+    "menu_page_about_btn" : "אודות",
+    "menu_page_terms_and_conditions_btn" : "תנאי שימוש",
+
+
+    "personal_info_page_change_profile_image_btn" : "",
+    "personal_info_page_logout_btn" : "התנתק",
+    "personal_info_page_delete_account_btn" : "מחיקת חשבון",
+    "personal_info_page_full_name_txt" : "שם מלא",
+    "personal_info_page_email_txt" : "אימייל",
+    "personal_info_page_phone_txt" : "טלפון נייד",
+    "personal_info_page_update_btn" : "עדכן פרטים",
+    "personal_info_page_change_password_btn" : "שינוי סיסמה",
+
+
+    "change_password_old_password_txt" : "סיסמה נוכחית",
+    "change_password_new_password_txt" : "סיסמה חדשה",
+    "change_password_confirm_new_password_txt" : "אימות סיסמה חדשה",
+    "change_password_change_password_btn" : "שנה סיסמה",
+
+
+    "my_post_card_city_txt" : "עיר",
+    "my_post_card_street_txt" : "רחוב",
+    "my_post_card_apartment_number_txt" : "מספר דירה",
+    "my_post_card_pending_txt" : "ממתין לאישור",
+    "my_post_card_approved_txt" : "אושר",
+    "my_post_card_more_details_btn" : "מידע נוסף",
+    "my_post_card_delete_btn" : "מחק דירה",
+    "my_post_card_edit_review_btn" : "ערוך חוות דעת",
+
+
+    "my_post_edit_review_page_city_txt" : "עיר",
+    "my_post_edit_review_page_street_txt" : "רחוב",
+    "my_post_edit_review_page_apartment_number_txt" : "מספר דירה",
+    "my_post_edit_review_page_rent_price_txt" : "מחיר שכירות",
+    "my_post_edit_review_page_entry_date_txt" : "תאריך כניסה",
+    "my_post_edit_review_page_exit_date_txt" : "תאריך יציאה",
+    "my_post_edit_review_page_review_txt" : "החוויה שלי",
+    "my_post_edit_review_page_update_btn" : "עדכן פרטים",
+
+
+    "search_post_card_city_txt" : "עיר",
+    "search_post_card_street_txt" : "רחוב",
+    "search_post_card_apartment_number_txt" : "מספר דירה",
+    "search_post_card_rent_price_txt" : "מחיר שכירות",
+    "search_post_card_more_details_btn" : "מידע נוסף",
+
+
+    "post_details_page_city_txt" : "עיר",
+    "post_details_page_street_txt" : "רחוב",
+    "post_details_page_apartment_number_txt" : "מספר דירה",
+    "post_details_page_rent_price_txt" : "מחיר שכירות",
+    "post_details_page_entry_date_txt" : "תאריך כניסה",
+    "post_details_page_exit_date_txt" : "תאריך יציאה",
+    "post_details_page_rental_review_txt" : "החוויה שלי",
+    "post_details_page_pics_txt" : "תמונות"
+
+}

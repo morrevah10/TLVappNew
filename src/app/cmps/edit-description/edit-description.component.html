@@ -2,34 +2,34 @@
 
 <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="post_city">city:</label>
+      <label for="post_city">{{"my_post_edit_review_page_city_txt"| translate}}:</label>
       <input type="text" class="form-control" id="post_city" name="post_city" [(ngModel)]="this.apartmentData.post_city"  [disabled]="true"/>
     </div>
 
     <div class="form-group">
-        <label for="post_street">street:</label>
+        <label for="post_street">{{"my_post_edit_review_page_street_txt"| translate}}:</label>
         <input type="text" class="form-control" id="post_street" name="post_street" [(ngModel)]="this.apartmentData.post_street" [disabled]="true"/>
       </div>
 
       <div class="form-group">
-        <label for=" post_apartment_number">apartment_number:</label>
+        <label for=" post_apartment_number">{{"my_post_edit_review_page_apartment_number_txt"| translate}}:</label>
         <input type="text" class="form-control" id=" post_apartment_number" name="post_apartment_number" [(ngModel)]="this.apartmentData.post_apartment_number"  [disabled]="true"/>
       </div>
 
       <div class="form-group">
-        <label for="post_apartment_price">apartment_price:</label>
+        <label for="post_apartment_price">{{"my_post_edit_review_page_rent_price_txt"| translate}}:</label>
         <input type="text" class="form-control" id="post_apartment_price" name="post_apartment_price" [(ngModel)]="this.apartmentData.post_apartment_price" [disabled]="true"/>
       </div>
 
       
       <div class="form-group">
-          <label for="post_rent_end">rent_end:</label>
+          <label for="post_rent_end">{{"my_post_edit_review_page_rent_price_txt"| translate}}:</label>
           <input type="text" class="form-control" id="post_rent_end" name="post_rent_end" [(ngModel)]="this.apartmentData.post_rent_end" [disabled]="true" />
         </div>
         
         
         <div class="form-group">
-            <label for="post_rent_start">rent_start:</label>
+            <label for="post_rent_start">{{"my_post_edit_review_page_entry_date_txt"| translate}}:</label>
             <input type="text" class="form-control" id=" post_rent_start" name="post_rent_start" [(ngModel)]="this.apartmentData.post_rent_start" [disabled]="true" />
         </div>
 
@@ -39,11 +39,11 @@
         </div>
         
         <div class="form-group">
-          <label for="post_description">post description:</label>
+          <label for="post_description">{{"my_post_edit_review_page_review_txt"| translate}}:</label>
           <input type="text" class="form-control" id="post_description" name="post_description" (click)="enableButton()" [(ngModel)]="this.apartmentData.post_description" />
         </div>
         
-    <button type="submit" [disabled]="isButtonDisabled" >Save Changes</button>
+    <button type="submit" [disabled]="isButtonDisabled" >{{"my_post_edit_review_page_update_btn"| translate}}</button>
 
     <div *ngIf="errorMessage" class="error-message">
       {{ errorMessage }}
