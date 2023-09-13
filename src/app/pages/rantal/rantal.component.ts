@@ -31,6 +31,7 @@ export class RantalComponent implements OnInit {
     this.apartmentForm = this.formBuilder.group({
       post_city: '',
       post_street: '',
+      post_building_number:'',
       post_apartment_number: '',
       post_apartment_price: '',
       post_rent_start: '',
@@ -87,24 +88,70 @@ export class RantalComponent implements OnInit {
     );
   }
 
+  // onImageSelected(event: any, controlName: string) {
+  //   if (event.target && event.target.files) {
+  //     const files = event.target.files;
+  //     if (files.length > 0) {
+  //       const imageURLs: string[] = [];
+  //       for (const file of files) {
+  //         const reader = new FileReader();
+  //         reader.onload = (e) => {
+  //           imageURLs.push(e.target?.result as string);
+  //           if (imageURLs.length === files.length) {
+  //             // Update the form control value
+  //             this.apartmentForm.get(controlName)?.setValue(imageURLs);
+  //           }
+  //         };
+  //         reader.readAsDataURL(file);
+  //       }
+  //     }
+  //   }
+  // }
+
+
+  // onImageSelected(event: any): Promise<string | null> {
+  //   return new Promise<string | null>((resolve, reject) => {
+  //     if (event.target && event.target.files) {
+  //       const files = event.target.files;
+  //       if (files.length > 0) {
+  //         const reader = new FileReader();
+  //         reader.onload = (e) => {
+  //           const imgUrl = e.target?.result as string;
+  //           resolve(imgUrl);
+  //         };
+  //         reader.onerror = (error) => {
+  //           reject(error);
+  //         };
+  //         reader.readAsDataURL(files[0]); 
+  //       } else {
+  //         resolve(null); 
+  //       }
+  //     } else {
+  //       reject(new Error("Invalid event target"));
+  //     }
+  //   });
+  // }
+  
   onImageSelected(event: any, controlName: string) {
     if (event.target && event.target.files) {
       const files = event.target.files;
       if (files.length > 0) {
-        const imageURLs: string[] = [];
-        for (const file of files) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            imageURLs.push(e.target?.result as string);
-            if (imageURLs.length === files.length) {
-              // Update the form control value
-              this.apartmentForm.get(controlName)?.setValue(imageURLs);
-            }
-          };
-          reader.readAsDataURL(file);
-        }
+        const reader = new FileReader();
+  
+        reader.onload = (e) => {
+          const imageURL = e.target?.result as string;
+          this.apartmentForm.get(controlName)?.setValue(imageURL);
+        };
+  
+        
+        reader.readAsDataURL(files[0]);
       }
     }
   }
+  
+  
+
+
+
 }
 

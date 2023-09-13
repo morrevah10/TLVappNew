@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
     post_city: '',
     post_street: '',
     post_apartment_number: '',
+    post_bulding_number:'',
   };
 
   selectedCity: string = '';
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit {
   streets: any[] = [];
 
   apartmentControl = new FormControl();
+  buildingControl = new FormControl();
   cityData: string[] = [];
 
   errorMessage='';
@@ -207,7 +209,8 @@ export class HomeComponent implements OnInit {
     const searchData = {
       post_city:this.selectedCity,
       post_street:this.streetControl.value,
-      post_apartment_number: this.apartmentControl.value
+      post_apartment_number: this.apartmentControl.value,
+      post_building_number : this.buildingControl.value
     }
     console.log('1111searchData111',searchData)
     this.searchService.setSearchData(searchData);

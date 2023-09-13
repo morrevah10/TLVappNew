@@ -108,6 +108,7 @@
 
     "post_details_page_city_txt" : "City",
     "post_details_page_street_txt" : "Street",
+    "post_details_page_building_txt" : "Building Number",
     "post_details_page_apartment_number_txt" : "Apartment Number",
     "post_details_page_rent_price_txt" : "Rent Price",
     "post_details_page_entry_date_txt" : "Entry Date",

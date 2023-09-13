@@ -92,7 +92,7 @@ export class ApartmentListComponent implements OnInit {
 
 
 
-  fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; }): Observable<any> {
+  fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; post_building_number:string; }): Observable<any> {
     return this.postService.getApartmentFilteredPosts(searchData).pipe(
       catchError((error) => {
         console.error('Error fetching apartment posts:', error);

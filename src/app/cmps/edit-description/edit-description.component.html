@@ -12,6 +12,11 @@
       </div>
 
       <div class="form-group">
+        <label for="post_building_number">{{"post_details_page_building_txt"| translate}}:</label>
+        <input type="text" class="form-control" id="post_building_number" name="post_building_number" [(ngModel)]="this.apartmentData.post_building_number" [disabled]="true"/>
+      </div>
+
+      <div class="form-group">
         <label for=" post_apartment_number">{{"my_post_edit_review_page_apartment_number_txt"| translate}}:</label>
         <input type="text" class="form-control" id=" post_apartment_number" name="post_apartment_number" [(ngModel)]="this.apartmentData.post_apartment_number"  [disabled]="true"/>
       </div>
