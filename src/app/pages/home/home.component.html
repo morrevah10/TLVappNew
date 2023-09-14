@@ -1,58 +1,77 @@
 <section [appLanguage]="'ltr'" class="home-container">
-  <h1>Hi {{logedinUser?.user_full_name}}</h1>
+  <h1>Hi {{ logedinUser?.user_full_name }}</h1>
 
   <p>Welcome to home page!!</p>
   <P>let's get started</P>
-  <!-- <button (click)="navigateToPersonalInfo()">אזור אישי</button> -->
 
-
-     <div class="search-container">
+  <div class="search-container">
+    <form>
       <mat-form-field>
-        <input placeholder="city" matInput [formControl]="cityControl" [matAutocomplete]="cityAuto">
-        <mat-autocomplete #cityAuto="matAutocomplete">
-          <mat-option *ngFor="let city of filteredCities | async" [value]="getDisplayCityName(city)" (click)="onCityOptionSelected(city.city_name)">
-            {{ getDisplayCityName(city) }}
+        <input
+          placeholder="city"
+          matInput
+          [formControl]="cityFilterControl"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let city of filteredCities$ | async"
+            [value]="city"
+          >
+            {{ city }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
 
-        <mat-form-field>
-          <input placeholder="street" matInput  [formControl]="streetControl" [matAutocomplete]="streetAuto">
-          <mat-autocomplete #streetAuto="matAutocomplete">
-            <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
-              {{ street }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field> 
-      
-        <mat-form-field>
-          <input matInput placeholder="building number"  [formControl]="buildingControl">
-        </mat-form-field>
-
       <mat-form-field>
-        <input matInput placeholder="apartment number"  [formControl]="apartmentControl">
+        <input
+          placeholder="street"
+          matInput
+          [formControl]="streetFilterControl"
+          [matAutocomplete]="streetAuto"
+        />
+        <mat-autocomplete #streetAuto="matAutocomplete">
+          <mat-option
+          *ngFor="let street of filteredStreets" [value]="street">
+            {{ street }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
-      
-      <button class="newBTN"  (click)="searchApartments()">{{"search_post_page_search_btn"| translate}}</button>
-      <!-- <button class="newBTN"  (click)="searchApartments()">Search</button> -->
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="building number"
+          [formControl]="buildingControl"
+        />
+      </mat-form-field>
 
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="apartment number"
+          [formControl]="apartmentControl"
+        />
+      </mat-form-field>
+    </form>
+
+    <button class="newBTN" (click)="searchApartments()">
+      {{ "search_post_page_search_btn" | translate }}
+    </button>
+    <!-- <button class="newBTN"  (click)="searchApartments()">Search</button> -->
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
     </div>
-  
+  </div>
+
   <!-- <button mat-raised-button color="primary" (click)="searchApartments()">Search</button> -->
 
-
-  <button class="css-btn" (click)="navigateToApartmentForm()">{{"search_post_page_add_post_btn"| translate}}</button>
+  <button class="css-btn" (click)="navigateToApartmentForm()">
+    {{ "search_post_page_add_post_btn" | translate }}
+  </button>
 
   <section>
-
-
-    <app-apartment-list #apartmentList>
-
-    </app-apartment-list>
-    
+    <app-apartment-list #apartmentList> </app-apartment-list>
   </section>
 </section>

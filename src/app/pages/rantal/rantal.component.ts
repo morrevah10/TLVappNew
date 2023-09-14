@@ -4,34 +4,37 @@ import { UserService } from 'src/app/srvices/user.service';
 import { PostService } from 'src/app/srvices/post.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { DataService } from 'src/app/cmps/auto/data.service';
 
 @Component({
   selector: 'app-rantal',
   templateUrl: './rantal.component.html',
   styleUrls: ['./rantal.component.scss'],
 })
-//RantalComponent
 export class RantalComponent implements OnInit {
-
   apartmentForm!: FormGroup;
   formData: any;
   loading = false;
   post_id: number = 101;
+
+  cityAutocomplete$!: Observable<string[]>;
+  streetAutocomplete$!: Observable<string[]>;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private postService: PostService,
     private router: Router,
-    private toastr: ToastrService
-
+    private toastr: ToastrService,
+    private dataService: DataService
   ) {}
 
   ngOnInit() {
     this.apartmentForm = this.formBuilder.group({
-      post_city: '',
-      post_street: '',
-      post_building_number:'',
+      post_city: [''],
+      post_street: [''],
+      post_building_number: '',
       post_apartment_number: '',
       post_apartment_price: '',
       post_rent_start: '',
@@ -44,6 +47,31 @@ export class RantalComponent implements OnInit {
       apartment_pic_4: [],
       post_description: '',
     });
+
+    // Subscribe to city autocomplete values
+    this.cityAutocomplete$ = this.dataService.getCities();
+
+    // Subscribe to street autocomplete values
+    this.streetAutocomplete$ = this.dataService.getStreets();
+
+    // Subscribe to changes in the city form control
+    this.apartmentForm.get('post_city')?.valueChanges.subscribe((value) => {
+      if (value) {
+        // Update city autocomplete data based on value
+        this.dataService.updateCityFilter(value);
+      }
+    });
+
+    // Subscribe to changes in the street form control
+    this.apartmentForm.get('post_street')?.valueChanges.subscribe((value) => {
+      if (value) {
+        // Update street autocomplete data based on value
+        this.dataService.updateStreetFilter(
+          this.apartmentForm.get('post_city')?.value,
+          value
+        );
+      }
+    });
   }
 
   onSubmit() {
@@ -55,19 +83,17 @@ export class RantalComponent implements OnInit {
       apartment_pic_2: this.apartmentForm.get('apartment_pic_2')?.value,
       apartment_pic_3: this.apartmentForm.get('apartment_pic_3')?.value,
       apartment_pic_4: this.apartmentForm.get('apartment_pic_4')?.value,
-      
     };
     console.log('this.formData befor user', this.formData);
 
     this.loading = true;
-    
+
     this.userService.user$.subscribe((user) => {
       if (user) {
         this.formData.user = user;
       }
     });
     console.log('this.formData after user', this.formData);
-
 
     this.postService.addPost(this.formData).subscribe(
       (response) => {
@@ -76,7 +102,7 @@ export class RantalComponent implements OnInit {
         this.loading = false;
 
         this.post_id = this.post_id + 1;
-        
+
         setTimeout(() => {
           this.router.navigate(['/home']);
         }, 2000);
@@ -88,70 +114,21 @@ export class RantalComponent implements OnInit {
     );
   }
 
-  // onImageSelected(event: any, controlName: string) {
-  //   if (event.target && event.target.files) {
-  //     const files = event.target.files;
-  //     if (files.length > 0) {
-  //       const imageURLs: string[] = [];
-  //       for (const file of files) {
-  //         const reader = new FileReader();
-  //         reader.onload = (e) => {
-  //           imageURLs.push(e.target?.result as string);
-  //           if (imageURLs.length === files.length) {
-  //             // Update the form control value
-  //             this.apartmentForm.get(controlName)?.setValue(imageURLs);
-  //           }
-  //         };
-  //         reader.readAsDataURL(file);
-  //       }
-  //     }
-  //   }
-  // }
+ 
 
-
-  // onImageSelected(event: any): Promise<string | null> {
-  //   return new Promise<string | null>((resolve, reject) => {
-  //     if (event.target && event.target.files) {
-  //       const files = event.target.files;
-  //       if (files.length > 0) {
-  //         const reader = new FileReader();
-  //         reader.onload = (e) => {
-  //           const imgUrl = e.target?.result as string;
-  //           resolve(imgUrl);
-  //         };
-  //         reader.onerror = (error) => {
-  //           reject(error);
-  //         };
-  //         reader.readAsDataURL(files[0]); 
-  //       } else {
-  //         resolve(null); 
-  //       }
-  //     } else {
-  //       reject(new Error("Invalid event target"));
-  //     }
-  //   });
-  // }
-  
   onImageSelected(event: any, controlName: string) {
     if (event.target && event.target.files) {
       const files = event.target.files;
       if (files.length > 0) {
         const reader = new FileReader();
-  
+
         reader.onload = (e) => {
           const imageURL = e.target?.result as string;
           this.apartmentForm.get(controlName)?.setValue(imageURL);
         };
-  
-        
+
         reader.readAsDataURL(files[0]);
       }
     }
   }
-  
-  
-
-
-
 }
-

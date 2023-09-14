@@ -12,7 +12,13 @@
       id="post_city"
       formControlName="post_city"
       class="form-control"
+      [matAutocomplete]="cityAuto"
     />
+    <mat-autocomplete #cityAuto="matAutocomplete">
+      <mat-option *ngFor="let city of cityAutocomplete$ | async" [value]="city">
+        {{ city }}
+      </mat-option>
+    </mat-autocomplete>
 
 
 
@@ -24,7 +30,13 @@
       id="post_street"
       formControlName="post_street"
       class="form-control"
+      [matAutocomplete]="streetAuto"
     />
+    <mat-autocomplete #streetAuto="matAutocomplete">
+      <mat-option *ngFor="let street of streetAutocomplete$ | async" [value]="street">
+        {{ street }}
+      </mat-option>
+    </mat-autocomplete>
 
     <label for="post_building_number"
     >{{"post_details_page_building_txt"| translate}}:</label
