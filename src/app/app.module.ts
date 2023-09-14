@@ -56,12 +56,9 @@ import { TranslateLoaderImpl } from './helpers/translate.loader';
 
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-// import { TranslateHttpLoader } from '../assets/i18/';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LanguageSwitcherComponent } from './cmps/language-switcher/language-switcher.component';
 import { LanguageDirective } from './helpers/language.directive';
-import { Test1Component } from './cmps/auto/test1/test1.component';
-import { Test2Component } from './cmps/auto/test2/test2.component';
 
 
 
@@ -92,8 +89,6 @@ import { Test2Component } from './cmps/auto/test2/test2.component';
     AccessDeniedComponent,
     LanguageSwitcherComponent,
     LanguageDirective,
-    Test1Component,
-    Test2Component,
   ],
   imports: [
     BrowserModule,

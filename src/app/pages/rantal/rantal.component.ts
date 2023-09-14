@@ -5,7 +5,7 @@ import { PostService } from 'src/app/srvices/post.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { DataService } from 'src/app/cmps/auto/data.service';
+import { DataService } from 'src/app/srvices/data.service';
 
 @Component({
   selector: 'app-rantal',

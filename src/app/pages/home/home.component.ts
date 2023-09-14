@@ -13,7 +13,7 @@ import { MatAutocomplete } from '@angular/material/autocomplete';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { DataService } from 'src/app/cmps/auto/data.service';
+import { DataService } from 'src/app/srvices/data.service';
 
 
 @Component({
