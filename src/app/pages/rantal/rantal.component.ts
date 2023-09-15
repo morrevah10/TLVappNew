@@ -163,12 +163,27 @@ export class RantalComponent implements OnInit {
     );
   }
 
-  formatDateToDdMmYyyy(inputDate: Date): string {
+  // formatDateToDdMmYyyy(inputDate: Date): string {
+  //   // Get day, month, and year components
+  //   console.log('inputDate',inputDate)
+  //   const date = new Date(inputDate);
+  // const day = date.getDate().toString().padStart(2, '0');
+  // const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-based
+  // const year = date.getFullYear();
+  // return `${day}/${month}/${year}`;
+    // console.log('formattedDate',formattedDate)
+    // return formattedDate;
+  // }
+  formatDateToYyyyMmDd(inputDate: Date): string {
     // Get day, month, and year components
-    const day = inputDate.getDate().toString().padStart(2, '0'); // Ensure 2-digit format
+    const day = inputDate.getDate().toString().padStart(2, '0');
     const month = (inputDate.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-based
-    const year = inputDate.getFullYear().toString();
-    return `${day}/${month}/${year}`;
+    const year = inputDate.getFullYear();
+  
+    // Create the formatted date string in "YYYY-MM-DD" format
+    const formattedDate = `${year}-${month}-${day}`;
+  
+    return formattedDate;
   }
 
   // onImageSelected(event: any, controlName: string) {
@@ -204,10 +219,10 @@ export class RantalComponent implements OnInit {
 
   onDateSelected(selectedDate: Date, controlName: string) {
     console.log('Selected Date:', selectedDate);
-    const formattedDate = this.formatDateToDdMmYyyy(selectedDate)
+    const formattedDate = this.formatDateToYyyyMmDd(selectedDate);
     this.mainForm.get('stepTwo')?.get(controlName)?.setValue(formattedDate);
     console.log('formattedDate:', formattedDate);
-    console.log('Form Value:', this.mainForm.value);
+    // console.log('Form Value:', this.mainForm.value);
   }
 
   nextStep() {
