@@ -61,6 +61,10 @@ import { LanguageSwitcherComponent } from './cmps/language-switcher/language-swi
 import { LanguageDirective } from './helpers/language.directive';
 
 
+import {MatStepperModule} from '@angular/material/stepper';
+import { DatepickerComponent } from './cmps/datepicker/datepicker.component'
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -89,6 +93,7 @@ import { LanguageDirective } from './helpers/language.directive';
     AccessDeniedComponent,
     LanguageSwitcherComponent,
     LanguageDirective,
+    DatepickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,9 +124,12 @@ import { LanguageDirective } from './helpers/language.directive';
         provide: TranslateLoader,
         useClass: TranslateLoaderImpl
       }
-    })
+    }),
+    BsDatepickerModule.forRoot(),
 
+    BrowserAnimationsModule,
 
+    MatStepperModule
 
   ],
   providers: [AuthService, UserService, PostService,TranslateLoaderImpl],
