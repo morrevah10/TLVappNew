@@ -66,6 +66,8 @@ import { DatepickerComponent } from './cmps/datepicker/datepicker.component'
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 
 @NgModule({
   declarations: [
@@ -129,7 +131,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
     BrowserAnimationsModule,
 
-    MatStepperModule
+    MatStepperModule,
+    MatSlideToggleModule,
 
   ],
   providers: [AuthService, UserService, PostService,TranslateLoaderImpl],

@@ -1,4 +1,17 @@
-<select [(ngModel)]="selectedLang" (change)="toggleLanguage()">
+<!-- <select [(ngModel)]="selectedLang" (change)="toggleLanguage()">
     <option value="en">English</option>
     <option value="he">Hebrew</option>
-  </select>
+  </select> -->
+<section class="switcher-section">
+
+  <div class="switcher-div" >
+    <mat-icon *ngIf="!isEnglishSelected">language</mat-icon>
+    <span *ngIf="!isEnglishSelected">Hebrew</span>
+  </div>
+  <mat-slide-toggle [(ngModel)]="isEnglishSelected" (change)="toggleLanguage()">
+  </mat-slide-toggle>
+  <div class="switcher-div" >
+    <mat-icon *ngIf="isEnglishSelected">translate</mat-icon>
+    <span *ngIf="isEnglishSelected">English</span>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+::ng-deep .mdc-switch--unselected .mdc-switch__icon--off {
+  opacity: 0 !important;
+  // transition: opacity 45ms 30ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+::ng-deep .mdc-switch__icon {
+  display: none !important;
+}
+
+::ng-deep .mdc-switch__track::after {
+  background: #e0e0e0 !important;
+}
+
+.switcher-section{
+  display: flex;
+  align-items: center;
+
+}
+
+.switcher-div{
+  display: flex;
+  height: 48px;
+  width: 100px;
+  align-items: center;
+
+}
+
+
+
+// slide toggle
+// ::after
+::ng-deep .mat-mdc-slide-toggle.mat-accent {
+  --mdc-switch-selected-focus-state-layer-color: #424242 !important;
+  --mdc-switch-selected-handle-color: #424242 !important;
+  --mdc-switch-selected-hover-state-layer-color: #424242 !important;
+  --mdc-switch-selected-pressed-state-layer-color: #424242 !important;
+  --mdc-switch-selected-focus-handle-color: #212121 !important;
+  --mdc-switch-selected-hover-handle-color: #212121 !important;
+  --mdc-switch-selected-pressed-handle-color: #212121 !important;
+  --mdc-switch-selected-focus-track-color: #e0e0e0 !important;
+  --mdc-switch-selected-hover-track-color: #e0e0e0 !important;
+  --mdc-switch-selected-pressed-track-color: #e0e0e0 !important;
+  --mdc-switch-selected-track-color: #e0e0e0 !important;
+}
+
+// ::before
+// .mat-mdc-slide-toggle {
+//     --mdc-switch-disabled-selected-handle-color: #424242;
+//     --mdc-switch-disabled-unselected-handle-color: #424242;
+//     --mdc-switch-disabled-selected-track-color: #424242;
+//     --mdc-switch-disabled-unselected-track-color: #424242;
+//     --mdc-switch-unselected-focus-state-layer-color: #424242;
+//     --mdc-switch-unselected-pressed-state-layer-color: #424242;
+//     --mdc-switch-unselected-hover-state-layer-color: #424242;
+//     --mdc-switch-unselected-focus-track-color: #e0e0e0;
+//     --mdc-switch-unselected-hover-track-color: #e0e0e0;
+//     --mdc-switch-unselected-pressed-track-color: #e0e0e0;
+//     --mdc-switch-unselected-track-color: #e0e0e0;
+//     --mdc-switch-unselected-focus-handle-color: #212121;
+//     --mdc-switch-unselected-hover-handle-color: #212121;
+//     --mdc-switch-unselected-pressed-handle-color: #212121;
+//     --mdc-switch-handle-surface-color: var(--mdc-theme-surface, #fff);
+//     --mdc-switch-unselected-handle-color: #616161;
+//     --mdc-switch-selected-icon-color: #fff;
+//     --mdc-switch-disabled-selected-icon-color: #fff;
+//     --mdc-switch-disabled-unselected-icon-color: #fff;
+//     --mdc-switch-unselected-icon-color: #fff;
+// }
