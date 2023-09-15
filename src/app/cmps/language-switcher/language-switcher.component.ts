@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../srvices/language.service';
+
+
 
 @Component({
   selector: 'app-language-switcher',
@@ -10,12 +13,13 @@ export class LanguageSwitcherComponent {
   selectedLang!: string;
   isEnglishSelected = true;
 
-  constructor(public translateService: TranslateService) {
+  constructor(public translateService: TranslateService,private languageService: LanguageService) {
     this.selectedLang = translateService.currentLang;
   }
 
   toggleLanguage() {
     this.selectedLang = this.isEnglishSelected ? 'en' : 'he';
+    this.languageService.setLanguage(this.selectedLang)
     if (this.isEnglishSelected) {
       this.enFunction();
     } else {

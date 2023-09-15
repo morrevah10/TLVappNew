@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { heLocale, listLocales } from 'ngx-bootstrap/chronos';
+import { heLocale ,listLocales } from 'ngx-bootstrap/chronos';
 import { defineLocale } from 'ngx-bootstrap/chronos';
+import { LanguageService } from '../../srvices/language.service';
 
 
 @Component({
@@ -9,20 +10,22 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
 })
-export class DatepickerComponent {
-  locale = 'he';
+export class DatepickerComponent implements OnInit {
+  // locale = 'he';
   locales = listLocales();
+  currentLanguage = 'en'
 
   colorTheme = 'theme-dark-blue';
   bsConfig?: Partial<BsDatepickerConfig>;
 
   selectedDate: Date | undefined;
 
-  constructor(private localeService: BsLocaleService) {
+  constructor(private localeService: BsLocaleService,private languageService: LanguageService) {
     defineLocale('he', heLocale);
     this.bsConfig = Object.assign({}, { containerClass: this.colorTheme });
-    this.localeService.use(this.locale);
+    this.localeService.use(this.currentLanguage);
   }
+
 
   @Output() dateSelected: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -32,5 +35,17 @@ export class DatepickerComponent {
       this.dateSelected.emit(this.selectedDate);
       console.log('Selected Date:', this.selectedDate);
     }
+  }
+
+
+
+  ngOnInit(): void {
+    this.languageService.currentLanguage$.subscribe((language) => {
+      this.currentLanguage = language;
+      console.log('this.currentLanguage',this.currentLanguage)
+      if(this.currentLanguage=='he'){
+        this.localeService.use(this.currentLanguage);
+      }
+    });
   }
 }
