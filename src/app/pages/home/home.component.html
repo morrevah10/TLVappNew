@@ -4,6 +4,10 @@
   <p>Welcome to home page!!</p>
   <P>let's get started</P>
 
+  <div *ngIf="loading" class="loading-spinner">
+    <img src="../../../assets/img/Animation.gif" alt="">
+  </div>
+
   <div class="search-container">
     <form>
       <mat-form-field>

@@ -58,3 +58,13 @@
     justify-content: center;
     align-items: center;
   }
+
+  .disable-step-title {
+    pointer-events: none;
+    cursor: default;
+    color: #888; 
+  }
+
+  ::ng-deep .mat-step-header {
+    pointer-events: none !important;
+}

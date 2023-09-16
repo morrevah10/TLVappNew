@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
   filteredStreets: string[] = [];
 
   @ViewChild(MatAutocomplete) autocomplete!: MatAutocomplete;
+  loading: boolean = false;
 
   constructor(
     private router: Router,
@@ -116,13 +117,19 @@ export class HomeComponent implements OnInit {
       post_apartment_number: this.apartmentControl.value,
       post_building_number : this.buildingControl.value
     }
+
+    this.loading = true;
+
     console.log('1111searchData111',searchData)
     this.searchService.setSearchData(searchData);
         
     this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
       (apartments) => {
         console.log('Fetched apartments:', apartments);
-        this.apartmentList.apartments = apartments;
+        setTimeout(() => {
+          this.loading = false;
+          this.apartmentList.apartments = apartments;
+        }, 5000);
       },
       (error) => {
         console.log('Error fetching apartment posts:', error);

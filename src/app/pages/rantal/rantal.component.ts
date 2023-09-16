@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { UserService } from 'src/app/srvices/user.service';
 import { PostService } from 'src/app/srvices/post.service';
 import { Router } from '@angular/router';
@@ -15,11 +20,18 @@ import { DataService } from 'src/app/srvices/data.service';
 export class RantalComponent implements OnInit {
   // apartmentForm
 
-  currentStep = 0;
+  currentStep: number = 0;
   mainForm!: FormGroup;
   formData: any;
   loading = false;
-  selectedDate!: Date;
+
+  stepTwoData: any = {};
+  stepThreeData: any = {};
+  stepFourData: any = {};
+
+  formDataSnapshot: any;
+  formStates: any[] = [];
+  // formValues: any = {}
 
   cityAutocomplete$!: Observable<string[]>;
   streetAutocomplete$!: Observable<string[]>;
@@ -30,48 +42,24 @@ export class RantalComponent implements OnInit {
     private postService: PostService,
     private router: Router,
     private toastr: ToastrService,
-    private dataService: DataService
-  ) {
-    // this.mainForm = this.formBuilder.group({
-    //   stepOne: this.formBuilder.group({
-    //     post_city: [''],
-    //     post_street: [''],
-    //     post_building_number: '',
-    //     post_apartment_number: '',
-    //     post_apartment_price: '',
-    //   }),
-    //   stepTwo: this.formBuilder.group({
-    //     post_rent_start: '',
-    //     post_rent_end: '',
-    //     proof_image: [],
-    //     driving_license: [],
-    //   }),
-    //   stepThree: this.formBuilder.group({
-    //     apartment_pic_1: [],
-    //     apartment_pic_2: [],
-    //     apartment_pic_3: [],
-    //     apartment_pic_4: [],
-    //   }),
-    //   stepFour: this.formBuilder.group({
-    //     post_description: '',
-    //   }),
-    // });
-  }
+    private dataService: DataService,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.mainForm = this.formBuilder.group({
       stepOne: this.formBuilder.group({
-        post_city: [''],
-        post_street: [''],
-        post_building_number: '',
-        post_apartment_number: '',
-        post_apartment_price: '',
+        post_city: ['', Validators.required],
+        post_street: ['', Validators.required],
+        post_building_number: ['', Validators.required],
+        post_apartment_number: ['', Validators.required],
+        post_apartment_price: ['', Validators.required],
       }),
       stepTwo: this.formBuilder.group({
-        post_rent_start: [''],
-        post_rent_end: [''],
-        proof_image: [null],
-        driving_license: [null],
+        post_rent_start: ['', Validators.required],
+        post_rent_end: ['', Validators.required],
+        proof_image: [null, Validators.required],
+        driving_license: [null, Validators.required],
       }),
       stepThree: this.formBuilder.group({
         apartment_pic_1: [null],
@@ -80,7 +68,7 @@ export class RantalComponent implements OnInit {
         apartment_pic_4: [null],
       }),
       stepFour: this.formBuilder.group({
-        post_description: '',
+        post_description: ['', Validators.required],
       }),
     });
 
@@ -119,6 +107,9 @@ export class RantalComponent implements OnInit {
           );
         }
       });
+
+    this.formStates.push(this.mainForm.getRawValue());
+    console.log('this.formStates', this.formStates);
   }
 
   onSubmit() {
@@ -150,11 +141,15 @@ export class RantalComponent implements OnInit {
       (response) => {
         console.log('Form submitted successfully:', response);
         this.toastr.success('Post add successfully!!');
-        this.loading = false;
 
         setTimeout(() => {
+          this.loading = false;
+        }, 5000);
+
+        
           this.router.navigate(['/home']);
-        }, 2000);
+       
+
       },
       (error) => {
         this.loading = false;
@@ -171,18 +166,18 @@ export class RantalComponent implements OnInit {
   // const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-based
   // const year = date.getFullYear();
   // return `${day}/${month}/${year}`;
-    // console.log('formattedDate',formattedDate)
-    // return formattedDate;
+  // console.log('formattedDate',formattedDate)
+  // return formattedDate;
   // }
   formatDateToYyyyMmDd(inputDate: Date): string {
     // Get day, month, and year components
     const day = inputDate.getDate().toString().padStart(2, '0');
     const month = (inputDate.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-based
     const year = inputDate.getFullYear();
-  
+
     // Create the formatted date string in "YYYY-MM-DD" format
     const formattedDate = `${year}-${month}-${day}`;
-  
+
     return formattedDate;
   }
 
@@ -225,14 +220,83 @@ export class RantalComponent implements OnInit {
     // console.log('Form Value:', this.mainForm.value);
   }
 
-  nextStep() {
-    // Move to the next step and save data to the main form
-    this.currentStep++;
+  nextStep(currentStepName: string) {
+    console.log('befor', this.currentStep);
+    if (this.currentStep < 3) {
+      this.currentStep++;
+    }
+    console.log('after', this.currentStep);
   }
+
+
   prevStep() {
-    // Move to the previous step
-    this.currentStep--;
+    console.log('before', this.currentStep);
+    if (this.currentStep > 0) {
+      this.currentStep--;
+    }
+    console.log('after', this.currentStep);
+}
+
+
+  // prevStep(step: string) {
+  //   const currentStepName = this.getStepName(this.currentStep);
+  //   console.log(`currentStepName: ${currentStepName}`);
+  //   console.log(`this.mainForm.get('${currentStepName}')!.value: `, this.mainForm.get('${currentStepName}')?.value);
+  //   console.log(`this.formStates[this.currentStep - 1]: `, this.formStates[this.currentStep - 1]);
+
+
+  //   this.mainForm.get('${currentStepName}')?.patchValue(this.formStates[this.currentStep - 1]);
+  //   console.log('this.formStates[this.currentStep - 1]', this.formStates[this.currentStep - 1]);
+  //   console.log('before', this.currentStep);
+  //   if (this.currentStep > 0) {
+  //     this.currentStep--;
+  //   }
+  //   console.log('after', this.currentStep);
+
+  // }
+
+  getStepName(index: number) {
+    if(index=0){
+      return `stepOne`;
+    }
+    if(index=1){
+      return `stepTwo`;
+    }
+    if(index=2){
+      return `stepThree`;
+    }
+    if(index=3){
+      return `stepFour`;
+    }
+    return 0
+
   }
+  //   console.log(
+  //     `this.mainForm.get('currentStepName')!.value`,
+  //     this.mainForm.get('currentStepName')?.value
+  //   );
+  //   console.log(
+  //     `this.formStates[this.currentStep - 1]`,
+  //     this.formStates[this.currentStep - 1]
+  //   );
+
+  //   this.mainForm.get('currentStepName')!.value ==
+  //     this.formStates[this.currentStep - 1];
+  //   console.log(
+  //     'this.formStates[this.currentStep - 1]',
+  //     this.formStates[this.currentStep - 1]
+  //   );
+  //   console.log('befor', this.currentStep);
+  //   if (this.currentStep > 0) {
+  //     this.currentStep--;
+  //   }
+  //   console.log('after', this.currentStep);
+  // }
+  // updateCurrentStep(step:number){
+  //   console.log('befor',this.currentStep)
+  //     this.currentStep==step
+  //   console.log('after',this.currentStep)
+  // }
 }
 // this.apartmentForm = this.formBuilder.group({
 //   post_city: [''],
