@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { heLocale ,listLocales } from 'ngx-bootstrap/chronos';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -11,6 +11,8 @@ import { LanguageService } from '../../srvices/language.service';
   styleUrls: ['./datepicker.component.scss'],
 })
 export class DatepickerComponent implements OnInit {
+  @Input() selectedDate!: Date;
+  @Input() selectedDate2!: Date;
   // locale = 'he';
   locales = listLocales();
   currentLanguage = 'en'
@@ -18,7 +20,7 @@ export class DatepickerComponent implements OnInit {
   colorTheme = 'theme-dark-blue';
   bsConfig?: Partial<BsDatepickerConfig>;
 
-  selectedDate: Date | undefined;
+  // selectedDate: Date | undefined;
 
   constructor(private localeService: BsLocaleService,private languageService: LanguageService) {
     defineLocale('he', heLocale);

@@ -1,16 +1,325 @@
-import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+// import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+// import {
+//   FormBuilder,
+//   FormControl,
+//   FormGroup,
+//   Validators,
+// } from '@angular/forms';
+// import { UserService } from 'src/app/srvices/user.service';
+// import { PostService } from 'src/app/srvices/post.service';
+// import { Router } from '@angular/router';
+// import { ToastrService } from 'ngx-toastr';
+// import { Observable } from 'rxjs';
+// import { DataService } from 'src/app/srvices/data.service';
+// import { DatepickerComponent } from 'src/app/cmps/datepicker/datepicker.component';
+
+// @Component({
+//   selector: 'app-rantal',
+//   templateUrl: './rantal.component.html',
+//   styleUrls: ['./rantal.component.scss'],
+// })
+// export class RantalComponent implements OnInit {
+//   // apartmentForm
+
+//   fileInputs: {
+//     stepTwoForm: { [key: string]: File | null };
+//     stepThreeForm: { [key: string]: File | null };
+//   } = {
+//     stepTwoForm: {
+//       proof_image: null,
+//       driving_license: null,
+//       // Add other file input names for step two as needed
+//     },
+//     stepThreeForm: {
+//       apartment_pic_1: null,
+//       apartment_pic_2: null,
+//       apartment_pic_3: null,
+//       apartment_pic_4: null,
+//       // Add other file input names for step three as needed
+//     },
+//   };
+
+//   formDataStep1: any = {}; // Initialize with default values
+//   formDataStep2: any = {};
+//   formDataStep3: any = {};
+//   formDataStep4: any = {};
+
+//   currentStep: number = 0;
+//   mainForm!: FormGroup;
+//   formData: any = {};
+//   loading = false;
+
+//   stepOneForm!: FormGroup;
+//   stepTwoForm!: FormGroup;
+//   stepThreeForm!: FormGroup;
+//   stepFourForm!: FormGroup;
+
+//   selectedStartDate: Date | null = null;
+//   selectedEndDate: Date | null = null;
+
+//   cityAutocomplete$!: Observable<string[]>;
+//   streetAutocomplete$!: Observable<string[]>;
+
+//   constructor(
+//     private formBuilder: FormBuilder,
+//     private userService: UserService,
+//     private postService: PostService,
+//     private router: Router,
+//     private toastr: ToastrService,
+//     private dataService: DataService,
+//     private cdRef: ChangeDetectorRef
+//   ) {}
+
+//   ngOnInit() {
+//     this.stepOneForm = this.formBuilder.group({
+//       post_city: ['', Validators.required],
+//       post_street: ['', Validators.required],
+//       post_building_number: ['', Validators.required],
+//       post_apartment_number: ['', Validators.required],
+//       post_apartment_price: ['', Validators.required],
+//     });
+
+//     this.stepTwoForm = this.formBuilder.group({
+//       post_rent_start: ['', Validators.required],
+//       post_rent_end: ['', Validators.required],
+//       proof_image: [null, Validators.required],
+//       driving_license: [null, Validators.required],
+//     });
+
+//     this.stepThreeForm = this.formBuilder.group({
+//       apartment_pic_1: [null],
+//       apartment_pic_2: [null],
+//       apartment_pic_3: [null],
+//       apartment_pic_4: [null],
+//     });
+
+//     this.stepFourForm = this.formBuilder.group({
+//       post_description: ['', Validators.required],
+//     });
+
+//     this.stepOneForm.patchValue(this.formDataStep1);
+//     this.stepTwoForm.patchValue(this.formDataStep2);
+//     this.stepThreeForm.patchValue(this.formDataStep3);
+//     this.stepFourForm.patchValue(this.formDataStep4);
+//     // Subscribe to city autocomplete values
+//     this.cityAutocomplete$ = this.dataService.getCities();
+
+//     // Subscribe to street autocomplete values
+//     this.streetAutocomplete$ = this.dataService.getStreets();
+
+//     // Subscribe to changes in the city form control
+//     this.stepOneForm.get('post_street')?.valueChanges.subscribe((value) => {
+//       if (value) {
+//         // Update city autocomplete data based on value
+//         this.dataService.updateCityFilter(value);
+//       }
+//     });
+
+//     // Subscribe to changes in the street form control
+//     this.stepOneForm.get('post_city')!.valueChanges.subscribe((value) => {
+//       if (value) {
+//         // Update city autocomplete data based on value
+//         this.dataService.updateCityFilter(value);
+//       }
+//     });
+
+//     this.stepOneForm.get('post_street')!.valueChanges.subscribe((value) => {
+//       if (value) {
+//         // Update street autocomplete data based on value
+//         this.dataService.updateStreetFilter(
+//           this.stepOneForm.get('post_city')!.value,
+//           value
+//         );
+//       }
+//     });
+
+//     if (this.stepOneForm.get('post_city')?.value) {
+//       this.formData.post_city = this.stepOneForm.get('post_city')?.value;
+//     }
+
+//   }
+
+//   onSubmit() {
+//     const formattedStartDate = this.formatDateToYyyyMmDd(
+//       this.selectedStartDate!
+//     );
+//     const formattedEndDate = this.formatDateToYyyyMmDd(this.selectedEndDate!);
+
+//     this.formData = {
+//       ...this.stepOneForm.value,
+//       ...this.stepTwoForm.value,
+//       ...this.stepThreeForm.value,
+//       ...this.stepFourForm.value,
+
+//       proof_image: this.stepTwoForm.get('proof_image')?.value,
+//       driving_license: this.stepTwoForm.get('driving_license')?.value,
+//       apartment_pic_1: this.stepThreeForm.get('apartment_pic_1')?.value,
+//       apartment_pic_2: this.stepThreeForm.get('apartment_pic_2')?.value,
+//       apartment_pic_3: this.stepThreeForm.get('apartment_pic_3')?.value,
+//       apartment_pic_4: this.stepThreeForm.get('apartment_pic_4')?.value,
+//     };
+//     console.log('this.formData befor user', this.formData);
+
+//     this.loading = true;
+
+//     this.userService.user$.subscribe((user) => {
+//       if (user) {
+//         this.formData.user = user;
+//       }
+//     });
+//     console.log('this.formData after user', this.formData);
+
+//     this.postService.addPost(this.formData).subscribe(
+//       (response) => {
+//         console.log('Form submitted successfully:', response);
+//         this.toastr.success('Post add successfully!!');
+
+//         setTimeout(() => {
+//           this.loading = false;
+//         }, 5000);
+
+//         this.router.navigate(['/home']);
+//       },
+//       (error) => {
+//         this.loading = false;
+//         console.error('Error submitting form:', error);
+//       }
+//     );
+//   }
+
+//   formatDateToYyyyMmDd(inputDate: Date): string {
+//     // Get day, month, and year components
+//     const day = inputDate.getDate().toString().padStart(2, '0');
+//     const month = (inputDate.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-based
+//     const year = inputDate.getFullYear();
+
+//     // Create the formatted date string in "YYYY-MM-DD" format
+//     const formattedDate = `${year}-${month}-${day}`;
+
+//     return formattedDate;
+//   }
+
+//   onImageSelected(event: any, controlName: string, stepForm: string) {
+//     if (event.target && event.target.files) {
+//       const files = event.target.files;
+//       if (files.length > 0) {
+//         // Update the file input based on the stepForm and controlName
+//         if (stepForm === 'stepTwoForm' || stepForm === 'stepThreeForm') {
+//           this.fileInputs[stepForm][controlName] = files[0];
+//         }
+//       }
+//     }
+//   }
+
+//   logFormValidity() {
+//     console.log('stepTwoForm validity:', this.stepTwoForm.valid);
+//   }
+
+//   onDateSelected(selectedDate: Date, controlName: string) {
+//     if (controlName == 'post_rent_start') {
+//       this.selectedStartDate = selectedDate;
+//       console.log('this.selectedStartDate', this.selectedStartDate);
+//     } else {
+//       if (controlName == 'post_rent_end') {
+//         this.selectedEndDate = selectedDate;
+//         console.log('this.selectedEndDate', this.selectedEndDate);
+//       }
+//     }
+//   }
+
+//   nextStep(currentStepName: string) {
+//     console.log('before', this.currentStep);
+
+//     if (currentStepName == 'stepTwo') {
+//       const controlNameStart = 'post_rent_start';
+//       const controlNameEnd = 'post_rent_end';
+//       if (this.selectedStartDate !== null && this.selectedEndDate !== null) {
+
+//         this.stepTwoForm
+//           .get(controlNameStart)
+//           ?.setValue(this.selectedStartDate);
+//         this.stepTwoForm.get(controlNameEnd)?.setValue(this.selectedEndDate);
+//       }
+//     }
+
+//     this.saveFormData(currentStepName);
+//     if (this.currentStep < 3) {
+//       this.currentStep++;
+//     }
+//     console.log('after', this.currentStep);
+//   }
+
+//   saveFormData(formName: string) {
+//     if (formName === 'stepOneForm') {
+//       this.formDataStep1 = this.stepOneForm.value;
+//     } else if (formName === 'stepTwoForm') {
+//       this.formDataStep2 = this.stepTwoForm.value;
+//     } else if (formName === 'stepThreeForm') {
+//       this.formDataStep3 = this.stepThreeForm.value;
+//     } else if (formName === 'stepFourForm') {
+//       this.formDataStep4 = this.stepFourForm.value;
+//     }
+//   }
+
+//   prevStep(currentStepName: string) {
+//     console.log('before', this.currentStep);
+//     this.saveFormData(currentStepName);
+
+//     if (this.currentStep > 0) {
+//       this.currentStep--;
+//     }
+
+//     // Load the data from the previous step's form into the formData object
+
+//     console.log('after', this.currentStep);
+//   }
+
+//   loadFormData(stepName: string) {
+//     switch (stepName) {
+//       case 'stepOneForm':
+//         this.formData = this.stepOneForm.value;
+//         break;
+//       case 'stepTwoForm':
+//         this.formData = this.stepTwoForm.value;
+//         break;
+//       case 'stepThreeForm':
+//         this.formData = this.stepThreeForm.value;
+//         break;
+//       case 'stepFourForm':
+//         this.formData = this.stepFourForm.value;
+//         break;
+//       default:
+//         // Handle other cases or throw an error if needed
+//         break;
+//     }
+//   }
+
+//   getStepName(index: number) {
+//     if ((index = 0)) {
+//       return `stepOne`;
+//     }
+//     if ((index = 1)) {
+//       return `stepTwo`;
+//     }
+//     if ((index = 2)) {
+//       return `stepThree`;
+//     }
+//     if ((index = 3)) {
+//       return `stepFour`;
+//     }
+//     return 0;
+//   }
+// }
+
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/srvices/user.service';
 import { PostService } from 'src/app/srvices/post.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { DataService } from 'src/app/srvices/data.service';
+import { DatepickerComponent } from 'src/app/cmps/datepicker/datepicker.component';
 
 @Component({
   selector: 'app-rantal',
@@ -18,20 +327,16 @@ import { DataService } from 'src/app/srvices/data.service';
   styleUrls: ['./rantal.component.scss'],
 })
 export class RantalComponent implements OnInit {
-  // apartmentForm
-
+  formData: any = {};
   currentStep: number = 0;
-  mainForm!: FormGroup;
-  formData: any;
-  loading = false;
 
-  stepTwoData: any = {};
-  stepThreeData: any = {};
-  stepFourData: any = {};
+  stepOneForm!: FormGroup;
+  stepTwoForm!: FormGroup;
+  stepThreeForm!: FormGroup;
+  stepFourForm!: FormGroup;
 
-  formDataSnapshot: any;
-  formStates: any[] = [];
-  // formValues: any = {}
+  selectedStartDate: Date | null = null;
+  selectedEndDate: Date | null = null;
 
   cityAutocomplete$!: Observable<string[]>;
   streetAutocomplete$!: Observable<string[]>;
@@ -44,33 +349,46 @@ export class RantalComponent implements OnInit {
     private toastr: ToastrService,
     private dataService: DataService,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) {
+
+
+
+  }
 
   ngOnInit() {
-    this.mainForm = this.formBuilder.group({
-      stepOne: this.formBuilder.group({
-        post_city: ['', Validators.required],
-        post_street: ['', Validators.required],
-        post_building_number: ['', Validators.required],
-        post_apartment_number: ['', Validators.required],
-        post_apartment_price: ['', Validators.required],
-      }),
-      stepTwo: this.formBuilder.group({
-        post_rent_start: ['', Validators.required],
-        post_rent_end: ['', Validators.required],
-        proof_image: [null, Validators.required],
-        driving_license: [null, Validators.required],
-      }),
-      stepThree: this.formBuilder.group({
-        apartment_pic_1: [null],
-        apartment_pic_2: [null],
-        apartment_pic_3: [null],
-        apartment_pic_4: [null],
-      }),
-      stepFour: this.formBuilder.group({
-        post_description: ['', Validators.required],
-      }),
+    this.formData = {
+      stepOneForm: {},
+      stepTwoForm: {},
+      stepThreeForm: {},
+      stepFourForm: {},
+    };
+
+    this.stepOneForm = this.formBuilder.group({
+      post_city: ['', Validators.required],
+      post_street: ['', Validators.required],
+      post_building_number: ['', Validators.required],
+      post_apartment_number: ['', Validators.required],
+      post_apartment_price: ['', Validators.required],
     });
+
+    this.stepTwoForm = this.formBuilder.group({
+      post_rent_start: ['', Validators.required],
+      post_rent_end: ['', Validators.required],
+      proof_image: [null, Validators.required],
+      driving_license: [null, Validators.required],
+    });
+
+    this.stepThreeForm = this.formBuilder.group({
+      apartment_pic_1: [null],
+      apartment_pic_2: [null],
+      apartment_pic_3: [null],
+      apartment_pic_4: [null],
+    });
+
+    this.stepFourForm = this.formBuilder.group({
+      post_description: ['', Validators.required],
+    });
+  
 
     // Subscribe to city autocomplete values
     this.cityAutocomplete$ = this.dataService.getCities();
@@ -79,62 +397,49 @@ export class RantalComponent implements OnInit {
     this.streetAutocomplete$ = this.dataService.getStreets();
 
     // Subscribe to changes in the city form control
-    this.mainForm
-      .get('stepOne.post_street')
-      ?.valueChanges.subscribe((value) => {
-        if (value) {
-          // Update city autocomplete data based on value
-          this.dataService.updateCityFilter(value);
-        }
-      });
-
-    // Subscribe to changes in the street form control
-    this.mainForm.get('stepOne.post_city')!.valueChanges.subscribe((value) => {
+    this.stepOneForm.get('post_street')?.valueChanges.subscribe((value) => {
       if (value) {
         // Update city autocomplete data based on value
         this.dataService.updateCityFilter(value);
       }
     });
 
-    this.mainForm
-      .get('stepOne.post_street')!
-      .valueChanges.subscribe((value) => {
-        if (value) {
-          // Update street autocomplete data based on value
-          this.dataService.updateStreetFilter(
-            this.mainForm.get('stepOne.post_city')!.value,
-            value
-          );
-        }
-      });
+    // Subscribe to changes in the street form control
+    this.stepOneForm.get('post_city')!.valueChanges.subscribe((value) => {
+      if (value) {
+        // Update city autocomplete data based on value
+        this.dataService.updateCityFilter(value);
+      }
+    });
 
-    this.formStates.push(this.mainForm.getRawValue());
-    console.log('this.formStates', this.formStates);
+    this.stepOneForm.get('post_street')!.valueChanges.subscribe((value) => {
+      if (value) {
+        // Update street autocomplete data based on value
+        this.dataService.updateStreetFilter(
+          this.stepOneForm.get('post_city')!.value,
+          value
+        );
+      }
+    });
+
+    if (this.stepOneForm.get('post_city')?.value) {
+      this.formData.post_city = this.stepOneForm.get('post_city')?.value;
+    }
   }
 
   onSubmit() {
+    // Merge all form data into the formData object
     this.formData = {
-      ...this.mainForm.get('stepOne')?.value,
-      ...this.mainForm.get('stepTwo')?.value,
-      ...this.mainForm.get('stepThree')?.value,
-      ...this.mainForm.get('stepFour')?.value,
-
-      proof_image: this.mainForm.get('stepTwo.proof_image')?.value,
-      driving_license: this.mainForm.get('stepTwo.driving_license')?.value,
-      apartment_pic_1: this.mainForm.get('stepThree.apartment_pic_1')?.value,
-      apartment_pic_2: this.mainForm.get('stepThree.apartment_pic_2')?.value,
-      apartment_pic_3: this.mainForm.get('stepThree.apartment_pic_3')?.value,
-      apartment_pic_4: this.mainForm.get('stepThree.apartment_pic_4')?.value,
+      ...this.formData,
+      ...this.stepOneForm.value,
+      ...this.stepTwoForm.value,
+      ...this.stepThreeForm.value,
+      ...this.stepFourForm.value,
     };
-    console.log('this.formData befor user', this.formData);
 
-    this.loading = true;
+    // Handle the rest of your form submission logic here
+    // ...
 
-    this.userService.user$.subscribe((user) => {
-      if (user) {
-        this.formData.user = user;
-      }
-    });
     console.log('this.formData after user', this.formData);
 
     this.postService.addPost(this.formData).subscribe(
@@ -142,175 +447,109 @@ export class RantalComponent implements OnInit {
         console.log('Form submitted successfully:', response);
         this.toastr.success('Post add successfully!!');
 
-        setTimeout(() => {
-          this.loading = false;
-        }, 5000);
+        // setTimeout(() => {
+        //   this.loading = false;
+        // }, 5000);
 
-        
-          this.router.navigate(['/home']);
-       
-
+        this.router.navigate(['/home']);
       },
       (error) => {
-        this.loading = false;
+        // this.loading = false;
         console.error('Error submitting form:', error);
       }
     );
   }
 
-  // formatDateToDdMmYyyy(inputDate: Date): string {
-  //   // Get day, month, and year components
-  //   console.log('inputDate',inputDate)
-  //   const date = new Date(inputDate);
-  // const day = date.getDate().toString().padStart(2, '0');
-  // const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-based
-  // const year = date.getFullYear();
-  // return `${day}/${month}/${year}`;
-  // console.log('formattedDate',formattedDate)
-  // return formattedDate;
-  // }
-  formatDateToYyyyMmDd(inputDate: Date): string {
-    // Get day, month, and year components
-    const day = inputDate.getDate().toString().padStart(2, '0');
-    const month = (inputDate.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-based
-    const year = inputDate.getFullYear();
-
-    // Create the formatted date string in "YYYY-MM-DD" format
-    const formattedDate = `${year}-${month}-${day}`;
-
-    return formattedDate;
-  }
-
-  // onImageSelected(event: any, controlName: string) {
-  //   if (event.target && event.target.files) {
-  //     const files = event.target.files;
-  //     if (files.length > 0) {
-  //       const reader = new FileReader();
-
-  //       reader.onload = (e) => {
-  //         const imageURL = e.target?.result as string;
-  //         this.mainForm.get(controlName)?.setValue(imageURL);
-  //       };
-
-  //       reader.readAsDataURL(files[0]);
-  //     }
-  //   }
-  // }
-
-  onImageSelected(event: any, controlName: string, step: string) {
+  onImageSelected(event: any, controlName: string, stepForm: string) {
     if (event.target && event.target.files) {
       const files = event.target.files;
       if (files.length > 0) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const imageURL = e.target?.result as string;
-          this.mainForm.get(`${step}.${controlName}`)?.setValue(imageURL);
-        };
-
-        reader.readAsDataURL(files[0]);
+        // Update the file input based on the stepForm and controlName
+        if (stepForm === 'stepTwoForm' || stepForm === 'stepThreeForm') {
+          this.formData[controlName] = files[0];
+        }
       }
     }
   }
 
   onDateSelected(selectedDate: Date, controlName: string) {
-    console.log('Selected Date:', selectedDate);
-    const formattedDate = this.formatDateToYyyyMmDd(selectedDate);
-    this.mainForm.get('stepTwo')?.get(controlName)?.setValue(formattedDate);
-    console.log('formattedDate:', formattedDate);
-    // console.log('Form Value:', this.mainForm.value);
+    if (controlName === 'post_rent_start') {
+      this.selectedStartDate = selectedDate;
+      console.log('this.selectedStartDate', this.selectedStartDate);
+    } else if (controlName === 'post_rent_end') {
+      this.selectedEndDate = selectedDate;
+      console.log('this.selectedEndDate', this.selectedEndDate);
+    }
   }
 
-  nextStep(currentStepName: string) {
-    console.log('befor', this.currentStep);
+  nextStep() {
+    this.saveFormData();
     if (this.currentStep < 3) {
       this.currentStep++;
+      this.loadFormData(); // Load saved data for the next step
     }
-    console.log('after', this.currentStep);
   }
-
 
   prevStep() {
-    console.log('before', this.currentStep);
     if (this.currentStep > 0) {
+      this.saveFormData(); // Save data before going back
       this.currentStep--;
+      this.loadFormData(); // Load saved data for the previous step
     }
-    console.log('after', this.currentStep);
-}
+  }
 
+  saveFormData() {
+    switch (this.currentStep) {
+      case 0:
+        this.formData.stepOneForm = { ...this.stepOneForm.value };
+        break;
+      case 1:
+        this.formData.stepTwoForm = { ...this.stepTwoForm.value };
+        break;
+      case 2:
+        this.formData.stepThreeForm = { ...this.stepThreeForm.value };
+        break;
+      case 3:
+        this.formData.stepFourForm = { ...this.stepFourForm.value };
+        break;
+      default:
+        // Handle other cases or throw an error if needed
+        break;
+    }
+  }
 
-  // prevStep(step: string) {
-  //   const currentStepName = this.getStepName(this.currentStep);
-  //   console.log(`currentStepName: ${currentStepName}`);
-  //   console.log(`this.mainForm.get('${currentStepName}')!.value: `, this.mainForm.get('${currentStepName}')?.value);
-  //   console.log(`this.formStates[this.currentStep - 1]: `, this.formStates[this.currentStep - 1]);
-
-
-  //   this.mainForm.get('${currentStepName}')?.patchValue(this.formStates[this.currentStep - 1]);
-  //   console.log('this.formStates[this.currentStep - 1]', this.formStates[this.currentStep - 1]);
-  //   console.log('before', this.currentStep);
-  //   if (this.currentStep > 0) {
-  //     this.currentStep--;
-  //   }
-  //   console.log('after', this.currentStep);
-
-  // }
+  loadFormData() {
+    switch (this.currentStep) {
+      case 0:
+        this.stepOneForm.patchValue(this.formData.stepOneForm);
+        break;
+      case 1:
+        this.stepTwoForm.patchValue(this.formData.stepTwoForm);
+        break;
+      case 2:
+        this.stepThreeForm.patchValue(this.formData.stepThreeForm);
+        break;
+      case 3:
+        this.stepFourForm.patchValue(this.formData.stepFourForm);
+        break;
+      default:
+        // Handle other cases or throw an error if needed
+        break;
+    }
+  }
 
   getStepName(index: number) {
-    if(index=0){
-      return `stepOne`;
+    switch (index) {
+      case 0:
+        return 'stepOne';
+      case 1:
+        return 'stepTwo';
+      case 2:
+        return 'stepThree';
+      case 3:
+        return 'stepFour';
+      default:
+        return '';
     }
-    if(index=1){
-      return `stepTwo`;
-    }
-    if(index=2){
-      return `stepThree`;
-    }
-    if(index=3){
-      return `stepFour`;
-    }
-    return 0
-
   }
-  //   console.log(
-  //     `this.mainForm.get('currentStepName')!.value`,
-  //     this.mainForm.get('currentStepName')?.value
-  //   );
-  //   console.log(
-  //     `this.formStates[this.currentStep - 1]`,
-  //     this.formStates[this.currentStep - 1]
-  //   );
-
-  //   this.mainForm.get('currentStepName')!.value ==
-  //     this.formStates[this.currentStep - 1];
-  //   console.log(
-  //     'this.formStates[this.currentStep - 1]',
-  //     this.formStates[this.currentStep - 1]
-  //   );
-  //   console.log('befor', this.currentStep);
-  //   if (this.currentStep > 0) {
-  //     this.currentStep--;
-  //   }
-  //   console.log('after', this.currentStep);
-  // }
-  // updateCurrentStep(step:number){
-  //   console.log('befor',this.currentStep)
-  //     this.currentStep==step
-  //   console.log('after',this.currentStep)
-  // }
 }
-// this.apartmentForm = this.formBuilder.group({
-//   post_city: [''],
-//   post_street: [''],
-//   post_building_number: '',
-//   post_apartment_number: '',
-//   post_apartment_price: '',
-//   post_rent_start: '',
-//   post_rent_end: '',
-//   proof_image: [],
-//   driving_license: [],
-//   apartment_pic_1: [],
-//   apartment_pic_2: [],
-//   apartment_pic_3: [],
-//   apartment_pic_4: [],
-//   post_description: '',
-// });

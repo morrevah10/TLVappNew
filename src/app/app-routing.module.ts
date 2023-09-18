@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'personalInfo/changPassword', component: ChangPasswordComponent,canActivate: [AuthGuard] },
   { path: 'about', component: AboutComponent,canActivate: [AuthGuard] },
   { path: 'myposts', component: myPostsComponent,canActivate: [AuthGuard] },
-  { path: 'terms', component: TermsComponent,canActivate: [AuthGuard] },
+  { path: 'terms', component: TermsComponent,},
   { path: 'forgetPassword', component: ForgotPasswordComponent },
   { path: 'resetPassword', component: RestPasswordComponent },
   { path: 'accessDenied', component: AccessDeniedComponent },

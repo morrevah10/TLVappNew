@@ -175,209 +175,422 @@
 
 <!-- /////// -->
 
-<section class="rantal-container">
+<!-- <div *ngIf="loading" class="loading-spinner">
+  <img src="../../../assets/img/Animation.gif" alt="">
+</div> -->
+<!-- <section class="rantal-container">
   <h3>Rental Form :</h3>
 
-
-  <!-- <div *ngIf="loading" class="loading-spinner">
-    <img src="../../../assets/img/Animation.gif" alt="">
-  </div> -->
-  <mat-horizontal-stepper [selectedIndex]="currentStep" >
-    <mat-step label="step1" >
+  <mat-horizontal-stepper [selectedIndex]="currentStep">
+    <mat-step label="step1">
       <div *ngIf="currentStep === 0">
-        <form [formGroup]="mainForm">
-          <div formGroupName="stepOne">
+        <form [formGroup]="stepOneForm">
 
-            <label for="post_city"
-              >{{ "add_post_page_city_txt" | translate }}:</label
+          <label for="post_city"
+            >{{ "add_post_page_city_txt" | translate }}:</label
+          >
+          <input
+            type="text"
+            id="post_city"
+            formControlName="post_city"
+            class="form-control"
+            [matAutocomplete]="cityAuto"
+            [value]="formDataStep1.post_city"
+          />
+          <mat-autocomplete #cityAuto="matAutocomplete">
+            <mat-option
+              *ngFor="let city of cityAutocomplete$ | async"
+              [value]="city"
             >
-            <input
-              type="text"
-              id="post_city"
-              formControlName="post_city"
-              class="form-control"
-              [matAutocomplete]="cityAuto"
-            />
-            <mat-autocomplete #cityAuto="matAutocomplete">
-              <mat-option
-                *ngFor="let city of cityAutocomplete$ | async"
-                [value]="city"
-              >
-                {{ city }}
-              </mat-option>
-            </mat-autocomplete>
+              {{ city }}
+            </mat-option>
+          </mat-autocomplete>
 
-            <label for="post_street"
-              >{{ "add_post_page_street_txt" | translate }}:</label
+          <label for="post_street"
+            >{{ "add_post_page_street_txt" | translate }}:</label
+          >
+          <input
+            type="text"
+            id="post_street"
+            formControlName="post_street"
+            class="form-control"
+            [matAutocomplete]="streetAuto"
+            [value]="formDataStep1.post_street"
+          />
+          <mat-autocomplete #streetAuto="matAutocomplete">
+            <mat-option
+              *ngFor="let street of streetAutocomplete$ | async"
+              [value]="street"
             >
-            <input
-              type="text"
-              id="post_street"
-              formControlName="post_street"
-              class="form-control"
-              [matAutocomplete]="streetAuto"
-            />
-            <mat-autocomplete #streetAuto="matAutocomplete">
-              <mat-option
-                *ngFor="let street of streetAutocomplete$ | async"
-                [value]="street"
-              >
-                {{ street }}
-              </mat-option>
-            </mat-autocomplete>
+              {{ street }}
+            </mat-option>
+          </mat-autocomplete>
 
-            <label for="post_building_number"
-              >{{ "post_details_page_building_txt" | translate }}:</label
-            >
-            <input
-              type="text"
-              id="post_building_number"
-              formControlName="post_building_number"
-              class="form-control"
-            />
+          <label for="post_building_number"
+            >{{ "post_details_page_building_txt" | translate }}:</label
+          >
+          <input
+            type="text"
+            id="post_building_number"
+            formControlName="post_building_number"
+            class="form-control"
+            [value]="formDataStep1.post_building_number"
+          />
 
-            <label for="post_apartment_number"
-              >{{ "add_post_page_apartment_number_txt" | translate }}:</label
-            >
-            <input
-              type="text"
-              id="post_apartment_number"
-              formControlName="post_apartment_number"
-              class="form-control"
-            />
-            <label for="post_apartment_price"
-              >{{ "add_post_page_rent_price_txt" | translate }}:</label
-            >
-            <input
-              type="text"
-              id="post_apartment_price"
-              formControlName="post_apartment_price"
-              class="form-control"
-            />
-          </div>
+          <label for="post_apartment_number"
+            >{{ "add_post_page_apartment_number_txt" | translate }}:</label
+          >
+          <input
+            type="text"
+            id="post_apartment_number"
+            formControlName="post_apartment_number"
+            class="form-control"
+            [value]="formDataStep1.post_apartment_number"
+          />
+          <label for="post_apartment_price"
+            >{{ "add_post_page_rent_price_txt" | translate }}:</label
+          >
+          <input
+            type="text"
+            id="post_apartment_price"
+            formControlName="post_apartment_price"
+            class="form-control"
+            [value]="formDataStep1.post_apartment_price"
+          />
         </form>
-        <button mat-button (click)="nextStep('stepOne')" [disabled]="!this.mainForm.get('stepOne')!.valid">Next</button>
+        <button
+          mat-button
+          (click)="nextStep('stepOneForm')"
+          [disabled]="!stepOneForm.valid"
+        >
+          Next
+        </button>
       </div>
     </mat-step>
 
     <mat-step label="step2">
       <div *ngIf="currentStep === 1">
-        <form [formGroup]="mainForm">
-          <div formGroupName="stepTwo">
-            <div>
-              <label for="post_rent_start"
-                >{{ "add_post_page_entry_date_txt" | translate }}:</label
-              >
-              <app-datepicker 
-                (dateSelected)="onDateSelected($event, 'post_rent_start')"
-              ></app-datepicker>
-            </div>
-
-           <div >
-             <label for="post_rent_end"
-               >{{ "add_post_page_exit_date_txt" | translate }}:</label
-             >
-             <app-datepicker 
-               (dateSelected)="onDateSelected($event, 'post_rent_end')"
-             ></app-datepicker>
-           </div>
-           
-
-            <label for="proof_image"
-              >{{ "add_post_page_rental_contract_file" | translate }}:</label
+        <form [formGroup]="stepTwoForm">
+          <div>
+            <label for="post_rent_start"
+              >{{ "add_post_page_entry_date_txt" | translate }}:</label
             >
-            <input
-              type="file"
-              (change)="onImageSelected($event, 'proof_image', 'stepTwo')"
-              class="form-control"
-            />
-
-            <label for="driving_license"
-              >{{ "add_post_page_identification_document" | translate }}:</label
-            >
-            <input
-              type="file"
-              (change)="onImageSelected($event, 'driving_license', 'stepTwo')"
-              class="form-control"
-            />
+            <app-datepicker
+              (dateSelected)="onDateSelected($event, 'post_rent_start')"
+              [selectedDate]="formDataStep2.post_rent_start"
+              [selectedDate2]="formDataStep2.post_rent_end"
+            ></app-datepicker>
           </div>
+
+          <div>
+            <label for="post_rent_end"
+              >{{ "add_post_page_exit_date_txt" | translate }}:</label
+            >
+            <app-datepicker
+              (dateSelected)="onDateSelected($event, 'post_rent_end')"
+              [selectedDate]="formDataStep2.post_rent_start"
+              [selectedDate2]="formDataStep2.post_rent_end"
+            ></app-datepicker>
+          </div>
+
+          <label for="proof_image"
+            >{{ "add_post_page_rental_contract_file" | translate }}:</label
+          >
+          <input
+            type="file"
+            (change)="onImageSelected($event, 'proof_image', 'stepTwoForm')"
+            class="form-control"
+          />
+
+          <label for="driving_license"
+            >{{ "add_post_page_identification_document" | translate }}:</label
+          >
+          <input
+            type="file"
+            (change)="onImageSelected($event, 'driving_license', 'stepTwoForm')"
+            class="form-control"
+          />
         </form>
-        <button mat-button (click)="nextStep('stepTwo')" [disabled]="!this.mainForm.get('stepTwo')!.valid" >Next</button>
-        <button mat-button (click)="prevStep()">Back</button>
+        <button
+          mat-button
+          (click)="nextStep('stepTwo')"
+          [disabled]="!stepTwoForm.valid"
+        >
+          Next
+        </button>
+
+
+        <button mat-button (click)="logFormValidity()">
+          Log Form Validity
+        </button>
+
+
+        <button mat-button (click)="prevStep('stepTwoForm')">Back</button>
       </div>
     </mat-step>
 
-    <mat-step  label="step3" >
+    <mat-step label="step3">
       <div *ngIf="currentStep === 2">
-        <form [formGroup]="mainForm">
-          <div formGroupName="stepThree">
-            <label for="apartment_pic_1"
-              >{{ "add_post_page_apartment_image_1" | translate }} :</label
-            >
-            <input
-              type="file"
-              (change)="onImageSelected($event, 'apartment_pic_1', 'stepThree')"
-              class="form-control"
-            />
+        <form [formGroup]="stepThreeForm">
+          <label for="apartment_pic_1"
+            >{{ "add_post_page_apartment_image_1" | translate }} :</label
+          >
+          <input
+            type="file"
+            (change)="
+              onImageSelected($event, 'apartment_pic_1', 'stepThreeForm')
+            "
+            class="form-control"
+          />
+          
+          <img
+            [src]="formData.apartment_pic_4"
+            alt="apartment_pic_4"
+            *ngIf="formData.apartment_pic_4"
+            [style.display]="formData.apartment_pic_4 ? 'initial' : 'none'"
+          />
 
-            <label for="apartment_pic_2"
-              >{{ "add_post_page_apartment_image_2" | translate }} :</label
-            >
-            <input
-              type="file"
-              (change)="onImageSelected($event, 'apartment_pic_2', 'stepThree')"
-              class="form-control"
-            />
+          <label for="apartment_pic_2"
+            >{{ "add_post_page_apartment_image_2" | translate }} :</label
+          >
+          <input
+            type="file"
+            (change)="
+              onImageSelected($event, 'apartment_pic_2', 'stepThreeForm')
+            "
+            class="form-control"
+          />
+          
+          <img
+            [src]="formData.apartment_pic_4"
+            alt="apartment_pic_4"
+            *ngIf="formData.apartment_pic_4"
+            [style.display]="formData.apartment_pic_4 ? 'initial' : 'none'"
+          />
 
-            <label for="apartment_pic_3"
-              >{{ "add_post_page_apartment_image_3" | translate }}:</label
-            >
-            <input
-              type="file"
-              (change)="onImageSelected($event, 'apartment_pic_3', 'stepThree')"
-              class="form-control"
-            />
+          <label for="apartment_pic_3"
+            >{{ "add_post_page_apartment_image_3" | translate }}:</label
+          >
+          <input
+            type="file"
+            (change)="
+              onImageSelected($event, 'apartment_pic_3', 'stepThreeForm')
+            "
+            class="form-control"
+          />
+          <img
+            [src]="formData.apartment_pic_4"
+            alt="apartment_pic_4"
+            *ngIf="formData.apartment_pic_4"
+            [style.display]="formData.apartment_pic_4 ? 'initial' : 'none'"
+          />
 
-            <label for="apartment_pic_4"
-              >{{ "add_post_page_apartment_image_4" | translate }}:</label
-            >
-            <input
-              type="file"
-              (change)="onImageSelected($event, 'apartment_pic_4', 'stepThree')"
-              class="form-control"
-            />
-          </div>
+          <label for="apartment_pic_4"
+            >{{ "add_post_page_apartment_image_4" | translate }}:</label
+          >
+          <input
+            type="file"
+            (change)="
+              onImageSelected($event, 'apartment_pic_4', 'stepThreeForm')
+            "
+            class="form-control"
+          />
+          <img
+            [src]="formData.apartment_pic_4"
+            alt="apartment_pic_4"
+            *ngIf="formData.apartment_pic_4"
+            [style.display]="formData.apartment_pic_4 ? 'initial' : 'none'"
+          />
         </form>
-        <button mat-button (click)="nextStep('stepThree')"  >Next</button>
+        <button
+          mat-button
+          (click)="nextStep('stepThree')"
+          [disabled]="!stepThreeForm.valid"
+        >
+          Next
+        </button>
+        <button mat-button (click)="prevStep('stepTwoForm')">Back</button>
+      </div>
+    </mat-step>
+
+    <mat-step label="step4">
+      <div *ngIf="currentStep === 3">
+        <form [formGroup]="stepFourForm">
+
+          <label for="post_description"
+            >{{ "add_post_page_review_txt" | translate }}:</label
+          >
+          <input
+            type="text"
+            id="post_description"
+            formControlName="post_description"
+            class="form-control"
+            [value]="formDataStep4.post_description"
+          />
+
+        </form>
+    
+        <button
+          class="btn"
+          mat-button
+          [disabled]="!stepFourForm.valid"
+          (click)="onSubmit()"
+        >
+          {{ "add_post_page_add_post_btn" | translate }}
+        </button>
+        <button mat-button (click)="prevStep('stepFourForm')">Back</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</section> -->
+
+
+<section class="rantal-container">
+  <h3>Rental Form :</h3>
+
+  <mat-horizontal-stepper [selectedIndex]="currentStep">
+    <mat-step label="step1">
+      <div *ngIf="currentStep === 0">
+        <form [formGroup]="stepOneForm">
+          <label for="post_city"
+          >{{ "add_post_page_city_txt" | translate }}:</label
+        >
+        <input
+          type="text"
+          id="post_city"
+          formControlName="post_city"
+          class="form-control"
+          [matAutocomplete]="cityAuto"
+        />
+        <mat-autocomplete #cityAuto="matAutocomplete">
+          <mat-option
+            *ngFor="let city of cityAutocomplete$ | async"
+            [value]="city"
+          >
+            {{ city }}
+          </mat-option>
+        </mat-autocomplete>
+
+        <label for="post_street"
+          >{{ "add_post_page_street_txt" | translate }}:</label
+        >
+        <input
+          type="text"
+          id="post_street"
+          formControlName="post_street"
+          class="form-control"
+          [matAutocomplete]="streetAuto"
+        />
+        <mat-autocomplete #streetAuto="matAutocomplete">
+          <mat-option
+            *ngFor="let street of streetAutocomplete$ | async"
+            [value]="street"
+          >
+            {{ street }}
+          </mat-option>
+        </mat-autocomplete>
+
+          <label for="post_building_number">{{ "post_details_page_building_txt" | translate }}:</label>
+          <input
+            type="text"
+            id="post_building_number"
+            formControlName="post_building_number"
+            class="form-control"
+          />
+
+          <label for="post_apartment_number">{{ "add_post_page_apartment_number_txt" | translate }}:</label>
+          <input
+            type="text"
+            id="post_apartment_number"
+            formControlName="post_apartment_number"
+            class="form-control"
+          />
+
+          <label for="post_apartment_price">{{ "add_post_page_rent_price_txt" | translate }}:</label>
+          <input
+            type="text"
+            id="post_apartment_price"
+            formControlName="post_apartment_price"
+            class="form-control"
+          />
+        </form>
+        <button mat-button (click)="nextStep()" [disabled]="!stepOneForm.valid">Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step label="step2">
+      
+      <div *ngIf="currentStep === 1">
+        <form [formGroup]="stepTwoForm">
+          <div>
+            <label for="post_rent_start">{{ "add_post_page_entry_date_txt" | translate }}:</label>
+            <app-datepicker
+              (dateSelected)="onDateSelected($event, 'post_rent_start')"
+              [selectedDate]="formData.post_rent_start"
+              [selectedDate2]="formData.post_rent_end"
+            ></app-datepicker>
+          </div>
+
+          <div>
+            <label for="post_rent_end">{{ "add_post_page_exit_date_txt" | translate }}:</label>
+            <app-datepicker
+              (dateSelected)="onDateSelected($event, 'post_rent_end')"
+              [selectedDate]="formData.post_rent_start"
+              [selectedDate2]="formData.post_rent_end"
+            ></app-datepicker>
+          </div>
+
+          <label for="proof_image">{{ "add_post_page_rental_contract_file" | translate }}:</label>
+          <input
+            type="file"
+            (change)="onImageSelected($event, 'proof_image', 'stepTwoForm')"
+            class="form-control"
+          />
+
+          <label for="driving_license">{{ "add_post_page_identification_document" | translate }}:</label>
+          <input
+            type="file"
+            (change)="onImageSelected($event, 'driving_license', 'stepTwoForm')"
+            class="form-control"
+          />
+        </form>
+        <button mat-button (click)="nextStep()" [disabled]="!stepTwoForm.valid">Next</button>
+        <button mat-button (click)="prevStep()">Back</button>
+      </div>
+
+    </mat-step>
+
+    <mat-step label="step3">
+      <div *ngIf="currentStep === 2">
+        <form [formGroup]="stepThreeForm">
+          <label for="apartment_pic_1">{{ "add_post_page_apartment_image_1" | translate }} :</label>
+          <input
+            type="file"
+            (change)="onImageSelected($event, 'apartment_pic_1', 'stepThreeForm')"
+            class="form-control"
+          />
+          <!-- Add similar code for other image inputs -->
+        </form>
+        <button mat-button (click)="nextStep()" [disabled]="!stepThreeForm.valid">Next</button>
         <button mat-button (click)="prevStep()">Back</button>
       </div>
     </mat-step>
 
-    <mat-step  label="step4" >
+    <mat-step label="step4">
       <div *ngIf="currentStep === 3">
-        <form [formGroup]="mainForm">
-          <div formGroupName="stepFour">
-
-            <label for="post_description"
-              >{{ "add_post_page_review_txt" | translate }}:</label
-            >
-            <input
-              type="text"
-              id="post_description"
-              formControlName="post_description"
-              class="form-control"
-            />
-
-          </div>
+        <form [formGroup]="stepFourForm">
+          <label for="post_description">{{ "add_post_page_review_txt" | translate }}:</label>
+          <input
+            type="text"
+            id="post_description"
+            formControlName="post_description"
+            class="form-control"
+          />
         </form>
-        <!-- <div class="btn-container">
-          <button type="submit" class="btn">
-            {{ "add_post_page_add_post_btn" | translate }}
-          </button>
-        </div> -->
-        <button class="btn" mat-button [disabled]="!this.mainForm.get('stepFour')!.valid" (click)="onSubmit()">{{ "add_post_page_add_post_btn" | translate }}</button>
+        <button class="btn" mat-button [disabled]="!stepFourForm.valid" (click)="onSubmit()">{{ "add_post_page_add_post_btn" | translate }}</button>
         <button mat-button (click)="prevStep()">Back</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
 </section>
+
