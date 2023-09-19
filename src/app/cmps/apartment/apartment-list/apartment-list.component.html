@@ -78,32 +78,55 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="group-container">
   <div *ngFor="let group of apartments; let i = index">
     <div class="container" *ngIf="group.length > 1">
-      <carousel [isAnimated]="false">
+      <carousel [showIndicators]="false">
         <slide *ngFor="let apartment of group">
           <div class="card-container">
-            <div class="card-sl card-container">
+            <div class="card-sl">
               <div class="card-image">
                 <img [src]="apartment.apartment_pic_1" />
               </div>
               <div class="card-heading">
-                {{ "search_post_card_city_txt" | translate }} : {{ apartment.post_city }}
+                {{ "search_post_card_city_txt" | translate }} :
+                {{ apartment.post_city }}
               </div>
               <div class="card-text">
-                {{ "search_post_card_street_txt" | translate }} : {{ apartment.post_street }}
+                {{ "search_post_card_street_txt" | translate }} :
+                {{ apartment.post_street }}
               </div>
               <div class="card-text">
-                {{"post_details_page_building_txt"| translate}} : {{ apartment.post_building_number }}
+                {{ "post_details_page_building_txt" | translate }} :
+                {{ apartment.post_building_number }}
               </div>
               <div class="card-text">
-                {{"post_details_page_apartment_number_txt"| translate}} : {{ apartment.post_apartment_number }}
+                {{ "post_details_page_apartment_number_txt" | translate }} :
+                {{ apartment.post_apartment_number }}
               </div>
               <div class="card-text">
-                {{ "search_post_card_rent_price_txt" | translate }} : {{ apartment.post_apartment_price }}
+                {{ "search_post_card_rent_price_txt" | translate }} :
+                {{ apartment.post_apartment_price }}
               </div>
-              <a (click)="viewApartmentDetails(apartment.post_id)" class="card-button">
+              <a
+                (click)="viewApartmentDetails(apartment.post_id)"
+                class="card-button"
+              >
                 {{ "search_post_card_more_details_btn" | translate }}
               </a>
             </div>
@@ -119,21 +142,29 @@
             <img [src]="apartment.apartment_pic_1" />
           </div>
           <div class="card-heading">
-            {{ "search_post_card_city_txt" | translate }} : {{ apartment.post_city }}
+            {{ "search_post_card_city_txt" | translate }} :
+            {{ apartment.post_city }}
           </div>
           <div class="card-text">
-            {{ "search_post_card_street_txt" | translate }} : {{ apartment.post_street }}
+            {{ "search_post_card_street_txt" | translate }} :
+            {{ apartment.post_street }}
           </div>
           <div class="card-text">
-            {{"post_details_page_building_txt"| translate}} : {{ apartment.post_building_number }}
+            {{ "post_details_page_building_txt" | translate }} :
+            {{ apartment.post_building_number }}
           </div>
           <div class="card-text">
-            {{"post_details_page_apartment_number_txt"| translate}} : {{ apartment.post_apartment_number }}
+            {{ "post_details_page_apartment_number_txt" | translate }} :
+            {{ apartment.post_apartment_number }}
           </div>
           <div class="card-text">
-            {{ "search_post_card_rent_price_txt" | translate }} : {{ apartment.post_apartment_price }}
+            {{ "search_post_card_rent_price_txt" | translate }} :
+            {{ apartment.post_apartment_price }}
           </div>
-          <a (click)="viewApartmentDetails(apartment.post_id)" class="card-button">
+          <a
+            (click)="viewApartmentDetails(apartment.post_id)"
+            class="card-button"
+          >
             {{ "search_post_card_more_details_btn" | translate }}
           </a>
         </div>
@@ -142,6 +173,11 @@
   </div>
 </div>
 
+
+
+
+
+
 <pre>
-  {{apartments | json}}
+  {{ apartments | json }}
 </pre>

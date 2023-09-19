@@ -21,10 +21,10 @@ import { AuthGuard } from './helpers/authGuard';
 
 const routes: Routes = [
   { path: '', component: LandPageComponent },
-  { path: 'home', component: HomeComponent ,canActivate: [AuthGuard]},
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'rantal', component: RantalComponent,canActivate: [AuthGuard] },
+  { path: 'rantal', component: RantalComponent, },
   { path: 'apartment', component: ApartmentListComponent,canActivate: [AuthGuard] },
   { path: 'apartment/edit/:id', component: EditDescriptionComponent,canActivate: [AuthGuard] },
   { path: 'apartment/:id', component: ApartmentDetailsComponent,canActivate: [AuthGuard] },

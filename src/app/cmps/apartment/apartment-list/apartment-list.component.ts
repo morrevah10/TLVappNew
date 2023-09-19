@@ -7,7 +7,7 @@ import { PopupComponent } from '../../popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { CarouselComponent } from 'ngx-bootstrap/carousel';
+import { CarouselComponent, CarouselConfig } from 'ngx-bootstrap/carousel';
 
 
 
@@ -15,12 +15,20 @@ import { CarouselComponent } from 'ngx-bootstrap/carousel';
   selector: 'app-apartment-list',
   templateUrl: './apartment-list.component.html',
   styleUrls: ['./apartment-list.component.scss'],
+  providers: [
+    { provide: CarouselConfig, useValue: { isAnimated: false} }
+  ]
 })
 export class ApartmentListComponent implements OnInit {
 
   @Input() apartments: any[][] = [];
   activeSlide: number = 0;
 
+  group!: any[] 
+  currentIndex = 0;
+  
+
+  
   filteredApartments: any[] = [];
   errorMessage=''
 
@@ -30,7 +38,9 @@ export class ApartmentListComponent implements OnInit {
     private searchService: SearchService,
     private dialog: MatDialog,
 
-  ) {}
+  ) {
+    
+  }
 
   // ngOnInit() {
   //   this.postService.getApartmentPosts().subscribe(
@@ -49,13 +59,18 @@ export class ApartmentListComponent implements OnInit {
   ngOnInit() {
     this.searchService.searchData$.subscribe(searchParams => {
       console.log('searchParams',searchParams)
-      // this.fetchApartments(); 
-      //#אם נחזיר את זה אז נראה את כל הפוסטים בדף הבית איך שהוא מעולה
     });
+
+
   }
 
 
-
+  prevSlide() {
+    this.currentIndex = (this.currentIndex - 1 + this.group.length) % this.group.length;
+  }
+  nextSlide() {
+    this.currentIndex = (this.currentIndex + 1) % this.group.length;
+  }
   // fetchApartments(searchParams?: any) {
   //   console.log('searchParams',searchParams)
   //   this.postService.getApartmentPosts(searchParams).subscribe(
@@ -68,17 +83,17 @@ export class ApartmentListComponent implements OnInit {
   //     }
   //   );
   // }
-  fetchApartments() {
-    this.postService.getApartmentPosts().subscribe(
-      (apartments) => {
-        this.apartments = apartments;
-        console.log('apartments:', apartments);
-      },
-      (error) => {
-        console.error('Error fetching apartment posts:', error);
-      }
-    );
-  }
+  // fetchApartments() {
+  //   this.postService.getApartmentPosts().subscribe(
+  //     (apartments) => {
+  //       this.apartments = apartments;
+  //       console.log('apartments:', apartments);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching apartment posts:', error);
+  //     }
+  //   );
+  // }
 
   // fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; }) {
   //   this.postService.getApartmentFilteredPosts(searchData).subscribe(
@@ -104,6 +119,7 @@ export class ApartmentListComponent implements OnInit {
         // return EMPTY; // Return an empty observable or handle the error as needed
       })
     );
+
  }
 
 //  prevSlide() {
