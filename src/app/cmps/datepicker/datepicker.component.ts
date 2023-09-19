@@ -11,8 +11,6 @@ import { LanguageService } from '../../srvices/language.service';
   styleUrls: ['./datepicker.component.scss'],
 })
 export class DatepickerComponent implements OnInit {
-  @Input() selectedDate!: Date;
-  @Input() selectedDate2!: Date;
   // locale = 'he';
   locales = listLocales();
   currentLanguage = 'en'
@@ -20,7 +18,8 @@ export class DatepickerComponent implements OnInit {
   colorTheme = 'theme-dark-blue';
   bsConfig?: Partial<BsDatepickerConfig>;
 
-  // selectedDate: Date | undefined;
+  @Input() selectedDate: Date | null = null;
+  @Output() dateSelected: EventEmitter<Date> = new EventEmitter<Date>();
 
   constructor(private localeService: BsLocaleService,private languageService: LanguageService) {
     defineLocale('he', heLocale);
@@ -29,7 +28,6 @@ export class DatepickerComponent implements OnInit {
   }
 
 
-  @Output() dateSelected: EventEmitter<Date> = new EventEmitter<Date>();
 
   
   onDateSelected() {

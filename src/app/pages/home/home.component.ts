@@ -15,6 +15,13 @@ import { Observable } from 'rxjs';
 
 import { DataService } from 'src/app/srvices/data.service';
 
+interface Apartment {
+  post_id: number;
+  post_city: string;
+  post_street: string;
+  post_building_number: string;
+  post_apartment_number: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -29,17 +36,12 @@ export class HomeComponent implements OnInit {
     post_city: '',
     post_street: '',
     post_apartment_number: '',
-    post_bulding_number:'',
+    post_bulding_number: '',
   };
 
- 
   apartmentControl = new FormControl();
   buildingControl = new FormControl();
-  errorMessage='';
-  
-
-
-
+  errorMessage = '';
 
   cityFilterControl = new FormControl();
   streetFilterControl = new FormControl({ value: '', disabled: true });
@@ -47,7 +49,7 @@ export class HomeComponent implements OnInit {
   filteredCities$!: Observable<string[]>;
   filteredStreets$!: Observable<string[]>;
 
-  selectedCity: string  = '';
+  selectedCity: string = '';
   filteredStreets: string[] = [];
 
   @ViewChild(MatAutocomplete) autocomplete!: MatAutocomplete;
@@ -61,10 +63,7 @@ export class HomeComponent implements OnInit {
     private postservice: PostService,
     private dataService: DataService,
     private http: HttpClient
-  ) {
-    
-  }
-
+  ) {}
 
   ngOnInit() {
     console.log('HomeComponent initialized');
@@ -107,36 +106,93 @@ export class HomeComponent implements OnInit {
       this.filteredStreets = streets;
       console.log('Filtered Streets:', this.filteredStreets);
     });
-
   }
+
+  // searchApartments() {
+  //   const searchData = {
+  //     post_city:this.cityFilterControl.value as string,
+  //     post_street:this.streetFilterControl.value as string,
+  //     post_apartment_number: this.apartmentControl.value,
+  //     post_building_number : this.buildingControl.value
+  //   }
+
+  //   this.loading = true;
+
+  //   console.log('1111searchData111',searchData)
+  //   this.searchService.setSearchData(searchData);
+
+  //   this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
+  //     (apartments) => {
+  //       console.log('Fetched apartments:', apartments);
+  //       setTimeout(() => {
+  //         this.loading = false;
+  //         this.apartmentList.apartments = apartments;
+  //       }, 5000);
+  //     },
+  //     (error) => {
+  //       console.log('Error fetching apartment posts:', error);
+  //       this.errorMessage = 'An error occurred while fetching apartments :'+ error ;
+  //     }
+  //   );
+  // }
 
   searchApartments() {
     const searchData = {
-      post_city:this.cityFilterControl.value as string,
-      post_street:this.streetFilterControl.value as string,
+      post_city: this.cityFilterControl.value as string,
+      post_street: this.streetFilterControl.value as string,
       post_apartment_number: this.apartmentControl.value,
-      post_building_number : this.buildingControl.value
-    }
+      post_building_number: this.buildingControl.value,
+    };
 
     this.loading = true;
 
-    console.log('1111searchData111',searchData)
+    console.log('1111searchData111', searchData);
     this.searchService.setSearchData(searchData);
-        
+
     this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
       (apartments) => {
         console.log('Fetched apartments:', apartments);
+
+        // Group the apartments based on your criteria
+        const groupedApartments = this.groupApartments(apartments);
+        console.log('groupedApartments',groupedApartments)
+        console.log(' this.apartmentList', this.apartmentList)
+
         setTimeout(() => {
           this.loading = false;
-          this.apartmentList.apartments = apartments;
+          this.apartmentList.apartments = groupedApartments;
         }, 5000);
       },
       (error) => {
         console.log('Error fetching apartment posts:', error);
-        this.errorMessage = 'An error occurred while fetching apartments :'+ error ;
+        this.errorMessage =
+          'An error occurred while fetching apartments :' + error;
       }
     );
+  }
 
+  groupApartments(apartments: Apartment[]): Apartment[][] {
+    const groupedApartments: Apartment[][] = [];
+
+    // Create a map to group apartments by city, street, building, and apartment number
+    const apartmentMap = new Map<string, Apartment[]>();
+
+    apartments.forEach((apartment) => {
+      const key = `${apartment.post_city}-${apartment.post_street}-${apartment.post_building_number}-${apartment.post_apartment_number}`;
+
+      if (!apartmentMap.has(key)) {
+        apartmentMap.set(key, []);
+      }
+
+      apartmentMap.get(key)?.push(apartment);
+    });
+
+    // Extract the grouped apartments into an array of arrays
+    apartmentMap.forEach((group) => {
+      groupedApartments.push(group);
+    });
+
+    return groupedApartments;
   }
 
   navigateToApartmentForm() {
@@ -149,5 +205,3 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
 }
-
-

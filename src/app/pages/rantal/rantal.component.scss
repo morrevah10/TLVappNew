@@ -1,70 +1,83 @@
 .rantal-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
-    border-radius: 25px;
-    margin: 20px;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+  border-radius: 25px;
+  margin: 20px;
+  padding: 20px;
 
 }
 
 
 .form-control {
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-  }
-  
-  .form-control.is-invalid {
-    border-color: #dc3545;
-  }
-  
-  .invalid-feedback {
-    display: block;
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: 80%;
-    color: #dc3545;
-  }
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
 
-  input {
-    margin: 10px;
-  }
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
 
-  .required{
-    margin-bottom: 10px;
-  }
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
 
-  .btn{
-    color: blue; 
-    padding: 10px 20px; 
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-    // font-size:  24px; ;
-  
-  }
+input {
+  margin: 10px;
+}
 
-  .btn-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.required{
+  margin-bottom: 10px;
+}
 
-  .disable-step-title {
-    pointer-events: none;
-    cursor: default;
-    color: #888; 
-  }
+.btn{
+  color: blue; 
+  padding: 10px 20px; 
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  // font-size:  24px; ;
 
-  ::ng-deep .mat-step-header {
-    pointer-events: none !important;
+}
+
+.btn-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.disable-step-title {
+  pointer-events: none;
+  cursor: default;
+  color: #888; 
+}
+
+::ng-deep .mat-step-header {
+  pointer-events: none !important;
+}
+
+
+
+.grid-container {
+display: grid;
+grid-template-columns: repeat(2, 1fr); /* Creates a 2x2 grid */
+gap: 10px; 
+}
+
+.grid-item {
+padding: 10px; 
+border: 1px solid #ccc; /* Add a border for visual separation */
 }

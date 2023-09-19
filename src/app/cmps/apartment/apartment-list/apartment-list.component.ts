@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/srvices/post.service';
 import { SearchService } from 'src/app/srvices/search.service';
@@ -7,6 +7,7 @@ import { PopupComponent } from '../../popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { CarouselComponent } from 'ngx-bootstrap/carousel';
 
 
 
@@ -16,9 +17,10 @@ import { Observable, throwError } from 'rxjs';
   styleUrls: ['./apartment-list.component.scss'],
 })
 export class ApartmentListComponent implements OnInit {
-  @Input() apartments!: any[];
-  // apartments: any[] = [];
-  afterSearchApartments: any[] = [];
+
+  @Input() apartments: any[][] = [];
+  activeSlide: number = 0;
+
   filteredApartments: any[] = [];
   errorMessage=''
 
@@ -104,6 +106,17 @@ export class ApartmentListComponent implements OnInit {
     );
  }
 
+//  prevSlide() {
+//   if (this.activeSlide > 0) {
+//     this.activeSlide--;
+//   }
+// }
+
+// nextSlide() {
+//   if (this.activeSlide < this.apartments.length - 1) {
+//     this.activeSlide++;
+//   }
+// }
 
 
 
