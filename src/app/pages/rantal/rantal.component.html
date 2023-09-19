@@ -514,7 +514,6 @@
             class="form-control"
           />
         </form>
-        <button mat-button (click)="nextStep()" [disabled]="!stepOneForm.valid">Next</button>
       </div>
     </mat-step>
 
@@ -554,8 +553,6 @@
             class="form-control"
           />
         </form>
-        <button mat-button (click)="nextStep()" [disabled]="!stepTwoForm.valid">Next</button>
-        <button mat-button (click)="prevStep()">Back</button>
       </div>
 
     </mat-step>
@@ -571,8 +568,6 @@
           />
           <!-- Add similar code for other image inputs -->
         </form>
-        <button mat-button (click)="nextStep()" [disabled]="!stepThreeForm.valid">Next</button>
-        <button mat-button (click)="prevStep()">Back</button>
       </div>
     </mat-step>
 
@@ -587,10 +582,13 @@
             class="form-control"
           />
         </form>
-        <button class="btn" mat-button [disabled]="!stepFourForm.valid" (click)="onSubmit()">{{ "add_post_page_add_post_btn" | translate }}</button>
-        <button mat-button (click)="prevStep()">Back</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
+
+  <a class="btn" (click)="prevStep()" *ngIf="currentStep != 0">previous</a>
+  <button  class="btn" (click)="nextStep()" *ngIf="currentStep != 3">next</button>
+  <button  class="btn" type="submit" *ngIf="currentStep == 3">submit</button>
+
 </section>
 
