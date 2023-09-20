@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { CarouselComponent, CarouselConfig } from 'ngx-bootstrap/carousel';
+import { AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
 
 
 
@@ -28,6 +29,7 @@ export class ApartmentListComponent implements OnInit {
   currentIndex = 0;
   
   currentSlide = 0;
+  carouselStyles: string[] = [];
   
   filteredApartments: any[] = [];
   errorMessage=''
@@ -37,6 +39,7 @@ export class ApartmentListComponent implements OnInit {
     private router: Router,
     private searchService: SearchService,
     private dialog: MatDialog,
+    private el: ElementRef, private renderer: Renderer2
 
   ) {
     
@@ -61,7 +64,20 @@ export class ApartmentListComponent implements OnInit {
       console.log('searchParams',searchParams)
     });
 
+    for (let i = 0; i < this.apartments.length; i++) {
+      const style = this.renderer.createElement('style');
+      style.innerHTML = `::ng-deep #carousel${i + 1}.carousel.slide {
+        max-width: 300px;
+        /* Add other individual styles here */
+      }`;
+      this.renderer.appendChild(this.el.nativeElement, style);
+    }
   }
+  
+
+
+
+  
 
 
   nextSlide() {
