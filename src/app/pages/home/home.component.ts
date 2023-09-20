@@ -146,6 +146,8 @@ export class HomeComponent implements OnInit {
   //   );
   // }
 
+
+
   searchApartments() {
     const searchData = {
       post_city: this.cityFilterControl.value as string,
@@ -153,35 +155,93 @@ export class HomeComponent implements OnInit {
       post_apartment_number: this.apartmentControl.value,
       post_building_number: this.buildingControl.value,
     };
-
+  
     this.loading = true;
-
+  
     console.log('1111searchData111', searchData);
     this.searchService.setSearchData(searchData);
-
-    // this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
-    //   (apartments) => {
-    //     console.log('Fetched apartments:', apartments);
-
-        //! Group the apartments based on your criteria
-        // const groupedApartments = this.groupApartments(apartments);
-        // console.log('groupedApartments',groupedApartments)
-        // console.log(' this.apartmentList', this.apartmentList)
-
-        // setTimeout(() => {
-          // this.loading = false;
-          // this.apartmentList.apartments = groupedApartments;
-          // this.apartmentList.apartments = apartments;
-          this.apartmentList.apartments = this.fakeData;
-        // }, 5000);
-      // },
-      // (error) => {
-        // console.log('Error fetching apartment posts:', error);
-        // this.errorMessage =
-          // 'An error occurred while fetching apartments :' + error;
-      // }
-    // );
+  
+    this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
+      (apartmentsResponse) => {
+        // Remove the outer curly braces to make it valid JSON
+        const cleanedResponse = apartmentsResponse.replace(/^\{+|\}+$/g, '');
+  
+        // Parse the cleaned response as JSON
+        let apartmentsObject = null;
+        try {
+          apartmentsObject = JSON.parse(cleanedResponse);
+        } catch (error) {
+          console.error('Error parsing response as JSON:', error);
+        }
+  
+        console.log('Fגטאלכיחעץ:', apartmentsObject);
+  
+        // Extract the arrays directly from the object
+        const extractedArrays = Object.values(apartmentsObject);
+        console.log('Extracted arrays:', extractedArrays);
+  
+        // Update the apartmentList with the extracted arrays
+        this.apartmentList.apartments = extractedArrays as any[][];
+  
+        setTimeout(() => {
+          this.loading = false;
+        }, 5000);
+      },
+      (error) => {
+        console.log('Error fetching apartment posts:', error);
+        this.errorMessage =
+          'An error occurred while fetching apartments :' + error;
+      }
+    );
   }
+  
+
+
+
+  // searchApartments() {
+  //   const searchData = {
+  //     post_city: this.cityFilterControl.value as string,
+  //     post_street: this.streetFilterControl.value as string,
+  //     post_apartment_number: this.apartmentControl.value,
+  //     post_building_number: this.buildingControl.value,
+  //   };
+
+  //   this.loading = true;
+
+  //   console.log('1111searchData111', searchData);
+  //   this.searchService.setSearchData(searchData);
+
+  //   this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
+  //     (apartments) => {
+  //       console.log('Fetched apartments:', apartments);
+
+  //       // const extractedArray = apartments;
+  //       // const extractedArray = Array.isArray(apartments) ? apartments[0] : [];
+
+
+        
+  //       // console.log('Fetched 2 apartments:', extractedArray);
+  //       //! Group the apartments based on your criteria
+  //       // const groupedApartments = this.groupApartments(apartments);
+  //       // console.log('groupedApartments',groupedApartments)
+  //       // console.log(' this.apartmentList', this.apartmentList)
+  //       // this.apartmentList.apartments = extractedArray as any[][];
+  //       this.apartmentList.apartments = apartments;
+  //       console.log(' this.apartmentList', this.apartmentList.apartments)
+
+  //       setTimeout(() => {
+  //         this.loading = false;
+  //         // this.apartmentList.apartments = groupedApartments;
+  //         // this.apartmentList.apartments = this.fakeData;
+  //       }, 5000);
+  //     },
+  //     (error) => {
+  //       console.log('Error fetching apartment posts:', error);
+  //       this.errorMessage =
+  //         'An error occurred while fetching apartments :' + error;
+  //     }
+  //   );
+  // }
 
   // groupApartments(apartments: Apartment[]): Apartment[][] {
   //   const groupedApartments: Apartment[][] = [];
@@ -217,3 +277,5 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
 }
+
+
