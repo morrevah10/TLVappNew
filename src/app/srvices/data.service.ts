@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-// import {json} from '../../../assets/Jsons/'
+// import {json} from '../../assets/Jsons/fakePost.json'
 
 @Injectable({
   providedIn: 'root',
@@ -9,12 +9,27 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class DataService {
     private cities: any[] = [];
     private streets: any[] = [];
+
+    private fake : any[][]=[];
   
      citySubject = new BehaviorSubject<string[]>([]);
      streetSubject = new BehaviorSubject<string[]>([]);
+
+     fakeSubject = new BehaviorSubject<any[][]>([]);
+
+     
   
     constructor(private http: HttpClient) {
       this.loadCitiesAndStreets();
+      this.loadFakeJson()
+    }
+
+    private loadFakeJson() {
+      this.http.get('../../../assets/Jsons/fakePost.json').subscribe((data: any) => {
+          this.fake = data.fakeJson;
+          console.log('this.fake',this.fake)
+        this.fakeSubject.next(this.fake);
+      });
     }
   
     private loadCitiesAndStreets() {
@@ -36,6 +51,11 @@ export class DataService {
   
     getStreets(): Observable<string[]> {
       return this.streetSubject.asObservable();
+    }
+
+    getJson() : Observable<any[][]> {
+      console.log('this.fakeSubject',this.fakeSubject)
+      return this.fakeSubject;
     }
   
     updateCityFilter(filter: string) {

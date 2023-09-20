@@ -153,14 +153,15 @@ export class HomeComponent implements OnInit {
       (apartments) => {
         console.log('Fetched apartments:', apartments);
 
-        // Group the apartments based on your criteria
-        const groupedApartments = this.groupApartments(apartments);
-        console.log('groupedApartments',groupedApartments)
+        //! Group the apartments based on your criteria
+        // const groupedApartments = this.groupApartments(apartments);
+        // console.log('groupedApartments',groupedApartments)
         console.log(' this.apartmentList', this.apartmentList)
 
         setTimeout(() => {
           this.loading = false;
-          this.apartmentList.apartments = groupedApartments;
+          // this.apartmentList.apartments = groupedApartments;
+          this.apartmentList.apartments = apartments;
         }, 5000);
       },
       (error) => {
@@ -171,29 +172,29 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  groupApartments(apartments: Apartment[]): Apartment[][] {
-    const groupedApartments: Apartment[][] = [];
+  // groupApartments(apartments: Apartment[]): Apartment[][] {
+  //   const groupedApartments: Apartment[][] = [];
 
-    // Create a map to group apartments by city, street, building, and apartment number
-    const apartmentMap = new Map<string, Apartment[]>();
+  //   // Create a map to group apartments by city, street, building, and apartment number
+  //   const apartmentMap = new Map<string, Apartment[]>();
 
-    apartments.forEach((apartment) => {
-      const key = `${apartment.post_city}-${apartment.post_street}-${apartment.post_building_number}-${apartment.post_apartment_number}`;
+  //   apartments.forEach((apartment) => {
+  //     const key = `${apartment.post_city}-${apartment.post_street}-${apartment.post_building_number}-${apartment.post_apartment_number}`;
 
-      if (!apartmentMap.has(key)) {
-        apartmentMap.set(key, []);
-      }
+  //     if (!apartmentMap.has(key)) {
+  //       apartmentMap.set(key, []);
+  //     }
 
-      apartmentMap.get(key)?.push(apartment);
-    });
+  //     apartmentMap.get(key)?.push(apartment);
+  //   });
 
-    // Extract the grouped apartments into an array of arrays
-    apartmentMap.forEach((group) => {
-      groupedApartments.push(group);
-    });
+  //   // Extract the grouped apartments into an array of arrays
+  //   apartmentMap.forEach((group) => {
+  //     groupedApartments.push(group);
+  //   });
 
-    return groupedApartments;
-  }
+  //   return groupedApartments;
+  // }
 
   navigateToApartmentForm() {
     // console.log('clicked');
