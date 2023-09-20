@@ -26,8 +26,8 @@ export class DataService {
 
     private loadFakeJson() {
       this.http.get('../../../assets/Jsons/fakePost.json').subscribe((data: any) => {
-          this.fake = data.fakeJson;
-          console.log('this.fake',this.fake)
+        this.fake = data.fakeJson;
+        console.log('this.fake', this.fake);
         this.fakeSubject.next(this.fake);
       });
     }
@@ -35,13 +35,13 @@ export class DataService {
     private loadCitiesAndStreets() {
       this.http.get('../../../assets/Jsons/cities.json').subscribe((data: any) => {
           this.cities = data.cities;
-          console.log('this.cities',this.cities)
+          // console.log('this.cities',this.cities)
         this.citySubject.next(this.cities.map((city) => city.city_name));
       });
   
       this.http.get('../../../assets/Jsons/streets.json').subscribe((data: any) => {
           this.streets = data.streets;
-          console.log(' this.streets', this.streets)
+          // console.log(' this.streets', this.streets)
       });
     }
   
@@ -53,16 +53,15 @@ export class DataService {
       return this.streetSubject.asObservable();
     }
 
-    getJson() : Observable<any[][]> {
-      console.log('this.fakeSubject',this.fakeSubject)
-      return this.fakeSubject;
+    getFakeData() {
+      return this.fakeSubject.asObservable();
     }
   
     updateCityFilter(filter: string) {
       const filteredCities = this.cities
         .filter((city) => city.city_name.toLowerCase().startsWith(filter.toLowerCase()))
         .map((city) => city.city_name);
-        console.log(' filteredCities', filteredCities)
+        // console.log(' filteredCities', filteredCities)
       this.citySubject.next(filteredCities);
     }
   
@@ -86,7 +85,7 @@ export class DataService {
 //!  city and  input 
 updateStreetFilter(cityName: string | null, filter: string) {
     if (cityName) {
-      console.log('Updating Street Filter - Selected City:', cityName);
+      // console.log('Updating Street Filter - Selected City:', cityName);
       const trimmedCity = cityName.trim().toLowerCase();
   
       // Filter streets based on a partial match to the city name
@@ -102,8 +101,8 @@ updateStreetFilter(cityName: string | null, filter: string) {
           street.toLowerCase().startsWith(filter.toLowerCase())
         );
   
-      console.log('Filtered Streets:', filteredStreets);
-      console.log('Emitting to streetSubject:', filteredStreets);
+      // console.log('Filtered Streets:', filteredStreets);
+      // console.log('Emitting to streetSubject:', filteredStreets);
       this.streetSubject.next(filteredStreets);
     }
     

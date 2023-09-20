@@ -31,6 +31,8 @@ interface Apartment {
 export class HomeComponent implements OnInit {
   @ViewChild(ApartmentListComponent) apartmentList!: ApartmentListComponent;
 
+  fakeData!: any[][];
+
   logedinUser: User | null = null;
   search = {
     post_city: '',
@@ -73,6 +75,14 @@ export class HomeComponent implements OnInit {
       this.cdr.detectChanges();
     });
 
+
+    this.dataService.getFakeData().subscribe((data) => {
+      this.fakeData = data;
+      console.log('fakeData', this.fakeData);
+    });
+
+
+
     this.filteredCities$ = this.dataService.getCities();
     this.filteredStreets$ = this.dataService.streetSubject.asObservable();
     this.cityFilterControl.valueChanges.subscribe((filterValue) => {
@@ -80,7 +90,7 @@ export class HomeComponent implements OnInit {
     });
 
     this.cityFilterControl.valueChanges.subscribe((selectedCity) => {
-      console.log('Selected City:', selectedCity);
+      // console.log('Selected City:', selectedCity);
       this.selectedCity = selectedCity;
       if (selectedCity !== null) {
         this.streetFilterControl.enable();
@@ -104,7 +114,7 @@ export class HomeComponent implements OnInit {
     console.log('Subscribing to filteredStreets$');
     this.dataService.streetSubject.asObservable().subscribe((streets) => {
       this.filteredStreets = streets;
-      console.log('Filtered Streets:', this.filteredStreets);
+      // console.log('Filtered Streets:', this.filteredStreets);
     });
   }
 
@@ -149,27 +159,28 @@ export class HomeComponent implements OnInit {
     console.log('1111searchData111', searchData);
     this.searchService.setSearchData(searchData);
 
-    this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
-      (apartments) => {
-        console.log('Fetched apartments:', apartments);
+    // this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
+    //   (apartments) => {
+    //     console.log('Fetched apartments:', apartments);
 
         //! Group the apartments based on your criteria
         // const groupedApartments = this.groupApartments(apartments);
         // console.log('groupedApartments',groupedApartments)
-        console.log(' this.apartmentList', this.apartmentList)
+        // console.log(' this.apartmentList', this.apartmentList)
 
-        setTimeout(() => {
-          this.loading = false;
+        // setTimeout(() => {
+          // this.loading = false;
           // this.apartmentList.apartments = groupedApartments;
-          this.apartmentList.apartments = apartments;
-        }, 5000);
-      },
-      (error) => {
-        console.log('Error fetching apartment posts:', error);
-        this.errorMessage =
-          'An error occurred while fetching apartments :' + error;
-      }
-    );
+          // this.apartmentList.apartments = apartments;
+          this.apartmentList.apartments = this.fakeData;
+        // }, 5000);
+      // },
+      // (error) => {
+        // console.log('Error fetching apartment posts:', error);
+        // this.errorMessage =
+          // 'An error occurred while fetching apartments :' + error;
+      // }
+    // );
   }
 
   // groupApartments(apartments: Apartment[]): Apartment[][] {

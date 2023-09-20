@@ -27,7 +27,7 @@ export class ApartmentListComponent implements OnInit {
   group!: any[] 
   currentIndex = 0;
   
-
+  currentSlide = 0;
   
   filteredApartments: any[] = [];
   errorMessage=''
@@ -61,15 +61,16 @@ export class ApartmentListComponent implements OnInit {
       console.log('searchParams',searchParams)
     });
 
-
   }
 
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.apartments.length;
+  }
 
   prevSlide() {
-    this.currentIndex = (this.currentIndex - 1 + this.group.length) % this.group.length;
-  }
-  nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.group.length;
+    this.currentSlide =
+      (this.currentSlide - 1 + this.apartments.length) % this.apartments.length;
   }
   // fetchApartments(searchParams?: any) {
   //   console.log('searchParams',searchParams)
