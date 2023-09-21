@@ -179,10 +179,23 @@ a {
   max-width: 300px;
 }
 
-::ng-deep #carousel1.carousel.slide {
-  max-width: 300px;
+::ng-deep .carousel.slide {
+  max-width: 350px;
 }
 
-.carousel-style1 {
-  max-width: 300px;
+// .carousel-style1 {
+//   max-width: 300px;
+// }
+
+::ng-deep .container.ng-star-inserted {
+display: flex;
+justify-content: center;
 }
+
+// ::ng-deep .carousel{
+//   max-width: 350px;
+// }
+
+::ng-deep .item.carousel-item.ng-star-inserted.active {
+  max-width: 350px;
+  }

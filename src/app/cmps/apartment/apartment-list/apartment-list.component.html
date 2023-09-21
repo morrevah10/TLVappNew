@@ -96,9 +96,9 @@
 <div class="group-container">
   <div *ngFor="let group of apartments; let i = index">
     <div class="container" *ngIf="group.length > 1">
-      <carousel [showIndicators]="true" [isAnimated]="false" class="carousel-style1">
+      <carousel [showIndicators]="true" [isAnimated]="false">
         <slide *ngFor="let apartment of group">
-          <div class="card-container">
+          <div class="card-sl card-container">
               <div class="card-image">
                 <img [src]="apartment.apartment_pic_1" />
               </div>
