@@ -116,6 +116,11 @@ export class RantalComponent implements OnInit {
           );
         }
       });
+    // this.mainForm.get('stepOne.post_street')!.valueChanges.subscribe((value) => {
+    //   if (value) {
+    //     this.dataService.updateStreetFilter(value);
+    //   }
+    // });
 
     this.formStates.push(this.mainForm.getRawValue());
     console.log('this.formStates', this.formStates);

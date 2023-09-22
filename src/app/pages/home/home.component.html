@@ -21,18 +21,21 @@
           <mat-option
             *ngFor="let city of filteredCities$ | async"
             [value]="city"
+            (click)="toggleDisable()"           
           >
             {{ city }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field >
         <input
           placeholder="street"
           matInput
           [formControl]="streetFilterControl"
           [matAutocomplete]="streetAuto"
+          matTooltip="Please select a city first"
+          [matTooltipDisabled]="isDisable"
         />
         <mat-autocomplete #streetAuto="matAutocomplete">
           <mat-option

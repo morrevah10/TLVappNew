@@ -68,6 +68,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
+import {MatTooltipModule} from '@angular/material/tooltip';
+
+
 
 @NgModule({
   declarations: [
@@ -134,6 +137,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatStepperModule,
     MatSlideToggleModule,
 
+    MatTooltipModule
   ],
   providers: [AuthService, UserService, PostService,TranslateLoaderImpl],
   bootstrap: [AppComponent],
