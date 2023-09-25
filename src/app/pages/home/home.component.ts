@@ -11,7 +11,15 @@ import { HttpClient } from '@angular/common/http';
 
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { FormControl } from '@angular/forms';
-import { Observable, combineLatest, debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs';
+import {
+  Observable,
+  combineLatest,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  startWith,
+  switchMap,
+} from 'rxjs';
 
 import { DataService } from 'src/app/srvices/data.service';
 
@@ -41,7 +49,7 @@ export class HomeComponent implements OnInit {
     post_bulding_number: '',
   };
 
-  isDisable = false
+  isDisable = false;
   apartmentControl = new FormControl();
   buildingControl = new FormControl();
   errorMessage = '';
@@ -58,6 +66,9 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatAutocomplete) autocomplete!: MatAutocomplete;
   loading: boolean = false;
 
+  isAuthenticated = false;
+  windowWidth!: number;
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -72,15 +83,14 @@ export class HomeComponent implements OnInit {
     console.log('HomeComponent initialized');
     this.userService.user$.subscribe((user) => {
       console.log('User updated:', user);
-      this.logedinUser = user;
-      this.cdr.detectChanges();
+      if (user) {
+        this.logedinUser = user;
+        this.cdr.detectChanges();
+        this.isAuthenticated = true;
+      }
     });
-
-
-
-
-    this.streetFilterControl.disable()
-
+    this.windowWidth = window.innerWidth;
+    this.streetFilterControl.disable();
 
     // this.filteredCities$ = this.dataService.getCities();
     this.filteredCities$ = combineLatest([
@@ -95,7 +105,7 @@ export class HomeComponent implements OnInit {
         return filteredCities;
       })
     );
-    
+
     this.filteredStreets$ = this.dataService.streetSubject.asObservable();
     this.cityFilterControl.valueChanges.subscribe((filterValue) => {
       this.dataService.updateCityFilter(filterValue);
@@ -106,13 +116,15 @@ export class HomeComponent implements OnInit {
       this.selectedCity = selectedCity;
     });
 
-    combineLatest([this.cityFilterControl.valueChanges, this.streetFilterControl.valueChanges])
-  .subscribe(([selectedCity, filterValue]) => {
-    if (selectedCity !== null) {
-      const trimmedFilter = filterValue!.trim();
-      this.dataService.updateStreetFilter(selectedCity, trimmedFilter);
-    }
-  });
+    combineLatest([
+      this.cityFilterControl.valueChanges,
+      this.streetFilterControl.valueChanges,
+    ]).subscribe(([selectedCity, filterValue]) => {
+      if (selectedCity !== null) {
+        const trimmedFilter = filterValue!.trim();
+        this.dataService.updateStreetFilter(selectedCity, trimmedFilter);
+      }
+    });
     // this.streetFilterControl.valueChanges.subscribe((filterValue) => {
     //   const trimmedFilter = filterValue!.trim();
     //   if (this.selectedCity !== null) {
@@ -121,7 +133,6 @@ export class HomeComponent implements OnInit {
     //   }
     // });
 
-   
     console.log('Subscribing to filteredStreets$');
     this.dataService.streetSubject.asObservable().subscribe((streets) => {
       this.filteredStreets = streets;
@@ -157,29 +168,35 @@ export class HomeComponent implements OnInit {
   //   );
   // }
 
-  private filterCities(cityIndex: { [letter: string]: string[] }, filterValue: string): string[] {
-    console.log('cityIndex',cityIndex)
+  private filterCities(
+    cityIndex: { [letter: string]: string[] },
+    filterValue: string
+  ): string[] {
+    console.log('cityIndex', cityIndex);
     // console.log('filterValue',filterValue)
     filterValue = filterValue.toLowerCase();
-        console.log('filterValue',filterValue)
+    console.log('filterValue', filterValue);
     let filteredCities: string[] = [];
-  
+
     if (this.selectedCity) {
       // If a city is selected, only consider cities starting with the selected letter
       const selectedLetter = this.selectedCity.charAt(0).toLowerCase();
       if (selectedLetter === filterValue[0]) {
         // Filter and concatenate matching cities
-        filteredCities = filteredCities.concat(cityIndex[selectedLetter].filter(city => city.toLowerCase().includes(filterValue)));
+        filteredCities = filteredCities.concat(
+          cityIndex[selectedLetter].filter((city) =>
+            city.toLowerCase().includes(filterValue)
+          )
+        );
       }
-    } 
-    console.log('filteredCities',filteredCities)
+    }
+    console.log('filteredCities', filteredCities);
     return filteredCities;
   }
 
-
-  toggleDisable(){
-    this.streetFilterControl.enable()
-    this.isDisable=!this.isDisable
+  toggleDisable() {
+    this.streetFilterControl.enable();
+    this.isDisable = !this.isDisable;
     this.streetFilterControl.setValue('');
   }
 
@@ -190,17 +207,17 @@ export class HomeComponent implements OnInit {
       post_apartment_number: this.apartmentControl.value,
       post_building_number: this.buildingControl.value,
     };
-  
+
     this.loading = true;
-  
+
     console.log('1111searchData111', searchData);
     this.searchService.setSearchData(searchData);
-  
+
     this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
       (apartmentsResponse) => {
         // Remove the outer curly braces to make it valid JSON
         const cleanedResponse = apartmentsResponse.replace(/^\{+|\}+$/g, '');
-  
+
         // Parse the cleaned response as JSON
         let apartmentsObject = null;
         try {
@@ -208,16 +225,16 @@ export class HomeComponent implements OnInit {
         } catch (error) {
           console.error('Error parsing response as JSON:', error);
         }
-  
+
         // console.log(':', apartmentsObject);
-  
+
         // Extract the arrays directly from the object
         const extractedArrays = Object.values(apartmentsObject);
         console.log('Extracted arrays:', extractedArrays);
-  
+
         // Update the apartmentList with the extracted arrays
         this.apartmentList.apartments = extractedArrays as any[][];
-  
+
         setTimeout(() => {
           this.loading = false;
         }, 5000);
@@ -229,9 +246,6 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  
-
-
 
   // searchApartments() {
   //   const searchData = {
@@ -253,8 +267,6 @@ export class HomeComponent implements OnInit {
   //       // const extractedArray = apartments;
   //       // const extractedArray = Array.isArray(apartments) ? apartments[0] : [];
 
-
-        
   //       // console.log('Fetched 2 apartments:', extractedArray);
   //       //! Group the apartments based on your criteria
   //       // const groupedApartments = this.groupApartments(apartments);
@@ -312,5 +324,3 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
 }
-
-

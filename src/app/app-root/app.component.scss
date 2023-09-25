@@ -1,16 +1,32 @@
+// mat-sidenav-container{
+// height: calc(205vh - 115vh);
+// }
 
-mat-sidenav-container{
-height: calc(205vh - 115vh);
+::ng-deep mat-sidenav-container.default-sidenav-container {
+  height: 100vh;
 }
 
-mat-sidenav{
-    width: 200px;
-    background-color: rgb(238, 238, 238);
+::ng-deep mat-sidenav-container.mobile-auth-sidenav-container {
+  height: 90vh;
+}
+
+.large-screen-content {
+  height: 100vh;
+}
+
+.small-screen-content {
+  height: 90vh;
 }
 
 
-.rentbuzz-logo{
-    height: 160px;
-    width: 160px;
-    cursor: pointer;
+
+mat-sidenav {
+  width: 200px;
+  background-color: rgb(238, 238, 238);
+}
+
+.rentbuzz-logo {
+  height: 160px;
+  width: 160px;
+  cursor: pointer;
 }

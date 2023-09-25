@@ -18,6 +18,12 @@ import { MatDialog } from '@angular/material/dialog';
 export class myPostsComponent implements OnInit {
   userPosts!: any[];
   currentUser!: any;
+  windowWidth!: number;
+  isAuthenticated: boolean =false
+
+  initialPostsToShow = 3; // Number of posts to show initially
+  postsToShow = this.initialPostsToShow; // Number of posts to display
+  postsToLoad = 3; // Number of additional posts to load
 
 
 
@@ -35,7 +41,9 @@ export class myPostsComponent implements OnInit {
     this.userService.user$.subscribe((user) => {
       console.log('User from posts:', user);
       this.currentUser = user;
-
+      
+      this.windowWidth = window.innerWidth;
+      this.isAuthenticated = true;
       
       if (this.currentUser) {
         this.loadUserPosts();
@@ -52,6 +60,10 @@ export class myPostsComponent implements OnInit {
       });
   }
 
+
+  loadMorePosts() {
+    this.postsToShow += this.postsToLoad;
+  }
   
   viewApartmentDetails(apartmentId: number) {
     this.router.navigate(['/apartment', apartmentId]);

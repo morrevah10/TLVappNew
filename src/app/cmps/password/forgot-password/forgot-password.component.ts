@@ -14,6 +14,7 @@ export class ForgotPasswordComponent implements OnInit {
   loading = false;
   submitted = false;
   errorMessage='';
+  windowWidth!: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,6 +24,7 @@ export class ForgotPasswordComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.windowWidth = window.innerWidth;
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
     });

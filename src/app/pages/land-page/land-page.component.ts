@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./land-page.component.scss']
 })
 export class LandPageComponent {
-  constructor(private router: Router) {}
+  windowWidth: number;
+  constructor(private router: Router) {this.windowWidth = window.innerWidth;}
   // console.log(string,'click')
 
 

@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
   returnUrl!: string;
   showPassword=false;
   errorMassege = '';
+  windowWidth!: number;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,10 +35,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.windowWidth = window.innerWidth;
+    
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
+
   }
 
   // for accessing to form fields

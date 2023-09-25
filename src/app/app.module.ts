@@ -23,7 +23,7 @@ import { UserService } from './srvices/user.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app-root/app.component';
-import { HaederComponent } from './cmps/haeder/haeder.component';
+// import { HaederComponent } from './cmps/haeder/haeder.component';
 import { LandPageComponent } from './pages/land-page/land-page.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -69,13 +69,17 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { NavBarComponent } from './mobile/nav-bar/nav-bar.component';
+
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HaederComponent,
+    // HaederComponent,
     LandPageComponent,
     LoginComponent,
     RegisterComponent,
@@ -99,6 +103,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     LanguageSwitcherComponent,
     LanguageDirective,
     DatepickerComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +117,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    MatSelectModule,
 
     MatSidenavModule,
     MatIconModule,

@@ -13,6 +13,8 @@ export class RegisterComponent implements OnInit {
 
 
   errorMessage=''
+  windowWidth!: number;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,6 +30,7 @@ export class RegisterComponent implements OnInit {
   showPasswordConfirmation = false;
 
   ngOnInit() {
+    this.windowWidth = window.innerWidth;
     this.registerForm = this.formBuilder.group({
       // firstName: ['', Validators.required],
       // lastName: ['', Validators.required],

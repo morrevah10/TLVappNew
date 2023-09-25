@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../srvices/language.service';
 
@@ -9,13 +9,22 @@ import { LanguageService } from '../../srvices/language.service';
   templateUrl: './language-switcher.component.html',
   styleUrls: ['./language-switcher.component.scss'],
 })
+
+
+
 export class LanguageSwitcherComponent {
   selectedLang!: string;
   isEnglishSelected = true;
+  windowWidth!: number;
 
   constructor(public translateService: TranslateService,private languageService: LanguageService) {
     this.selectedLang = translateService.currentLang;
   }
+
+  @HostListener('window:resize', ['$event'])
+onresize(event: Event): void {
+  this.windowWidth = window.innerWidth;
+}
 
   toggleLanguage() {
     this.selectedLang = this.isEnglishSelected ? 'en' : 'he';

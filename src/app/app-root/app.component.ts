@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../srvices/auth.service';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
   opened = false;
   isAuthenticated = false;
   user: any;
+  windowWidth!: number;
+  isSmallScreen!: boolean;
+  sidenavContainerClass!: string ;
+
 
 
   constructor(
@@ -22,8 +26,32 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private router: Router,
 
-  ) {}
+  ) { }
 
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event: Event | null): void {
+  //   this.windowWidth = event?.target?.innerWidth;    this.checkWindowWidth();
+  //   this.sidenavContainerClass = this.calculateSidenavContainerClass();
+
+  // }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.windowWidth = event.target.innerWidth;
+    this.isSmallScreen = this.windowWidth <= 567;
+    this.sidenavContainerClass = this.calculateSidenavContainerClass();
+  }
+
+ 
+
+  calculateSidenavContainerClass() {
+    if (this.windowWidth <= 567 && this.isAuthenticated) {
+      return 'mobile-auth-sidenav-container';
+    } else {
+      return 'default-sidenav-container';
+    }
+  }
+  
   ngOnInit() {
     this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isAuthenticated = isAuthenticated;
@@ -32,6 +60,9 @@ export class AppComponent implements OnInit {
       console.log('User updated:', user);
       this.user = user;
     });
+    this.windowWidth = window.innerWidth;
+    this.isSmallScreen = this.windowWidth <= 567;
+    this.sidenavContainerClass = this.calculateSidenavContainerClass();
   }
   onLogoClicked() {
     if(this.user){

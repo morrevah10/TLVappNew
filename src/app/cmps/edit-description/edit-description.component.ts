@@ -5,6 +5,7 @@ import { PostService } from 'src/app/srvices/post.service';
 import { Router } from '@angular/router';
 import { PopupComponent } from '../popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from 'src/app/srvices/user.service';
 
 
 
@@ -21,19 +22,36 @@ export class EditDescriptionComponent implements OnInit {
   apartmentData: any;
   errorMessage!: '';
   isButtonDisabled : boolean = true
+  windowWidth!: number;
+  user: any;
+  isAuthenticated: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private postService: PostService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
+
   ) {
 
   }
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
+
+    this.windowWidth = window.innerWidth;
+
+    this.userService.user$
+    .subscribe((user) => {
+      console.log('User updated:', user);
+      this.user = user;
+    });
+    this.isAuthenticated = true;
+
+    
+    const idParam = this.route
+    .snapshot.paramMap.get('id');
     if (idParam !== null) {
       this.apartmentId = +idParam;
       console.log('this.apartmentId', this.apartmentId);

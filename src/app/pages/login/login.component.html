@@ -1,6 +1,8 @@
-<section class="login-container">
+<section *ngIf="this.windowWidth > 567" class="login-container">
+  <div class="login-content">
+  <!-- <img src="../../../assets/Illustration/login.svg" alt=""> -->
   <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
-    <h3>{{"login_form_title"| translate}}</h3>
+    <!-- <h3>{{"login_form_title"| translate}}</h3> -->
     <div class="form-group">
       <label for="email">{{"login_form_email_txt"| translate}}</label>
       <input
@@ -82,9 +84,104 @@
       </button>
     </div>
   </form>
-</section>
-<div>
-  <p>mosherevah10@gmail.com</p>
-  <p>eranlevy9@gmail.com</p>
-  <p>Mor27195</p>
 </div>
+</section>
+
+
+
+<section *ngIf="this.windowWidth <= 567" class="login-mobile">
+  <div class="login-content-mobile">
+
+    <div class="login-img">
+      <img src="../../../assets/Illustration/login.svg" alt="">
+    </div>
+
+
+    <div class="form-mobile">
+      <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+      
+        <div class="form-group">
+          <label for="email">{{"login_form_email_txt"| translate}}</label>
+          <input
+            type="text"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': submitted && loginForm.get('email')?.errors
+            }"
+            placeholder="Enter email here"
+          />
+          <div
+            *ngIf="submitted && loginForm.get('email')?.errors"
+            class="invalid-feedback"
+          >
+            <div
+              class="required"
+              *ngIf="loginForm.get('email')?.hasError('required')"
+            >
+              Email is required
+            </div>
+            <div *ngIf="loginForm.get('email')?.hasError('email')">
+              Enter valid email address
+            </div>
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="password">{{"login_form_password_txt"| translate}}</label>
+          <div class="password-input-container">
+            <input
+              type="{{ showPassword ? 'text' : 'password' }}"
+              formControlName="password"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && loginForm.get('password')?.errors
+              }"
+              placeholder="Enter password here"
+            />
+            <button type="button" (click)="togglePasswordVisibility()">
+              <img
+                class="showPaasImg"
+                [src]="
+                  showPassword
+                    ? '../../../assets/img/eye-open.png'
+                    : '../../../assets/img/eye-close.png'
+                "
+                alt="{{ showPassword ? 'Hide Password' : 'Show Password' }}"
+              />
+            </button>
+          </div>
+          <div
+            *ngIf="submitted && loginForm.get('password')?.errors"
+            class="invalid-feedback"
+          >
+            <div
+              class="required"
+              *ngIf="loginForm.get('password')?.hasError('required')"
+            >
+              Password is required
+            </div>
+          </div>
+        </div>
+    
+        <div class="error-message" *ngIf="this.errorMassege">
+          {{ this.errorMassege }}
+        </div>
+    
+        <div class="form-group">
+          <button [disabled]="loading" class="btn">
+            <span *ngIf="loading" class=""></span>
+            {{"login_form_login_btn"| translate}}
+          </button>
+          <button [disabled]="loading" class="btn">
+            <span routerLink="/register" class="">{{"login_form_register_btn"| translate}}</span>
+          </button>
+          <button [disabled]="loading" class="btn">
+            <span routerLink="/forgetPassword" class="">{{"login_form_forget_password_btn"| translate}}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+</div>
+</section>
+

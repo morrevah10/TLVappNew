@@ -19,6 +19,9 @@ export class ChangPasswordComponent implements OnInit{
   submitted=false
   errorMessage:string =''
   loading= false
+  windowWidth!: number;
+  isAuthenticated: boolean =false;
+
 
   
     constructor(
@@ -34,6 +37,9 @@ export class ChangPasswordComponent implements OnInit{
       this.userService.user$.subscribe((user) => {
         console.log('User updated:', user);
         this.user = user;
+
+        this.windowWidth = window.innerWidth;
+        this.isAuthenticated = true;
 
         this.changePassForm = this.formBuilder.group({
           old_password:[''],

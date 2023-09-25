@@ -43,81 +43,78 @@
 <!-- </section> -->
 
 <section class="apartment-details-container">
-  <!-- <p>Apartment Details</p> -->
-  <div class="apartment-details">
-    <div class="detail-row">
-      <label>{{"post_details_page_city_txt"| translate}}:</label>
-      <p>{{ apartment?.post_city }}</p>
-    </div>
-    <div class="detail-row">
-      <label>{{"post_details_page_street_txt"| translate}}:</label>
-      <p>{{ apartment?.post_street }}</p>
-    </div>
-    <div class="detail-row">
-      <label>{{"post_details_page_building_txt"| translate}}:</label>
-      <p>{{ apartment?.post_building_number }}</p>
-    </div>
-    <div class="detail-row">
-      <label>{{"post_details_page_apartment_number_txt"| translate}}:</label>
-      <p>{{ apartment?.post_apartment_number }}</p>
-    </div>
-    <div class="detail-row">
-      <label>{{"post_details_page_rent_price_txt"| translate}}:</label>
-      <p>{{ apartment?.post_apartment_price }}</p>
-    </div>
-    <div class="detail-row">
-      <label>{{"post_details_page_entry_date_txt"| translate}}:</label>
-      <p>{{ apartment?.post_rent_start }}</p>
-    </div>
-    <div class="detail-row">
-      <label>{{"post_details_page_exit_date_txt"| translate}}:</label>
-      <p>{{ apartment?.post_rent_end }}</p>
-    </div>
-    <div class="detail-row">
-      <label>{{"post_details_page_rental_review_txt"| translate}}:</label>
-      <p>{{ apartment?.post_description }}</p>
-    </div>
-    <!-- <div class="detail-row">
-      <label>pics:</label>
-      <img src="{{ apartment?.apartment_pic_1 }}" alt="">
-    </div> -->
+  <div class="apartment-details-contant">
+    <div class="apartment-details">
+      <div class="detail-row">
+        <label>{{ "post_details_page_city_txt" | translate }}:</label>
+        <p>{{ apartment?.post_city }}</p>
+      </div>
+      <div class="detail-row">
+        <label>{{ "post_details_page_street_txt" | translate }}:</label>
+        <p>{{ apartment?.post_street }}</p>
+      </div>
+      <div class="detail-row">
+        <label>{{ "post_details_page_building_txt" | translate }}:</label>
+        <p>{{ apartment?.post_building_number }}</p>
+      </div>
+      <div class="detail-row">
+        <label
+          >{{ "post_details_page_apartment_number_txt" | translate }}:</label
+        >
+        <p>{{ apartment?.post_apartment_number }}</p>
+      </div>
+      <div class="detail-row">
+        <label>{{ "post_details_page_rent_price_txt" | translate }}:</label>
+        <p>{{ apartment?.post_apartment_price }}</p>
+      </div>
+      <div class="detail-row">
+        <label>{{ "post_details_page_entry_date_txt" | translate }}:</label>
+        <p>{{ apartment?.post_rent_start }}</p>
+      </div>
+      <div class="detail-row">
+        <label>{{ "post_details_page_exit_date_txt" | translate }}:</label>
+        <p>{{ apartment?.post_rent_end }}</p>
+      </div>
+      <div class="detail-row">
+        <label>{{ "post_details_page_rental_review_txt" | translate }}:</label>
+        <p>{{ apartment?.post_description }}</p>
+      </div>
 
-
-    <!-- chang apartment_pic_1 to array on back  -->
-    <div class="detail-row">
-      <label>{{"post_details_page_pics_txt"| translate}}:</label>
-      <carousel [isAnimated]="true">
-        <slide>
-          <img
-            src="{{ apartment?.apartment_pic_1 }}"
-            alt="first slide"
-            style="display: block; width: 100%"
-          />
-        </slide>
-        <slide *ngIf="apartment?.apartment_pic_2">
-          <img
-            src="{{ apartment?.apartment_pic_2 }}"
-            alt="second slide"
-            style="display: block; width: 100%"
-          />
-        </slide>
-        <slide *ngIf="apartment?.apartment_pic_3">
-          <img
-            src="{{ apartment?.apartment_pic_3 }}"
-            alt="third slide"
-            style="display: block; width: 100%"
-          />
-        </slide>
-        <slide *ngIf="apartment?.apartment_pic_4">
-          <img
-            src="{{ apartment?.apartment_pic_4 }}"
-            alt="third slide"
-            style="display: block; width: 100%"
-          />
-        </slide>
-      </carousel>
+      <!-- chang apartment_pic_1 to array on back  -->
+      <div class="detail-row">
+        <!-- <label>{{ "post_details_page_pics_txt" | translate }}:</label> -->
+        <carousel [isAnimated]="true">
+          <slide>
+            <img
+              src="{{ apartment?.apartment_pic_1 }}"
+              alt="first slide"
+              style="display: block; width: 100%"
+            />
+          </slide>
+          <slide *ngIf="apartment?.apartment_pic_2">
+            <img
+              src="{{ apartment?.apartment_pic_2 }}"
+              alt="second slide"
+              style="display: block; width: 100%"
+            />
+          </slide>
+          <slide *ngIf="apartment?.apartment_pic_3">
+            <img
+              src="{{ apartment?.apartment_pic_3 }}"
+              alt="third slide"
+              style="display: block; width: 100%"
+            />
+          </slide>
+          <slide *ngIf="apartment?.apartment_pic_4">
+            <img
+              src="{{ apartment?.apartment_pic_4 }}"
+              alt="third slide"
+              style="display: block; width: 100%"
+            />
+          </slide>
+        </carousel>
+      </div>
     </div>
-
-    <!-- Add more fields as needed -->
   </div>
 </section>
+<app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar>

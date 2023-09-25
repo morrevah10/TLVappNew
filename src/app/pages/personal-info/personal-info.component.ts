@@ -23,6 +23,8 @@ export class PersonalInfoComponent implements OnInit {
   errorMessage: string = '';
 
   profilePicture: string | ArrayBuffer | null = null;
+  windowWidth!: number;
+  isAuthenticated: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,10 +36,17 @@ export class PersonalInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.user$.subscribe((user) => {
+
+    this.windowWidth = window.innerWidth;
+
+    this.userService.user$
+    .subscribe((user) => {
       console.log('User updated:', user);
       this.user = user;
     });
+    this.isAuthenticated = true;
+
+    
 
     this.PersonalForm = this.formBuilder.group({
       user_full_name: [''],

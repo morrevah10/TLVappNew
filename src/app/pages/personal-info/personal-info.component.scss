@@ -1,8 +1,4 @@
-.profile-picture {
-    max-width: 200px;
-    max-height: 200px;
-    margin-top: 10px;
-  }
+
 
 
   .profile-img {
@@ -13,3 +9,90 @@
       object-fit: cover; 
     }
   }
+
+
+
+
+
+  .personal-mobile{
+    height: 90vh; // Occupy the entire viewport height
+    display: flex;
+    justify-content: center; // Center content horizontally
+    align-items: center; // Center content vertically
+    background-color: #f0f0f0; // Set background color as needed
+  }
+
+  .personal-content-mobile{
+    display: flex;
+    margin: 20px; // Add margin to create spacing from the edges
+    padding: 20px; // Add padding to determine the size of the container
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+    width: 100%; // Occupy the entire screen width
+    // max-width: 600px; // Set a maximum width if needed
+    height: 100%;
+    border-radius: 16px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+
+  .personal-img-log-out{
+    display: flex;
+  }
+
+  .btn{
+    color: blue; 
+    padding: 10px 20px; 
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    // font-size:  24px; ;
+  
+  }
+
+ .personal-img-btn{
+display: flex;
+flex-direction: column-reverse;
+ }
+
+ .logout-btn{
+  .btn{
+    color: red; 
+    padding: 10px 20px; 
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+  }
+ }
+
+ label{
+  padding: 10px;
+ }
+
+ .personal-btn{
+  display: flex;
+  flex-direction: column;
+ }
+
+ .personal-btn{
+  .delet-btn{
+    color: red; 
+    padding: 10px 20px; 
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+  }
+ }
+
+
+ 

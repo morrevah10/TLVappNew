@@ -20,6 +20,7 @@ export class RestPasswordComponent implements OnInit {
   showPassword=false
   showPasswordConfirmation= false
   errorMessage='';
+  windowWidth!: number;
 
 
   constructor(
@@ -32,6 +33,8 @@ export class RestPasswordComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.windowWidth = window.innerWidth;
+
     this.response = this.forgetService.getResponse();
 
       // Now you can use the 'response' object in your component as needed

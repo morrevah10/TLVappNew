@@ -1,84 +1,81 @@
 <section [appLanguage]="'ltr'" class="home-container">
-  <h1>Hi {{ logedinUser?.user_full_name }}</h1>
+  <div class="home-contant">
+    <div class="searcg-img">
+      <img src="../../../assets/Illustration/search.svg" alt="" />
+    </div>
+    <div class="search-container">
+      <form class="form-container">
+        <mat-form-field class="=form-field" appearance="outline">
+          <input
+            placeholder="city"
+            matInput
+            [formControl]="cityFilterControl"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let city of filteredCities$ | async"
+              [value]="city"
+              (click)="toggleDisable()"
+            >
+              {{ city }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 
-  <p>Welcome to home page!!</p>
-  <P>let's get started</P>
+        <mat-form-field class="=form-field" appearance="outline">
+          <input
+            placeholder="street"
+            matInput
+            [formControl]="streetFilterControl"
+            [matAutocomplete]="streetAuto"
+            matTooltip="Please select a city first"
+            [matTooltipDisabled]="isDisable"
+          />
+          <mat-autocomplete #streetAuto="matAutocomplete">
+            <mat-option *ngFor="let street of filteredStreets" [value]="street">
+              {{ street }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 
-  <div *ngIf="loading" class="loading-spinner">
-    <img src="../../../assets/img/Animation.gif" alt="">
-  </div>
+        <mat-form-field class="=form-field" appearance="outline">
+          <input
+            matInput
+            placeholder="building number"
+            [formControl]="buildingControl"
+          />
+        </mat-form-field>
 
-  <div class="search-container">
-    <form>
-      <mat-form-field>
-        <input
-          placeholder="city"
-          matInput
-          [formControl]="cityFilterControl"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option
-            *ngFor="let city of filteredCities$ | async"
-            [value]="city"
-            (click)="toggleDisable()"           
-          >
-            {{ city }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+        <mat-form-field class="=form-field" appearance="outline">
+          <input
+            matInput
+            placeholder="apartment number"
+            [formControl]="apartmentControl"
+          />
+        </mat-form-field>
+      </form>
 
-      <mat-form-field >
-        <input
-          placeholder="street"
-          matInput
-          [formControl]="streetFilterControl"
-          [matAutocomplete]="streetAuto"
-          matTooltip="Please select a city first"
-          [matTooltipDisabled]="isDisable"
-        />
-        <mat-autocomplete #streetAuto="matAutocomplete">
-          <mat-option
-          *ngFor="let street of filteredStreets" [value]="street">
-            {{ street }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
 
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="building number"
-          [formControl]="buildingControl"
-        />
-      </mat-form-field>
+    <div class="actions">
+      <button class="css-btn" css-btn (click)="searchApartments()">
+        <!-- {{ "search_post_page_search_btn" | translate }} -->
+        Look For Reviews
+      </button>
 
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="apartment number"
-          [formControl]="apartmentControl"
-        />
-      </mat-form-field>
-    </form>
-
-    <button class="newBTN" (click)="searchApartments()">
-      {{ "search_post_page_search_btn" | translate }}
-    </button>
-    <!-- <button class="newBTN"  (click)="searchApartments()">Search</button> -->
-
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
+      <button class="newBTN" (click)="navigateToApartmentForm()">
+        {{ "search_post_page_add_post_btn" | translate }}
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
     </div>
   </div>
 
-  <!-- <button mat-raised-button color="primary" (click)="searchApartments()">Search</button> -->
-
-  <button class="css-btn" (click)="navigateToApartmentForm()">
-    {{ "search_post_page_add_post_btn" | translate }}
-  </button>
-
-  <section>
+  <!-- <section class="list">
     <app-apartment-list #apartmentList> </app-apartment-list>
-  </section>
+  </section> -->
 </section>
+<app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar>
