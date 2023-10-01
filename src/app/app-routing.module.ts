@@ -18,23 +18,29 @@ import { ForgotPasswordComponent } from './cmps/password/forgot-password/forgot-
 import { RestPasswordComponent } from './cmps/password/rest-password/rest-password.component';
 import { AccessDeniedComponent } from './cmps/access-denied/access-denied.component';
 import { AuthGuard } from './helpers/authGuard';
+import { OpeningComponent } from './cmps/opening/opening.component';
 
 const routes: Routes = [
-  { path: '', component: LandPageComponent },
-  { path: 'home', component: HomeComponent, },
+  // { path: '', component: LandPageComponent },
+  { path: '', component: OpeningComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'rantal', component: RantalComponent, },
+  { path: 'rantal', component: RantalComponent },
   { path: 'apartment', component: ApartmentListComponent },
-  { path: 'apartment/edit/:id', component: EditDescriptionComponent, },
+  { path: 'apartment/edit/:id', component: EditDescriptionComponent },
   { path: 'apartment/:id', component: ApartmentDetailsComponent },
-  { path: 'personalInfo', component: PersonalInfoComponent, },
-  { path: 'personalInfo/changPassword', component: ChangPasswordComponent, },
-  { path: 'about', component: AboutComponent,},
-  { path: 'myposts', component: myPostsComponent, },
-  { path: 'terms', component: TermsComponent,},
+  { path: 'personalInfo', component: PersonalInfoComponent },
+  { path: 'personalInfo/changPassword', component: ChangPasswordComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'myposts', component: myPostsComponent },
+  { path: 'terms', component: TermsComponent },
   { path: 'forgetPassword', component: ForgotPasswordComponent },
-  { path: 'resetPassword', component: RestPasswordComponent,canActivate: [AuthGuard] },
+  {
+    path: 'resetPassword',
+    component: RestPasswordComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'accessDenied', component: AccessDeniedComponent },
 ];
 

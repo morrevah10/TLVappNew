@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class OpeningComponent {
 
+  isSkiped = false
+
   stages = [
     {
       imageUrl: '../../../assets/img/open1.png',
@@ -46,5 +48,6 @@ export class OpeningComponent {
   skipToLogin() {
     // Navigate to the login page when the user clicks the Skip button
     this.router.navigate(['/login']);
+    this.isSkiped = true
   }
 }

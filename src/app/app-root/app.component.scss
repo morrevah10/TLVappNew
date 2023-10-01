@@ -19,7 +19,6 @@
 }
 
 
-
 mat-sidenav {
   width: 200px;
   background-color: rgb(238, 238, 238);
@@ -29,4 +28,9 @@ mat-sidenav {
   height: 160px;
   width: 160px;
   cursor: pointer;
+}
+
+
+.hide{
+  display: none;
 }
