@@ -72,6 +72,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { NavBarComponent } from './mobile/nav-bar/nav-bar.component';
 
 import {MatSelectModule} from '@angular/material/select';
+import { OpeningComponent } from './cmps/opening/opening.component';
 
 
 
@@ -104,6 +105,7 @@ import {MatSelectModule} from '@angular/material/select';
     LanguageDirective,
     DatepickerComponent,
     NavBarComponent,
+    OpeningComponent,
   ],
   imports: [
     BrowserModule,

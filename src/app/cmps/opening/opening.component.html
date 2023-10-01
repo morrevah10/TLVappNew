@@ -1,0 +1,42 @@
+<section class="opening container">
+  <div class="top-bar">
+    <button class="skip-button" (click)="skipToLogin()">דלג</button>
+    <div class="stage-indicator">
+      <div
+        *ngFor="let stage of stages; let i = index"
+        class="indicator-circle"
+        [class.active]="currentStage === i"
+      ></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <img class="img" [src]="stages[currentStage].imageUrl" alt="Stage Image" />
+    <h2 class="title">{{ stages[currentStage].title }}</h2>
+    <p class="text">{{ stages[currentStage].text }}</p>
+  </div>
+
+  <div class="navigation-buttons">
+    <button
+      class="open-btn previous"
+      *ngIf="currentStage > 0"
+      (click)="previousStage()"
+    >
+      <img src="../../../assets/img/previus.png" alt="" />
+    </button>
+    <button
+      class="open-btn next"
+      *ngIf="currentStage < stages.length - 1"
+      (click)="nextStage()"
+    >
+      <img src="../../../assets/img/next.png" alt="" />
+    </button>
+
+    <button class="open-btn login" *ngIf="currentStage === stages.length - 1" (click)="skipToLogin()">
+        <img src="../../../assets/img/next.png" alt="" />
+        מסך התחברות
+    </button>
+
+
+  </div>
+</section>
