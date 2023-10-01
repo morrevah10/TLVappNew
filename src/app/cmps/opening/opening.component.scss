@@ -1,7 +1,7 @@
 .top-bar {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 120px;
   padding: 10px;
   padding-top: 50px;
   // border-bottom: 1px solid #ccc;
@@ -40,6 +40,8 @@
 .container {
   height: 100dvh;
   width: 100dvw;
+  display: flex;
+  flex-direction: column;
 }
 
 .skip-button {
@@ -92,4 +94,10 @@
   font-size: 18px;
   right: 30px;
   border-radius: 10px;
+}
+
+
+.img{
+max-width:350px ;
+max-height: 300px;
 }
