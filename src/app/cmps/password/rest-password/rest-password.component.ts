@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -13,6 +13,14 @@ import { Router } from '@angular/router';
 })
 export class RestPasswordComponent implements OnInit {
 
+  @ViewChild('input1') input1!: ElementRef<HTMLInputElement>;
+  @ViewChild('input2') input2!: ElementRef<HTMLInputElement>;
+  @ViewChild('input3') input3!: ElementRef<HTMLInputElement>;
+  @ViewChild('input4') input4!: ElementRef<HTMLInputElement>;
+  
+  currentStep = 1;
+
+  confirmationCode: string = '';
   passwordResetForm!: FormGroup;
   loading = false;
   submitted = false;
@@ -29,6 +37,7 @@ export class RestPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private forgetService: ForgetService,
     private router: Router,
+    private cdr: ChangeDetectorRef 
 
   ) {}
 
@@ -91,7 +100,54 @@ export class RestPasswordComponent implements OnInit {
     togglePasswordConfirmationVisibility(){
       this.showPasswordConfirmation = !this.showPasswordConfirmation
     }
+
+
+    verifyCodeAndContinue() {
+      // Add logic to verify the entered code with the backend
+      // If the code is verified successfully, proceed to step 2
+      // For example:
+      // if (this.verifyCode()) {
+      //   this.currentStep = 2;
+      // }
+      this.currentStep=2
+      console.log('Confirmation Code:', this.confirmationCode);
+
+    }
+
+
+
+
+
+
+    onInput(currentInput: HTMLInputElement, nextInput: HTMLInputElement | null) {
+      const inputValue = currentInput.value;
+  
+      if (inputValue.length === 1 && nextInput) {
+        nextInput.focus(); // Move focus to the next input
+      }
+  
+      // Check if the input is in the last box and print the confirmation code
+      if (!nextInput) {
+        const confirmationCode = [
+          this.input1.nativeElement.value,
+          this.input2.nativeElement.value,
+          this.input3.nativeElement.value,
+          this.input4.nativeElement.value
+        ].join('');
+  
+        if (confirmationCode.length === 4) {
+          this.confirmationCode=confirmationCode
+          console.log('Confirmation Code:', confirmationCode);
+        }
+      }
+    }
+    
+    reset(){
+      console.log('hit reset // move to login page')
+    }
+
   }
+
 
 
 

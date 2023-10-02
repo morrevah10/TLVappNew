@@ -39,9 +39,8 @@ const routes: Routes = [
   {
     path: 'resetPassword',
     component: RestPasswordComponent,
-    canActivate: [AuthGuard],
   },
-  { path: 'accessDenied', component: AccessDeniedComponent },
+  { path: 'accessDenied', component: AccessDeniedComponent,canActivate: [AuthGuard], },
 ];
 
 @NgModule({

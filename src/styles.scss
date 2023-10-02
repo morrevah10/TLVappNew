@@ -39,9 +39,15 @@ $TLVapp-theme: mat.define-light-theme((
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+// @import '../src/app/styles/colors';
+// @import '../src/app/styles/mixins';
+// @import '../src/app/styles/virables';
+// @import '../src/app/styles/classes';
+
 @import '../src/app/styles/colors';
 @import '../src/app/styles/mixins';
-@import '../src/app/styles/virables';
+@import '../src/app/styles/virables'; 
+@import '../src/app/styles/classes';
 // @import '@fortawesome/fontawesome-free/css/all.css';
 
 *{
