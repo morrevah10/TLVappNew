@@ -1,4 +1,4 @@
-<section *ngIf="this.windowWidth > 567" class="personal-container">
+<!-- <section *ngIf="this.windowWidth > 567" class="personal-container">
   <h3>personal info Form :</h3>
   <button type="button" class="btn" (click)="openImageUploadModal()">
     {{ "personal_info_page_change_profile_image_btn" | translate }}
@@ -185,4 +185,101 @@
     </div>
   </div>
 </section>
-<app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar>
+<app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar> -->
+
+
+<section *ngIf="this.windowWidth <= 567" class="personal-mobile">
+  <div class="personal-content-mobile">
+    <div class="personal-img-log-out">
+      <div class="profile-img">
+        <img
+          *ngIf="userImg.user_profile_pic; else defaultImage"
+          [src]="userImg.user_profile_pic"
+          alt="User Profile Picture"
+        />
+      </div>
+
+      <div class="personal-img-btn">
+        <button type="button" class="btn" (click)="openImageUploadModal()">
+          {{ "personal_info_page_change_profile_image_btn" | translate }}
+          <img src="../../../assets/icons/img.png" alt="" />
+        </button>
+      </div>
+      <div class="logout-btn">
+        <button class="btn" (click)="logout()">
+          {{ "personal_info_page_logout_btn" | translate }}
+        </button>
+      </div>
+    </div>
+    
+
+    <ng-template #defaultImage>
+      <img src="../../../assets/img/user.png" alt="User Profile Picture" />
+    </ng-template>
+
+
+    <div class="form-mobile">
+
+      <form [formGroup]="PersonalForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="user_full_name"
+            >{{ "personal_info_page_full_name_txt" | translate }}:</label
+          >
+          <input
+            type="text"
+            id="user_full_name"
+            [(ngModel)]="user.user_full_name"
+            formControlName="user_full_name"
+            class="form-control"
+          />
+        </div>
+
+        <div>
+          <label for="user_email"
+            >{{ "personal_info_page_email_txt" | translate }} :</label
+          >
+          <input
+            type="email"
+            id="user_email"
+            [(ngModel)]="user.user_email"
+            formControlName="user_email"
+            class="form-control"
+          />
+        </div>
+
+        <div>
+          <label for="user_phone"
+            >{{ "personal_info_page_phone_txt" | translate }} :</label
+          >
+          <input
+            type="string"
+            id="user_phone"
+            [(ngModel)]="user.user_phone"
+            formControlName="user_phone"
+            class="form-control"
+          />
+        </div>
+
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+
+    <div class="personal-btn">
+      <button type="submit" class="btn" [disabled]="PersonalForm.invalid">
+        {{ "personal_info_page_update_btn" | translate }}
+      </button>
+
+      <button class="delet-btn" (click)="deleteUser(user.user_id)">
+        {{ "personal_info_page_delete_account_btn" | translate }}
+      </button>
+
+      <button type="submit" class="btn">
+        <span routerLink="/personalInfo/changPassword" class="">
+          {{ "personal_info_page_change_password_btn" | translate }}</span
+        >
+      </button>
+    </div>
+  </div>
+</section>
