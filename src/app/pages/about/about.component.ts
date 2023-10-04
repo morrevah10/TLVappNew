@@ -10,6 +10,7 @@ export class AboutComponent implements OnInit {
   windowWidth!: number;
   user: any;
   isAuthenticated: boolean = false;
+  randomText: any;
 
 
   constructor(
@@ -27,6 +28,8 @@ export class AboutComponent implements OnInit {
       this.user = user;
     });
     this.isAuthenticated = true;
+
+    this.randomText='זה החלק של הabout הקונטייניר יתאים את עצמו לכתב'
   }
 
 

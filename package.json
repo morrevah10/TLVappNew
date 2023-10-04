@@ -24,6 +24,7 @@
     "@ngx-translate/http-loader": "github:ngx-translate/http-loader",
     "bootstrap": "^5.3.1",
     "jquery": "^3.7.1",
+    "lorem-ipsum": "^2.0.8",
     "ngx-bootstrap": "^11.0.2",
     "ngx-image-cropper": "^7.0.2",
     "ngx-toastr": "^17.0.2",
