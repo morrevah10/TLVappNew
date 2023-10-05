@@ -42,6 +42,13 @@
 <!-- </div> -->
 <!-- </section> -->
 
+
+
+
+
+
+<!-- 
+
 <section class="apartment-details-container">
   <div class="apartment-details-contant">
     <div class="apartment-details">
@@ -80,9 +87,7 @@
         <p>{{ apartment?.post_description }}</p>
       </div>
 
-      <!-- chang apartment_pic_1 to array on back  -->
       <div class="detail-row">
-        <!-- <label>{{ "post_details_page_pics_txt" | translate }}:</label> -->
         <carousel [isAnimated]="true">
           <slide>
             <img
@@ -116,5 +121,99 @@
       </div>
     </div>
   </div>
+</section>
+<app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar> -->
+
+
+
+<section class="apartment-details-container">
+  <div class="apartment-details-contant">
+      <div class="apartment-card">
+
+        <div class="apartment-card-img">
+          <img src="{{ apartment?.apartment_pic_1 }}" alt="" />
+        </div>
+
+        <div class="edit-card-details">
+          <p class="text">{{ this.apartment.post_city }}</p>
+          <p class="text">
+            {{ this.apartment.post_street }}
+            {{ this.apartment.post_building_number }}
+          </p>
+          <p class="text">דירה {{ this.apartment.post_apartment_number }}</p>
+        </div>
+
+      </div>
+
+      <div class="apartment-date-price">
+        <div class="dates">
+          <p class="small-text">
+            תאריך כניסה לדירה : {{ this.apartment.post_rent_start }}
+          </p>
+          <p class="small-text">
+            תאריך יציאה מהדירה : {{ this.apartment.post_rent_end }}
+          </p>
+          <p class="small-text">
+            שכר דירה : {{ this.apartment.post_apartment_price }}
+          </p>
+        </div>
+      </div>
+      
+
+      <div class="apartment-description">
+
+        <p> חוות דעת</p>
+        <div class="edit-input">
+          <textarea
+            class="input-text"
+            id="post_description"
+            name="post_description"
+            [(ngModel)]="apartment.post_description"
+          ></textarea>
+          <!-- <input type="text" class="input-text" id="post_description" name="post_description" (click)="enableButton()" [(ngModel)]="this.apartmentData.post_description" /> -->
+        </div>
+      </div>
+
+
+      <div class="apartment-btn">
+        <p class="small-text">השכרת דירה זו בעבר ?</p>
+        <span class="color-text">
+          הוסף את החויה שלך
+        </span>
+      </div>
+  
+      
+        
+        <!-- <carousel [isAnimated]="true">
+          <slide>
+            <img
+              src="{{ apartment?.apartment_pic_1 }}"
+              alt="first slide"
+              style="display: block; width: 100%"
+            />
+          </slide>
+          <slide *ngIf="apartment?.apartment_pic_2">
+            <img
+              src="{{ apartment?.apartment_pic_2 }}"
+              alt="second slide"
+              style="display: block; width: 100%"
+            />
+          </slide>
+          <slide *ngIf="apartment?.apartment_pic_3">
+            <img
+              src="{{ apartment?.apartment_pic_3 }}"
+              alt="third slide"
+              style="display: block; width: 100%"
+            />
+          </slide>
+          <slide *ngIf="apartment?.apartment_pic_4">
+            <img
+              src="{{ apartment?.apartment_pic_4 }}"
+              alt="third slide"
+              style="display: block; width: 100%"
+            />
+          </slide>
+        </carousel> -->
+      </div>
 </section>
 <app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar>

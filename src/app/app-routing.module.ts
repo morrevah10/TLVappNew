@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  // {path:'search-result',component:ApartmentListComponent},
   { path: 'rantal', component: RantalComponent },
   { path: 'apartment', component: ApartmentListComponent },
   { path: 'apartment/edit/:id', component: EditDescriptionComponent },
