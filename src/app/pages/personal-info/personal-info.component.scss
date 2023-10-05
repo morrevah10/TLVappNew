@@ -1,98 +1,190 @@
-
-
-
-  .profile-img {
-    img{
-      width: 100px; 
-      height: 100px; 
-      border-radius: 50%; 
-      object-fit: cover; 
-    }
+.profile-img {
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
   }
+}
 
+//   .personal-mobile{
+//     height: 90vh; // Occupy the entire viewport height
+//     display: flex;
+//     justify-content: center; // Center content horizontally
+//     align-items: center; // Center content vertically
+//     background-color: #f0f0f0; // Set background color as needed
+//   }
 
+//   .personal-content-mobile{
+//     display: flex;
+//     margin: 20px; // Add margin to create spacing from the edges
+//     padding: 20px; // Add padding to determine the size of the container
+//     box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+//     width: 100%; // Occupy the entire screen width
+//     // max-width: 600px; // Set a maximum width if needed
+//     height: 100%;
+//     border-radius: 16px;
+//     flex-direction: column;
+//     justify-content: space-around;
+//     align-items: center;
+//   }
 
+//   .personal-img-log-out{
+//     display: flex;
+//   }
 
+//   .btn{
+//     color: blue;
+//     padding: 10px 20px;
+//     background-color: transparent;
+//     background-repeat: no-repeat;
+//     border: none;
+//     cursor: pointer;
+//     overflow: hidden;
+//     outline: none;
+//     // font-size:  24px; ;
 
-  .personal-mobile{
-    height: 90vh; // Occupy the entire viewport height
-    display: flex;
-    justify-content: center; // Center content horizontally
-    align-items: center; // Center content vertically
-    background-color: #f0f0f0; // Set background color as needed
-  }
+//   }
 
-  .personal-content-mobile{
-    display: flex;
-    margin: 20px; // Add margin to create spacing from the edges
-    padding: 20px; // Add padding to determine the size of the container
-    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
-    width: 100%; // Occupy the entire screen width
-    // max-width: 600px; // Set a maximum width if needed
-    height: 100%;
-    border-radius: 16px;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  }
+//  .personal-img-btn{
+// display: flex;
+// flex-direction: column-reverse;
+//  }
 
+//  .logout-btn{
+//   .btn{
+//     color: red;
+//     padding: 10px 20px;
+//     background-color: transparent;
+//     background-repeat: no-repeat;
+//     border: none;
+//     cursor: pointer;
+//     overflow: hidden;
+//     outline: none;
+//   }
+//  }
 
-  .personal-img-log-out{
-    display: flex;
-  }
+//  label{
+//   padding: 10px;
+//  }
 
-  .btn{
-    color: blue; 
-    padding: 10px 20px; 
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-    // font-size:  24px; ;
-  
-  }
+//  .personal-btn{
+//   display: flex;
+//   flex-direction: column;
+//  }
 
- .personal-img-btn{
-display: flex;
-flex-direction: column-reverse;
- }
+//  .personal-btn{
+//   .delet-btn{
+//     color: red;
+//     padding: 10px 20px;
+//     background-color: transparent;
+//     background-repeat: no-repeat;
+//     border: none;
+//     cursor: pointer;
+//     overflow: hidden;
+//     outline: none;
+//   }
+//  }
 
- .logout-btn{
-  .btn{
-    color: red; 
-    padding: 10px 20px; 
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-  }
- }
+@import "../../../app/styles/colors";
 
- label{
-  padding: 10px;
- }
+.title {
+  direction: rtl;
+  font-size: 25px;
+  font-weight: bold;
+}
 
- .personal-btn{
+.personal-container {
+  height: 100dvh;
+  // width: 100dvh;
+}
+
+.personal-content {
   display: flex;
   flex-direction: column;
- }
+  // height: 90dvh;
+  padding: 1.5rem;
+  height: 100%;
+}
 
- .personal-btn{
-  .delet-btn{
-    color: red; 
-    padding: 10px 20px; 
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
+.form-group {
+  direction: rtl;
+  padding: 1.5rem 0 0 0;
+}
+
+.text {
+  direction: rtl;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  color: $color5;
+}
+
+input {
+  direction: rtl;
+  // background-color: #F2F7FF;
+}
+
+.color-text {
+  color: $color1;
+  cursor: pointer;
+}
+
+.btn-group {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 35dvh;
+  padding-top: 3rem;
+  justify-content: space-between;
+}
+
+.btn-large {
+  height: 3em;
+  width: 15em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25em;
+}
+
+.small-text {
+  color: $color4;
+  direction: rtl;
+}
+
+.profile-img {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 2rem;
+  p{
+    padding: 1rem;
+    color: $color2;
+    font-size: 1rem;
+    font-weight: 700;
   }
- }
+}
 
+.nav-item {
+  color: $color5;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 
- 
+  img{
+    height: 1em;
+    width: 1em;
+  }
+}
+
+.nav-item :hover{
+  text-decoration: underline;
+  color: $color1;
+  cursor: pointer;
+}

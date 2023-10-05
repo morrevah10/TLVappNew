@@ -73,6 +73,7 @@ import { NavBarComponent } from './mobile/nav-bar/nav-bar.component';
 
 import {MatSelectModule} from '@angular/material/select';
 import { OpeningComponent } from './cmps/opening/opening.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 
@@ -106,6 +107,7 @@ import { OpeningComponent } from './cmps/opening/opening.component';
     DatepickerComponent,
     NavBarComponent,
     OpeningComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

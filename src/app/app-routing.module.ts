@@ -19,6 +19,7 @@ import { RestPasswordComponent } from './cmps/password/rest-password/rest-passwo
 import { AccessDeniedComponent } from './cmps/access-denied/access-denied.component';
 import { AuthGuard } from './helpers/authGuard';
 import { OpeningComponent } from './cmps/opening/opening.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   // { path: '', component: LandPageComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'myposts', component: myPostsComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'forgetPassword', component: ForgotPasswordComponent },
+  {path: 'profile' , component: ProfileComponent},
   {
     path: 'resetPassword',
     component: RestPasswordComponent,

@@ -25,6 +25,8 @@ export class EditDescriptionComponent implements OnInit {
   windowWidth!: number;
   user: any;
   isAuthenticated: boolean = false;
+  isOpinionEditable: boolean = true;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -66,6 +68,7 @@ export class EditDescriptionComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isOpinionEditable = false;
     this.errorMessage = '';
     if (this.apartmentData) {
       // handle the form submission here
@@ -102,7 +105,7 @@ export class EditDescriptionComponent implements OnInit {
   }
 
   enableButton() {
-    console.log('click')
+    this.isOpinionEditable = true;
     this.isButtonDisabled = false;
   }
 }

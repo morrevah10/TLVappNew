@@ -1,4 +1,4 @@
-<section class="my-posts">
+<!-- <section class="my-posts">
   <div class="my-posts-container">
 
   
@@ -15,9 +15,7 @@
       </div>
       <div class="card-info">
         <h2> {{ apartment.post_city }} , {{ apartment.post_street }}</h2>
-        <!-- <h2>{{"my_post_card_city_txt"| translate}}: {{ apartment.post_city }}</h2> -->
 
-        <!-- <p>{{"my_post_card_street_txt"| translate}}: {{ apartment.post_street }}</p> -->
         <p>{{"post_details_page_building_txt"| translate}}: {{ apartment.post_building_number }}</p>
         <p>{{"my_post_card_apartment_number_txt"| translate}}: {{ apartment.post_apartment_number }}</p>
         <div class="custom-chip approval" *ngIf="apartment.proof_image_confirmed">
@@ -29,20 +27,9 @@
         </div>
       </div>
     </div>
-    
-
-    
-    <!-- <div class="divider"></div> -->
+  
     
     
-    
-    
-    
-    
-    
-    
-    
-    <!-- <div class="divider"></div> -->
     <div class="card-btn">
       <button
       (click)="viewApartmentDetails(apartment.post_id)"
@@ -72,4 +59,65 @@
 
 </div>
 </section>
-<app-nav-bar *ngIf="this.windowWidth <= 567  && isAuthenticated"></app-nav-bar>
+<app-nav-bar *ngIf="this.windowWidth <= 567  && isAuthenticated"></app-nav-bar> -->
+
+<section class="my-posts-container">
+  <div class="my-posts-contact">
+    <p class="title">הדירות שלי</p>
+
+    <section class="cards-container">
+      <div
+        class="card"
+        *ngFor="let apartment of userPosts.slice(0, postsToShow)"
+        (click)="editApartmentDetails(apartment.post_id)"
+      >
+        <div class="card-img">
+          <img [src]="apartment.apartment_pic_1" alt="Apartment Image" />
+        </div>
+
+        <div class="card-details">
+          <p class="text">{{ apartment.post_city }}</p>
+          <p class="small-text">
+            {{ apartment.post_street }} {{ apartment.post_building_number }} ,דירה
+            {{ apartment.post_apartment_number }}
+          </p>
+        </div>
+
+
+          <div class="card-actions">
+            <div
+              class="custom-chip approval"
+              *ngIf="apartment.proof_image_confirmed"
+            >
+              <img src="../../../assets/icons/confirm.png" alt="">
+            </div>
+
+            <div
+              class="custom-chip pending"
+              *ngIf="!apartment.proof_image_confirmed"
+            >
+              <img src="../../../assets/icons/panding.png" alt="">
+            </div>
+
+            <button
+              (click)="deletePost(apartment.post_id, currentUser.user_id)"
+            >
+            <img src="../../../assets/icons/delete.png" alt="">
+            </button>
+          </div>
+
+      </div>
+    </section>
+    
+    <button
+      *ngIf="postsToShow < userPosts.length"
+      (click)="loadMorePosts()"
+      class="load-more"
+    >
+      Load More
+    </button>
+    <app-nav-bar
+      *ngIf="this.windowWidth <= 567 && isAuthenticated"
+    ></app-nav-bar>
+  </div>
+</section>
