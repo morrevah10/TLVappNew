@@ -49,6 +49,9 @@ export class HomeComponent implements OnInit {
     post_bulding_number: '',
   };
 
+  greetingMessage: string = '';
+  filteredCities: string[] = [];
+
   isDisable = false;
   apartmentControl = new FormControl();
   buildingControl = new FormControl();
@@ -77,7 +80,7 @@ export class HomeComponent implements OnInit {
     private postservice: PostService,
     private dataService: DataService,
     private http: HttpClient
-  ) {}
+  ) {  }
 
   ngOnInit() {
     console.log('HomeComponent initialized');
@@ -92,6 +95,7 @@ export class HomeComponent implements OnInit {
     this.windowWidth = window.innerWidth;
     this.streetFilterControl.disable();
 
+    this.setGreetingMessage();
     // this.filteredCities$ = this.dataService.getCities();
     this.filteredCities$ = combineLatest([
       this.cityFilterControl.valueChanges.pipe(startWith('')),
@@ -204,47 +208,55 @@ export class HomeComponent implements OnInit {
     const searchData = {
       post_city: this.cityFilterControl.value as string,
       post_street: this.streetFilterControl.value as string,
-      post_apartment_number: this.apartmentControl.value,
-      post_building_number: this.buildingControl.value,
+      post_apartment_number:
+        this.apartmentControl.value !== null
+          ? this.apartmentControl.value
+          : 'null',
+      post_building_number:
+        this.buildingControl.value !== null
+          ? this.buildingControl.value
+          : 'null',
     };
 
     this.loading = true;
 
     console.log('1111searchData111', searchData);
-    this.searchService.setSearchData(searchData);
+    // this.searchService.setSearchData(searchData);
 
-    this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
-      (apartmentsResponse) => {
-        // Remove the outer curly braces to make it valid JSON
-        const cleanedResponse = apartmentsResponse.replace(/^\{+|\}+$/g, '');
+    this.router.navigate(['/apartment'], { queryParams: searchData });
 
-        // Parse the cleaned response as JSON
-        let apartmentsObject = null;
-        try {
-          apartmentsObject = JSON.parse(cleanedResponse);
-        } catch (error) {
-          console.error('Error parsing response as JSON:', error);
-        }
+    // this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
+    //   (apartmentsResponse) => {
+    //     // Remove the outer curly braces to make it valid JSON
+    //     const cleanedResponse = apartmentsResponse.replace(/^\{+|\}+$/g, '');
 
-        // console.log(':', apartmentsObject);
+    //     // Parse the cleaned response as JSON
+    //     let apartmentsObject = null;
+    //     try {
+    //       apartmentsObject = JSON.parse(cleanedResponse);
+    //     } catch (error) {
+    //       console.error('Error parsing response as JSON:', error);
+    //     }
 
-        // Extract the arrays directly from the object
-        const extractedArrays = Object.values(apartmentsObject);
-        console.log('Extracted arrays:', extractedArrays);
+    //     // console.log(':', apartmentsObject);
 
-        // Update the apartmentList with the extracted arrays
-        this.apartmentList.apartments = extractedArrays as any[][];
+    //     // Extract the arrays directly from the object
+    //     const extractedArrays = Object.values(apartmentsObject);
+    //     console.log('Extracted arrays:', extractedArrays);
 
-        setTimeout(() => {
-          this.loading = false;
-        }, 5000);
-      },
-      (error) => {
-        console.log('Error fetching apartment posts:', error);
-        this.errorMessage =
-          'An error occurred while fetching apartments :' + error;
-      }
-    );
+    //     // Update the apartmentList with the extracted arrays
+    //     this.apartmentList.apartments = extractedArrays as any[][];
+
+    //     setTimeout(() => {
+    //       this.loading = false;
+    //     }, 5000);
+    //   },
+    //   (error) => {
+    //     console.log('Error fetching apartment posts:', error);
+    //     this.errorMessage =
+    //       'An error occurred while fetching apartments :' + error;
+    //   }
+    // );
   }
 
   // searchApartments() {
@@ -323,4 +335,31 @@ export class HomeComponent implements OnInit {
     // console.log('clicked');
     this.router.navigate(['/personalInfo']);
   }
-}
+
+  setGreetingMessage(): void {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    if (this.logedinUser && this.logedinUser.user_full_name) {
+      const fullNameParts = this.logedinUser.user_full_name.split(' ');
+      const firstName = fullNameParts[0]; 
+
+      if (currentHour >= 5 && currentHour < 12) {
+        this.greetingMessage = `בוקר טוב ${firstName}`;
+      } else if (currentHour >= 12 && currentHour < 17) {
+        this.greetingMessage = `צוהריים טובים ${firstName}`;
+      } else if (currentHour >= 17 && currentHour < 20) {
+        this.greetingMessage = `ערב טוב ${firstName}`;
+      } else {
+        this.greetingMessage = `לילה טוב ${firstName}`;
+      }
+    } else {
+      this.greetingMessage = 'ברוכים הבאים';
+    }
+
+  console.log('this.greetingMessage',this.greetingMessage)
+  }
+
+
+  }
+

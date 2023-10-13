@@ -87,13 +87,214 @@
 
 
 
+<!-- <div>
+  <p>
+    hiiiiiiiiii
+  </p>
+</div> -->
+
+<!-- <div *ngFor="let subArray of filteredApartments,let i = index">
+  <p>Size of Array: {{ subArray.length }}</p>
+  <ng-container *ngIf="subArray.length > 1; else noMessage">
+    <p>Yes</p>
+  </ng-container>
+  <ng-template #noMessage>
+    <p>No</p>
+  </ng-template>
+</div> -->
+<section class="list-container">
+  <div class="list-conant">
+
+    <div class="list-parama">
+      <img src="../../../../assets/icons/location.png" alt="">
+      <p class="color-text">מיקום</p>
+      <p class="small-text">{{this.searchParams}}</p>
+    </div>
+
+<div class="title">
+  <p>תוצאות חיפוש</p>
+</div>
+
+    <div class="card-container"  *ngFor="let subArray of filteredApartments.slice(0, postsToShow) ; let subArrayIndex = index">
+      <div *ngIf="subArray.length === 1" class="card">
+        
+        <div class="card-img">
+          <img [src]="subArray[0].apartment_pic_1" alt="Image" />
+        </div>
+
+        <div class="card-details">
+          <p class="text">{{ subArray[0].post_city }}</p>
+          <p class="small-text">
+            {{ subArray[0].post_street }} {{ subArray[0].post_building_number }} ,דירה
+            {{ subArray[0].post_apartment_number }}
+          </p>
+          <p class="small-text">{{subArray[0].post_rent_start | dateFormat  }}</p>
+        </div>
+        <div class="card-actions">
+
+          <div>
+            <img src="../../../../assets/icons/STAR.png" alt="">
+          </div>
+
+          <div (click)="viewApartmentDetails(subArray[0].post_id)">
+            <img src="../../../../assets/icons/i.png" alt="">
+          </div>
+        </div>
+        <!-- Display content for single item -->
+        <!-- <p>{{ subArray[0].post_city }}</p>
+        <p>{{ subArray[0].post_description }}</p> -->
+        <!-- Add other properties as needed -->
+      </div>
+    
+      <div  *ngIf="subArray.length > 1">
+        <div class="card">
+          <div class="card-img">
+            <img [src]="subArray[getCurrentIndex(subArrayIndex)].apartment_pic_1" alt="Image" />
+          </div>
+  
+          <div class="card-details">
+            <p class="text">{{ subArray[getCurrentIndex(subArrayIndex)].post_city }}</p>
+            <p class="small-text">
+              {{ subArray[getCurrentIndex(subArrayIndex)].post_street }} {{ subArray[getCurrentIndex(subArrayIndex)].post_building_number }} ,דירה
+              {{ subArray[getCurrentIndex(subArrayIndex)].post_apartment_number }}
+            </p>
+            <p class="small-text">{{subArray[getCurrentIndex(subArrayIndex)].post_rent_start | dateFormat  }}</p>
+          </div>
+
+          <div class="card-actions">
+
+            <div>
+              <img src="../../../../assets/icons/STAR.png" alt="">
+            </div>
+
+            <div  (click)="viewApartmentDetails(subArray[getCurrentIndex(subArrayIndex)].post_id)">
+              <img src="../../../../assets/icons/i.png" alt="">
+            </div>
+          </div>
+          <!-- Display content for first item in subArray -->
+          <!-- <p>{{ subArray[getCurrentIndex(subArrayIndex)].post_city }}</p>
+          <p>{{ subArray[getCurrentIndex(subArrayIndex)].post_description }}</p> -->
+          <!-- Add other properties as needed -->
+        </div>
+        <div class="card-btn">
+          <button [class]="getCurrentIndex(subArrayIndex) > 0 ? 'normal-button' : 'hidden-button'" (click)="updateCurrentIndex(subArrayIndex, getCurrentIndex(subArrayIndex) - 1)">הקודם</button>
+          <p class="small-text">לדירה זו יש עוד תגובות</p>
+          <button [class]="getCurrentIndex(subArrayIndex) < subArray.length - 1 ? 'normal-button' : 'hidden-button'" (click)="updateCurrentIndex(subArrayIndex, getCurrentIndex(subArrayIndex) + 1)">הבא</button>
+        </div>
+      </div>
+
+    </div>
+    <button
+    *ngIf="postsToShow < filteredApartments.length"
+    (click)="loadMorePosts()"
+    class="load-more"
+  >
+    Load More
+  </button>
+  </div>
+
+</section>
+
+
+
+<!-- <div class="group-container">
+  <div *ngFor="let group of filteredApartments">
+    <div class="container" *ngIf="isCarousel(group)">
+      <carousel [showIndicators]="true" [isAnimated]="false">
+        <slide *ngFor="let apartment of group">
+          <div class="card-sl card-container">
+              <div class="card-image">
+                <img [src]="apartment.apartment_pic_1" />
+              </div>
+              <div class="card-heading">
+                {{ "search_post_card_city_txt" | translate }} :
+                {{ apartment.post_city }}
+              </div>
+              <div class="card-text">
+                {{ "search_post_card_street_txt" | translate }} :
+                {{ apartment.post_street }}
+              </div>
+              <div class="card-text">
+                {{ "post_details_page_building_txt" | translate }} :
+                {{ apartment.post_building_number }}
+              </div>
+              <div class="card-text">
+                {{ "post_details_page_apartment_number_txt" | translate }} :
+                {{ apartment.post_apartment_number }}
+              </div>
+              <div class="card-text">
+                {{ "search_post_card_rent_price_txt" | translate }} :
+                {{ apartment.post_apartment_price }}
+              </div>
+              <a
+                (click)="viewApartmentDetails(apartment.post_id)"
+                class="card-button"
+              >
+                {{ "search_post_card_more_details_btn" | translate }}
+              </a>
+            </div>
+        </slide>
+      </carousel>
+
+    </div>
+
+    <div class="container" *ngIf="apartments.length === 1">
+      <div *ngFor="let apartment of group">
+        <div class="card-sl card-container">
+          <div class="card-image">
+            <img [src]="apartment.apartment_pic_1" />
+          </div>
+          <div class="card-heading">
+            {{ "search_post_card_city_txt" | translate }} :
+            {{ apartment.post_city }}
+          </div>
+          <div class="card-text">
+            {{ "search_post_card_street_txt" | translate }} :
+            {{ apartment.post_street }}
+          </div>
+          <div class="card-text">
+            {{ "post_details_page_building_txt" | translate }} :
+            {{ apartment.post_building_number }}
+          </div>
+          <div class="card-text">
+            {{ "post_details_page_apartment_number_txt" | translate }} :
+            {{ apartment.post_apartment_number }}
+          </div>
+          <div class="card-text">
+            {{ "search_post_card_rent_price_txt" | translate }} :
+            {{ apartment.post_apartment_price }}
+          </div>
+          <a
+            (click)="viewApartmentDetails(apartment.post_id)"
+            class="card-button"
+          >
+            {{ "search_post_card_more_details_btn" | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
 
 
 
 
 
 
-<div class="group-container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="group-container">
   <div *ngFor="let group of apartments; let i = index">
     <div class="container" *ngIf="group.length > 1">
       <carousel [showIndicators]="true" [isAnimated]="false">
@@ -170,7 +371,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 

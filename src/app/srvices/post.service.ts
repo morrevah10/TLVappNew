@@ -26,7 +26,7 @@ export class PostService {
     return this.http.get<any[]>(url);
   }
   
-  getApartmentFilteredPosts(searchData: { post_city: string; post_street: string; post_apartment_number: string; }): Observable<any[]> {
+  getApartmentFilteredPosts(searchData: { post_city: string; post_street: string; post_apartment_number: string;post_building_number:string }): Observable<any[]> {
     const url = this.APIurl + 'get_post_by_parm/';
     let queryParams = searchData
     console.log('searchData new',searchData)

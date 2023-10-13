@@ -7,11 +7,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService {
-  searchData: any = {
-    city: '',
-    street: '',
-    apartmentNumber: '',
-  };
+  // searchData: any = {
+  //   city: '',
+  //   street: '',
+  //   apartmentNumber: '',
+  // };
 
   constructor(private http: HttpClient, private postservice: PostService) {}
 

@@ -74,7 +74,9 @@ import { NavBarComponent } from './mobile/nav-bar/nav-bar.component';
 import {MatSelectModule} from '@angular/material/select';
 import { OpeningComponent } from './cmps/opening/opening.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { SearchFormComponent } from './pages/search-form/search-form.component';
 
+import { DateFormatPipe } from '../app/helpers/date-format.pipe'; 
 
 
 
@@ -108,6 +110,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     NavBarComponent,
     OpeningComponent,
     ProfileComponent,
+    SearchFormComponent,
+    DateFormatPipe,
   ],
   imports: [
     BrowserModule,
