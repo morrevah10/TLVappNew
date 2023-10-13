@@ -1,0 +1,29 @@
+// .modal-container{
+//     background-color: aqua;
+// }
+
+// .text{
+//     color: coral;
+// }
+
+.modal-container{
+    z-index: 5;
+    display: grid;
+    position: fixed;
+    min-width: 250px;
+    max-height: 100dvh;
+    background-color: aqua;
+
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%,5%);
+    padding: 20px;
+    grid-gap: 10px;
+    transition:display .3s ;
+
+}
+
+
+&.is-hidden{
+    display: none;
+}

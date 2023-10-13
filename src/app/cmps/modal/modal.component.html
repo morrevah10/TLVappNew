@@ -1,0 +1,24 @@
+<div class="modal-container">
+    <div class="modal-contant">
+        hiiiiiiiiiiii
+        <div *ngIf="this.needAprove">
+            <div *ngIf="step==1">
+                <div class="text">
+                    <p>{{aprovelText}}</p>
+                </div>
+                <div class="action">
+                    <button (click)="onclick(true)">yes</button>
+                    <button (click)="onclick(false)">no</button>
+                </div>
+            </div>
+            <div *ngIf="step==2">
+                    <img src="{{img}}" alt="">
+                    <p>{{text}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay">
+    
+</div>

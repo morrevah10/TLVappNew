@@ -7,6 +7,7 @@ import { ImgUploadModalComponent } from '../../cmps/img-upload-modal/img-upload-
 import { PostService } from 'src/app/srvices/post.service';
 import { PopupComponent } from 'src/app/cmps/popup/popup.component';
 import { Router } from '@angular/router';
+// import {tt} from '../../../assets/img/success.png'
 
 
 
@@ -25,6 +26,12 @@ export class PersonalInfoComponent implements OnInit {
   profilePicture: string | ArrayBuffer | null = null;
   windowWidth!: number;
   isAuthenticated: boolean = false;
+
+
+  needApproval: boolean = false;
+  aprovelText='';
+  modalImg=''
+  modalText=''
 
   constructor(
     private formBuilder: FormBuilder,
@@ -164,8 +171,13 @@ export class PersonalInfoComponent implements OnInit {
 
 logout(){
   console.log('logedout!!!');
-  this.userService.clearUser()
-  this.router.navigate(['/login']);}
+  this.needApproval=true
+  this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק ?'
+  this.modalImg='../../../assets/img/success.png'
+  this.modalText='התנתקת בהצלחה'
+  // this.userService.clearUser()
+  // this.router.navigate(['/login']);
+}
 
   
 }

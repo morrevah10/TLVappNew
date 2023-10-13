@@ -247,7 +247,7 @@
         </div>
 
         <div class="nav-item">
-          <p class="text">התנתק</p>
+          <p (click)="logout()"class="text">התנתק</p>
           <img src="../../../assets/icons/next-profile.png" alt="">
         </div>
 
@@ -320,5 +320,7 @@
         >
       </button>
     </div> -->
+
+    <app-modal [needAprove]="this.needApproval" [aprovelText]="this.aprovelText" [img]="this.modalImg" [text]="this.modalText"></app-modal>
   </div>
 </section>

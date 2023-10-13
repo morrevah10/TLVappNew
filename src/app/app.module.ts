@@ -77,7 +77,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { SearchFormComponent } from './pages/search-form/search-form.component';
 
 import { DateFormatPipe } from '../app/helpers/date-format.pipe';
-import { LoadindComponent } from './cmps/loadind/loadind.component'; 
+import { LoadindComponent } from './cmps/loadind/loadind.component';
+import { ModalComponent } from './cmps/modal/modal.component'; 
 
 
 
@@ -114,6 +115,7 @@ import { LoadindComponent } from './cmps/loadind/loadind.component';
     SearchFormComponent,
     DateFormatPipe,
     LoadindComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
