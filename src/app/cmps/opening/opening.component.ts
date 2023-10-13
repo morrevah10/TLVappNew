@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-// import {img} from '../../../assets/img/'
 
 @Component({
   selector: 'app-opening',

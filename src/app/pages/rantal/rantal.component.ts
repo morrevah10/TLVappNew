@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef,ElementRef, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -19,7 +19,7 @@ import { DataService } from 'src/app/srvices/data.service';
 })
 export class RantalComponent implements OnInit {
   // apartmentForm
-
+  @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
   currentStep: number = 0;
   mainForm!: FormGroup;
   formData: any;
@@ -273,21 +273,21 @@ export class RantalComponent implements OnInit {
     return new File([blob], 'image.png'); // You may need to adjust the file name and type
   }
 
-  nextStep(currentStepName: string) {
-    console.log('befor', this.currentStep);
-    if (this.currentStep < 3) {
-      this.currentStep++;
-    }
-    console.log('after', this.currentStep);
-  }
+  // nextStep(currentStepName: string) {
+  //   console.log('befor', this.currentStep);
+  //   if (this.currentStep < 3) {
+  //     this.currentStep++;
+  //   }
+  //   console.log('after', this.currentStep);
+  // }
 
-  prevStep() {
-    console.log('before', this.currentStep);
-    if (this.currentStep > 0) {
-      this.currentStep--;
-    }
-    console.log('after', this.currentStep);
-  }
+  // prevStep() {
+  //   console.log('before', this.currentStep);
+  //   if (this.currentStep > 0) {
+  //     this.currentStep--;
+  //   }
+  //   console.log('after', this.currentStep);
+  // }
 
   // prevStep(step: string) {
   //   const currentStepName = this.getStepName(this.currentStep);
@@ -302,7 +302,17 @@ export class RantalComponent implements OnInit {
   //     this.currentStep--;
   //   }
   //   console.log('after', this.currentStep);
+  nextStep() {
+    if (this.currentStep < 3) {
+      this.currentStep++;
+    }
+  }
 
+  prevStep() {
+    if (this.currentStep > 0) {
+      this.currentStep--;
+    }
+  }
   // }
 
   getStepName(index: number) {
@@ -346,6 +356,13 @@ export class RantalComponent implements OnInit {
   //     this.currentStep==step
   //   console.log('after',this.currentStep)
   // }
+
+  triggerFileInput() {
+    if (this.fileInput) {
+      this.fileInput.nativeElement.click(); // Trigger click event on the file input element
+    }
+  }
+
 }
 // this.apartmentForm = this.formBuilder.group({
 //   post_city: [''],

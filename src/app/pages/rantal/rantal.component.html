@@ -175,13 +175,13 @@
 
 <!-- /////// -->
 
-<section class="rantal-container">
-  <h3>Rental Form :</h3>
+<!-- <section class="rantal-container">
+  <h3>Rental Form :</h3> -->
 
-  <!-- <div *ngIf="loading" class="loading-spinner">
+<!-- <div *ngIf="loading" class="loading-spinner">
     <img src="../../../assets/img/Animation.gif" alt="">
   </div> -->
-  <mat-horizontal-stepper [selectedIndex]="currentStep">
+<!-- <mat-horizontal-stepper [selectedIndex]="currentStep">
     <mat-step label="step1">
       <div *ngIf="currentStep === 0">
         <form [formGroup]="mainForm">
@@ -317,9 +317,9 @@
         </button>
         <button mat-button (click)="prevStep()">Back</button>
       </div>
-    </mat-step>
+    </mat-step> -->
 
-    <!-- <mat-step label="step3">
+<!-- <mat-step label="step3">
       <div *ngIf="currentStep === 2">
         <form [formGroup]="mainForm">
           <div formGroupName="stepThree">
@@ -365,7 +365,7 @@
       </div>
     </mat-step> -->
 
-    <mat-step label="step3">
+<!-- <mat-step label="step3">
       <div *ngIf="currentStep === 2">
         <form [formGroup]="mainForm">
           <div formGroupName="stepThree">
@@ -505,13 +505,13 @@
               class="form-control"
             />
           </div>
-        </form>
-        <!-- <div class="btn-container">
+        </form> -->
+<!-- <div class="btn-container">
           <button type="submit" class="btn">
             {{ "add_post_page_add_post_btn" | translate }}
           </button>
         </div> -->
-        <button
+<!-- <button
           class="btn"
           mat-button
           [disabled]="!this.mainForm.get('stepFour')!.valid"
@@ -523,6 +523,432 @@
       </div>
     </mat-step>
   </mat-horizontal-stepper>
-</section>
+</section> -->
 
 <!-- <pre>{{ mainForm.value | json }}</pre> -->
+
+<section class="rantal-container">
+  <div class="rental-contant">
+    <div class="stepper">
+      <div class="circle" [ngClass]="{ active: currentStep >= 0 }"></div>
+      <div class="line" [ngClass]="{ active: currentStep >= 1 }"></div>
+      <div class="circle" [ngClass]="{ active: currentStep >= 1 }"></div>
+      <div class="line" [ngClass]="{ active: currentStep >= 2 }"></div>
+      <div class="circle" [ngClass]="{ active: currentStep >= 2 }"></div>
+      <div class="line" [ngClass]="{ active: currentStep >= 3 }"></div>
+      <div class="circle" [ngClass]="{ active: currentStep >= 3 }"></div>
+    </div>
+
+    <div class="step-container">
+      <div *ngIf="currentStep === 0">
+        <form [formGroup]="mainForm">
+          <div class="step" formGroupName="stepOne">
+            <label for="post_city">*עיר</label>
+            <input
+              type="text"
+              id="post_city"
+              formControlName="post_city"
+              class="form-control"
+              [matAutocomplete]="cityAuto"
+            />
+            <mat-autocomplete #cityAuto="matAutocomplete">
+              <mat-option
+                *ngFor="let city of cityAutocomplete$ | async"
+                [value]="city"
+              >
+                {{ city }}
+              </mat-option>
+            </mat-autocomplete>
+
+            <label for="post_street">*רחוב</label>
+            <input
+              type="text"
+              id="post_street"
+              formControlName="post_street"
+              class="form-control"
+              [matAutocomplete]="streetAuto"
+            />
+            <mat-autocomplete #streetAuto="matAutocomplete">
+              <mat-option
+                *ngFor="let street of streetAutocomplete$ | async"
+                [value]="street"
+              >
+                {{ street }}
+              </mat-option>
+            </mat-autocomplete>
+
+            <label for="post_building_number">*מספר ביניין</label>
+            <input
+              type="text"
+              id="post_building_number"
+              formControlName="post_building_number"
+              class="form-control"
+            />
+
+            <label for="post_apartment_number">*מספר דירה</label>
+            <input
+              type="text"
+              id="post_apartment_number"
+              formControlName="post_apartment_number"
+              class="form-control"
+            />
+            <label for="post_apartment_price">*שכר דירה</label>
+            <input
+              type="text"
+              id="post_apartment_price"
+              formControlName="post_apartment_price"
+              class="form-control"
+            />
+          </div>
+        </form>
+        <div class="step-btn-one">
+          <button
+            (click)="nextStep()"
+            [disabled]="!this.mainForm.get('stepOne')!.valid"
+            [ngClass]="{
+              'disabled-btn1': !mainForm.get('stepOne')!.valid,
+              'btn-large': mainForm.get('stepOne')!.valid
+            }"
+          >
+            עבור לשלב הבא
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 1">
+        <form [formGroup]="mainForm">
+          <div class="step" formGroupName="stepTwo">
+            <div>
+              <label for="post_rent_start">*תאריך כניסה</label>
+              <app-datepicker
+                [selectedDate]="selectedStartDate"
+                (dateSelected)="onDateSelected($event, 'post_rent_start')"
+              ></app-datepicker>
+            </div>
+
+            <div>
+              <label for="post_rent_end">*תאריך יציאה</label>
+              <app-datepicker
+                [selectedDate]="selectedEndDate"
+                (dateSelected)="onDateSelected($event, 'post_rent_end')"
+              ></app-datepicker>
+            </div>
+
+            <label for="proof_image"
+              >*חוזה שיכורות\חשבון חשמל\חשבון ארנונה</label
+            >
+            <input
+              type="file"
+              (change)="onImageSelected($event, 'proof_image', 'stepTwo')"
+              class="form-control"
+            />
+
+            <label for="driving_license">*תעודה מזהה</label>
+            <input
+              type="file"
+              (change)="onImageSelected($event, 'driving_license', 'stepTwo')"
+              class="form-control"
+            />
+          </div>
+        </form>
+        <div class="step-btn">
+          <button
+            (click)="nextStep()"
+            [disabled]="!this.mainForm.get('stepTwo')!.valid"
+            [ngClass]="{
+              'disabled-btn': !mainForm.get('stepTwo')!.valid,
+              'btn-next': mainForm.get('stepTwo')!.valid
+            }"
+          >
+            שלב הבא
+          </button>
+          <button class="btn-prev" (click)="prevStep()">
+            <img src="../../../assets/icons/prev.png" alt="" />
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 2">
+        <form [formGroup]="mainForm">
+          <div formGroupName="stepThree">
+            <div class="grid-container">
+              <div class="grid-item">
+                <label for="apartment_pic_1"></label>
+                <img
+                  *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value"
+                  [src]="mainForm.get('stepThree.apartment_pic_1')!.value"
+                  alt="Apartment Image 1"
+                />
+                <input
+                  type="file"
+                  #apartmentPic1Input
+                  (change)="
+                    onImageSelectedStep3(
+                      $event,
+                      'apartment_pic_1',
+                      'stepThree',
+                      apartmentPic1Input
+                    )
+                  "
+                  class="file-input"
+                  id="file-input"
+                />
+                <label class="custom-upload-button" for="file-input"
+                  >Custom Upload Button</label
+                >
+                <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
+                <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
+                  selectedFileName("apartment_pic_1", "stepThree")
+                }}</span> -->
+                <button
+                  class="remove-btn"
+                  (click)="deleteImage('apartment_pic_1', 'stepThree')"
+                >
+                  Remove
+                </button>
+              </div>
+
+              <div class="grid-item">
+                <label for="apartment_pic_2"></label>
+                <img
+                  *ngIf="mainForm.get('stepThree.apartment_pic_2')!.value"
+                  [src]="mainForm.get('stepThree.apartment_pic_2')!.value"
+                  alt="Apartment Image 2"
+                />
+                <input
+                  type="file"
+                  #apartmentPic2Input
+                  (change)="
+                    onImageSelectedStep3(
+                      $event,
+                      'apartment_pic_2',
+                      'stepThree',
+                      apartmentPic2Input
+                    )
+                  "
+                  class="file-input"
+                  id="file-input2"
+                />
+                <label class="custom-upload-button" for="file-input2"
+                  >Custom Upload Button</label
+                >
+                <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
+                <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
+                  selectedFileName("apartment_pic_1", "stepThree")
+                }}</span> -->
+                <button
+                  class="remove-btn"
+                  (click)="deleteImage('apartment_pic_2', 'stepThree')"
+                >
+                  Remove
+                </button>
+              </div>
+
+              <!-- <div class="grid-item">
+                <label for="apartment_pic_2"></label>
+                <img
+                  *ngIf="mainForm.get('stepThree.apartment_pic_2')!.value"
+                  [src]="mainForm.get('stepThree.apartment_pic_2')!.value"
+                  alt="Apartment Image 2"
+                />
+                <input
+                  type="file"
+                  #apartmentPic2Input
+                  (change)="
+                  onImageSelectedStep3($event, 'apartment_pic_2', 'stepThree',apartmentPic2Input)
+                  "
+                />
+                <span *ngIf="mainForm.get('stepThree.apartment_pic_2')!.value">{{
+                  selectedFileName("apartment_pic_2", "stepThree")
+                }}</span>
+                <button
+                  mat-button
+                  (click)="deleteImage('apartment_pic_2', 'stepThree')"
+                >
+                  Remove
+                </button>
+              </div> -->
+
+              <div class="grid-item">
+                <label for="apartment_pic_3"></label>
+                <img
+                  *ngIf="mainForm.get('stepThree.apartment_pic_3')!.value"
+                  [src]="mainForm.get('stepThree.apartment_pic_3')!.value"
+                  alt="Apartment Image 3"
+                />
+                <input
+                  type="file"
+                  #apartmentPic3Input
+                  (change)="
+                    onImageSelectedStep3(
+                      $event,
+                      'apartment_pic_3',
+                      'stepThree',
+                      apartmentPic3Input
+                    )
+                  "
+                  class="file-input"
+                  id="file-input3"
+                />
+                <label class="custom-upload-button" for="file-input3"
+                  >Custom Upload Button</label
+                >
+                <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
+                <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
+                  selectedFileName("apartment_pic_1", "stepThree")
+                }}</span> -->
+                <button
+                  class="remove-btn"
+                  (click)="deleteImage('apartment_pic_3', 'stepThree')"
+                >
+                  Remove
+                </button>
+              </div>
+
+              <!-- <div class="grid-item">
+              <label for="apartment_pic_3"
+                >תמונה 3</label
+              >
+              <img
+                *ngIf="mainForm.get('stepThree.apartment_pic_3')!.value"
+                [src]="mainForm.get('stepThree.apartment_pic_3')!.value"
+                alt="Apartment Image 3"
+              />
+              <input
+                type="file"
+                #apartmentPic3Input
+                (change)="
+                onImageSelectedStep3($event, 'apartment_pic_3', 'stepThree',apartmentPic2Input)
+                "
+                class="form-control"
+              />
+              <span *ngIf="mainForm.get('stepThree.apartment_pic_3')!.value">{{
+                selectedFileName("apartment_pic_3", "stepThree")
+              }}</span>
+              <button
+                mat-button
+                (click)="deleteImage('apartment_pic_3', 'stepThree')"
+              >
+                Remove
+              </button>
+            </div> -->
+
+              <div class="grid-item">
+                <label for="apartment_pic_4"></label>
+                <img
+                  *ngIf="mainForm.get('stepThree.apartment_pic_4')!.value"
+                  [src]="mainForm.get('stepThree.apartment_pic_4')!.value"
+                  alt="Apartment Image 4"
+                />
+                <input
+                  type="file"
+                  #apartmentPic4Input
+                  (change)="
+                    onImageSelectedStep3(
+                      $event,
+                      'apartment_pic_4',
+                      'stepThree',
+                      apartmentPic4Input
+                    )
+                  "
+                  class="file-input"
+                  id="file-input4"
+                />
+                <label class="custom-upload-button" for="file-input4"
+                  >Custom Upload Button</label
+                >
+                <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
+                <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
+                selectedFileName("apartment_pic_1", "stepThree")
+              }}</span> -->
+                <button
+                  class="remove-btn"
+                  (click)="deleteImage('apartment_pic_4', 'stepThree')"
+                >
+                  Remove
+                </button>
+              </div>
+
+              <!-- <div class="grid-item">
+            <label for="apartment_pic_4"
+              >תמונה 4</label
+            >
+            <img
+              *ngIf="mainForm.get('stepThree.apartment_pic_4')!.value"
+              [src]="mainForm.get('stepThree.apartment_pic_4')!.value"
+              alt="Apartment Image 4"
+            />
+            <input
+              type="file"
+              #apartmentPic4Input
+              (change)="
+              onImageSelectedStep3($event, 'apartment_pic_4', 'stepThree',apartmentPic2Input)
+              "
+              class="form-control"
+            />
+            <span *ngIf="mainForm.get('stepThree.apartment_pic_4')!.value">{{
+              selectedFileName("apartment_pic_4", "stepThree")
+            }}</span>
+            <button
+              mat-button
+              (click)="deleteImage('apartment_pic_4', 'stepThree')"
+            >
+              Remove
+            </button>
+          </div> -->
+            </div>
+          </div>
+        </form>
+        <div class="step-btn">
+          <button class="btn-next" (click)="nextStep()">שלב הבא</button>
+          <button class="btn-prev" (click)="prevStep()">
+            <img src="../../../assets/icons/prev.png" alt="" />
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 3">
+        <form [formGroup]="mainForm">
+          <div formGroupName="stepFour">
+            <label for="post_description">ביקורת</label>
+            <!-- <input
+              type="text"
+              id="post_description"
+              formControlName="post_description"
+              class="share-input"
+            /> -->
+            <textarea
+              id="post_description"
+              formControlName="post_description"
+              class="share-input"
+            ></textarea>
+          </div>
+        </form>
+        <div class="step-btn">
+          <button
+            class="btn-next share"
+            (click)="onSubmit()"
+            [ngClass]="{
+              'disabled-btn-share': !mainForm.get('stepFour')!.valid,
+              'btn-next share': mainForm.get('stepFour')!.valid
+            }"
+          >
+            שתף את החויה שלך
+          </button>
+          <button class="btn-prev" (click)="prevStep()">
+            <img src="../../../assets/icons/prev.png" alt="" />
+          </button>
+        </div>
+        <!-- <button
+          class="btn"
+          mat-button
+          [disabled]="!this.mainForm.get('stepFour')!.valid"
+          (click)="onSubmit()"
+        >
+          {{ "add_post_page_add_post_btn" | translate }}
+        </button>
+        <button mat-button (click)="prevStep()">Back</button> -->
+      </div>
+    </div>
+  </div>
+</section>

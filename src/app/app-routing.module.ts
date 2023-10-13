@@ -20,10 +20,11 @@ import { AccessDeniedComponent } from './cmps/access-denied/access-denied.compon
 import { AuthGuard } from './helpers/authGuard';
 import { OpeningComponent } from './cmps/opening/opening.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LoadindComponent } from './cmps/loadind/loadind.component';
 
 const routes: Routes = [
-  // { path: '', component: LandPageComponent },
-  { path: '', component: OpeningComponent },
+  { path: '', component: LoadindComponent },
+  { path: 'welcom', component: OpeningComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
