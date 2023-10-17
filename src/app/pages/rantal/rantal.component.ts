@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef,ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -41,9 +47,15 @@ export class RantalComponent implements OnInit {
   cityAutocomplete$!: Observable<string[]>;
   streetAutocomplete$!: Observable<string[]>;
 
-
   selectedFileNames: { [key: string]: string } = {};
 
+  needApproval: boolean = false;
+  aprovelText = '';
+  modalImg = '';
+  modalText = '';
+  isHidden: boolean = false;
+  isApproved = false;
+  serverResponse = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -151,19 +163,27 @@ export class RantalComponent implements OnInit {
     });
     console.log('this.formData after user', this.formData);
 
+    this.isHidden = true;
+    this.serverResponse = true;
+
     this.postService.addPost(this.formData).subscribe(
       (response) => {
         console.log('Form submitted successfully:', response);
-        this.toastr.success('Post add successfully!!');
+        // this.toastr.success('Post add successfully!!');
+        this.serverResponse = false;
+        this.modalImg = '../../../assets/img/success.png';
+        this.modalText = 'חוות הדעת עודכנה בהצלחה';
+        // setTimeout(() => {
+        //   this.loading = false;
+        // }, 5000);
 
-        setTimeout(() => {
-          this.loading = false;
-        }, 5000);
-
-        this.router.navigate(['/home']);
+        // this.router.navigate(['/home']);
       },
       (error) => {
         this.loading = false;
+        this.serverResponse = false;
+        this.modalImg = '../../../assets/img/eroor.png';
+        this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
         console.error('Error submitting form:', error);
       }
     );
@@ -208,7 +228,12 @@ export class RantalComponent implements OnInit {
     }
   }
 
-  onImageSelectedStep3(event: any, controlName: string, step: string, inputElement: HTMLInputElement) {
+  onImageSelectedStep3(
+    event: any,
+    controlName: string,
+    step: string,
+    inputElement: HTMLInputElement
+  ) {
     if (event.target && event.target.files) {
       const files = event.target.files;
       if (files.length > 0) {
@@ -222,7 +247,7 @@ export class RantalComponent implements OnInit {
             this.selectedFileNames[key] = files[0].name;
           }
         };
-  
+
         reader.readAsDataURL(files[0]);
       }
     }
@@ -258,9 +283,6 @@ export class RantalComponent implements OnInit {
     this.mainForm.get(`${step}.${controlName}`)?.setValue(null);
   }
 
-
- 
-  
   // Helper function to convert data URI to File object
   dataURItoFile(dataURI: string): File {
     const byteString = atob(dataURI.split(',')[1]);
@@ -363,6 +385,27 @@ export class RantalComponent implements OnInit {
     }
   }
 
+  onModalClosed(isHidden: boolean): void {
+    console.log(this.isApproved);
+    this.isHidden = isHidden;
+    this.aprovelText = '';
+    this.modalImg = '';
+    this.modalText = '';
+    if (!this.isApproved) {
+      // this.userService.clearUser();
+      // this.router.navigate(['/login']);
+       setTimeout(() => {
+          this.loading = false;
+        }, 1500);
+
+      this.router.navigate(['/home']);
+    }
+  }
+
+  onAprovel(isApproved: boolean): void {
+    this.isApproved = isApproved;
+    console.log(this.isApproved);
+  }
 }
 // this.apartmentForm = this.formBuilder.group({
 //   post_city: [''],

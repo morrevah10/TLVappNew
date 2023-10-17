@@ -22,7 +22,13 @@ export class ChangPasswordComponent implements OnInit{
   windowWidth!: number;
   isAuthenticated: boolean =false;
 
-
+  needApproval: boolean = false;
+  aprovelText = '';
+  modalImg = '';
+  modalText = '';
+  isHidden: boolean = false;
+  isApproved = false;
+  serverResponse = false;
   
     constructor(
       private formBuilder: FormBuilder,
@@ -42,10 +48,10 @@ export class ChangPasswordComponent implements OnInit{
         this.isAuthenticated = true;
 
         this.changePassForm = this.formBuilder.group({
-          old_password:[''],
-          new_password: [''],
-          new_password_confirm: [''],
-          user_id : [this.user.user_id]
+          old_password:['', Validators.required],
+          new_password: ['', Validators.required],
+          new_password_confirm: ['', Validators.required],
+          user_id : [this.user.user_id, Validators.required]
         });
       });
     }
@@ -55,24 +61,31 @@ export class ChangPasswordComponent implements OnInit{
       if (this.changePassForm.invalid) {
         return;
       }
+      this.isHidden = true;
+      this.serverResponse = true;
       this.loading=true;
       this.userService.updateUserPassword(this.changePassForm.value).subscribe(
         (response) => {
           console.log('password successfully update:', response);
+          this.serverResponse = false;
+          this.modalImg = '../../../assets/img/success.png';
+          this.modalText = 'הסיסמא עודכנה בהצלחה';
 
-
-          const dialogRef = this.dialog.open(PopupComponent, {
-            data: {
-              message: 'User successfully update!'
-            }
-          });
-          dialogRef.afterClosed()
+          // const dialogRef = this.dialog.open(PopupComponent, {
+          //   data: {
+          //     message: 'User successfully update!'
+          //   }
+          // });
+          // dialogRef.afterClosed()
 
         },
         (error) => {
           console.error('Error update password:', error);
-          this.errorMessage = 'Error updating post: ' + error.error;
+          // this.errorMessage = 'Error updating post: ' + error.error;
           this.loading=false;
+          this.serverResponse = false;
+          this.modalImg = '../../../assets/img/eroor.png';
+          this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
 
         }
         );
@@ -88,6 +101,23 @@ export class ChangPasswordComponent implements OnInit{
       }
       togglePasswordConfirmationVisibility(){
         this.showPasswordConfirmation = !this.showPasswordConfirmation;
+      }
+
+      onModalClosed(isHidden: boolean): void {
+        console.log(this.isApproved);
+        this.isHidden = isHidden;
+        this.aprovelText = '';
+        this.modalImg = '';
+        this.modalText = '';
+        if (this.isApproved) {
+          // this.userService.clearUser();
+          // this.router.navigate(['/login']);
+        }
+      }
+    
+      onAprovel(isApproved: boolean): void {
+        this.isApproved = isApproved;
+        console.log(this.isApproved);
       }
   
      

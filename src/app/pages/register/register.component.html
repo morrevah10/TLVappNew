@@ -604,8 +604,7 @@
       </form>
     </div>
     <div class="buttons">
-      <button [disabled]="loading" class="btn-large">
-        <span *ngIf="loading" class="btn-large"></span>
+      <button class="btn-large" (click)="onFormSubmit()" >
         הצטרף לקהילה
       </button>
 

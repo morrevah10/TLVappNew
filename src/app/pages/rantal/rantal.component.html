@@ -694,7 +694,7 @@
                   id="file-input"
                 />
                 <label class="custom-upload-button" for="file-input"
-                  >Custom Upload Button</label
+                  > Upload </label
                 >
                 <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
                 <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
@@ -730,7 +730,7 @@
                   id="file-input2"
                 />
                 <label class="custom-upload-button" for="file-input2"
-                  >Custom Upload Button</label
+                  > Upload </label
                 >
                 <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
                 <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
@@ -791,7 +791,7 @@
                   id="file-input3"
                 />
                 <label class="custom-upload-button" for="file-input3"
-                  >Custom Upload Button</label
+                  > Upload </label
                 >
                 <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
                 <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
@@ -855,7 +855,7 @@
                   id="file-input4"
                 />
                 <label class="custom-upload-button" for="file-input4"
-                  >Custom Upload Button</label
+                  > Upload </label
                 >
                 <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
                 <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
@@ -951,4 +951,17 @@
       </div>
     </div>
   </div>
+
+  <app-modal
+  [needAprove]="this.needApproval"
+  [aprovelText]="this.aprovelText"
+  [img]="this.modalImg"
+  [text]="this.modalText"
+  [serverResponse]="this.serverResponse"
+  [(isHid)]="isHidden"
+  (isHidChange)="onModalClosed($event)"
+  (isApproved)="onAprovel($event)"
+></app-modal>
+
+
 </section>

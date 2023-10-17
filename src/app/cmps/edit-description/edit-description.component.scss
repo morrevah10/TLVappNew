@@ -184,3 +184,15 @@ input {
   border-radius: 10px;
   background-color: $color3;
 }
+
+
+.btn-large-dis {
+  height: 3em;
+  width: 15em;
+  color: white;
+  background-color: $color4;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25em;
+  cursor: pointer;
+}

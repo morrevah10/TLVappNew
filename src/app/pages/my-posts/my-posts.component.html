@@ -69,13 +69,13 @@
       <div
         class="card"
         *ngFor="let apartment of userPosts.slice(0, postsToShow)"
-        (click)="editApartmentDetails(apartment.post_id)"
+        
       >
-        <div class="card-img">
+        <div (click)="editApartmentDetails(apartment.post_id)" class="card-img">
           <img [src]="apartment.apartment_pic_1" alt="Apartment Image" />
         </div>
 
-        <div class="card-details">
+        <div (click)="editApartmentDetails(apartment.post_id)" class="card-details">
           <p class="text">{{ apartment.post_city }}</p>
           <p class="small-text">
             {{ apartment.post_street }} {{ apartment.post_building_number }} ,דירה
@@ -120,4 +120,16 @@
       *ngIf="this.windowWidth <= 567 && isAuthenticated"
     ></app-nav-bar>
   </div>
+
+  <app-modal
+  [needAprove]="this.needApproval"
+  [aprovelText]="this.aprovelText"
+  [img]="this.modalImg"
+  [text]="this.modalText"
+  [serverResponse]="this.serverResponse"
+  [(isHid)]="isHidden"
+  (isHidChange)="onModalClosed($event)"
+  (isApproved)="onAprovel($event)"
+></app-modal>
+
 </section>

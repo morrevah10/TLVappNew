@@ -108,7 +108,10 @@
       </div>
     </div>
     <div class="edit-btn">
-      <button type="submit" class="btn-large" [disabled]="isButtonDisabled">
+      <button (click)="onSubmit()"  type="submit" class="btn-large" [disabled]="isButtonDisabled" [ngClass]="{
+        'btn-large-dis': isButtonDisabled,
+        'btn-large ': !isButtonDisabled,
+      }">
         עדכן חוות דעת
       </button>
     </div>
@@ -118,4 +121,16 @@
     </div>
   </div>
 </section>
+
+<app-modal
+  [needAprove]="this.needApproval"
+  [aprovelText]="this.aprovelText"
+  [img]="this.modalImg"
+  [text]="this.modalText"
+  [serverResponse]="this.serverResponse"
+  [(isHid)]="isHidden"
+  (isHidChange)="onModalClosed($event)"
+  (isApproved)="onAprovel($event)"
+></app-modal>
+
 <app-nav-bar *ngIf="this.windowWidth <= 567"></app-nav-bar>

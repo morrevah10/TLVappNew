@@ -46,10 +46,13 @@ export class RegisterComponent implements OnInit {
   get fval() {
     return this.registerForm.controls;
   }
+
+
   onFormSubmit() {
+    console.log('click')
     this.submitted = true;
     if (this.registerForm.invalid) {
-      return;
+      console.log('this.registerForm',this.registerForm);
     }
     this.loading = true;
 

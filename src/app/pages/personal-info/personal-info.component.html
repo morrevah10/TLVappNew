@@ -187,77 +187,71 @@
 </section>
 <app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar> -->
 
-
 <section class="personal-container">
   <div class="personal-content">
+    <div class="profile-img">
+      <img
+        *ngIf="userImg.user_profile_pic; else defaultImage"
+        [src]="userImg.user_profile_pic"
+        alt="User Profile Picture"
+      />
+      <p>{{ this.user.user_full_name }}</p>
+    </div>
 
-      <div class="profile-img">
-        <img
-          *ngIf="userImg.user_profile_pic; else defaultImage"
-          [src]="userImg.user_profile_pic"
-          alt="User Profile Picture"
-        />
-        <p>{{this.user.user_full_name}}</p>
-      </div>
-
-      <!-- <div class="personal-img-btn">
+    <!-- <div class="personal-img-btn">
         <button type="button" class="btn" (click)="openImageUploadModal()">
           {{ "personal_info_page_change_profile_image_btn" | translate }}
           <img src="../../../assets/icons/img.png" alt="" />
         </button>
       </div> -->
 
-
-      <!-- <div class="logout-btn">
+    <!-- <div class="logout-btn">
         <button class="btn" (click)="logout()">
           {{ "personal_info_page_logout_btn" | translate }}
         </button>
       </div> -->
-    
 
-      <ng-template #defaultImage>
-        <img src="../../../assets/img/user.png" alt="User Profile Picture" />
-      </ng-template>
-      
-      
-      <div class="nav-item" routerLink="/profile">
-        <p class="text">עריכת פרופיל</p>
-        <img src="../../../assets/icons/next-profile.png" alt="">
+    <ng-template #defaultImage>
+      <img src="../../../assets/img/user.png" alt="User Profile Picture" />
+    </ng-template>
+
+    <div class="nav-item" routerLink="/profile">
+      <p class="text">עריכת פרופיל</p>
+      <img src="../../../assets/icons/next-profile.png" alt="" />
+    </div>
+
+    <div class="nav-container">
+      <div class="nav-item" routerLink="/myposts">
+        <p class="text">הדירות שלי</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
       </div>
-      
-      <div class="nav-container">
-        <div class="nav-item" routerLink="/myposts">
-          <p class="text">הדירות שלי</p>
-          <img src="../../../assets/icons/next-profile.png" alt="">
-        </div>
 
-        <div class="nav-item" routerLink="/terms">
-          <p class="text">תנאי שימוש</p>
-          <img src="../../../assets/icons/next-profile.png" alt="">
-        </div>
-
-        <div class="nav-item" routerLink="/personalInfo/changPassword">
-          <p class="text">שינוי סיסמא</p>
-          <img src="../../../assets/icons/next-profile.png" alt="">
-        </div>
-
-        <div class="nav-item" routerLink="/about">
-          <p class="text">אודות</p>
-          <img src="../../../assets/icons/next-profile.png" alt="">
-        </div>
-
-        <div class="nav-item">
-          <p (click)="logout()"class="text">התנתק</p>
-          <img src="../../../assets/icons/next-profile.png" alt="">
-        </div>
-
-        <div class="nav-item">
-          <p class="text">מחיקת חשבון</p>
-          <img src="../../../assets/icons/next-profile.png" alt="">
-        </div>
-
+      <div class="nav-item" routerLink="/terms">
+        <p class="text">תנאי שימוש</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
       </div>
-      <!-- <form [formGroup]="PersonalForm" (ngSubmit)="onSubmit()">
+
+      <div class="nav-item" routerLink="/personalInfo/changPassword">
+        <p class="text">שינוי סיסמא</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+
+      <div class="nav-item" routerLink="/about">
+        <p class="text">אודות</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+
+      <div class="nav-item">
+        <p (click)="logout()" class="text">התנתק</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+
+      <div class="nav-item">
+        <p (click)="deleteUser(user.user_id)" class="text">מחיקת חשבון</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+    </div>
+    <!-- <form [formGroup]="PersonalForm" (ngSubmit)="onSubmit()">
 
         <div>
           <label for="user_full_name"
@@ -303,8 +297,6 @@
         </div>
       </form> -->
 
-
-
     <!-- <div class="personal-btn">
       <button type="submit" class="btn" [disabled]="PersonalForm.invalid">
         {{ "personal_info_page_update_btn" | translate }}
@@ -321,6 +313,15 @@
       </button>
     </div> -->
 
-    <app-modal [needAprove]="this.needApproval" [aprovelText]="this.aprovelText" [img]="this.modalImg" [text]="this.modalText"></app-modal>
+    <app-modal
+      [needAprove]="this.needApproval"
+      [aprovelText]="this.aprovelText"
+      [img]="this.modalImg"
+      [text]="this.modalText"
+      [serverResponse]="this.serverResponse"
+      [(isHid)]="isHidden"
+      (isHidChange)="onModalClosed($event)"
+      (isApproved)="onAprovel($event)"
+    ></app-modal>
   </div>
 </section>

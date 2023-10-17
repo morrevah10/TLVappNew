@@ -9,8 +9,6 @@ import { PopupComponent } from 'src/app/cmps/popup/popup.component';
 import { Router } from '@angular/router';
 // import {tt} from '../../../assets/img/success.png'
 
-
-
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
@@ -27,11 +25,13 @@ export class PersonalInfoComponent implements OnInit {
   windowWidth!: number;
   isAuthenticated: boolean = false;
 
-
   needApproval: boolean = false;
-  aprovelText='';
-  modalImg=''
-  modalText=''
+  aprovelText = '';
+  modalImg = '';
+  modalText = '';
+  isHidden: boolean = false;
+  isApproved = false;
+  serverResponse = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,17 +43,13 @@ export class PersonalInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.windowWidth = window.innerWidth;
 
-    this.userService.user$
-    .subscribe((user) => {
+    this.userService.user$.subscribe((user) => {
       console.log('User updated:', user);
       this.user = user;
     });
     this.isAuthenticated = true;
-
-    
 
     this.PersonalForm = this.formBuilder.group({
       user_full_name: [''],
@@ -154,31 +150,66 @@ export class PersonalInfoComponent implements OnInit {
 
   deleteUser(user_id: any) {
     console.log('user_id', user_id);
+    this.needApproval = true;
+    this.isHidden = true;
+    console.log('this.isHidden', this.isHidden);
+    this.aprovelText = 'האם אתה בטוח שאתה רוצה למחוק את המשתמש ?';
+
+    this.serverResponse = true;
+
+    if (this.isApproved) {
+      console.log('delet');
+
+      // this.modalImg = '../../../assets/img/success.png';
+      // this.modalText = 'התנתקת בהצלחה';
+    }
+
     this.userService.deleteUser(user_id).subscribe(
       (response) => {
         console.log('User successfully deleted:', response);
-        this.userService.clearUser()
-        this.router.navigate(['/login']);
+        // this.userService.clearUser();
+        // this.router.navigate(['/login']);
+        this.serverResponse = false;
+        this.modalImg = '../../../assets/img/success.png';
+        this.modalText = 'החשבון נמחק בהצלחה';
       },
       (error) => {
         console.error('Error delete user:', error);
         this.errorMessage = 'Error delet user: ' + error.error;
+        this.serverResponse = false;
+        this.modalImg = '../../../assets/img/eroor.png';
+        this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
       }
     );
-  
+  }
+
+  onModalClosed(isHidden: boolean): void {
+    console.log(this.isApproved);
+    this.isHidden = isHidden;
+    this.aprovelText = '';
+    this.modalImg = '';
+    this.modalText = '';
+    if (this.isApproved) {
+      this.userService.clearUser();
+      this.router.navigate(['/login']);
+    }
+  }
+
+  onAprovel(isApproved: boolean): void {
+    this.isApproved = isApproved;
+    console.log(this.isApproved);
+  }
+
+  logout() {
+    console.log('logedout!!!');
+    this.needApproval = true;
+    this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק ?';
+    this.modalImg = '../../../assets/img/success.png';
+    this.modalText = 'התנתקת בהצלחה';
+
+    this.isHidden = true;
+    console.log('this.isHidden', this.isHidden);
+    // this.userService.clearUser()
+    // this.router.navigate(['/login']);
+  }
 }
-
-
-logout(){
-  console.log('logedout!!!');
-  this.needApproval=true
-  this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק ?'
-  this.modalImg='../../../assets/img/success.png'
-  this.modalText='התנתקת בהצלחה'
-  // this.userService.clearUser()
-  // this.router.navigate(['/login']);
-}
-
-  
-}
-

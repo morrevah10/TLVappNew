@@ -13,14 +13,22 @@ export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm!: FormGroup;
   loading = false;
   submitted = false;
-  errorMessage='';
+  errorMessage = '';
   windowWidth!: number;
+
+  needApproval: boolean = false;
+  aprovelText = '';
+  modalImg = '';
+  modalText = '';
+  isHidden: boolean = false;
+  isApproved = false;
+  serverResponse = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private forgetService:ForgetService
+    private forgetService: ForgetService
   ) {}
 
   ngOnInit() {
@@ -32,6 +40,8 @@ export class ForgotPasswordComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.isHidden = true;
+    this.serverResponse = true;
 
     if (this.forgotPasswordForm && this.forgotPasswordForm.get('email')) {
       if (this.forgotPasswordForm.get('email')!.invalid) {
@@ -44,15 +54,40 @@ export class ForgotPasswordComponent implements OnInit {
         (response) => {
           console.log('email send successfully:', response);
           this.forgetService.setResponse(response);
-          this.router.navigate(['resetPassword/']);
+          // this.router.navigate(['resetPassword/']);
+          this.serverResponse = false;
+          this.modalImg = '../../../assets/img/success.png';
+          this.modalText = '  נשלחנו קוד לאימייל שלך';
         },
         (error) => {
           // console.error('Error sending email:', error);
-          this.errorMessage=error.error
-          console.log('this.errorMessage',this.errorMessage)
+          this.errorMessage = error.error;
+          console.log('this.errorMessage', this.errorMessage);
           this.submitted = false;
+          this.serverResponse = false;
+          this.modalImg = '../../../assets/img/eroor.png';
+          this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
         }
       );
     }
+  }
+
+  onModalClosed(isHidden: boolean): void {
+    console.log(this.isApproved);
+    this.isHidden = isHidden;
+    this.aprovelText = '';
+    this.modalImg = '';
+    this.modalText = '';
+    this.router.navigate(['resetPassword/']);
+
+    if (this.isApproved) {
+      // this.userService.clearUser();
+      // this.router.navigate(['/login']);
+    }
+  }
+
+  onAprovel(isApproved: boolean): void {
+    this.isApproved = isApproved;
+    console.log(this.isApproved);
   }
 }

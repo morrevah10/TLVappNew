@@ -28,6 +28,16 @@ export class EditDescriptionComponent implements OnInit {
   isOpinionEditable: boolean = true;
 
 
+  needApproval: boolean = false;
+  aprovelText = '';
+  modalImg = '';
+  modalText = '';
+  isHidden: boolean = false;
+  isApproved = false;
+  serverResponse = false;
+
+
+
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -70,6 +80,8 @@ export class EditDescriptionComponent implements OnInit {
   onSubmit() {
     this.isOpinionEditable = false;
     this.errorMessage = '';
+    this.isHidden = true;
+    this.serverResponse = true;
     if (this.apartmentData) {
       // handle the form submission here
       console.log('Form submitted:', this.apartmentData);
@@ -78,26 +90,33 @@ export class EditDescriptionComponent implements OnInit {
     this.postService.updatePost(this.apartmentData).subscribe(
       (response) => {
         console.log('Post updated successfully:', response);
-        
-        const dialogRef = this.dialog.open(PopupComponent, {
-          data: {
-            message: 'Post updated successfully!'
-          }
-        });
+        console.log('Delete successful', response);
+            this.serverResponse = false;
+            this.modalImg = '../../../assets/img/success.png';
+            this.modalText = 'חוות הדעת עודכנה בהצלחה';
+        // const dialogRef = this.dialog.open(PopupComponent, {
+        //   data: {
+        //     message: 'Post updated successfully!'
+        //   }
+        // });
 
         // Navigate to 'myposts' after the dialog closes
-        dialogRef.afterClosed().subscribe(() => {
-          this.router.navigate(['myposts']);
-        });
+        // dialogRef.afterClosed().subscribe(() => {
+        //   this.router.navigate(['myposts']);
+        // });
       },
       (error) => {
         console.error('Error updating post:', error);
-        const dialogRef = this.dialog.open(PopupComponent, {
-          data: {
-            message: 'Error updating post: ' + error.error
-          }
+        // const dialogRef = this.dialog.open(PopupComponent, {
+        //   data: {
+        //     message: 'Error updating post: ' + error.error
+        //   }
           
-        });
+        // });
+        console.error('Error deleting post', error);
+        this.serverResponse = false;
+        this.modalImg = '../../../assets/img/eroor.png';
+        this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
         this.errorMessage = error.error
       }
       
@@ -108,6 +127,25 @@ export class EditDescriptionComponent implements OnInit {
     this.isOpinionEditable = true;
     this.isButtonDisabled = false;
   }
+
+
+  onModalClosed(isHidden: boolean): void {
+    console.log(this.isApproved);
+    this.isHidden = isHidden;
+    this.aprovelText = '';
+    this.modalImg = '';
+    this.modalText = '';
+    if (this.isApproved) {
+      // this.userService.clearUser();
+      // this.router.navigate(['/login']);
+    }
+  }
+
+  onAprovel(isApproved: boolean): void {
+    this.isApproved = isApproved;
+    console.log(this.isApproved);
+  }
+
 }
 
   
