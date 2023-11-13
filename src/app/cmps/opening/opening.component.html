@@ -59,7 +59,10 @@
     <p class="text">{{ stages[currentStage].text }}</p>
   </div>
 
-  <div class="navigation-buttons">
+  <div [ngClass]="{
+    'navigation-buttons': currentStage === 1,
+    'navigation-button': currentStage !== 1
+  }">
     <button
       class="open-btn previous"
       *ngIf="currentStage > 0"
