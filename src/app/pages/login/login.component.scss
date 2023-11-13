@@ -98,8 +98,8 @@
 
  .title {
   direction: rtl;
-  font-size: 25px;
-  font-weight: bold;
+  padding-top: 16px;
+  margin: 0;
 }
 
 .login-container{
@@ -122,9 +122,10 @@ height: 100%;
 
 .text {
   direction: rtl;
-  font-size: 20px;
-  font-weight: 500;
-  color: #888888;
+  font-size: 32px;
+  font-weight: bold;
+  padding-top: 8px;
+  color: black;
 }
 
 input{
@@ -157,9 +158,23 @@ input{
   border: none;
   border-radius: 5px;
   font-size: 1.25em;
+  cursor: pointer;
 }
+
+.btn-large-dis {
+  height: 3em;
+  width: 15em;
+  color: white;
+  background-color: $color4;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25em;
+  cursor: pointer;
+} 
+
 
 .small-text{
   color: $color4;
   direction: rtl;
+  font-size: 24px;
 }
