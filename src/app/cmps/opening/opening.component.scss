@@ -33,8 +33,15 @@
   margin-bottom: 40px;
 }
 
-.navigation-buttons button {
-  margin: 0 10px;
+// .navigation-buttons button {
+//   margin: 0 10px;
+// }
+
+.navigation-buttons {
+  direction: rtl;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; 
 }
 
 .container {
@@ -68,8 +75,8 @@
   height: 60px;
   width: 60px;
   border-radius: 10px;
-  position: fixed;
-  bottom: 100px;
+  // position: fixed;
+  // bottom: 100px;
   padding: 10px 20px;
   border: none;
   border-radius: 15%;
@@ -78,11 +85,11 @@
 
 .next {
   background-color: #1167ee;
-  right: 20px;
+  // right: 20px;
 }
 
 .previous {
-  left: 30px;
+  // left: 30px;
   background-color: #0c243e;
 }
 
@@ -92,8 +99,8 @@
   direction: rtl;
   color: white;
   font-size: 18px;
-  right: 30px;
-  border-radius: 10px;
+  // right: 30px;
+  // border-radius: 10px;
 }
 
 
