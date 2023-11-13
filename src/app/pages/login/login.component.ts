@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   showPassword=false;
   errorMassege = '';
   windowWidth!: number;
+  greetingMessage='';
 
 
   constructor(
@@ -87,6 +88,25 @@ export class LoginComponent implements OnInit {
   }
 
 
+  setGreetingMessage(): void {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+     
+      
+      if (currentHour >= 5 && currentHour < 12) {
+        this.greetingMessage = `בוקר טוב`;
+      } else if (currentHour >= 12 && currentHour < 17) {
+        this.greetingMessage = `צוהריים טובים`;
+      } else if (currentHour >= 17 && currentHour < 20) {
+        this.greetingMessage = `ערב טוב`;
+      } else {
+        this.greetingMessage = `לילה טוב`;
+      }
+     
+  console.log('this.greetingMessage',this.greetingMessage)
+  }
+  
   togglePasswordVisibility(){
     this.showPassword = !this.showPassword
   }
