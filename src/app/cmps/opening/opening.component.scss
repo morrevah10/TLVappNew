@@ -45,7 +45,7 @@
 .navigation-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  // margin-top: 20px;
 }
 
 .container {
@@ -63,14 +63,14 @@
 }
 
 .title {
-  direction: rtl;
-  font-size: 1.5rem;
+  // direction: rtl;
+  font-size: 5.5vh;
   font-weight: bold;
 }
 
 .text {
   direction: rtl;
-  font-size: 1rem;
+  font-size: 4vh;
   font-weight: 500;
   color: #888888;
 }
