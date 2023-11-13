@@ -33,9 +33,11 @@ export class OpeningComponent {
   constructor(private router: Router) {}
 
   nextStage() {
+    console.log(this.currentStage)
     if (this.currentStage < this.stages.length - 1) {
       this.currentStage++;
     }
+    console.log(this.currentStage)
   }
 
   previousStage() {
