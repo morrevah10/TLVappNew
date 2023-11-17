@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
     });
 
+    this.setGreetingMessage()
+
   }
 
   // for accessing to form fields

@@ -87,33 +87,13 @@
 
     <div class="title">
       <p>
-        {{this.greetingMessage}}
+        {{ this.greetingMessage }}
       </p>
-      <p>כאן תוכל לחפש חוות דעת על דירות</p>
+      <p class="small-title">  כאן תוכל לחפש חוות דעת על דירות</p>
     </div>
 
     <div class="search-container">
       <form class="form-container">
-        <!-- <div class="form-item">
-          <label>*עיר</label>
-          <mat-form-field class="=form-field" appearance="outline">
-            <input
-              placeholder="city"
-              matInput
-              [formControl]="cityFilterControl"
-              [matAutocomplete]="auto"
-            />
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option
-                *ngFor="let city of filteredCities$ | async"
-                [value]="city"
-                (click)="toggleDisable()"
-              >
-                {{ city }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-        </div> -->
         <div class="form-item">
           <label>*עיר</label>
           <mat-form-field class="form-field" appearance="outline">
@@ -135,7 +115,7 @@
           </mat-form-field>
         </div>
         <div class="form-item">
-          <label>רחוב</label>
+          <label>*רחוב</label>
           <mat-form-field class="=form-field" appearance="outline">
             <input
               matInput
@@ -152,7 +132,7 @@
           </mat-form-field>
         </div>
         <div class="form-item">
-          <label>מס ביניין</label>
+          <label>*מס ביניין</label>
           <mat-form-field class="=form-field" appearance="outline">
             <input
               matInput
@@ -161,7 +141,7 @@
           </mat-form-field>
         </div>
         <div class="form-item">
-          <label>מס דירה</label>
+          <label>*מס דירה</label>
           <mat-form-field class="=form-field" appearance="outline">
             <input
               matInput
@@ -193,11 +173,11 @@
     </div>
   </div>
 
+  <app-nav-bar *ngIf="this.windowWidth <= 567 "></app-nav-bar>
 </section>
 
 <!-- <section class="list">
   <app-apartment-list #apartmentList> </app-apartment-list>
 </section> -->
 
-<app-nav-bar *ngIf="this.windowWidth <= 567 "></app-nav-bar>
 

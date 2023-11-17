@@ -122,7 +122,7 @@ height: 100%;
 
 .text {
   direction: rtl;
-  font-size: 5vh;
+  font-size: 7vw;
   font-weight: bold;
   padding-top: 8px;
   color: black;
@@ -157,7 +157,7 @@ input{
   background-color: #007bff;
   border: none;
   border-radius: 5px;
-  font-size: 1.25em;
+  font-size: 5vw;
   cursor: pointer;
 }
 
@@ -168,7 +168,7 @@ input{
   background-color: $color4;
   border: none;
   border-radius: 5px;
-  font-size: 1.25em;
+  font-size: 5vw;
   cursor: pointer;
 } 
 
@@ -176,5 +176,5 @@ input{
 .small-text{
   color: $color4;
   direction: rtl;
-  font-size: 3.5vh;
+  font-size: 4vw;
 }

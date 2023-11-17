@@ -39,12 +39,16 @@
 .navigation-button {
   display: flex;
   justify-content: flex-end;
+  padding: 10px;
+  padding-bottom: 50px;
   // margin-top: 20px;
 }
 
 .navigation-buttons {
   display: flex;
   justify-content: space-between;
+  padding: 10px;
+  padding-bottom: 50px;
   // margin-top: 20px;
 }
 
@@ -53,6 +57,7 @@
   width: 100dvw;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .skip-button {
@@ -64,13 +69,13 @@
 
 .title {
   // direction: rtl;
-  font-size: 5.5vh;
+  font-size: 7vw;
   font-weight: bold;
 }
 
 .text {
   direction: rtl;
-  font-size: 4vh;
+  font-size: 4.5vw;
   font-weight: 500;
   color: #888888;
 }
@@ -81,7 +86,7 @@
   border-radius: 10px;
   padding: 10px 20px;
   border: none;
-  border-radius: 15%;
+  border-radius: -1%;
   cursor: pointer;
 }
 

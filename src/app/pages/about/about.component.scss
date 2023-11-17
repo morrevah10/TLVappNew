@@ -58,7 +58,7 @@ font-size: 18px;
 .about-content{
 display: flex;
 flex-direction: column;
-padding: 3rem 1.5rem 3rem 1.5rem;
+padding:  1.5rem ;
 }
 
 .form-group{
@@ -83,6 +83,9 @@ input{
   cursor: pointer;
 }
 
+.space{
+  height: 10%;
+}
 
 .btn-group {
   direction: rtl;
