@@ -910,7 +910,7 @@
       <div *ngIf="currentStep === 3">
         <form [formGroup]="mainForm">
           <div formGroupName="stepFour">
-            <label for="post_description">ביקורת</label>
+            <label for="post_description">*ביקורת</label>
             <!-- <input
               type="text"
               id="post_description"
@@ -933,7 +933,7 @@
               'btn-next share': mainForm.get('stepFour')!.valid
             }"
           >
-            שתף את החויה שלך
+            שתף את החוויה שלך
           </button>
           <button class="btn-prev" (click)="prevStep()">
             <img src="../../../assets/icons/prev.png" alt="" />

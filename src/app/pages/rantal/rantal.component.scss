@@ -334,10 +334,14 @@ input {
   .disabled-btn-share{
     width: 10rem;
     height: 3.5rem;
-    width: 9rem;
+    // width: 9rem;
     color: white;
     background-color: $light-gray;
     border: none;
     border-radius: 1rem;
     font-size: 1.25em;
+  }
+
+  #post_description{
+    height: 20rem;
   }
