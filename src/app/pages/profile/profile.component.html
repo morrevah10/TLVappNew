@@ -90,7 +90,7 @@
     </div>
 
     <div class="profile-btn">
-      <button type="submit" class="btn-large" [disabled]="PersonalForm.invalid">
+      <button type="submit" (click)="onSubmit()"  class="btn-large" [disabled]="PersonalForm.invalid">
         עדכן פרטים
       </button>
     </div>

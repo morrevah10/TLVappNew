@@ -16,6 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
   errorMessage = '';
   windowWidth!: number;
 
+  response:boolean=false;
   needApproval: boolean = false;
   aprovelText = '';
   modalImg = '';
@@ -54,36 +55,57 @@ export class ForgotPasswordComponent implements OnInit {
         (response) => {
           console.log('email send successfully:', response);
           this.forgetService.setResponse(response);
-          // this.router.navigate(['resetPassword/']);
+          this.response=true
           this.serverResponse = false;
           this.modalImg = '../../../assets/img/success.png';
-          this.modalText = '  נשלחנו קוד לאימייל שלך';
+          this.modalText = '  נשלח קוד לאימייל שלך';
         },
         (error) => {
-          // console.error('Error sending email:', error);
+          this.response=false
           this.errorMessage = error.error;
           console.log('this.errorMessage', this.errorMessage);
-          this.submitted = false;
+          this.submitted = true;
           this.serverResponse = false;
           this.modalImg = '../../../assets/img/eroor.png';
-          this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
+          this.modalText = this.errorMessage;
         }
       );
     }
   }
 
   onModalClosed(isHidden: boolean): void {
-    console.log(this.isApproved);
-    this.isHidden = isHidden;
-    this.aprovelText = '';
-    this.modalImg = '';
-    this.modalText = '';
-    this.router.navigate(['resetPassword/']);
+    
+    console.log(this.submitted, 'this.submitted');
+    console.log(this.serverResponse, 'this.serverResponse');
+    console.log(this.isApproved, 'this.isApproved');
+    console.log(this.response,'this.response')
 
-    if (this.isApproved) {
-      // this.userService.clearUser();
-      // this.router.navigate(['/login']);
+    if(this.response){
+      this.router.navigate(['resetPassword/']);
+    }else{
+      this.isHidden = isHidden;
+      this.aprovelText = '';
+      this.modalImg = '';
+      this.modalText = '';
+      this.router.navigate(['forgetPassword/']);
     }
+
+
+    // console.log(this.submitted, 'this.submitted');
+    // console.log(this.serverResponse, 'this.serverResponse');
+    // console.log(this.isApproved, 'this.isApproved');
+
+
+    // this.isHidden = isHidden;
+    // this.aprovelText = '';
+    // this.modalImg = '';
+    // this.modalText = '';
+    // this.router.navigate(['resetPassword/']);
+
+    // if (this.isApproved) {
+    //   this.userService.clearUser();
+    //   this.router.navigate(['/login']);
+    // }
   }
 
   onAprovel(isApproved: boolean): void {

@@ -172,5 +172,17 @@
 }
 
 .checkbox{
+  // padding-top: 1.5em;
+  padding-right:0.5em;
+
+  span{
+    color: $color1;
+    cursor: pointer;
+  }
+}
+
+.checkbox-container{
   padding-top: 1.5em;
+  display: flex;
+  align-content: center;
 }

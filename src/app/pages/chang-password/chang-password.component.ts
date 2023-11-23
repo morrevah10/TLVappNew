@@ -51,7 +51,7 @@ export class ChangPasswordComponent implements OnInit{
           old_password:['', Validators.required],
           new_password: ['', Validators.required],
           new_password_confirm: ['', Validators.required],
-          user_id : [this.user.user_id, Validators.required]
+          user_id : [this.user.user_id]
         });
       });
     }

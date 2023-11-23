@@ -14,7 +14,7 @@ export class OpeningComponent {
     {
       imageUrl: '../../../assets/img/open1.png',
       title: 'ברוכים הבאים לRent Share',
-      text: 'המקום שיעזור לכם לצמצם את האי וודאות לפני השכרת דירה חדשה'
+      text: 'המקום שיעזור לכם לצמצם את אי הוודאות לפני השכרת דירה חדשה'
     },
     {
       imageUrl: '../../../assets/img/open2.png',

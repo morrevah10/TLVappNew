@@ -83,6 +83,8 @@ export class RestPasswordComponent implements OnInit {
       user_code_send: this.response.user.confirm_code,
     };
 
+    console.log('befor')
+
     this.forgetService.resetPassword(passwordResetData).subscribe(
       (response) => {
         console.log('email send successfully:', response);
@@ -110,15 +112,19 @@ export class RestPasswordComponent implements OnInit {
     this.showPasswordConfirmation = !this.showPasswordConfirmation;
   }
 
-  verifyCodeAndContinue() {
-    // Add logic to verify the entered code with the backend
-    // If the code is verified successfully, proceed to step 2
-    // For example:
-    // if (this.verifyCode()) {
-    //   this.currentStep = 2;
-    // }
-    this.currentStep = 2;
-    console.log('Confirmation Code:', this.confirmationCode);
+  // verifyCodeAndContinue() {
+  //   // Add logic to verify the entered code with the backend
+  //   // If the code is verified successfully, proceed to step 2
+  //   // For example:
+  //   // if (this.verifyCode()) {
+  //   //   this.currentStep = 2;
+  //   // }
+  //   this.currentStep = 2;
+  //   console.log('Confirmation Code:', this.confirmationCode);
+  // }
+
+  verifyCodeAndContinue(){
+    
   }
 
   onInput(currentInput: HTMLInputElement, nextInput: HTMLInputElement | null) {
