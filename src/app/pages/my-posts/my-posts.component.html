@@ -65,7 +65,7 @@
   <div class="my-posts-contact">
     <p class="title">הדירות שלי</p>
 
-    <section class="cards-container">
+    <!-- <section class="cards-container" *ngIf="userPosts">
       <div
         class="card"
         *ngFor="let apartment of userPosts.slice(0, postsToShow)"
@@ -107,14 +107,80 @@
           </div>
 
       </div>
+
+      <div *ngIf="userPosts.length === 0" class="no-apartments-message">
+        אין לך דירות פרסום כרגע
+      </div>
+
+    </section> -->
+    
+
+
+    <section class="cards-container" *ngIf="isApartmentsReady">
+      <ng-container *ngIf="userPosts.length > 0; else noApartments">
+        <div class="card" *ngFor="let apartment of userPosts.slice(0, postsToShow)">
+          <div (click)="editApartmentDetails(apartment.post_id)" class="card-img">
+            <img [src]="apartment.apartment_pic_1" alt="Apartment Image" />
+          </div>
+  
+          <div (click)="editApartmentDetails(apartment.post_id)" class="card-details">
+            <p class="text">{{ apartment.post_city }}</p>
+            <p class="small-text">
+              {{ apartment.post_street }} {{ apartment.post_building_number }} ,דירה
+              {{ apartment.post_apartment_number }}
+            </p>
+          </div>
+  
+  
+            <div class="card-actions">
+              <div
+                class="custom-chip approval"
+                *ngIf="apartment.proof_image_confirmed"
+              >
+                <img src="../../../assets/icons/confirm.png" alt="">
+              </div>
+  
+              <div
+                class="custom-chip pending"
+                *ngIf="!apartment.proof_image_confirmed"
+              >
+                <img src="../../../assets/icons/panding.png" alt="">
+              </div>
+  
+              <button
+                (click)="deletePost(apartment.post_id, currentUser.user_id)"
+              >
+              <img src="../../../assets/icons/delete.png" alt="">
+              </button>
+            </div>
+        </div>
+      </ng-container>
+    
+      <ng-template #noApartments >
+        <div class="no-apartments-message">
+         <p>עדיין לא שיתפת את החוויה שלך ?</p>
+         <p>תוסיף את החויה שלך ותוכל לחזור ולראות בעמוד זה את כל השיתופים שלך.</p>
+         <a routerLink="/rantal">להוספת חוויה<div class=""></div></a>
+        </div>
+      </ng-template>
     </section>
     
+
+    <section *ngIf="!isApartmentsReady">
+      <div class="no-apartments-message">
+        <p>טוען את הדירות והחוויות  ששיתפת ...</p>
+       </div>
+    </section>
+
+
+
+
     <button
       *ngIf="postsToShow < userPosts.length"
       (click)="loadMorePosts()"
       class="load-more"
     >
-      Load More
+      טען עוד
     </button>
     <app-nav-bar
     ></app-nav-bar>

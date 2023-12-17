@@ -13,10 +13,12 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./my-posts.component.scss'],
 })
 export class myPostsComponent implements OnInit {
-  userPosts!: any[];
+  userPosts: any[] = [];
   currentUser!: any;
   windowWidth!: number;
   isAuthenticated: boolean = false;
+
+  isApartmentsReady: boolean = false;
 
   initialPostsToShow = 3; // Number of posts to show initially
   postsToShow = this.initialPostsToShow; // Number of posts to display
@@ -59,7 +61,8 @@ export class myPostsComponent implements OnInit {
       .getUserPosts(this.currentUser.user_id)
       .subscribe((posts) => {
         console.log('User Posts:', posts);
-        this.userPosts = posts;
+        this.userPosts = posts || []; 
+        this.isApartmentsReady = true;
       });
   }
 
@@ -92,60 +95,10 @@ export class myPostsComponent implements OnInit {
 
     console.log('apartmentId', apartmentId);
 
-    // if(this.isApproved){
-    //   this.postService
-    //     .deletePost(apartmentId, this.currentUser.user_id)
-    //     .subscribe(
-    //       (response) => {
-    //         console.log('Delete successful', response);
-    //         this.serverResponse = false;
-    //         this.modalImg = '../../../assets/img/success.png';
-    //         this.modalText = 'חוות הדעת נמחקה בהצלחה';
-    //       },
-    //       (error) => {
-    //         console.error('Error deleting post', error);
-    //         this.serverResponse = false;
-    //         this.modalImg = '../../../assets/img/eroor.png';
-    //         this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
-    //       }
-    //     );
-    
-    // }
+
 
   }
 
-    //     this.postService.deletePost(apartmentId,this.currentUser.user_id).subscribe(
-    //       (response: any) => {
-    //         console.log('Delete successful', response);
-    //         this.serverResponse = false;
-    //     this.modalImg = '../../../assets/img/success.png';
-    //     this.modalText = 'חוות הדעת נמחקה בהצלחה';
-    // //         const dialogRef = this.dialog.open(PopupComponent, {
-    //           data: {
-    //             message: 'Post deleted successfully!'
-    //           }
-    //         });
-    //         dialogRef.afterClosed().subscribe(() => {
-    //           this.removePost(apartmentId);
-    // });
-    //
-    // }
-    // (error) => {
-    //   console.error('Error deleting post', error);
-    //   this.serverResponse = false;
-    //         this.modalImg = '../../../assets/img/eroor.png';
-    //         this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
-    //         const dialogRef = this.dialog.open(PopupComponent, {
-    //           data: {
-    //             message: 'Error deleting post '+ error.error
-    //           }
-    // });
-    //         dialogRef.afterClosed()
-
-    //       }
-    // );
-    //   }
-    // });
   
   
 

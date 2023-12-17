@@ -81,15 +81,13 @@
 
 <app-nav-bar *ngIf="this.windowWidth <= 567 "></app-nav-bar> -->
 
-
-<section  class="home-container">
+<section class="home-container">
   <div class="home-contant">
-
     <div class="title">
       <p>
         {{ this.greetingMessage }}
       </p>
-      <p class="small-title">  כאן אפשר לחפש חוות דעת על דירות</p>
+      <p class="small-title">כאן אפשר לחפש חוות דעת על דירות</p>
     </div>
 
     <div class="search-container">
@@ -98,7 +96,7 @@
           <label>*עיר</label>
           <mat-form-field class="form-field" appearance="outline">
             <input
-            class="input"
+              class="input"
               matInput
               [formControl]="cityFilterControl"
               [matAutocomplete]="auto"
@@ -125,7 +123,10 @@
               [matTooltipDisabled]="isDisable"
             />
             <mat-autocomplete #streetAuto="matAutocomplete">
-              <mat-option *ngFor="let street of filteredStreets" [value]="street">
+              <mat-option
+                *ngFor="let street of filteredStreets"
+                [value]="street"
+              >
                 {{ street }}
               </mat-option>
             </mat-autocomplete>
@@ -134,23 +135,16 @@
         <div class="form-item">
           <label>מס ביניין</label>
           <mat-form-field class="=form-field" appearance="outline">
-            <input
-              matInput
-              [formControl]="buildingControl"
-            />
+            <input matInput [formControl]="buildingControl" />
           </mat-form-field>
         </div>
         <div class="form-item">
           <label>מס דירה</label>
           <mat-form-field class="=form-field" appearance="outline">
-            <input
-              matInput
-              [formControl]="apartmentControl"
-            />
+            <input matInput [formControl]="apartmentControl" />
           </mat-form-field>
         </div>
       </form>
-
 
       <!-- <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
@@ -158,26 +152,22 @@
     </div>
 
     <div class="actions">
-      <button class="btn-large" (click)="searchApartments()">
-       חפש חוות דעת
+      <button
+        class="btn-large"
+        (click)="searchApartments()"
+        [disabled]="!cityFilterControl.valid"
+      >
+        חפש חוות דעת
       </button>
 
       <div class="share">
         <p class="text">שכרת דירה ? עזור לקהילה שלנו לגדול</p>
-        <p class="color-text" (click)="navigateToApartmentForm()">שתף את החוויה שלך</p>
+        <p class="color-text" (click)="navigateToApartmentForm()">
+          שתף את החוויה שלך
+        </p>
       </div>
-      <!-- <button class="newBTN" (click)="navigateToApartmentForm()">
-        {{ "search_post_page_add_post_btn" | translate }}
-        <mat-icon>add_circle_outline</mat-icon>
-      </button> -->
     </div>
   </div>
 
-  <app-nav-bar *ngIf="this.windowWidth <= 567 "></app-nav-bar>
+  <app-nav-bar *ngIf="this.windowWidth <= 567"></app-nav-bar>
 </section>
-
-<!-- <section class="list">
-  <app-apartment-list #apartmentList> </app-apartment-list>
-</section> -->
-
-

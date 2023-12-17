@@ -42,6 +42,9 @@ export class RestPasswordComponent implements OnInit {
   isApproved = false;
   serverResponse = false;
 
+  userCode='';
+  userEmail='';
+
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -53,14 +56,21 @@ export class RestPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.windowWidth = window.innerWidth;
+    // this.route.params.subscribe((params) => {
+    //   // Use params as needed
+    //   console.log('Route Params:', params);
+    // });
 
     this.response = this.forgetService.getResponse();
+    this.userCode=this.response.code
+    this.userEmail=this.response.email
+    console.log(this.userCode,this.userEmail)
 
     // Now you can use the 'response' object in your component as needed
     console.log('Response from previous page:', this.response);
 
     this.passwordResetForm = this.formBuilder.group({
-      verificationCode: ['', Validators.required],
+      // verificationCode: ['', Validators.required],
       newPassword: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     });
@@ -75,12 +85,13 @@ export class RestPasswordComponent implements OnInit {
     this.serverResponse = true;
 
     // Create an object with the three form fields
+  
     const passwordResetData = {
-      user_code_input: this.passwordResetForm.get('verificationCode')!.value,
+      // user_code_input: this.passwordResetForm.get('verificationCode')!.value,
       user_password: this.passwordResetForm.get('newPassword')!.value,
       user_password_2: this.passwordResetForm.get('confirmPassword')!.value,
-      user_email: this.response.user.user_email,
-      user_code_send: this.response.user.confirm_code,
+      user_email: this.userEmail,
+      // user_code_send: this.response.user.confirm_code,
     };
 
     console.log('befor')
@@ -92,6 +103,8 @@ export class RestPasswordComponent implements OnInit {
         this.serverResponse = false;
         this.modalImg = '../../../assets/img/success.png';
         this.modalText = '  הסיסמא שונתה בהצלחה ';
+        this.errorMessage='  הסיסמא שונתה בהצלחה ';
+        setTimeout(() => this.router.navigate(['login/']), 3500);
       },
       (error) => {
         console.error('Error sending email:', error);
@@ -124,6 +137,12 @@ export class RestPasswordComponent implements OnInit {
   // }
 
   verifyCodeAndContinue(){
+    if(this.userCode==this.confirmationCode){
+        this.currentStep = 2;
+        this.errorMessage='';
+    }else{
+      this.errorMessage='הקוד שנשלח והקוד שהוקלד לא זהים'
+    }
     
   }
 

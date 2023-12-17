@@ -20,8 +20,7 @@ export class ModalComponent {
   isApprovedOnModal=false
 
   public close(): void {
-    if(this.isApprovedOnModal=true){
-
+    if(this.isApprovedOnModal==true){
     }
     this.isHid = false;
     this.isHidChange.emit(this.isHid);

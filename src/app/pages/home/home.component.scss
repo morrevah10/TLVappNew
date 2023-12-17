@@ -74,6 +74,18 @@ input {
   margin:  12px;
 }
 
+.disabled-btn1{
+  height: 3em;
+  width: 15em;
+  color: white;
+  background-color: $light-gray;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25em;
+  cursor: not-allowed;
+  transition: background-color 0.5s ease;
+}
+
 .small-text {
   color: $color4;
   direction: rtl;

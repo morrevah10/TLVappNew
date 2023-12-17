@@ -138,6 +138,13 @@
   // width: 100dvh;
 }
 
+.no-apartments-message{
+  direction: rtl;
+  padding: 1.5rem;
+  background-color: #F2F7FF;
+  border-radius: 10%;
+}
+
 .my-posts-contact {
   display: flex;
   flex-direction: column;

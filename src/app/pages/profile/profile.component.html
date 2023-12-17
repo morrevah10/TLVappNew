@@ -9,34 +9,27 @@
         />
       </div>
 
-      <div class="personal-img-btn">
+      <!-- <div class="personal-img-btn">
         <button type="button" class="chang-img-btn" (click)="openImageUploadModal()">
           שנה תמונה פרופיל
         </button>
+      </div> -->
+
+      <div class="personal-img-btn">
+        <!-- Replace the button with a file input -->
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onProfilePictureSelected($event)"
+          style="display: none;"
+          id="profilePictureInput"
+        />
+        <label for="profilePictureInput" class="chang-img-btn">
+          שנה תמונת פרופיל
+        </label>
       </div>
+
     </div>
-
-
-    <!-- <div class="grid-item">
-      <label for="apartment_pic_1"></label>
-      <img
-        alt="Apartment Image 1"
-      />
-      <input
-        type="file"
-        #apartmentPic1Input
-        class="file-input"
-        id="file-input"
-      />
-      <label class="custom-upload-button" for="file-input"
-        > Upload </label
-      >
-      <button
-        class="remove-btn"
-      >
-        Remove
-      </button>
-    </div> -->
 
     <ng-template #defaultImage>
       <img src="../../../assets/img/user.png" alt="User Profile Picture" />
@@ -90,7 +83,7 @@
     </div>
 
     <div class="profile-btn">
-      <button type="submit" (click)="onSubmit()"  class="btn-large" [disabled]="PersonalForm.invalid">
+      <button type="button" class="btn-large" [disabled]="PersonalForm.invalid" (click)="onSubmit()">
         עדכן פרטים
       </button>
     </div>

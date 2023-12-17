@@ -225,11 +225,17 @@
         <p class="text">הדירות שלי</p>
         <img src="../../../assets/icons/next-profile.png" alt="" />
       </div>
-
+      
+      <div class="nav-item">
+        <p (click)="logout()" class="text">התנתק</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+      
       <div class="nav-item" routerLink="/terms">
         <p class="text">תנאי שימוש</p>
         <img src="../../../assets/icons/next-profile.png" alt="" />
       </div>
+      
 
       <div class="nav-item" routerLink="/personalInfo/changPassword">
         <p class="text">שינוי סיסמא</p>
@@ -241,15 +247,11 @@
         <img src="../../../assets/icons/next-profile.png" alt="" />
       </div>
 
-      <div class="nav-item">
-        <p (click)="logout()" class="text">התנתק</p>
-        <img src="../../../assets/icons/next-profile.png" alt="" />
-      </div>
 
-      <div class="nav-item">
+      <!-- <div class="nav-item">
         <p (click)="deleteUser(user.user_id)" class="text">מחיקת חשבון</p>
         <img src="../../../assets/icons/next-profile.png" alt="" />
-      </div>
+      </div> -->
     </div>
     <!-- <form [formGroup]="PersonalForm" (ngSubmit)="onSubmit()">
 

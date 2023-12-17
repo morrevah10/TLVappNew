@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
   templateUrl: './opening.component.html',
   styleUrls: ['./opening.component.scss']
 })
-export class OpeningComponent {
+export class OpeningComponent implements OnInit{
 
   isSkiped = false
-
+   
   stages = [
     {
       imageUrl: '../../../assets/img/open1.png',
@@ -32,10 +32,20 @@ export class OpeningComponent {
 
   constructor(private router: Router) {}
 
+  ngOnInit(): void {
+    const hasVisited = localStorage.getItem('hasVisited');
+    if (hasVisited) {
+    this.router.navigate(['/login']);
+    }
+  }
+
   nextStage() {
     console.log(this.currentStage)
     if (this.currentStage < this.stages.length - 1) {
       this.currentStage++;
+    }
+    if(this.currentStage==2){
+      localStorage.setItem('hasVisited', 'true');
     }
     console.log(this.currentStage)
   }
@@ -47,8 +57,8 @@ export class OpeningComponent {
   }
 
   skipToLogin() {
-    // Navigate to the login page when the user clicks the Skip button
     this.router.navigate(['/login']);
     this.isSkiped = true
+    localStorage.setItem('hasVisited', 'true');
   }
 }

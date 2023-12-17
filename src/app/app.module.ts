@@ -80,6 +80,7 @@ import { DateFormatPipe } from '../app/helpers/date-format.pipe';
 import { LoadindComponent } from './cmps/loadind/loadind.component';
 import { ModalComponent } from './cmps/modal/modal.component'; 
 
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -157,7 +158,13 @@ import { ModalComponent } from './cmps/modal/modal.component';
 
     MatTooltipModule
   ],
-  providers: [AuthService, UserService, PostService,TranslateLoaderImpl],
+  providers: [
+    AuthService,
+    UserService,
+    PostService,
+    TranslateLoaderImpl,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }, 
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

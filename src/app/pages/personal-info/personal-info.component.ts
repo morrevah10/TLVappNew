@@ -148,40 +148,40 @@ export class PersonalInfoComponent implements OnInit {
     });
   }
 
-  deleteUser(user_id: any) {
-    console.log('user_id', user_id);
-    this.needApproval = true;
-    this.isHidden = true;
-    console.log('this.isHidden', this.isHidden);
-    this.aprovelText = 'האם אתה בטוח שאתה רוצה למחוק את המשתמש ?';
+  // deleteUser(user_id: any) {
+  //   console.log('user_id', user_id);
+  //   this.needApproval = true;
+  //   this.isHidden = true;
+  //   console.log('this.isHidden', this.isHidden);
+  //   this.aprovelText = 'האם אתה בטוח שאתה רוצה למחוק את המשתמש ?';
 
-    this.serverResponse = true;
+  //   this.serverResponse = true;
 
-    if (this.isApproved) {
-      console.log('delet');
+  //   if (this.isApproved) {
+  //     console.log('delet');
 
-      // this.modalImg = '../../../assets/img/success.png';
-      // this.modalText = 'התנתקת בהצלחה';
-    }
+  //     // this.modalImg = '../../../assets/img/success.png';
+  //     // this.modalText = 'התנתקת בהצלחה';
+  //   }
 
-    this.userService.deleteUser(user_id).subscribe(
-      (response) => {
-        console.log('User successfully deleted:', response);
-        // this.userService.clearUser();
-        // this.router.navigate(['/login']);
-        this.serverResponse = false;
-        this.modalImg = '../../../assets/img/success.png';
-        this.modalText = 'החשבון נמחק בהצלחה';
-      },
-      (error) => {
-        console.error('Error delete user:', error);
-        this.errorMessage = 'Error delet user: ' + error.error;
-        this.serverResponse = false;
-        this.modalImg = '../../../assets/img/eroor.png';
-        this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
-      }
-    );
-  }
+  //   this.userService.deleteUser(user_id).subscribe(
+  //     (response) => {
+  //       console.log('User successfully deleted:', response);
+  //       // this.userService.clearUser();
+  //       // this.router.navigate(['/login']);
+  //       this.serverResponse = false;
+  //       this.modalImg = '../../../assets/img/success.png';
+  //       this.modalText = 'החשבון נמחק בהצלחה';
+  //     },
+  //     (error) => {
+  //       console.error('Error delete user:', error);
+  //       this.errorMessage = 'Error delet user: ' + error.error;
+  //       this.serverResponse = false;
+  //       this.modalImg = '../../../assets/img/eroor.png';
+  //       this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
+  //     }
+  //   );
+  // }
 
   onModalClosed(isHidden: boolean): void {
     console.log(this.isApproved);
@@ -206,10 +206,12 @@ export class PersonalInfoComponent implements OnInit {
     this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק ?';
     this.modalImg = '../../../assets/img/success.png';
     this.modalText = 'התנתקת בהצלחה';
-
     this.isHidden = true;
     console.log('this.isHidden', this.isHidden);
-    // this.userService.clearUser()
-    // this.router.navigate(['/login']);
+    setTimeout(() => {
+      this.userService.clearUser()
+      this.router.navigate(['/login']);
+    }, 2500);
+
   }
 }

@@ -4,6 +4,8 @@ import { UserService } from 'src/app/srvices/user.service';
 import { HttpClient } from '@angular/common/http';
 import { PopupComponent } from 'src/app/cmps/popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -35,6 +37,7 @@ export class ChangPasswordComponent implements OnInit{
       private userService: UserService,
       private http: HttpClient,
       private dialog: MatDialog,
+      private router: Router,
     ) {
       
     }
@@ -71,12 +74,9 @@ export class ChangPasswordComponent implements OnInit{
           this.modalImg = '../../../assets/img/success.png';
           this.modalText = 'הסיסמא עודכנה בהצלחה';
 
-          // const dialogRef = this.dialog.open(PopupComponent, {
-          //   data: {
-          //     message: 'User successfully update!'
-          //   }
-          // });
-          // dialogRef.afterClosed()
+          setTimeout(() => {
+            this.router.navigate(['/personalInfo']);
+          }, 2500);
 
         },
         (error) => {
@@ -86,7 +86,6 @@ export class ChangPasswordComponent implements OnInit{
           this.serverResponse = false;
           this.modalImg = '../../../assets/img/eroor.png';
           this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
-
         }
         );
         this.changePassForm.patchValue({

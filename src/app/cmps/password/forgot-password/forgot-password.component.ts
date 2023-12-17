@@ -16,6 +16,9 @@ export class ForgotPasswordComponent implements OnInit {
   errorMessage = '';
   windowWidth!: number;
 
+  validCode='';
+  validEmail='';
+
   response:boolean=false;
   needApproval: boolean = false;
   aprovelText = '';
@@ -50,11 +53,14 @@ export class ForgotPasswordComponent implements OnInit {
       }
 
       const email = this.forgotPasswordForm.get('email')!.value;
+      this.validEmail=email
 
       this.userService.forgetPassword(email).subscribe(
         (response) => {
           console.log('email send successfully:', response);
           this.forgetService.setResponse(response);
+          // this.validCode=this.forgetService.getResponse()
+          // console.log('this.validCode',this.validCode)
           this.response=true
           this.serverResponse = false;
           this.modalImg = '../../../assets/img/success.png';
@@ -89,23 +95,6 @@ export class ForgotPasswordComponent implements OnInit {
       this.modalText = '';
       this.router.navigate(['forgetPassword/']);
     }
-
-
-    // console.log(this.submitted, 'this.submitted');
-    // console.log(this.serverResponse, 'this.serverResponse');
-    // console.log(this.isApproved, 'this.isApproved');
-
-
-    // this.isHidden = isHidden;
-    // this.aprovelText = '';
-    // this.modalImg = '';
-    // this.modalText = '';
-    // this.router.navigate(['resetPassword/']);
-
-    // if (this.isApproved) {
-    //   this.userService.clearUser();
-    //   this.router.navigate(['/login']);
-    // }
   }
 
   onAprovel(isApproved: boolean): void {

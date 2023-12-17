@@ -4,10 +4,13 @@ import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/srvices/user.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { SearchService } from 'src/app/srvices/search.service';
-import { FormsModule } from '@angular/forms';
+import { AbstractControl, FormsModule, ValidationErrors } from '@angular/forms';
 import { PostService } from 'src/app/srvices/post.service';
 import { ApartmentListComponent } from 'src/app/cmps/apartment/apartment-list/apartment-list.component';
 import { HttpClient } from '@angular/common/http';
+
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { FormControl } from '@angular/forms';
@@ -38,9 +41,12 @@ interface Apartment {
 })
 export class HomeComponent implements OnInit {
   @ViewChild(ApartmentListComponent) apartmentList!: ApartmentListComponent;
-
+  
+ 
   fakeData!: any[][];
+  searchForm!: FormGroup;
 
+  isValidSearch = false
   logedinUser: User | null = null;
   search = {
     post_city: '',
@@ -57,8 +63,11 @@ export class HomeComponent implements OnInit {
   buildingControl = new FormControl();
   errorMessage = '';
 
-  cityFilterControl = new FormControl();
-  streetFilterControl = new FormControl({ value: '', disabled: true });
+  // cityFilterControl = new FormControl();
+  // streetFilterControl = new FormControl({ value: '', disabled: true });
+
+  cityFilterControl = new FormControl('', [Validators.required, this.cityValidator.bind(this)]);
+  streetFilterControl = new FormControl({ value: '', disabled: true }, [Validators.required, this.streetValidator.bind(this)]);
 
   filteredCities$!: Observable<string[]>;
   filteredStreets$!: Observable<string[]>;
@@ -79,9 +88,28 @@ export class HomeComponent implements OnInit {
     private searchService: SearchService,
     private postservice: PostService,
     private dataService: DataService,
-    private http: HttpClient
+    private http: HttpClient,
+    private formBuilder: FormBuilder
   ) {  }
 
+  // Custom validator for the city control
+  cityValidator(control: AbstractControl): ValidationErrors | null {
+    const selectedCity = control.value;
+    if (this.filteredCities.length > 0 && !this.filteredCities.includes(selectedCity)) {
+      return { invalidCity: true };
+    }
+    return null;
+  }
+
+  // Custom validator for the street control
+  streetValidator(control: AbstractControl): ValidationErrors | null {
+    const selectedStreet = control.value;
+    if (this.filteredStreets.length > 0 && !this.filteredStreets.includes(selectedStreet)) {
+      return { invalidStreet: true };
+    }
+    return null;
+  }
+  
   ngOnInit() {
     console.log('HomeComponent initialized');
     this.userService.user$.subscribe((user) => {
@@ -105,19 +133,19 @@ export class HomeComponent implements OnInit {
       distinctUntilChanged(), // Only emit if the filter has changed
       map(([filterValue, cityIndex]) => {
         // Fetch filtered cities from the preprocessed data
-        const filteredCities = this.filterCities(cityIndex, filterValue);
+        const filteredCities = this.filterCities(cityIndex, filterValue!);
         return filteredCities;
       })
     );
 
     this.filteredStreets$ = this.dataService.streetSubject.asObservable();
     this.cityFilterControl.valueChanges.subscribe((filterValue) => {
-      this.dataService.updateCityFilter(filterValue);
+      this.dataService.updateCityFilter(filterValue!);
     });
 
     this.cityFilterControl.valueChanges.subscribe((selectedCity) => {
       // console.log('Selected City:', selectedCity);
-      this.selectedCity = selectedCity;
+      this.selectedCity = selectedCity!;
     });
 
     combineLatest([
@@ -142,61 +170,86 @@ export class HomeComponent implements OnInit {
       this.filteredStreets = streets;
       // console.log('Filtered Streets:', this.filteredStreets);
     });
+
+
+    
+
+    this.searchForm = this.formBuilder.group({
+      cityFilterControl: this.cityFilterControl,
+      streetFilterControl: this.streetFilterControl,
+      buildingControl: this.buildingControl,
+      apartmentControl: this.apartmentControl,
+    });
+
+
+
+
   }
 
-  // searchApartments() {
-  //   const searchData = {
-  //     post_city:this.cityFilterControl.value as string,
-  //     post_street:this.streetFilterControl.value as string,
-  //     post_apartment_number: this.apartmentControl.value,
-  //     post_building_number : this.buildingControl.value
-  //   }
 
-  //   this.loading = true;
-
-  //   console.log('1111searchData111',searchData)
-  //   this.searchService.setSearchData(searchData);
-
-  //   this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
-  //     (apartments) => {
-  //       console.log('Fetched apartments:', apartments);
-  //       setTimeout(() => {
-  //         this.loading = false;
-  //         this.apartmentList.apartments = apartments;
-  //       }, 5000);
-  //     },
-  //     (error) => {
-  //       console.log('Error fetching apartment posts:', error);
-  //       this.errorMessage = 'An error occurred while fetching apartments :'+ error ;
-  //     }
-  //   );
-  // }
-
-  private filterCities(
-    cityIndex: { [letter: string]: string[] },
-    filterValue: string
-  ): string[] {
+  
+  
+  private filterCities(cityIndex: { [letter: string]: string[] }, filterValue: string): string[] {
     console.log('cityIndex', cityIndex);
-    // console.log('filterValue',filterValue)
-    filterValue = filterValue.toLowerCase();
+    filterValue = filterValue.trim().toLowerCase();
     console.log('filterValue', filterValue);
     let filteredCities: string[] = [];
-
+    let isHebrewLetter: boolean = false; // Initialize with a default value
+  
     if (this.selectedCity) {
       // If a city is selected, only consider cities starting with the selected letter
       const selectedLetter = this.selectedCity.charAt(0).toLowerCase();
-      if (selectedLetter === filterValue[0]) {
+  
+      // Check if the typed letter is in Hebrew using a regular expression
+      isHebrewLetter = /^[\u0590-\u05FF]+$/.test(filterValue);
+  
+      if (selectedLetter === filterValue[0] && isHebrewLetter) {
         // Filter and concatenate matching cities
-        filteredCities = filteredCities.concat(
-          cityIndex[selectedLetter].filter((city) =>
-            city.toLowerCase().includes(filterValue)
-          )
+        filteredCities = cityIndex[selectedLetter].filter((city) =>
+          city.toLowerCase().includes(filterValue)
         );
       }
     }
+  
+    // If the input is in English, add a general option
+    if (!filteredCities.length && !isHebrewLetter) {
+      filteredCities.push('נא להקליד בעברית'); // Replace with the desired message or option
+    }
+  
     console.log('filteredCities', filteredCities);
     return filteredCities;
   }
+  
+  
+  
+  
+  
+  
+
+  // private filterCities(
+  //   cityIndex: { [letter: string]: string[] },
+  //   filterValue: string
+  // ): string[] {
+  //   console.log('cityIndex', cityIndex);
+  //   filterValue = filterValue.toLowerCase();
+  //   console.log('filterValue', filterValue);
+  //   let filteredCities: string[] = [];
+
+  //   if (this.selectedCity) {
+  //     // If a city is selected, only consider cities starting with the selected letter
+  //     const selectedLetter = this.selectedCity.charAt(0).toLowerCase();
+  //     if (selectedLetter === filterValue[0]) {
+  //       // Filter and concatenate matching cities
+  //       filteredCities = filteredCities.concat(
+  //         cityIndex[selectedLetter].filter((city) =>
+  //           city.toLowerCase().includes(filterValue)
+  //         )
+  //       );
+  //     }
+  //   }
+  //   console.log('filteredCities', filteredCities);
+  //   return filteredCities;
+  // }
 
   toggleDisable() {
     this.streetFilterControl.enable();
@@ -205,6 +258,9 @@ export class HomeComponent implements OnInit {
   }
 
   searchApartments() {
+    if (this.cityFilterControl.valid) {
+
+      this.isValidSearch= true
     const searchData = {
       post_city: this.cityFilterControl.value as string,
       post_street: this.streetFilterControl.value as string,
@@ -221,110 +277,15 @@ export class HomeComponent implements OnInit {
     this.loading = true;
 
     console.log('1111searchData111', searchData);
-    // this.searchService.setSearchData(searchData);
+    
 
     this.router.navigate(['/apartment'], { queryParams: searchData });
 
-    // this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
-    //   (apartmentsResponse) => {
-    //     // Remove the outer curly braces to make it valid JSON
-    //     const cleanedResponse = apartmentsResponse.replace(/^\{+|\}+$/g, '');
-
-    //     // Parse the cleaned response as JSON
-    //     let apartmentsObject = null;
-    //     try {
-    //       apartmentsObject = JSON.parse(cleanedResponse);
-    //     } catch (error) {
-    //       console.error('Error parsing response as JSON:', error);
-    //     }
-
-    //     // console.log(':', apartmentsObject);
-
-    //     // Extract the arrays directly from the object
-    //     const extractedArrays = Object.values(apartmentsObject);
-    //     console.log('Extracted arrays:', extractedArrays);
-
-    //     // Update the apartmentList with the extracted arrays
-    //     this.apartmentList.apartments = extractedArrays as any[][];
-
-    //     setTimeout(() => {
-    //       this.loading = false;
-    //     }, 5000);
-    //   },
-    //   (error) => {
-    //     console.log('Error fetching apartment posts:', error);
-    //     this.errorMessage =
-    //       'An error occurred while fetching apartments :' + error;
-    //   }
-    // );
+   
+  }
   }
 
-  // searchApartments() {
-  //   const searchData = {
-  //     post_city: this.cityFilterControl.value as string,
-  //     post_street: this.streetFilterControl.value as string,
-  //     post_apartment_number: this.apartmentControl.value,
-  //     post_building_number: this.buildingControl.value,
-  //   };
 
-  //   this.loading = true;
-
-  //   console.log('1111searchData111', searchData);
-  //   this.searchService.setSearchData(searchData);
-
-  //   this.apartmentList.fetchApartmentsFiltered(searchData).subscribe(
-  //     (apartments) => {
-  //       console.log('Fetched apartments:', apartments);
-
-  //       // const extractedArray = apartments;
-  //       // const extractedArray = Array.isArray(apartments) ? apartments[0] : [];
-
-  //       // console.log('Fetched 2 apartments:', extractedArray);
-  //       //! Group the apartments based on your criteria
-  //       // const groupedApartments = this.groupApartments(apartments);
-  //       // console.log('groupedApartments',groupedApartments)
-  //       // console.log(' this.apartmentList', this.apartmentList)
-  //       // this.apartmentList.apartments = extractedArray as any[][];
-  //       this.apartmentList.apartments = apartments;
-  //       console.log(' this.apartmentList', this.apartmentList.apartments)
-
-  //       setTimeout(() => {
-  //         this.loading = false;
-  //         // this.apartmentList.apartments = groupedApartments;
-  //         // this.apartmentList.apartments = this.fakeData;
-  //       }, 5000);
-  //     },
-  //     (error) => {
-  //       console.log('Error fetching apartment posts:', error);
-  //       this.errorMessage =
-  //         'An error occurred while fetching apartments :' + error;
-  //     }
-  //   );
-  // }
-
-  // groupApartments(apartments: Apartment[]): Apartment[][] {
-  //   const groupedApartments: Apartment[][] = [];
-
-  //   // Create a map to group apartments by city, street, building, and apartment number
-  //   const apartmentMap = new Map<string, Apartment[]>();
-
-  //   apartments.forEach((apartment) => {
-  //     const key = `${apartment.post_city}-${apartment.post_street}-${apartment.post_building_number}-${apartment.post_apartment_number}`;
-
-  //     if (!apartmentMap.has(key)) {
-  //       apartmentMap.set(key, []);
-  //     }
-
-  //     apartmentMap.get(key)?.push(apartment);
-  //   });
-
-  //   // Extract the grouped apartments into an array of arrays
-  //   apartmentMap.forEach((group) => {
-  //     groupedApartments.push(group);
-  //   });
-
-  //   return groupedApartments;
-  // }
 
   navigateToApartmentForm() {
     // console.log('clicked');
