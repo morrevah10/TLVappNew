@@ -316,10 +316,10 @@ input {
 //     }
 
 // }
-.load-more{
-    color: $color1;
-    border: none;
-    background-color: transparent;
+.load-more {
+  color: $color1;
+  border: none;
+  background-color: transparent;
 }
 
 .list-parama {
@@ -365,5 +365,22 @@ input {
 
 .card-container {
   padding-bottom: 1.5rem;
+}
+
+.no-apartments-message {
+  direction: rtl;
+  padding: 1.5rem;
+  background-color: #f2f7ff;
+  border-radius: 10%;
+
+}
+
+
+.no-message{
+
+  margin-bottom: 1rem;
+  p{
+    margin: 0;
+  }
 
 }

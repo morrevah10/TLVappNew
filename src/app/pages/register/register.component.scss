@@ -186,3 +186,17 @@
   display: flex;
   align-content: center;
 }
+
+
+  /* Apply styles when input is invalid */
+  .form-control.is-invalid {
+    border-color: #dc3545;
+  }
+  
+  /* Apply styles to invalid feedback container */
+  .invalid-feedback {
+    display: block;
+    font-size: 80%;
+    color: #dc3545;
+  }
+

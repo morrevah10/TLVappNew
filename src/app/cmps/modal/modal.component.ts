@@ -16,15 +16,20 @@ export class ModalComponent {
   @Output() public isHidChange = new EventEmitter<boolean>();
   @Output() public isApproved = new EventEmitter<boolean>()
 
+
+
   step = 1;
   isApprovedOnModal=false
 
   public close(): void {
-    if(this.isApprovedOnModal==true){
+    if(this.isApprovedOnModal){
+     
     }
     this.isHid = false;
     this.isHidChange.emit(this.isHid);
   }
+
+
 
   public open(): void {
     this.isHid = true;

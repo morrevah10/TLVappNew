@@ -148,51 +148,20 @@ export class PersonalInfoComponent implements OnInit {
     });
   }
 
-  // deleteUser(user_id: any) {
-  //   console.log('user_id', user_id);
-  //   this.needApproval = true;
-  //   this.isHidden = true;
-  //   console.log('this.isHidden', this.isHidden);
-  //   this.aprovelText = 'האם אתה בטוח שאתה רוצה למחוק את המשתמש ?';
-
-  //   this.serverResponse = true;
-
-  //   if (this.isApproved) {
-  //     console.log('delet');
-
-  //     // this.modalImg = '../../../assets/img/success.png';
-  //     // this.modalText = 'התנתקת בהצלחה';
-  //   }
-
-  //   this.userService.deleteUser(user_id).subscribe(
-  //     (response) => {
-  //       console.log('User successfully deleted:', response);
-  //       // this.userService.clearUser();
-  //       // this.router.navigate(['/login']);
-  //       this.serverResponse = false;
-  //       this.modalImg = '../../../assets/img/success.png';
-  //       this.modalText = 'החשבון נמחק בהצלחה';
-  //     },
-  //     (error) => {
-  //       console.error('Error delete user:', error);
-  //       this.errorMessage = 'Error delet user: ' + error.error;
-  //       this.serverResponse = false;
-  //       this.modalImg = '../../../assets/img/eroor.png';
-  //       this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
-  //     }
-  //   );
-  // }
-
   onModalClosed(isHidden: boolean): void {
     console.log(this.isApproved);
     this.isHidden = isHidden;
     this.aprovelText = '';
     this.modalImg = '';
     this.modalText = '';
+
     if (this.isApproved) {
-      this.userService.clearUser();
-      this.router.navigate(['/login']);
+      setTimeout(() => {
+        this.userService.clearUser();
+        this.router.navigate(['/login']);
+      }, 2000);
     }
+
   }
 
   onAprovel(isApproved: boolean): void {
@@ -206,12 +175,18 @@ export class PersonalInfoComponent implements OnInit {
     this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק ?';
     this.modalImg = '../../../assets/img/success.png';
     this.modalText = 'התנתקת בהצלחה';
-    this.isHidden = true;
-    console.log('this.isHidden', this.isHidden);
-    setTimeout(() => {
-      this.userService.clearUser()
-      this.router.navigate(['/login']);
-    }, 2500);
 
+    this.isHidden = true;
+    // console.log('this.isHidden', this.isHidden);
+
+    // if (this.isApproved) {
+    //   setTimeout(() => {
+    //     this.userService.clearUser();
+    //     this.router.navigate(['/login']);
+    //   }, 5000);
+    // }
+
+    // this.userService.clearUser()
+    // this.router.navigate(['/login']);
   }
 }

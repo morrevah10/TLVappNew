@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
   }
 
   onFormSubmit() {
+    this.errorMassege= ''
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;

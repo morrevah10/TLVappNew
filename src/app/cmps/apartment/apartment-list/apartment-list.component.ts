@@ -29,6 +29,7 @@ export class ApartmentListComponent implements OnInit {
   subindex = 0;
 
   
+  isApartmentsReady: boolean = false;
 
   currentSlide = 0;
   carouselStyles: string[] = [];
@@ -52,35 +53,7 @@ export class ApartmentListComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  // ngOnInit() {
-  //   this.postService.getApartmentPosts().subscribe(
-  //     (apartments) => {
-  //       this.apartments = apartments;
-  //       console.log('apartments:', apartments);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching apartment posts:', error);
-  //     }
-  //   );
-  // }
-  // ngOnInit() {
-  //   this.fetchApartments(); // Fetch apartments when the component initializes
-  // }
 
-  // ngOnInit() {
-  //   this.searchService.searchData$.subscribe(searchParams => {
-  //     console.log('searchParams',searchParams)
-  //   });
-
-  //   for (let i = 0; i < this.apartments.length; i++) {
-  //     const style = this.renderer.createElement('style');
-  //     style.innerHTML = `::ng-deep #carousel${i + 1}.carousel.slide {
-  //       max-width: 300px;
-  //       /* Add other individual styles here */
-  //     }`;
-  //     this.renderer.appendChild(this.el.nativeElement, style);
-  //   }
-  // }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -98,7 +71,7 @@ export class ApartmentListComponent implements OnInit {
             ? params['post_building_number']
             : '',
       };
-      // console.log('searchParams', searchParams);
+      console.log('searchParams', searchParams);
       if (searchParams.post_city != undefined) {
         this.fetchApartmentsFiltered(searchParams);
       }
@@ -113,14 +86,7 @@ export class ApartmentListComponent implements OnInit {
   loadMorePosts() {
     this.postsToShow += this.postsToLoad;
   }
-  // nextSlide() {
-  //   this.currentSlide = (this.currentSlide + 1) % this.apartments.length;
-  // }
 
-  // prevSlide() {
-  //   this.currentSlide =
-  //     (this.currentSlide - 1 + this.apartments.length) % this.apartments.length;
-  // }
   prevSlide(subArray: any[]) {
     if (this.subindex > 0) {
       this.currentIndex--;
@@ -133,78 +99,7 @@ export class ApartmentListComponent implements OnInit {
     }
   }
 
-  //   fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; post_building_number:string; }): Observable<any> {
-  //     return this.postService.getApartmentFilteredPosts(searchData).pipe(
-  //       catchError((error) => {
-  //         console.error('Error fetching apartment posts:', error);
-  //         // You can show the error to the user here, for example, by displaying a message.
-  //         // You can also re-throw the error if you want to handle it further up the chain.
-  //         return throwError(error.error); // Re-throwing the error
-  //         // return EMPTY; // Return an empty observable or handle the error as needed
-  //       })
-  //     );
 
-  //  }
-  // fetchApartments(searchParams?: any) {
-  //   console.log('searchParams',searchParams)
-  //   this.postService.getApartmentPosts(searchParams).subscribe(
-  //     (apartments) => {
-  //       this.apartments = apartments;
-  //       console.log('apartments:', apartments);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching apartment posts:', error);
-  //     }
-  //   );
-  // }
-  // fetchApartments() {
-  //   this.postService.getApartmentPosts().subscribe(
-  //     (apartments) => {
-  //       this.apartments = apartments;
-  //       console.log('apartments:', apartments);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching apartment posts:', error);
-  //     }
-  //   );
-  // }
-
-  // fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; }) {
-  //   this.postService.getApartmentFilteredPosts(searchData).subscribe(
-  //     (apartments) => {
-  //       this.apartments = apartments;
-  //       console.log('this.afterSearchApartments:', this.afterSearchApartments);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching apartment posts:', error);
-  //     }
-  //   );
-  // }
-
-  //   fetchApartmentsFiltered(searchData: { post_city: string; post_street: string; post_apartment_number: string; post_building_number:string; }): Observable<any> {
-  //     return this.postService.getApartmentFilteredPosts(searchData).pipe(
-  //       catchError((error) => {
-  //         console.error('Error fetching apartment posts:', error);
-  //         // You can show the error to the user here, for example, by displaying a message.
-  //         // You can also re-throw the error if you want to handle it further up the chain.
-  //         return throwError(error.error); // Re-throwing the error
-  //         // return EMPTY; // Return an empty observable or handle the error as needed
-  //       })
-  //     );
-
-  //  }
-
-  //  prevSlide() {
-  //   if (this.activeSlide > 0) {
-  //     this.activeSlide--;
-  //   }
-  // }
-
-  // nextSlide() {
-  //   if (this.activeSlide < this.apartments.length - 1) {
-  //     this.activeSlide++;
-  //   }
-  // }
 
   viewApartmentDetails(apartmentId: number) {
     this.router.navigate(['/apartment', apartmentId]);
@@ -213,44 +108,26 @@ export class ApartmentListComponent implements OnInit {
   fetchApartmentsFiltered(searchParams: any) {
     this.postService.getApartmentFilteredPosts(searchParams).subscribe(
       (response: any) => {
-        // console.log(response);
+        console.log(response);
         const cleanedResponse = response.replace(/^\{+|\}+$/g, '');
-        // console.log(cleanedResponse);
+        console.log(cleanedResponse);
         const arrayOfArrays = JSON.parse(cleanedResponse);
         // console.log(arrayOfArrays);
         // this.filteredApartments = arrayOfArrays;
         this.filteredApartments = arrayOfArrays.map((subArray: any[]) =>
           subArray.map((item, subindex) => ({ ...item, subindex }))
         );
-        // console.log(this.filteredApartments);
+        this.isApartmentsReady = true;
+        console.log(this.filteredApartments);
       },
       (error: any) => {
         console.error('Error fetching apartment posts:', error);
+        this.isApartmentsReady = true;
         // Handle the error if necessary
       }
     );
   }
 
-  // isCarousel(group: any[]): boolean {
-  //   return group.length > 1;
-  // }
-
-  // private flattenResponse(response: any[]) {
-  //   const flattenedApartments: any[] = [];
-
-  //   // Loop through the nested arrays and flatten them
-  //   response.forEach((nestedArray) => {
-  //     if (Array.isArray(nestedArray)) {
-  //       flattenedApartments.push(...nestedArray);
-  //     } else {
-  //       flattenedApartments.push(nestedArray);
-  //     }
-  //   });
-
-  //   // Assign the flattened data to the component property
-  //   this.filteredApartments = flattenedApartments;
-  //   console.log('Filtered Apartments:', this.filteredApartments);
-  // }
 
   updateCurrentIndex(subArrayIndex: number, newIndex: number) {
     this.currentIndexMap[subArrayIndex] = newIndex;

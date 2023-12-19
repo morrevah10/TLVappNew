@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ForgetService } from 'src/app/srvices/forget.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-rest-password',
   templateUrl: './rest-password.component.html',
@@ -34,6 +35,7 @@ export class RestPasswordComponent implements OnInit {
   errorMessage = '';
   windowWidth!: number;
 
+
   needApproval: boolean = false;
   aprovelText = '';
   modalImg = '';
@@ -45,13 +47,16 @@ export class RestPasswordComponent implements OnInit {
   userCode='';
   userEmail='';
 
+  successMessage = '';
+
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private route: ActivatedRoute,
     private forgetService: ForgetService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+
+
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +82,9 @@ export class RestPasswordComponent implements OnInit {
   }
 
   onSubmit() {
+
+    this.errorMessage=''
+    this.successMessage=''
     this.submitted = true;
     if (this.passwordResetForm.invalid) {
       return;
@@ -94,7 +102,8 @@ export class RestPasswordComponent implements OnInit {
       // user_code_send: this.response.user.confirm_code,
     };
 
-    console.log('befor')
+
+
 
     this.forgetService.resetPassword(passwordResetData).subscribe(
       (response) => {
@@ -103,7 +112,10 @@ export class RestPasswordComponent implements OnInit {
         this.serverResponse = false;
         this.modalImg = '../../../assets/img/success.png';
         this.modalText = '  הסיסמא שונתה בהצלחה ';
-        this.errorMessage='  הסיסמא שונתה בהצלחה ';
+        this.successMessage = 'הסיסמא שונתה בהצלחה';
+        console.log(this.successMessage, 'this.successMessage');
+       
+
         setTimeout(() => this.router.navigate(['login/']), 3500);
       },
       (error) => {
@@ -112,6 +124,9 @@ export class RestPasswordComponent implements OnInit {
         this.serverResponse = false;
         this.modalImg = '../../../assets/img/eroor.png';
         this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
+        this.errorMessage='קרתה בעיה.. נסה שוב מאוחר יותר';
+        
+
         // this.errorMessage=error.error;
       }
     );

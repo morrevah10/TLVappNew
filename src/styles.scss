@@ -104,6 +104,16 @@ i{
 .error-message{
   color:red;
   font-weight: bold;
+  direction: rtl;
+  padding-top: 1rem;
+
+}
+
+.success-message{
+  direction: rtl;
+  color:#007bff;
+  font-weight: bold;
+  padding-top: 1rem;
 }
 /* Importing Bootstrap SCSS file. */
 @import "./node_modules/bootstrap/scss/bootstrap";

@@ -441,7 +441,7 @@
               class="required"
               *ngIf="registerForm.get('user_full_name')?.hasError('required')"
             >
-              Full Name is required
+              שם מלא הוא שדה חובה
             </div>
           </div>
         </div>
@@ -462,7 +462,7 @@
             "
             class="invalid-feedback"
           >
-            Email is required
+           כתובת אימייל היא שדה חובה
           </div>
           <div
             *ngIf="
@@ -472,7 +472,7 @@
             "
             class="invalid-feedback"
           >
-            Enter valid email address
+            הכנס כתובת אימייל חוקית
           </div>
           <div
             *ngIf="
@@ -501,7 +501,7 @@
               class="required"
               *ngIf="registerForm.get('user_phone')?.hasError('required')"
             >
-              Phone is required
+              מספר טלפון הוא שדה חובה
             </div>
           </div>
         </div>
@@ -538,12 +538,12 @@
               class="required"
               *ngIf="registerForm.get('user_password')?.hasError('required')"
             >
-              Password is required
+              סיסמא היא שדה חובה
             </div>
             <div
               *ngIf="registerForm.get('user_password')?.hasError('minlength')"
             >
-              Password must be at least 6 characters
+              הסיסמא חייבת להיות לפחות 6 ספרות
             </div>
           </div>
         </div>
@@ -585,12 +585,12 @@
               class="required"
               *ngIf="registerForm.get('user_password_2')?.hasError('required')"
             >
-              Password is required
+            סיסמא חוזרת היא שדה חובה
             </div>
             <div
               *ngIf="registerForm.get('user_password_2')?.hasError('minlength')"
             >
-              Password must be at least 6 characters
+            הסיסמא חייבת להיות לפחות 6 ספרות
             </div>
           </div>
         </div>
