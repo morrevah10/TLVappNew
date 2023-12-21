@@ -79,13 +79,22 @@
         <div *ngIf="errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
+
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
+      </div>
+
       </form>
     </div>
 
     <div class="profile-btn">
-      <button type="button" class="btn-large" [disabled]="PersonalForm.invalid" (click)="onSubmit()">
-        עדכן פרטים
-      </button>
+      <button type="button"
+      [disabled]="PersonalForm.invalid || !formChanged"
+      (click)="onSubmit()"
+      [ngClass]="{
+        'btn-large-dis': !formChanged,
+        'btn-large': formChanged,
+      }">עדכן פרטים</button>        
     </div>
   </div>
   <app-nav-bar></app-nav-bar>

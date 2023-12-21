@@ -17,9 +17,14 @@ export class ProfileComponent implements OnInit {
   PersonalForm!: FormGroup;
   submittedForm: any;
   user: any;
+  initialUser: any;
   userImg: any = '';
   errorMessage: string = '';
-  
+  errorOccurred: boolean = false;
+  ImgerrorMessage: string = '';
+  successMessage: string = '';
+
+  formChanged: boolean = false;
 
   profilePicture: string | ArrayBuffer | null = null;
   windowWidth!: number;
@@ -36,10 +41,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.windowWidth = window.innerWidth;
+    console.log('this.formChanged',this.formChanged)
 
     this.userService.user$.subscribe((user) => {
       console.log('User updated:', user);
       this.user = user;
+      this.initialUser = { ...user };
     });
     this.isAuthenticated = true;
 
@@ -65,7 +72,22 @@ export class ProfileComponent implements OnInit {
       console.log('problemmm');
     }
 
-  
+
+    Object.keys(this.PersonalForm.controls).forEach((key) => {
+      this.PersonalForm.get(key)?.valueChanges.subscribe(() => {
+        this.formChanged = this.isFormChanged();
+      });
+    });
+  }
+
+  isFormChanged(): boolean {
+    const formValue = this.PersonalForm.value;
+
+    return (
+        formValue.user_full_name !== this.initialUser.user_full_name ||
+        formValue.user_email !== this.initialUser.user_email ||
+        formValue.user_phone !== this.initialUser.user_phone
+    );
   }
 
   onProfilePictureChange(event: any) {
@@ -80,18 +102,31 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('this.formChanged',this.formChanged)
     console.log('Submit button clicked');
     if (this.PersonalForm.invalid) {
       console.log('Form is invalid');
       return;
     }
-  
+
     console.log('Form is valid. Proceeding with submission...');
 
     const formValue = this.PersonalForm.value;
+
+    // if (
+    //   formValue.user_full_name !== this.initialUser.user_full_name ||
+    //   formValue.user_email !== this.initialUser.user_email ||
+    //   formValue.user_phone !== this.initialUser.user_phone
+    // ) {
+    //   this.formChanged = true;
+    //   console.log('this.formChanged',this.formChanged)
+    // } else {
+    //   this.formChanged = false;
+    // }
+
     const payload = {
       ...formValue,
-      profile_picture: this.profilePicture, 
+      profile_picture: this.profilePicture,
     };
 
     console.log('Form data:', payload);
@@ -101,16 +136,19 @@ export class ProfileComponent implements OnInit {
       (response) => {
         console.log('User successfully update:', response);
 
-        const dialogRef = this.dialog.open(PopupComponent, {
-          data: {
-            message: 'User successfully update!',
-          },
-        });
-        dialogRef.afterClosed();
+        // const dialogRef = this.dialog.open(PopupComponent, {
+        //   data: {
+        //     message: 'User successfully update!',
+        //   },
+        // });
+        // dialogRef.afterClosed();
+        this.successMessage = 'הפרטים עודכנו בהצלחה';
+        this.formChanged = false;
       },
       (error) => {
         console.error('Error update user:', error);
         this.errorMessage = 'Error updating post: ' + error.error;
+        this.formChanged = false;
       }
     );
     // this.PersonalForm.reset();

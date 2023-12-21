@@ -462,7 +462,7 @@
             "
             class="invalid-feedback"
           >
-           כתובת אימייל היא שדה חובה
+            כתובת אימייל היא שדה חובה
           </div>
           <div
             *ngIf="
@@ -507,7 +507,18 @@
         </div>
 
         <div class="form-group">
-          <label class="small-text" for="user_password">*סיסמא</label>
+          <div class="label-tooltip">
+            <label class="small-text" for="user_password"> *סיסמא</label>
+            <div class="pass-tooltip">
+              <div class="tooltip-img" (click)="toggleToolTipVisibility()">
+                <img src="../../../assets/icons/i.png" alt="" />
+              </div>
+              <div class="tooltip-container" *ngIf="showPasswordTooltip">
+                הסיסמא חייבת להכיל לפחות 6 ספרות כאשר בתוכן אות גדולה אות קטנה
+                ומספרים
+              </div>
+            </div>
+          </div>
           <div class="password-input-container">
             <input
               type="{{ showPassword ? 'text' : 'password' }}"
@@ -548,6 +559,15 @@
           </div>
         </div>
 
+        <!-- <div class="pass-tooltip" >
+          <div (click)="toggleToolTipVisibility()">
+            <img src="../../../assets/icons/i.png" alt="">
+          </div>
+          <div class="tooltip-container" *ngIf="showPasswordTooltip">
+            סיסמא חייבת לכלול לפחות 6 תווים ולכלול אותיות גדולות, קטנות ומספרים.
+          </div>
+        </div> -->
+
         <div class="form-group">
           <label class="small-text" for="user_password_2">*סיסמא חוזרת</label>
           <div class="password-input-container">
@@ -585,12 +605,12 @@
               class="required"
               *ngIf="registerForm.get('user_password_2')?.hasError('required')"
             >
-            סיסמא חוזרת היא שדה חובה
+              סיסמא חוזרת היא שדה חובה
             </div>
             <div
               *ngIf="registerForm.get('user_password_2')?.hasError('minlength')"
             >
-            הסיסמא חייבת להיות לפחות 6 ספרות
+              הסיסמא חייבת להיות לפחות 6 ספרות
             </div>
           </div>
         </div>
@@ -600,25 +620,36 @@
         </div>
 
         <div class="checkbox-container">
-          <input type="checkbox" id="terms" name="terms" value="terms" />
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            value="terms"
+            (change)="onCheckboxChange($event)"
+          />
           <label class="small-text checkbox" for="terms">
-            אני מסכים 
+            אני מסכים
             <span routerLink="/terms">לתנאי השימוש</span>
           </label>
         </div>
       </form>
     </div>
     <div class="buttons">
-      <button class="btn-large" (click)="onFormSubmit()" >
+      <button
+        (click)="onFormSubmit()"
+        [disabled]="!registerForm.valid || !isChecked"
+        [ngClass]="{
+          'btn-large-dis': !registerForm.valid || !isChecked,
+          'btn-large': registerForm.valid && isChecked
+        }"
+      >
         הצטרף לקהילה
       </button>
 
-     
-
-      <button [disabled]="loading" class="btn">
+      <button class="btn">
         <span routerLink="/login" class="small-text">
-         כבר יש לך משתמש ?
-         <span class="color-text">התחבר </span>
+          כבר יש לך משתמש ?
+          <span class="color-text">התחבר </span>
         </span>
       </button>
     </div>

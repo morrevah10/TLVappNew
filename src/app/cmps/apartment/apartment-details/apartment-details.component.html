@@ -164,13 +164,14 @@
 
         <p> חוות דעת</p>
         <div class="edit-input">
-          <textarea
+          <!-- <textarea
             class="input-text"
             id="post_description"
             name="post_description"
             [(ngModel)]="apartment.post_description"
-          ></textarea>
-          <!-- <input type="text" class="input-text" id="post_description" name="post_description" (click)="enableButton()" [(ngModel)]="this.apartmentData.post_description" /> -->
+          ></textarea> -->
+          <div class="input-text display-text">{{ apartment.post_description }}</div>
+      
         </div>
       </div>
 
@@ -215,5 +216,5 @@
           </slide>
         </carousel> -->
       </div>
+      <app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar>
 </section>
-<app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar>

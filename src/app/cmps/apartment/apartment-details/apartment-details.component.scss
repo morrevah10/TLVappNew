@@ -215,7 +215,8 @@ input {
   justify-content: center;
   padding: 2rem;
   direction: rtl;
-
+  flex-direction: column;
+  align-items: center;
 }
 
 .apartment-description {

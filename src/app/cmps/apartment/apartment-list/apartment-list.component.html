@@ -42,7 +42,7 @@
 
 
     <div class="card-container"  *ngFor="let subArray of filteredApartments.slice(0, postsToShow) ; let subArrayIndex = index">
-      <div *ngIf="subArray.length === 1" class="card">
+      <div *ngIf="subArray.length === 1" class="card" (click)="viewApartmentDetails(subArray[0].post_id)">
         
         <div class="card-img">
           <img [src]="subArray[0].apartment_pic_1" alt="Image" />
@@ -62,18 +62,15 @@
             <img src="../../../../assets/icons/STAR.png" alt="">
           </div>
 
-          <div (click)="viewApartmentDetails(subArray[0].post_id)">
+          <!-- <div (click)="viewApartmentDetails(subArray[0].post_id)">
             <img src="../../../../assets/icons/i.png" alt="">
-          </div>
+          </div> -->
         </div>
-        <!-- Display content for single item -->
-        <!-- <p>{{ subArray[0].post_city }}</p>
-        <p>{{ subArray[0].post_description }}</p> -->
-        <!-- Add other properties as needed -->
+
       </div>
 
       <div  *ngIf="subArray.length > 1">
-        <div class="card">
+        <div class="card" (click)="viewApartmentDetails(subArray[getCurrentIndex(subArrayIndex)].post_id)">
           <div class="card-img">
             <img [src]="subArray[getCurrentIndex(subArrayIndex)].apartment_pic_1" alt="Image" />
           </div>
@@ -93,9 +90,9 @@
               <img src="../../../../assets/icons/STAR.png" alt="">
             </div>
 
-            <div  (click)="viewApartmentDetails(subArray[getCurrentIndex(subArrayIndex)].post_id)">
+            <!-- <div  (click)="viewApartmentDetails(subArray[getCurrentIndex(subArrayIndex)].post_id)">
               <img src="../../../../assets/icons/i.png" alt="">
-            </div>
+            </div> -->
           </div>
           <!-- Display content for first item in subArray -->
           <!-- <p>{{ subArray[getCurrentIndex(subArrayIndex)].post_city }}</p>

@@ -151,6 +151,17 @@
   font-size: 1.25em;
 }
 
+.btn-large-dis {
+  height: 3em;
+  width: 15em;
+  color: white;
+  background-color: $color4;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25em;
+  cursor: pointer;
+}
+
 .color-text{
   color: $color1;
   cursor: pointer;
@@ -199,4 +210,35 @@
     font-size: 80%;
     color: #dc3545;
   }
+
+
+
+
+
+  
+  
+.label-tooltip{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.pass-tooltip {
+  position: relative;
+}
+
+.tooltip-container {
+  position: absolute;
+  top: -400%;
+  left: 100%;
+  right: -1200%;
+  background-color: #e8e8e8;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 1em;
+  z-index: 1000;
+}
+
+
+
 

@@ -172,7 +172,7 @@ export class RantalComponent implements OnInit {
         // this.toastr.success('Post add successfully!!');
         this.serverResponse = false;
         this.modalImg = '../../../assets/img/success.png';
-        this.modalText = 'חוות הדעת עודכנה בהצלחה';
+        this.modalText = 'חוות הדעת שלך התקבלה וממתינה לאישור';
         // setTimeout(() => {
         //   this.loading = false;
         // }, 5000);

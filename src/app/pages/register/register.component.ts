@@ -11,9 +11,16 @@ import { UserService } from 'src/app/srvices/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-
   errorMessage=''
   windowWidth!: number;
+
+  isChecked: boolean = false;
+
+
+
+
+  showPasswordTooltip: boolean = false;
+
 
 
   constructor(
@@ -62,7 +69,7 @@ export class RegisterComponent implements OnInit {
     this.userService.addUser(user).subscribe(
       (response) => {
         console.log('Registration successful:', response);
-        this.toastr.success('User Registered successfully!!');
+        // this.toastr.success('User Registered successfully!!');
         this.router.navigate(['/login']);
        
       },
@@ -87,5 +94,16 @@ export class RegisterComponent implements OnInit {
     this.showPasswordConfirmation = !this.showPasswordConfirmation;
   }
 
+
+  toggleToolTipVisibility(){
+    this.showPasswordTooltip = !this.showPasswordTooltip
+    console.log('tolltip',this.showPasswordTooltip)
 }
 
+
+
+onCheckboxChange(event: any) {
+  this.isChecked = event.target.checked;
+  console.log('Checkbox value:', this.isChecked);
+}
+}

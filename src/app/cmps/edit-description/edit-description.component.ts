@@ -93,7 +93,7 @@ export class EditDescriptionComponent implements OnInit {
         console.log('Delete successful', response);
             this.serverResponse = false;
             this.modalImg = '../../../assets/img/success.png';
-            this.modalText = 'חוות הדעת עודכנה בהצלחה';
+            this.modalText = 'חוות הדעת שלך התקבלה וממתינה לאישור';
         // const dialogRef = this.dialog.open(PopupComponent, {
         //   data: {
         //     message: 'Post updated successfully!'

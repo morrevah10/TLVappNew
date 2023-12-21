@@ -24,6 +24,11 @@ export class ChangPasswordComponent implements OnInit{
   windowWidth!: number;
   isAuthenticated: boolean =false;
 
+
+  showPasswordTooltip: boolean = false;
+
+
+
   needApproval: boolean = false;
   aprovelText = '';
   modalImg = '';
@@ -119,5 +124,9 @@ export class ChangPasswordComponent implements OnInit{
         console.log(this.isApproved);
       }
   
-     
+      toggleToolTipVisibility(){
+        this.showPasswordTooltip = !this.showPasswordTooltip
+        console.log('tolltip',this.showPasswordTooltip)
+    }
+
     }

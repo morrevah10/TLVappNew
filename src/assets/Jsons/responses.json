@@ -1,0 +1,36 @@
+{
+    "responses":
+        {
+            "Passwords don't match.": "סיסמאות לא זהות",
+            "Invalid full name": "שם מלא לא תקין",
+            "Email already exists":"אימייל כבר קיים במערכת",
+            "Phone number already exists":"טלפון קיים במערכת",
+            "Register Fails":"",
+            "Error parsing user registering data":"נתקלנו בבעיה, אנא נסה שנית מאוחר יותר..",
+            "Email dont exists":"אימייל לא קיים",
+            "Error send email":"שגיאה בשליחת האימייל",
+            "Error forget password":"שגיאת מערכת, אנא נסה שוב",
+            "Password is invalid":"סיסמא לא תקינה",
+            "Error reset password":"שגיאת מערכת, אנא נסה שוב",
+            "Passwords Incorrect. Login fail":"סיסמא שגויה",
+            "Email don't exists. Login fail":"אימייל לא קיים במערכת",
+            "Error parsing user login data":"שגיאת מערכת, אנא נסה שוב",
+            "An error occurred while serialize the post in get_posts":"שגיאת מערכת,אנא נסה שנית",
+            "An error occurred get_posts":"שגיאת מערכת, אנא נסה שנית",
+            "Post validation failed":"שגיאה בהעלאת הפוסט",
+            "An error occurred while adding a new post":"שגיאת מערכת,אנא נסה שנית",
+            "Email is invalid":"אימייל לא תקין",
+            "Phone number is invalid":"מספר טלפון לא תקין",
+            "An error occurred during personal info update":"שגיאת מערכת,נסה שנית",
+            "Old password is incorrect":"סיסמה נוכחית לא נכונה",
+            "An error occurred during password update":"שגיאת מערכת,נסה שנית",
+            "An error occurred during profile picture upload":"שגיאת מערכת,נסה שנית",
+            "An error occurred during delete_post":"מחיקת הפוסט נכשלה,נסה שנית",
+            "An error occurred update_description_post":"עדכון הפוסט נכשל"
+
+        }
+    
+
+      
+    
+}

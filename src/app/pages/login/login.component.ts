@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/srvices/user.service';
 import { AuthService } from '../../srvices/auth.service';
 
+import { ResponsesService } from 'src/app/srvices/responses.service';
 
 
 // import { AuthenticationService } from '../../srvices/auth.service';
@@ -31,11 +32,15 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private toastr: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private ResponsesService:ResponsesService,
 
-  ) {}
+  ) {
+    ResponsesService.loadTranslationDictionary()
+  }
 
   ngOnInit() {
+
     this.windowWidth = window.innerWidth;
     
     this.loginForm = this.formBuilder.group({

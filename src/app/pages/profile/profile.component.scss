@@ -108,3 +108,14 @@ input {
     margin-bottom: 1rem;
     margin-top: 1rem;
 }
+
+.btn-large-dis {
+  height: 3em;
+  width: 15em;
+  color: white;
+  background-color: $color4;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25em;
+  // cursor: pointer;
+}

@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ForgetService } from 'src/app/srvices/forget.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/srvices/user.service';
+
 
 
 @Component({
@@ -26,6 +28,7 @@ export class RestPasswordComponent implements OnInit {
   currentStep = 1;
 
   confirmationCode: string = '';
+  confirmationCodeAgain :string ='';
   passwordResetForm!: FormGroup;
   loading = false;
   submitted = false;
@@ -35,7 +38,9 @@ export class RestPasswordComponent implements OnInit {
   errorMessage = '';
   windowWidth!: number;
 
+  showPasswordTooltip: boolean = false;
 
+sendCodeAgain :string = '';
   needApproval: boolean = false;
   aprovelText = '';
   modalImg = '';
@@ -55,6 +60,8 @@ export class RestPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private forgetService: ForgetService,
     private router: Router,
+    private userService: UserService,
+
 
 
   ) {}
@@ -152,12 +159,19 @@ export class RestPasswordComponent implements OnInit {
   // }
 
   verifyCodeAndContinue(){
-    if(this.userCode==this.confirmationCode){
-        this.currentStep = 2;
+
+    if(this.confirmationCodeAgain != '' && this.confirmationCode==this.confirmationCodeAgain ){
+      this.currentStep = 2;
         this.errorMessage='';
     }else{
-      this.errorMessage='הקוד שנשלח והקוד שהוקלד לא זהים'
+      if(this.userCode==this.confirmationCode){
+          this.currentStep = 2;
+          this.errorMessage='';
+      }else{
+        this.errorMessage='הקוד שנשלח והקוד שהוקלד לא זהים'
+      }
     }
+
     
   }
 
@@ -206,6 +220,58 @@ export class RestPasswordComponent implements OnInit {
     this.isApproved = isApproved;
     console.log(this.isApproved);
   }
+
+  toggleToolTipVisibility(){
+    this.showPasswordTooltip = !this.showPasswordTooltip
+    console.log('tolltip',this.showPasswordTooltip)
+}
+
+
+
+
+sendAgain(){
+  this.userService.forgetPassword( this.userEmail).subscribe(
+    (response) => {
+      console.log('email send successfully:', response);
+      this.forgetService.setResponse(response);
+
+      if (typeof response === 'object' && response !== null && 'user' in response) {
+        const userObject = response.user as { confirm_code?: string };
+        if (userObject.confirm_code) {
+          const confirmCode = userObject.confirm_code;
+          this.confirmationCodeAgain = confirmCode
+          console.log('Confirmation Code:', confirmCode);
+        } else {
+          console.error('Missing confirm_code in user object.');
+        }
+      } else {
+        console.error('Invalid response format or missing user property.');
+      }  
+
+      // console.log('this.validCode',this.validCode)
+      this.response=true
+      this.serverResponse = false;
+      this.modalImg = '../../../assets/img/success.png';
+      this.modalText = '  נשלח קוד לאימייל שלך';
+      this.sendCodeAgain = 'קוד חדש נשלח לאימייל שלך'
+    },
+    (error) => {
+      this.response=false
+      this.errorMessage = error.error;
+      if(error.error == 'Email not exists'){
+        this.errorMessage = 'לא קיים משתמש עם כתובת האימייל הזו'
+      }
+      console.log('this.errorMessage', this.errorMessage);
+      this.submitted = true;
+      this.serverResponse = false;
+      this.modalImg = '../../../assets/img/eroor.png';
+      this.modalText = this.errorMessage;
+    }
+  );
+}
+
+
+
 }
 
 // onSubmit() {
