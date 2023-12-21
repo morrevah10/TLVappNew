@@ -3,6 +3,7 @@
         {
             "Passwords don't match.": "סיסמאות לא זהות",
             "Invalid full name": "שם מלא לא תקין",
+            "Invalid phone number":"מספר טלפון לא תקין",
             "Email already exists":"אימייל כבר קיים במערכת",
             "Phone number already exists":"טלפון קיים במערכת",
             "Register Fails":"",
@@ -26,7 +27,8 @@
             "An error occurred during password update":"שגיאת מערכת,נסה שנית",
             "An error occurred during profile picture upload":"שגיאת מערכת,נסה שנית",
             "An error occurred during delete_post":"מחיקת הפוסט נכשלה,נסה שנית",
-            "An error occurred update_description_post":"עדכון הפוסט נכשל"
+            "An error occurred update_description_post":"עדכון הפוסט נכשל",
+            "Error fetching apartment posts": "שגיאה בטעינת הפוסטים"
 
         }
     

@@ -26,14 +26,14 @@
             <div class="card-actions">
               <div
                 class="custom-chip approval"
-                *ngIf="apartment.proof_image_confirmed"
+                *ngIf="apartment.confirmation_status == 1"
               >
                 <img src="../../../assets/icons/confirm.png" alt="">
               </div>
   
               <div
                 class="custom-chip pending"
-                *ngIf="!apartment.proof_image_confirmed"
+                *ngIf="apartment.confirmation_status == 0"
               >
                 <img src="../../../assets/icons/panding.png" alt="">
               </div>

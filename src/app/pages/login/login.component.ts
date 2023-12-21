@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private authService: AuthService,
-    private ResponsesService:ResponsesService,
+    private responsesService:ResponsesService,
 
   ) {
-    ResponsesService.loadTranslationDictionary()
+    responsesService.loadTranslationDictionary()
   }
 
   ngOnInit() {
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
         console.log('response:', response);
         this.userService.setUser(response.user);
         this.authService.login()
-        // this.toastr.success('User Registered successfully!!');
+        
         setTimeout(() => {
           this.router.navigate(['/home']);
         }, 2000);
@@ -86,7 +86,10 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         // this.submitted = false;
         console.error(error);
-        this.errorMassege= error.error
+        // this.errorMassege= error.error
+        const translatedMessage = this.responsesService.translateResponse(error.error);
+        console.log(translatedMessage);
+        this.errorMassege=translatedMessage
         console.log(' this.errorMassege', this.errorMassege)
         
       }
@@ -95,6 +98,8 @@ export class LoginComponent implements OnInit {
 
   }
 
+
+  
 
   setGreetingMessage(): void {
     const currentTime = new Date();

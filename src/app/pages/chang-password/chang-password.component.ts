@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { PopupComponent } from 'src/app/cmps/popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ResponsesService } from 'src/app/srvices/responses.service';
 
 
 
@@ -43,6 +44,7 @@ export class ChangPasswordComponent implements OnInit{
       private http: HttpClient,
       private dialog: MatDialog,
       private router: Router,
+      private responsesService:ResponsesService
     ) {
       
     }
@@ -87,10 +89,12 @@ export class ChangPasswordComponent implements OnInit{
         (error) => {
           console.error('Error update password:', error);
           // this.errorMessage = 'Error updating post: ' + error.error;
+          const translatedMessage = this.responsesService.translateResponse(error.error);
+
           this.loading=false;
           this.serverResponse = false;
           this.modalImg = '../../../assets/img/eroor.png';
-          this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
+          this.modalText = translatedMessage;
         }
         );
         this.changePassForm.patchValue({

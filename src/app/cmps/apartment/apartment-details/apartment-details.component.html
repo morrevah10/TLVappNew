@@ -156,13 +156,18 @@
           <p class="small-text">
             שכר דירה : {{ this.apartment.post_apartment_price }}
           </p>
+
+          <div class="small-text">
+            דירוג :       {{ apartment.post_rating }}
+          <img src="../../../../assets/icons/star.png" alt="" />
+        </div>
         </div>
       </div>
       
 
       <div class="apartment-description">
 
-        <p> חוות דעת</p>
+        <p>: חוות דעת</p>
         <div class="edit-input">
           <!-- <textarea
             class="input-text"
@@ -173,8 +178,14 @@
           <div class="input-text display-text">{{ apartment.post_description }}</div>
       
         </div>
+
+
       </div>
 
+      <!-- <div class="rating">
+          דירוג :       {{ apartment.post_rating }}
+        <img src="../../../../assets/icons/star.png" alt="" />
+      </div> -->
 
       <div class="apartment-btn">
         <p class="small-text">השכרת דירה זו בעבר ?</p>

@@ -63,8 +63,6 @@ export class HomeComponent implements OnInit {
   buildingControl = new FormControl();
   errorMessage = '';
 
-  // cityFilterControl = new FormControl();
-  // streetFilterControl = new FormControl({ value: '', disabled: true });
 
   cityFilterControl = new FormControl('', [Validators.required, this.cityValidator.bind(this)]);
   streetFilterControl = new FormControl({ value: '', disabled: true }, [Validators.required, this.streetValidator.bind(this)]);
@@ -124,7 +122,6 @@ export class HomeComponent implements OnInit {
     this.streetFilterControl.disable();
 
     this.setGreetingMessage();
-    // this.filteredCities$ = this.dataService.getCities();
     this.filteredCities$ = combineLatest([
       this.cityFilterControl.valueChanges.pipe(startWith('')),
       this.dataService.preprocessedCityData$,
@@ -132,7 +129,6 @@ export class HomeComponent implements OnInit {
       debounceTime(300), // Debounce user input for 300 milliseconds
       distinctUntilChanged(), // Only emit if the filter has changed
       map(([filterValue, cityIndex]) => {
-        // Fetch filtered cities from the preprocessed data
         const filteredCities = this.filterCities(cityIndex, filterValue!);
         return filteredCities;
       })
@@ -144,7 +140,6 @@ export class HomeComponent implements OnInit {
     });
 
     this.cityFilterControl.valueChanges.subscribe((selectedCity) => {
-      // console.log('Selected City:', selectedCity);
       this.selectedCity = selectedCity!;
     });
 
@@ -157,18 +152,12 @@ export class HomeComponent implements OnInit {
         this.dataService.updateStreetFilter(selectedCity, trimmedFilter);
       }
     });
-    // this.streetFilterControl.valueChanges.subscribe((filterValue) => {
-    //   const trimmedFilter = filterValue!.trim();
-    //   if (this.selectedCity !== null) {
-    //     // Update filteredStreets$ based on the selected city and user input filter
-    //     this.dataService.getStreetsByCity(this.selectedCity, trimmedFilter);
-    //   }
-    // });
+
 
     console.log('Subscribing to filteredStreets$');
     this.dataService.streetSubject.asObservable().subscribe((streets) => {
       this.filteredStreets = streets;
-      // console.log('Filtered Streets:', this.filteredStreets);
+     
     });
 
 
@@ -226,31 +215,6 @@ export class HomeComponent implements OnInit {
   
   
 
-  // private filterCities(
-  //   cityIndex: { [letter: string]: string[] },
-  //   filterValue: string
-  // ): string[] {
-  //   console.log('cityIndex', cityIndex);
-  //   filterValue = filterValue.toLowerCase();
-  //   console.log('filterValue', filterValue);
-  //   let filteredCities: string[] = [];
-
-  //   if (this.selectedCity) {
-  //     // If a city is selected, only consider cities starting with the selected letter
-  //     const selectedLetter = this.selectedCity.charAt(0).toLowerCase();
-  //     if (selectedLetter === filterValue[0]) {
-  //       // Filter and concatenate matching cities
-  //       filteredCities = filteredCities.concat(
-  //         cityIndex[selectedLetter].filter((city) =>
-  //           city.toLowerCase().includes(filterValue)
-  //         )
-  //       );
-  //     }
-  //   }
-  //   console.log('filteredCities', filteredCities);
-  //   return filteredCities;
-  // }
-
   toggleDisable() {
     this.streetFilterControl.enable();
     this.isDisable = !this.isDisable;
@@ -288,12 +252,10 @@ export class HomeComponent implements OnInit {
 
 
   navigateToApartmentForm() {
-    // console.log('clicked');
     this.router.navigate(['/rantal']);
   }
 
   navigateToPersonalInfo() {
-    // console.log('clicked');
     this.router.navigate(['/personalInfo']);
   }
 

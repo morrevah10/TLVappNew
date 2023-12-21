@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/srvices/user.service';
+import { ResponsesService } from 'src/app/srvices/responses.service';
+
 
 @Component({
   selector: 'app-register',
@@ -28,6 +30,7 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private userService: UserService,
+    private responsesService:ResponsesService,
   ) {}
 
   registerForm!: FormGroup;
@@ -76,7 +79,10 @@ export class RegisterComponent implements OnInit {
       (error) => {
         this.loading = false;
         console.error(error);
-        this.errorMessage = error
+        // this.errorMessage = error
+        const translatedMessage = this.responsesService.translateResponse(error);
+        console.log(translatedMessage);
+        this.errorMessage=translatedMessage
         console.log('this.errorMessage',this.errorMessage)
 
 

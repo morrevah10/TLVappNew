@@ -7,6 +7,7 @@ import { ImgUploadModalComponent } from '../../cmps/img-upload-modal/img-upload-
 import { PostService } from 'src/app/srvices/post.service';
 import { PopupComponent } from 'src/app/cmps/popup/popup.component';
 import { Router } from '@angular/router';
+import { ResponsesService } from 'src/app/srvices/responses.service';
 
 @Component({
   selector: 'app-profile',
@@ -36,7 +37,8 @@ export class ProfileComponent implements OnInit {
     private http: HttpClient,
     private dialog: MatDialog,
     private postService: PostService,
-    private router: Router
+    private router: Router,
+    private responsesService:ResponsesService,
   ) {}
 
   ngOnInit(): void {
@@ -50,12 +52,6 @@ export class ProfileComponent implements OnInit {
     });
     this.isAuthenticated = true;
 
-    // this.PersonalForm = this.formBuilder.group({
-    //   user_full_name: [''],
-    //   user_email: [''],
-    //   user_phone: [''],
-    //   user_id: this.user.user_id,
-    // });
 
     this.PersonalForm = this.formBuilder.group({
       user_full_name: [this.user.user_full_name, Validators.required],
@@ -113,16 +109,7 @@ export class ProfileComponent implements OnInit {
 
     const formValue = this.PersonalForm.value;
 
-    // if (
-    //   formValue.user_full_name !== this.initialUser.user_full_name ||
-    //   formValue.user_email !== this.initialUser.user_email ||
-    //   formValue.user_phone !== this.initialUser.user_phone
-    // ) {
-    //   this.formChanged = true;
-    //   console.log('this.formChanged',this.formChanged)
-    // } else {
-    //   this.formChanged = false;
-    // }
+  
 
     const payload = {
       ...formValue,
@@ -136,22 +123,19 @@ export class ProfileComponent implements OnInit {
       (response) => {
         console.log('User successfully update:', response);
 
-        // const dialogRef = this.dialog.open(PopupComponent, {
-        //   data: {
-        //     message: 'User successfully update!',
-        //   },
-        // });
-        // dialogRef.afterClosed();
+
         this.successMessage = 'הפרטים עודכנו בהצלחה';
         this.formChanged = false;
       },
       (error) => {
-        console.error('Error update user:', error);
-        this.errorMessage = 'Error updating post: ' + error.error;
+        // console.error('Error update user:', error);
+        const translatedMessage = this.responsesService.translateResponse(error.error);
+
+        this.errorMessage = translatedMessage;
+
         this.formChanged = false;
       }
     );
-    // this.PersonalForm.reset();
   }
 
   // openImageUploadModal() {

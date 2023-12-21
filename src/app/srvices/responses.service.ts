@@ -31,6 +31,13 @@ export class ResponsesService {
   }
 
 
+  translateResponse(responseKey: string): string {
+    if (this.translationDictionary && this.translationDictionary.responses) {
+      return this.translationDictionary.responses[responseKey] || responseKey;
+    } else {
+      return responseKey;
+    }
+  }
 
 
 }

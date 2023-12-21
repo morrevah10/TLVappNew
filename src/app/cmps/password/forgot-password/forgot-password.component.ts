@@ -69,7 +69,7 @@ export class ForgotPasswordComponent implements OnInit {
         (error) => {
           this.response=false
           this.errorMessage = error.error;
-          if(error.error == 'Email not exists'){
+          if(error.error == 'Email dont exists'){
             this.errorMessage = 'לא קיים משתמש עם כתובת האימייל הזו'
           }
           console.log('this.errorMessage', this.errorMessage);

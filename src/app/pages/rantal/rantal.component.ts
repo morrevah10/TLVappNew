@@ -24,7 +24,7 @@ import { DataService } from 'src/app/srvices/data.service';
   styleUrls: ['./rantal.component.scss'],
 })
 export class RantalComponent implements OnInit {
-  // apartmentForm
+  
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
   currentStep: number = 0;
   mainForm!: FormGroup;
@@ -37,9 +37,7 @@ export class RantalComponent implements OnInit {
 
   formDataSnapshot: any;
   formStates: any[] = [];
-  // formValues: any = {}
 
-  // selectedFileName: string | null = null;
 
   selectedStartDate: Date | null = null;
   selectedEndDate: Date | null = null;
@@ -56,6 +54,8 @@ export class RantalComponent implements OnInit {
   isHidden: boolean = false;
   isApproved = false;
   serverResponse = false;
+
+  sliderValue = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -90,10 +90,11 @@ export class RantalComponent implements OnInit {
       }),
       stepFour: this.formBuilder.group({
         post_description: ['', Validators.required],
+        post_rating: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
       }),
     });
 
-    // Subscribe to city autocomplete values
+   
     this.cityAutocomplete$ = this.dataService.getCities();
 
     // Subscribe to street autocomplete values
@@ -128,14 +129,15 @@ export class RantalComponent implements OnInit {
           );
         }
       });
-    // this.mainForm.get('stepOne.post_street')!.valueChanges.subscribe((value) => {
-    //   if (value) {
-    //     this.dataService.updateStreetFilter(value);
-    //   }
-    // });
+    
 
     this.formStates.push(this.mainForm.getRawValue());
     console.log('this.formStates', this.formStates);
+
+    
+
+
+
   }
 
   onSubmit() {
@@ -169,15 +171,9 @@ export class RantalComponent implements OnInit {
     this.postService.addPost(this.formData).subscribe(
       (response) => {
         console.log('Form submitted successfully:', response);
-        // this.toastr.success('Post add successfully!!');
         this.serverResponse = false;
         this.modalImg = '../../../assets/img/success.png';
         this.modalText = 'חוות הדעת שלך התקבלה וממתינה לאישור';
-        // setTimeout(() => {
-        //   this.loading = false;
-        // }, 5000);
-
-        // this.router.navigate(['/home']);
       },
       (error) => {
         this.loading = false;
@@ -189,17 +185,8 @@ export class RantalComponent implements OnInit {
     );
   }
 
-  // formatDateToDdMmYyyy(inputDate: Date): string {
-  //   // Get day, month, and year components
-  //   console.log('inputDate',inputDate)
-  //   const date = new Date(inputDate);
-  // const day = date.getDate().toString().padStart(2, '0');
-  // const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-based
-  // const year = date.getFullYear();
-  // return `${day}/${month}/${year}`;
-  // console.log('formattedDate',formattedDate)
-  // return formattedDate;
-  // }
+
+  
   formatDateToYyyyMmDd(inputDate: Date): string {
     // Get day, month, and year components
     const day = inputDate.getDate().toString().padStart(2, '0');
@@ -226,6 +213,12 @@ export class RantalComponent implements OnInit {
         reader.readAsDataURL(files[0]);
       }
     }
+  }
+
+  onSliderChange(event: any) {
+    // Update the form control value when the slider changes
+    this.mainForm.get('stepFour.post_rating')!.setValue(event.target.value);
+    console.log(typeof(this.mainForm.get('stepFour.post_rating.target.value')))
   }
 
   onImageSelectedStep3(
@@ -258,13 +251,7 @@ export class RantalComponent implements OnInit {
     return this.selectedFileNames[key] || 'No file selected';
   }
 
-  // onDateSelected(selectedDate: Date, controlName: string) {
-  //   console.log('Selected Date:', selectedDate);
-  //   const formattedDate = this.formatDateToYyyyMmDd(selectedDate);
-  //   this.mainForm.get('stepTwo')?.get(controlName)?.setValue(formattedDate);
-  //   console.log('formattedDate:', formattedDate);
-  //   // console.log('Form Value:', this.mainForm.value);
-  // }
+
 
   onDateSelected(selectedDate: Date, controlName: string) {
     if (controlName === 'post_rent_start') {
@@ -295,35 +282,7 @@ export class RantalComponent implements OnInit {
     return new File([blob], 'image.png'); // You may need to adjust the file name and type
   }
 
-  // nextStep(currentStepName: string) {
-  //   console.log('befor', this.currentStep);
-  //   if (this.currentStep < 3) {
-  //     this.currentStep++;
-  //   }
-  //   console.log('after', this.currentStep);
-  // }
 
-  // prevStep() {
-  //   console.log('before', this.currentStep);
-  //   if (this.currentStep > 0) {
-  //     this.currentStep--;
-  //   }
-  //   console.log('after', this.currentStep);
-  // }
-
-  // prevStep(step: string) {
-  //   const currentStepName = this.getStepName(this.currentStep);
-  //   console.log(`currentStepName: ${currentStepName}`);
-  //   console.log(`this.mainForm.get('${currentStepName}')!.value: `, this.mainForm.get('${currentStepName}')?.value);
-  //   console.log(`this.formStates[this.currentStep - 1]: `, this.formStates[this.currentStep - 1]);
-
-  //   this.mainForm.get('${currentStepName}')?.patchValue(this.formStates[this.currentStep - 1]);
-  //   console.log('this.formStates[this.currentStep - 1]', this.formStates[this.currentStep - 1]);
-  //   console.log('before', this.currentStep);
-  //   if (this.currentStep > 0) {
-  //     this.currentStep--;
-  //   }
-  //   console.log('after', this.currentStep);
   nextStep() {
     if (this.currentStep < 3) {
       this.currentStep++;
@@ -335,7 +294,7 @@ export class RantalComponent implements OnInit {
       this.currentStep--;
     }
   }
-  // }
+  
 
   getStepName(index: number) {
     if ((index = 0)) {
@@ -352,32 +311,7 @@ export class RantalComponent implements OnInit {
     }
     return 0;
   }
-  //   console.log(
-  //     `this.mainForm.get('currentStepName')!.value`,
-  //     this.mainForm.get('currentStepName')?.value
-  //   );
-  //   console.log(
-  //     `this.formStates[this.currentStep - 1]`,
-  //     this.formStates[this.currentStep - 1]
-  //   );
 
-  //   this.mainForm.get('currentStepName')!.value ==
-  //     this.formStates[this.currentStep - 1];
-  //   console.log(
-  //     'this.formStates[this.currentStep - 1]',
-  //     this.formStates[this.currentStep - 1]
-  //   );
-  //   console.log('befor', this.currentStep);
-  //   if (this.currentStep > 0) {
-  //     this.currentStep--;
-  //   }
-  //   console.log('after', this.currentStep);
-  // }
-  // updateCurrentStep(step:number){
-  //   console.log('befor',this.currentStep)
-  //     this.currentStep==step
-  //   console.log('after',this.currentStep)
-  // }
 
   triggerFileInput() {
     if (this.fileInput) {
@@ -407,19 +341,3 @@ export class RantalComponent implements OnInit {
     console.log(this.isApproved);
   }
 }
-// this.apartmentForm = this.formBuilder.group({
-//   post_city: [''],
-//   post_street: [''],
-//   post_building_number: '',
-//   post_apartment_number: '',
-//   post_apartment_price: '',
-//   post_rent_start: '',
-//   post_rent_end: '',
-//   proof_image: [],
-//   driving_license: [],
-//   apartment_pic_1: [],
-//   apartment_pic_2: [],
-//   apartment_pic_3: [],
-//   apartment_pic_4: [],
-//   post_description: '',
-// });

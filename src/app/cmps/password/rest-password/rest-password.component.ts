@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ForgetService } from 'src/app/srvices/forget.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/srvices/user.service';
-
+import { ResponsesService } from 'src/app/srvices/responses.service';
 
 
 @Component({
@@ -61,6 +61,7 @@ sendCodeAgain :string = '';
     private forgetService: ForgetService,
     private router: Router,
     private userService: UserService,
+    private responsesService:ResponsesService,
 
 
 
@@ -126,12 +127,13 @@ sendCodeAgain :string = '';
         setTimeout(() => this.router.navigate(['login/']), 3500);
       },
       (error) => {
-        console.error('Error sending email:', error);
+        console.error('Error sending email:', error.error);
+        const translatedMessage = this.responsesService.translateResponse(error.error);
         this.submitted = false;
         this.serverResponse = false;
         this.modalImg = '../../../assets/img/eroor.png';
         this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
-        this.errorMessage='קרתה בעיה.. נסה שוב מאוחר יותר';
+        this.errorMessage=translatedMessage;
         
 
         // this.errorMessage=error.error;
@@ -258,10 +260,12 @@ sendAgain(){
     (error) => {
       this.response=false
       this.errorMessage = error.error;
-      if(error.error == 'Email not exists'){
-        this.errorMessage = 'לא קיים משתמש עם כתובת האימייל הזו'
-      }
       console.log('this.errorMessage', this.errorMessage);
+      const translatedMessage = this.responsesService.translateResponse(this.errorMessage);
+      // if(error.error == 'Email dnot exists'){
+        this.errorMessage = translatedMessage
+      // }
+
       this.submitted = true;
       this.serverResponse = false;
       this.modalImg = '../../../assets/img/eroor.png';

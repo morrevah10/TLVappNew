@@ -10,6 +10,7 @@ import { Observable, throwError } from 'rxjs';
 import { CarouselComponent, CarouselConfig } from 'ngx-bootstrap/carousel';
 import { AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
 import { format } from 'date-fns';
+import { ResponsesService } from 'src/app/srvices/responses.service';
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -50,7 +51,8 @@ export class ApartmentListComponent implements OnInit {
     private dialog: MatDialog,
     private el: ElementRef,
     private renderer: Renderer2,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private responsesService:ResponsesService
   ) {}
 
 

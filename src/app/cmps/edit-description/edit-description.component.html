@@ -86,6 +86,11 @@
         <p class="small-text">
           שכר דירה : {{ this.apartmentData.post_apartment_price }}
         </p>
+
+        <div class="small-text">
+          דירוג :       {{ apartmentData.post_rating }}
+        <img src="../../../../assets/icons/star.png" alt="" />
+      </div>
       </div>
     </div>
 
@@ -107,6 +112,27 @@
         <!-- <input type="text" class="input-text" id="post_description" name="post_description" (click)="enableButton()" [(ngModel)]="this.apartmentData.post_description" /> -->
       </div>
     </div>
+
+    <!-- <div class="rating">
+      דירוג :       {{ apartmentData.post_rating }}
+    <img src="../../../../assets/icons/star.png" alt="" />
+  </div> -->
+
+
+  <!-- <div class="slider-container">
+    <label class="slider-value" for="slider"> דירוג: {{ mainForm.get('stepFour.post_rating')!.value }}</label>
+    <input
+      type="range"
+      id="slider"
+      name="slider"
+      step="0.1"
+      min="0"
+      max="5"
+      formControlName="post_rating"
+      (input)="onSliderChange($event)"
+    />
+  </div> -->
+
     <div class="edit-btn">
       <button (click)="onSubmit()"  type="submit" class="btn-large" [disabled]="isButtonDisabled" [ngClass]="{
         'btn-large-dis': isButtonDisabled,
