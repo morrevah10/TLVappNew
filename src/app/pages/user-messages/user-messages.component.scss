@@ -1,0 +1,17 @@
+.title {
+    direction: rtl;
+    padding-top: 16px;
+    margin: 0;
+  }
+
+  .mat-expansion-panel-header{
+    flex-direction: row-reverse;
+  }
+
+  
+  .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+      justify-content: flex-end;
+    }
+    ::ng-deep .mat-content {
+       flex-direction: row-reverse !important;
+     }

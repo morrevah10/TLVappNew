@@ -1,68 +1,41 @@
 {
-    "fakeJson":[
-    
-    [
+    "Updates":[
         {
-          "apartment_pic_1": "https://rent-buzz.s3.amazonaws.com/Posts/Users%20object%20(22)/1/apartment_pic_1/099cdb44-478e-40f7-a975-718ad5910d5c_1694868233_.webp",
-          "apartment_pic_2": null,
-          "apartment_pic_3": null,
-          "apartment_pic_4": null,
-          "driving_license": "https://rent-buzz.s3.amazonaws.com/Posts/Users%20object%20(22)/1/driving_license/63ea0c87-f70b-40bf-bcdb-46f7867654be_1694868233_.jpeg",
-          "post_apartment_number": "46",
-          "post_apartment_price": "3500",
-          "post_building_number": "61",
-          "post_city": "Acre",
-          "post_description": "sdgfsdfgd",
-          "post_id": 1,
-          "post_rent_end": "2023-09-25",
-          "post_rent_start": "2023-09-04",
-          "post_street": "Ben-Ami",
-          "post_user_id": 22,
-          "proof_image": "https://rent-buzz.s3.amazonaws.com/Posts/Users%20object%20(22)/1/proof_image/6af0ee14-7ef2-4f80-b3c1-179298b13176_1694868230_.jpeg",
-          "proof_image_confirmed": true
+          "user_id":"42",
+          "massage":"הפוסט שלך אושר",
+          "date" : " 15.01.2020",
+          "time" : "20:56",
+          "post":{
+            "post_id":"32",
+            "post_city":"תל אביב",
+            "post_street":"הרצל",
+            "post_bulding_number":"108"
+          }
         },
         {
-          "apartment_pic_1": "https://rent-buzz.s3.amazonaws.com/Posts/Users%20object%20(22)/9/apartment_pic_1/231d6a59-61d8-4fd5-8984-ed2834e2e702_1695123196_.png",
-          "apartment_pic_2": null,
-          "apartment_pic_3": null,
-          "apartment_pic_4": null,
-          "driving_license": "https://rent-buzz.s3.amazonaws.com/Posts/Users%20object%20(22)/9/driving_license/743934c8-8819-4208-9c5c-efdad8c8ec82_1695123196_.png",
-          "post_apartment_number": "46",
-          "post_apartment_price": "65437",
-          "post_building_number": "61",
-          "post_city": "Acre",
-          "post_description": "Nothing",
-          "post_id": 9,
-          "post_rent_end": "2023-09-02",
-          "post_rent_start": "2023-09-01",
-          "post_street": "Ben-Ami",
-          "post_user_id": 22,
-          "proof_image": "https://rent-buzz.s3.amazonaws.com/Posts/Users%20object%20(22)/9/proof_image/97b6c470-15a2-447e-a5b9-91e4932b5373_1695123195_.png",
-          "proof_image_confirmed": true
-        }
+          "user_id":"42",
+          "massage":"הפוסט שלך נדחה",
+          "date" : " 15.01.2020",
+          "time" : "20:56",
+          "post":{
+            "post_id":"30",
+            "post_city":"תל אביב",
+            "post_street":"העלייה",
+            "post_bulding_number":"58"
+          }
+        },
 
-    ],
-    [
-
-        {
-          "apartment_pic_1": "https://rent-buzz.s3.amazonaws.com/Posts/Users%20object%20(22)/10/apartment_pic_1/e93d6dde-8875-4cd2-b772-4fbee9ac72bd_1695123313_.png",
-          "apartment_pic_2": null,
-          "apartment_pic_3": null,
-          "apartment_pic_4": null,
-          "driving_license": "https://rent-buzz.s3.amazonaws.com/Posts/Users%20object%20(22)/10/driving_license/3398e03f-8076-48f6-a00d-781f82edc2e9_1695123313_.png",
-          "post_apartment_number": "15",
-          "post_apartment_price": "5000",
-          "post_building_number": "61",
-          "post_city": "Acre",
-          "post_description": "nothing2",
-          "post_id": 10,
-          "post_rent_end": "2023-09-02",
-          "post_rent_start": "2023-09-02",
-          "post_street": "Ben-Ami",
-          "post_user_id": 22,
-          "proof_image": "https://rent-buzz.s3.amazonaws.com/Posts/Users%20object%20(22)/10/proof_image/8796c133-cee0-46be-b87c-cb5112020726_1695123312_.png",
-          "proof_image_confirmed": true
+        {"user_id":"42",
+          "massage":"הפוסט שלך נחמק",
+          "date" : " 15.01.2020",
+          "time" : "20:56",
+          "post":{
+            "post_id":"31",
+            "post_city":"בת ים",
+            "post_street":"טבנקין",
+            "post_bulding_number":"18"
+          }
         }
-    ]
-]
+    
+      ]
 }

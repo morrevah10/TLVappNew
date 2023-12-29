@@ -1,0 +1,31 @@
+<p>dashbord works!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Post ID</th>
+      <th>Dropdown</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td>{{ item.post_user_id }}</td>
+      <td>{{ item.post_id }}</td>
+      <td>
+        <form [formGroup]="item.formGroup">
+          <select formControlName="selectedOption">
+            <option *ngFor="let option of dropdownOptions" [value]="option.value">{{ option.text }}</option>
+          </select>
+        </form>
+      </td>
+      <td>
+        <button (click)="send(item.formGroup.value.selectedOption, item.post_user_id, item.post_id)">Submit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<app-nav-bar ></app-nav-bar>

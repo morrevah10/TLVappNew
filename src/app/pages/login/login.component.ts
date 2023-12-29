@@ -8,7 +8,6 @@ import { AuthService } from '../../srvices/auth.service';
 import { ResponsesService } from 'src/app/srvices/responses.service';
 
 
-// import { AuthenticationService } from '../../srvices/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -75,12 +74,16 @@ export class LoginComponent implements OnInit {
       (response) => {
         console.log('response:', response);
         this.userService.setUser(response.user);
-        this.authService.login()
-        
-        setTimeout(() => {
-          this.router.navigate(['/home']);
-        }, 2000);
-       
+        this.authService.login(email)
+        const userEmail = this.authService.getUserEmail();
+
+        if (this.authService.isAdminUser(userEmail!)) {
+          this.router.navigate(['/dashboard']);
+        } else {
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 2000);
+        }
       },
       (error) => {
         this.loading = false;

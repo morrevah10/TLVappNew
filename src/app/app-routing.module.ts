@@ -21,6 +21,10 @@ import { AuthGuard } from './helpers/authGuard';
 import { OpeningComponent } from './cmps/opening/opening.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LoadindComponent } from './cmps/loadind/loadind.component';
+import { UserMessagesComponent } from './pages/user-messages/user-messages.component';
+import { AdminGuard } from '../app/helpers/admin.guard'; 
+import { DashbordComponent } from './pages/dashbord/dashbord.component';
+
 
 const routes: Routes = [
   { path: '', component: LoadindComponent },
@@ -45,6 +49,9 @@ const routes: Routes = [
     component: RestPasswordComponent,
   },
   { path: 'accessDenied', component: AccessDeniedComponent,canActivate: [AuthGuard], },
+
+{path:'messages',component:UserMessagesComponent},
+{path:'dashboard',component:DashbordComponent,canActivate: [AdminGuard]}
 ];
 
 @NgModule({

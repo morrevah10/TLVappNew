@@ -9,6 +9,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import {MatExpansionModule} from '@angular/material/expansion';
+
+
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -79,8 +82,12 @@ import { SearchFormComponent } from './pages/search-form/search-form.component';
 import { DateFormatPipe } from '../app/helpers/date-format.pipe';
 import { LoadindComponent } from './cmps/loadind/loadind.component';
 import { ModalComponent } from './cmps/modal/modal.component'; 
-
+ 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { UserMessagesComponent } from './pages/user-messages/user-messages.component';
+import { DashbordComponent } from './pages/dashbord/dashbord.component';
+
+
 
 
 @NgModule({
@@ -117,6 +124,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     DateFormatPipe,
     LoadindComponent,
     ModalComponent,
+    UserMessagesComponent,
+    DashbordComponent,
   ],
   imports: [
     BrowserModule,
@@ -132,6 +141,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     FormsModule,
     MatSelectModule,
 
+    MatExpansionModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,

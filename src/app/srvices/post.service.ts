@@ -85,11 +85,25 @@ export class PostService {
     return this.http.put(url, body );
   }
 
-  // updatePost(updatedData: any): Observable<any> {
-  //   console.log('updatedData',updatedData)
-  //   const url = this.APIurl + `update_description_post/`;
-  //   return this.http.put(url, updatedData);
-  // }
+
+
+  getPostsNotConfirmed(){
+    const url = this.APIurl + 'get_all_posts_zero_status/';
+    console.log(' function works')
+    return this.http.get<any[]>(url);
+  }
+
+  updateConfirmStatus(update:any): Observable<any>{
+    const url = this.APIurl+'update_confirm_status/'
+    const queryParams = { post_id:update.post_id  ,user_id:update.user_id ,confirm_status:update.confirm_status };
+    console.log(' update works')
+    console.log('queryParams',queryParams)
+    return this.http.post(url, queryParams)
+   
+  }
+
+
+  
 
 
 

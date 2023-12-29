@@ -1,0 +1,25 @@
+.table-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns, adjust as needed */
+    grid-gap: 8px; /* Adjust the gap between rows and columns */
+  }
+  
+  .header,
+  .row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns, should match the number of columns in the table-container */
+  }
+  
+  .header {
+    font-weight: bold;
+    background-color: #f0f0f0; /* Light background color for header */
+  }
+  
+  .row {
+    border: 1px solid #ddd; /* Border for each row */
+    padding: 8px; /* Padding for each cell in the row */
+  }
+  
+  select {
+    width: 100%; /* Make the dropdown fill its container */
+  }
