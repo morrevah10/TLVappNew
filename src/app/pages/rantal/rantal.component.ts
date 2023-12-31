@@ -79,7 +79,7 @@ export class RantalComponent implements OnInit {
       stepTwo: this.formBuilder.group({
         post_rent_start: ['', Validators.required],
         post_rent_end: ['', Validators.required],
-        proof_image: [null, Validators.required],
+        rent_agreement: [null, Validators.required],
         driving_license: [null, Validators.required],
       }),
       stepThree: this.formBuilder.group({
@@ -147,7 +147,7 @@ export class RantalComponent implements OnInit {
       ...this.mainForm.get('stepThree')?.value,
       ...this.mainForm.get('stepFour')?.value,
 
-      proof_image: this.mainForm.get('stepTwo.proof_image')?.value,
+      rent_agreement: this.mainForm.get('stepTwo.rent_agreement')?.value,
       driving_license: this.mainForm.get('stepTwo.driving_license')?.value,
       apartment_pic_1: this.mainForm.get('stepThree.apartment_pic_1')?.value,
       apartment_pic_2: this.mainForm.get('stepThree.apartment_pic_2')?.value,

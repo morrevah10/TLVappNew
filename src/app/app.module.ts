@@ -86,6 +86,7 @@ import { ModalComponent } from './cmps/modal/modal.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UserMessagesComponent } from './pages/user-messages/user-messages.component';
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
+import { PostDetailsComponent } from './pages/post-details/post-details.component';
 
 
 
@@ -126,6 +127,7 @@ import { DashbordComponent } from './pages/dashbord/dashbord.component';
     ModalComponent,
     UserMessagesComponent,
     DashbordComponent,
+    PostDetailsComponent,
   ],
   imports: [
     BrowserModule,

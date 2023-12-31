@@ -24,6 +24,7 @@ import { LoadindComponent } from './cmps/loadind/loadind.component';
 import { UserMessagesComponent } from './pages/user-messages/user-messages.component';
 import { AdminGuard } from '../app/helpers/admin.guard'; 
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
+import { PostDetailsComponent } from './pages/post-details/post-details.component';
 
 
 const routes: Routes = [
@@ -51,7 +52,8 @@ const routes: Routes = [
   { path: 'accessDenied', component: AccessDeniedComponent,canActivate: [AuthGuard], },
 
 {path:'messages',component:UserMessagesComponent},
-{path:'dashboard',component:DashbordComponent,canActivate: [AdminGuard]}
+{path:'dashboard',component:DashbordComponent,canActivate: [AdminGuard]},
+{ path: 'post-details/:status/:postId', component: PostDetailsComponent },
 ];
 
 @NgModule({

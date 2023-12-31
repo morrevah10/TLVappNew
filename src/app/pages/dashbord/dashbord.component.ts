@@ -11,10 +11,12 @@ export class DashbordComponent implements OnInit {
 
   data: any[] = [];
 dropdownOptions: { text: string; value: number }[] = [
-  { text: 'Option 1', value: 1 },
-  { text: 'Option 2', value: 2 },
-  { text: 'Option 3', value: 3 },
-  // Add more options as needed
+  { text: 'אישור הפוסט', value: 1 },
+  { text: 'בפרטי הדירה', value: 2 },
+  { text: 'בתאיכים', value: 3 },
+  { text: 'שכירות', value: 4 },
+  { text: 'תעודה מזהה', value: 5 },
+  { text: 'שפה לא נאותה', value: 6 },
 ];
 submissionForm!: FormGroup ;
 

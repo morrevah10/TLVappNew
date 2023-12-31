@@ -1,28 +1,29 @@
-<h2 class="title">ההודעות שלך</h2>
+
+
+  <h2 class="title">ההודעות שלך</h2>
 
   <mat-accordion>
     <mat-expansion-panel *ngFor="let message of messages">
       <mat-expansion-panel-header>
-        <mat-panel-title >
-          <!-- {{ message.massage }} -->
-          {{message.post.post_id}}:פוסט
+        <mat-panel-title>
+          {{ message.post_id ? message.post_id + ':פוסט' : 'No Post ID' }}
         </mat-panel-title>
         <mat-panel-description>
-          <!-- Date: {{ message.date }}, Time: {{ message.time }} -->
-          בכתובת :{{message.post.post_street}},{{message.post.post_bulding_number}},{{message.post.post_city}}
+          בכתובת: {{ message.postDetails.post_street }}, {{ message.postDetails.post_building_number }}, {{ message.postDetails.post_city }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="panel-content">
-      <!-- You can customize the content of the panel here -->
-      <!-- <p>Additional content or actions related to the message</p> -->
-      {{ message.massage }}
-      Date: {{ message.date }}, Time: {{ message.time }}
-      <button mat-button color="primary" (click)="markAsUnread(message)">
-        Mark as Unread
-      </button>
-      <button mat-button color="warn" (click)="deleteMessage(message)">
-        Delete
-      </button>
-    </div>
+        <!-- {{ message.message }} -->
+       <p>{{message.user_message}}</p>
+       <a [routerLink]="['/post-details', message.postDetails.confirmation_status, message.post_id]">View Post Details</a>
+        <p>תאירך {{ message.date | date: 'dd/MM/yyyy' }}, שעה: {{ message.date | date: 'HH:mm:ss' }}</p>        
+        <button mat-button color="primary" (click)="markAsUnread(message)">
+          Mark as Unread
+        </button>
+        <button mat-button color="warn" (click)="deleteMessage(message)">
+          Delete
+        </button>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
+  

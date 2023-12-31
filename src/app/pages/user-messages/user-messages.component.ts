@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from '../../models/message.model';
+import { forkJoin, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { MessageService } from '../../srvices/massage.service';
 import { UserService } from 'src/app/srvices/user.service';
+import { PostService } from 'src/app/srvices/post.service';
 
 
 @Component({
@@ -17,30 +20,53 @@ export class UserMessagesComponent implements OnInit {
   messages2=[]
   user:any;
 
-  constructor(private messageService: MessageService,private userService: UserService,) {}
+  constructor(private messageService: MessageService,private userService: UserService,private postService:PostService) {}
 
   ngOnInit(): void {
-    
-    this.userService.user$.subscribe((user) => {
-      console.log('User updated:', user);
-      this.user = user;
-      // console.log('this.user1111111111',this.user)
+    this.userService.user$.pipe(
+      switchMap(user => {
+        this.user = user;
+        if (user && user.user_id) {
+          return this.messageService.getUserMessages(user.user_id);
+        } else {
+          console.error('User or user ID is undefined');
+          return of([]);
+        }
+      }),
+      switchMap((messages: Message[]) => {
+        const postIds = messages.map(message => message.post_id).filter(postId => postId);
+        const postRequests = postIds.map(postId => this.postService.getApartmentDetails(parseInt(postId)));
+        return forkJoin([of(messages), forkJoin(postRequests)]);
+      })
+    ).subscribe(([messages, postDetails]: [Message[], any[]]) => {
+      this.messages = messages.map((message, index) => {
+        return {
+          ...message,
+          postDetails: postDetails[index]
+        };
+      });
+      console.log('this.messages new', this.messages); // Move the log inside the subscribe callback
     });
-    this.loadUserMessages();
   }
+
 
   
   loadUserMessages(): void {
-    console.log('this.user',this.user)
-    console.log('this.user.user_id',this.user.user_id)
-    this.messageService.getUserMessages(this.user.user_id).subscribe((data:any) => {
-    //   // this.messages = data.Updates;
-      this.messages = data
-      console.log('this.messages',this.messages)
-    });
+    if (this.user && this.user.user_id) {
+      console.log('this.user', this.user);
+      console.log('this.user.user_id', this.user.user_id);
+      this.messageService.getUserMessages(this.user.user_id).subscribe((data: any) => {
+        this.messages = data;
+        console.log('this.messages', this.messages);
+      });
+    } else {
+      console.error('User or user ID is undefined');
+    }
   }
 
-
+getPostAddress(){
+  // this.postService.getApartmentDetails()
+}
 
 
 
