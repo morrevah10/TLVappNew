@@ -1,5 +1,4 @@
-<p>post-details works!</p>
-<div *ngIf="postForm" [formGroup]="postForm">
+<!-- <div *ngIf="postForm" [formGroup]="postForm">
 
 
 <div *ngIf="status === 2">
@@ -55,4 +54,125 @@
   </div>
   
   <button type="button" (click)="submitForm()" [disabled]="!enableButton">Update</button>
+   -->
+
+<!-- 
+   <div *ngIf="postForm" [formGroup]="postForm" class="post-details-container">
+
+    <div class="form-section" *ngIf="status === 2">
+      <label class="form-section-title">Address Details</label>
+      <div>
+        <label for="post_city">City</label>
+        <input type="text" id="post_city" formControlName="post_city" />
+      </div>
+      <div>
+        <label for="post_street">Street</label>
+        <input type="text" id="post_street" formControlName="post_street" />
+      </div>
+      <div>
+        <label for="post_building_number">House Number</label>
+        <input type="text" id="post_building_number" formControlName="post_building_number" />
+      </div>
+      <div>
+        <label for="post_apartment_number">Apartment Number</label>
+        <input type="text" id="post_apartment_number" formControlName="post_apartment_number" />
+      </div>
+    </div>
+    
+    <div class="form-section" *ngIf="status === 3">
+      <label class="form-section-title">Rental Dates</label>
+      <div>
+        <label for="post_rent_start">Entry Date</label>
+        <input type="text" id="post_rent_start" formControlName="post_rent_start" />
+      </div>
+      <div>
+        <label for="post_rent_end">Exit Date</label>
+        <input type="text" id="exipost_rent_endtDate" formControlName="post_rent_end" />
+      </div>
+    </div>
+    
+    <div class="form-section" *ngIf="status === 4">
+      <label class="form-section-title">Lease Information</label>
+      <div>
+        <label for="rent_agreement">Lease Field</label>
+        <input type="text" id="rent_agreement" formControlName="rent_agreement" />
+      </div>
+    </div>
+    
+    <div class="form-section" *ngIf="status === 5">
+      <label class="form-section-title">ID Card Information</label>
+      <div>
+        <label for="driving_license">ID Card Field</label>
+        <input type="text" id="driving_license" formControlName="driving_license" />
+      </div>
+    </div>
+    
+    <div class="form-section" *ngIf="status === 6">
+      <a [routerLink]="['/post-details',  this.currPost.post_id]">Go to another location</a>
+    </div>
+  
+
+    <button type="button" (click)="submitForm()" [disabled]="!enableButton">Update</button>
+
+  </div> -->
+  
+  
+  <div *ngIf="postForm" [formGroup]="postForm" class="post-details-container">
+
+    <div class="form-section" *ngIf="status === 2">
+      <label class="form-section-title">Address Details</label>
+      <div class="form-row">
+        <label for="post_city">City</label>
+        <input type="text" id="post_city" formControlName="post_city" />
+      </div>
+      <div class="form-row">
+        <label for="post_street">Street</label>
+        <input type="text" id="post_street" formControlName="post_street" />
+      </div>
+      <div class="form-row">
+        <label for="post_building_number">House Number</label>
+        <input type="text" id="post_building_number" formControlName="post_building_number" />
+      </div>
+      <div class="form-row">
+        <label for="post_apartment_number">Apartment Number</label>
+        <input type="text" id="post_apartment_number" formControlName="post_apartment_number" />
+      </div>
+    </div>
+    
+    <div class="form-section" *ngIf="status === 3">
+      <label class="form-section-title">Rental Dates</label>
+      <div class="form-row">
+        <label for="post_rent_start">Entry Date</label>
+        <input type="text" id="post_rent_start" formControlName="post_rent_start" />
+      </div>
+      <div class="form-row">
+        <label for="post_rent_end">Exit Date</label>
+        <input type="text" id="exipost_rent_endtDate" formControlName="post_rent_end" />
+      </div>
+    </div>
+    
+    <div class="form-section" *ngIf="status === 4">
+      <label class="form-section-title">Lease Information</label>
+      <div class="form-row">
+        <label for="rent_agreement">Lease Field</label>
+        <input type="text" id="rent_agreement" formControlName="rent_agreement" />
+      </div>
+    </div>
+    
+    <div class="form-section" *ngIf="status === 5">
+      <label class="form-section-title">ID Card Information</label>
+      <div class="form-row">
+        <label for="driving_license">ID Card Field</label>
+        <input type="text" id="driving_license" formControlName="driving_license" />
+      </div>
+    </div>
+    
+    <div class="form-section" *ngIf="status === 6">
+      <a [routerLink]="['/post-details',  this.currPost.post_id]">Go to another location</a>
+    </div>
+  
+    <button type="button" (click)="submitForm()" [disabled]="!enableButton">Update</button>
+
+  </div>
+  
   

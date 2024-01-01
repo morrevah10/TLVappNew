@@ -70,6 +70,7 @@ constructor(private postService: PostService, private formBuilder: FormBuilder) 
     this.postService.updateConfirmStatus(update).subscribe(
       (response) => {
         console.log('Form submitted successfully:', response);
+        this.loadData();
        
       },
       (error) => {
@@ -78,7 +79,6 @@ constructor(private postService: PostService, private formBuilder: FormBuilder) 
       }
     );
 
-    this.loadData();
 
   }
 

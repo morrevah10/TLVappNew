@@ -2,7 +2,7 @@
 
   <h2 class="title">ההודעות שלך</h2>
 
-  <mat-accordion>
+  <mat-accordion class="container">
     <mat-expansion-panel *ngFor="let message of messages">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -14,14 +14,16 @@
       </mat-expansion-panel-header>
       <div class="panel-content">
         <!-- {{ message.message }} -->
-       <p>{{message.user_message}}</p>
-       <a [routerLink]="['/post-details', message.postDetails.confirmation_status, message.post_id]">View Post Details</a>
-        <p>תאירך {{ message.date | date: 'dd/MM/yyyy' }}, שעה: {{ message.date | date: 'HH:mm:ss' }}</p>        
+       <p class="user-message">{{message.user_message}}
+        <a [routerLink]="['/post-details', message.postDetails.confirmation_status, message.post_id]">תקן את פרטי הפוסט</a>
+       </p>
+        <p>תאריך: {{ message.date | date: 'dd/MM/yyyy' }}</p>        
+        <p> שעה: {{ message.date | date: 'HH:mm:ss' }}</p>
         <button mat-button color="primary" (click)="markAsUnread(message)">
-          Mark as Unread
+          סמן כלא נקרא
         </button>
         <button mat-button color="warn" (click)="deleteMessage(message)">
-          Delete
+          מחק
         </button>
       </div>
     </mat-expansion-panel>

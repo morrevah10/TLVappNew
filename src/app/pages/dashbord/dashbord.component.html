@@ -144,56 +144,56 @@
   <div class="search">
 
     <div class="searchType">
-      <label for="searchType">Search Type:</label>
+      <label for="searchType">חפש לפי:</label>
       <select [(ngModel)]="searchType" name="searchType" id="searchType">
-        <option value="userId">User ID</option>
-        <option value="postId">Post ID</option>
+        <option value="userId">משתמש</option>
+        <option value="postId">פוסט</option>
       </select>
     </div>
   
     <div class="searchInput">
-      <label for="searchInput">Search:</label>
+      <label for="searchInput">הכנס מספר:</label>
       <input type="text" [(ngModel)]="searchInput" name="searchInput" id="searchInput">
     
     </div>
 
     <div class="btn">
-      <button (click)="search()">Search</button>
+      <button (click)="search()">חפש</button>
     </div>
   </div>
   
   <div class="filter">
 
     <div class="sortBy">
-      <label for="sortBy">Sort By:</label>
+      <label for="sortBy">מיין:</label>
       <select [(ngModel)]="sortBy" name="sortBy" id="sortBy">
-        <option value="userId">User ID</option>
-        <option value="postId">Post ID</option>
+        <option value="userId">משתמש</option>
+        <option value="postId">פוסט</option>
       </select>
     </div>
   
     <div class="sortOrder">
-      <label for="sortOrder">Sort Order:</label>
+      <label for="sortOrder">מיין על פי:</label>
       <select [(ngModel)]="sortOrder" name="sortOrder" id="sortOrder">
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
+        <option value="asc">סדר עולה</option>
+        <option value="desc">סדר יורד</option>
       </select>
     </div>
 
     <div class="btn">
-      <button (click)="sort()">Sort</button>
+      <button (click)="sort()">מיין</button>
     </div>
   </div>
 </section>
 
-<div *ngIf="filteredData.length > 0; else noResults">
+<div class="table" *ngIf="filteredData.length > 0; else noResults">
   <table>
     <thead>
       <tr>
-        <th>User ID</th>
-        <th>Post ID</th>
-        <th>Dropdown</th>
-        <th>Action</th>
+        <th>מזהה משתמש</th>
+        <th>מזהה פוסט</th>
+        <th>אפשרויות</th>
+        <th>פעולות</th>
       </tr>
     </thead>
     
@@ -209,7 +209,7 @@
           </form>
         </td>
         <td>
-          <button (click)="send(item.formGroup.value.selectedOption, item.post_user_id, item.post_id)">Submit</button>
+          <button class="btn-action" (click)="send(item.formGroup.value.selectedOption, item.post_user_id, item.post_id)">עדכן סטטוס</button>
         </td>
       </tr>
     </tbody>
@@ -217,7 +217,7 @@
 </div>
 
 <ng-template #noResults>
-  <p>No results found.</p>
+  <p class="no-results">אין תוצאות ...</p>
 </ng-template>
 
 <app-nav-bar></app-nav-bar>
