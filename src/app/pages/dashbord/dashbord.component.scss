@@ -1,25 +1,130 @@
-.table-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns, adjust as needed */
-    grid-gap: 8px; /* Adjust the gap between rows and columns */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+form {
+  margin: 0;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.custom-select {
+  width: 100%;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+::ng-deep div.mat-mdc-select-panel {
+  direction: rtl !important;
+}
+
+::ng-deep .mat-mdc-option {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+  margin-right: 0px !important;
+}
+
+
+
+.search {
+  // background-color: red;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.filter {
+  // background-color: blue;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.searchType {
+  // background-color: yellow;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ label {
+  flex: 1;
+}
+select {
+  flex: 2;
+}
+}
+.searchInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  label {
+    flex: 1;
   }
-  
-  .header,
-  .row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns, should match the number of columns in the table-container */
+  input{
+    // max-width: 75px;
+    flex: 2;
+   }
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sortBy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  label {
+    flex: 1;
   }
-  
-  .header {
-    font-weight: bold;
-    background-color: #f0f0f0; /* Light background color for header */
-  }
-  
-  .row {
-    border: 1px solid #ddd; /* Border for each row */
-    padding: 8px; /* Padding for each cell in the row */
-  }
-  
   select {
-    width: 100%; /* Make the dropdown fill its container */
+    flex: 2;
   }
+}
+
+.sortOrder{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  label {
+    flex: 1;
+  }
+  select {
+    flex: 2;
+  }
+}

@@ -91,6 +91,7 @@ export class RantalComponent implements OnInit {
       stepFour: this.formBuilder.group({
         post_description: ['', Validators.required],
         post_rating: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
+        // post_comments:[''],
       }),
     });
 

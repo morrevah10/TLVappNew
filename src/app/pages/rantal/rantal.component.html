@@ -107,7 +107,7 @@
             </div>
 
             <label for="rent_agreement"
-              >*חוזה שיכרות\חשבון חשמל\חשבון ארנונה</label
+              >*חוזה שכירות\חשבון חשמל\חשבון ארנונה</label
             >
             <input
               type="file"
@@ -168,10 +168,7 @@
                 <label class="custom-upload-button" for="file-input">
                   Upload
                 </label>
-                <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
-                <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
-                  selectedFileName("apartment_pic_1", "stepThree")
-                }}</span> -->
+
                 <button
                   class="remove-btn"
                   (click)="deleteImage('apartment_pic_1', 'stepThree')"
@@ -204,10 +201,7 @@
                 <label class="custom-upload-button" for="file-input2">
                   Upload
                 </label>
-                <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
-                <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
-                  selectedFileName("apartment_pic_1", "stepThree")
-                }}</span> -->
+               
                 <button
                   class="remove-btn"
                   (click)="deleteImage('apartment_pic_2', 'stepThree')"
@@ -216,30 +210,7 @@
                 </button>
               </div>
 
-              <!-- <div class="grid-item">
-                <label for="apartment_pic_2"></label>
-                <img
-                  *ngIf="mainForm.get('stepThree.apartment_pic_2')!.value"
-                  [src]="mainForm.get('stepThree.apartment_pic_2')!.value"
-                  alt="Apartment Image 2"
-                />
-                <input
-                  type="file"
-                  #apartmentPic2Input
-                  (change)="
-                  onImageSelectedStep3($event, 'apartment_pic_2', 'stepThree',apartmentPic2Input)
-                  "
-                />
-                <span *ngIf="mainForm.get('stepThree.apartment_pic_2')!.value">{{
-                  selectedFileName("apartment_pic_2", "stepThree")
-                }}</span>
-                <button
-                  mat-button
-                  (click)="deleteImage('apartment_pic_2', 'stepThree')"
-                >
-                  Remove
-                </button>
-              </div> -->
+             
 
               <div class="grid-item">
                 <label for="apartment_pic_3"></label>
@@ -265,10 +236,7 @@
                 <label class="custom-upload-button" for="file-input3">
                   Upload
                 </label>
-                <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
-                <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
-                  selectedFileName("apartment_pic_1", "stepThree")
-                }}</span> -->
+               
                 <button
                   class="remove-btn"
                   (click)="deleteImage('apartment_pic_3', 'stepThree')"
@@ -277,34 +245,7 @@
                 </button>
               </div>
 
-              <!-- <div class="grid-item">
-              <label for="apartment_pic_3"
-                >תמונה 3</label
-              >
-              <img
-                *ngIf="mainForm.get('stepThree.apartment_pic_3')!.value"
-                [src]="mainForm.get('stepThree.apartment_pic_3')!.value"
-                alt="Apartment Image 3"
-              />
-              <input
-                type="file"
-                #apartmentPic3Input
-                (change)="
-                onImageSelectedStep3($event, 'apartment_pic_3', 'stepThree',apartmentPic2Input)
-                "
-                class="form-control"
-              />
-              <span *ngIf="mainForm.get('stepThree.apartment_pic_3')!.value">{{
-                selectedFileName("apartment_pic_3", "stepThree")
-              }}</span>
-              <button
-                mat-button
-                (click)="deleteImage('apartment_pic_3', 'stepThree')"
-              >
-                Remove
-              </button>
-            </div> -->
-
+             
               <div class="grid-item">
                 <label for="apartment_pic_4"></label>
                 <img
@@ -329,10 +270,7 @@
                 <label class="custom-upload-button" for="file-input4">
                   Upload
                 </label>
-                <!-- <button (click)="triggerFileInput()" mat-button class="custom-upload-button">Custom Upload Button</button> -->
-                <!-- <span *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value">{{
-                selectedFileName("apartment_pic_1", "stepThree")
-              }}</span> -->
+                
                 <button
                   class="remove-btn"
                   (click)="deleteImage('apartment_pic_4', 'stepThree')"
@@ -341,33 +279,7 @@
                 </button>
               </div>
 
-              <!-- <div class="grid-item">
-            <label for="apartment_pic_4"
-              >תמונה 4</label
-            >
-            <img
-              *ngIf="mainForm.get('stepThree.apartment_pic_4')!.value"
-              [src]="mainForm.get('stepThree.apartment_pic_4')!.value"
-              alt="Apartment Image 4"
-            />
-            <input
-              type="file"
-              #apartmentPic4Input
-              (change)="
-              onImageSelectedStep3($event, 'apartment_pic_4', 'stepThree',apartmentPic2Input)
-              "
-              class="form-control"
-            />
-            <span *ngIf="mainForm.get('stepThree.apartment_pic_4')!.value">{{
-              selectedFileName("apartment_pic_4", "stepThree")
-            }}</span>
-            <button
-              mat-button
-              (click)="deleteImage('apartment_pic_4', 'stepThree')"
-            >
-              Remove
-            </button>
-          </div> -->
+             
             </div>
           </div>
         </form>
@@ -402,6 +314,14 @@
                 (input)="onSliderChange($event)"
               />
             </div>
+
+            <!-- <label for="post_comments">הערות</label>
+            <textarea
+              id="post_comments"
+              formControlName="post_comments"
+              class="share-input"
+            ></textarea> -->
+
           </div>
         </form>
         <div class="step-btn">
@@ -412,6 +332,7 @@
               'disabled-btn-share': !mainForm.get('stepFour')!.valid,
               'btn-next share': mainForm.get('stepFour')!.valid
             }"
+            [disabled]="!mainForm.get('stepFour')!.valid"
           >
             שתף את החוויה שלך
           </button>

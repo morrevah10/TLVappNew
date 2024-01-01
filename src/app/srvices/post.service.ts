@@ -102,7 +102,14 @@ export class PostService {
    
   }
 
+  updateApartmentDetails(newPost:any): Observable<any> {
+    console.log('newPost',newPost)
+    const url = this.APIurl + `update_post/`;
+    return this.http.put(url, newPost );
+  }
 
+  
+  }
   
 
 
@@ -112,5 +119,5 @@ export class PostService {
 
 
 
-}
+
 

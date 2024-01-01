@@ -27,7 +27,6 @@ export class PostDetailsComponent {
       this.status = +params['status'];
       this.postId = +params['postId'];
 
-      // this.initializeForm();
       this.loadPostDetails(this.postId);
     });
   }
@@ -41,7 +40,7 @@ export class PostDetailsComponent {
   }
 
   initializeForm(): void {
-    // Initialize the form group with common controls
+    
     this.postForm = this.fb.group({
       post_city: [this.currPost.post_city, Validators.required],
       post_street: [this.currPost.post_street, Validators.required],
@@ -49,11 +48,12 @@ export class PostDetailsComponent {
         this.currPost.post_building_number,
         Validators.required,
       ],
-      post_apartment_number: [this.currPost.detail4, Validators.required],
+      post_apartment_number: [this.currPost.post_apartment_number
+        , Validators.required],
       post_rent_start: [this.currPost.post_rent_start, Validators.required],
       post_rent_end: [this.currPost.post_rent_end, Validators.required],
-      driving_license: [this.currPost.driving_license],
-      rent_agreement: [this.currPost.rent_agreement], 
+      driving_license: [this.currPost.driving_license, Validators.required],
+      rent_agreement: [this.currPost.rent_agreement, Validators.required], 
     });
 
     this.postForm.valueChanges.subscribe(() => {
@@ -73,16 +73,16 @@ export class PostDetailsComponent {
         };
     
         console.log('newPost',newPost)
-        // this.postService.updateApartmentDetails(this.postId, newPost).subscribe(
-        //   () => {
-        //     // Handle successful update
-        //     console.log('Apartment details updated successfully');
-        //   },
-        //   (error) => {
-        //     // Handle error
-        //     console.error('Error updating apartment details', error);
-        //   }
-        // );
+        this.postService.updateApartmentDetails(newPost).subscribe(
+          () => {
+            // Handle successful update
+            console.log('Apartment details updated successfully');
+          },
+          (error) => {
+            // Handle error
+            console.error('Error updating apartment details', error);
+          }
+        );
       }
     
   }

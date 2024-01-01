@@ -1,12 +1,49 @@
-<p>dashbord works!</p>
+
+<!-- 
+<p>dashboard works!</p>
+
+<section class="search_filter">
+  <div>
+    <label for="searchType">חפש לפי</label>
+    <select [(ngModel)]="searchType" name="searchType" id="searchType">
+      <option value="userId">משתמש</option>
+      <option value="postId">פוסט</option>
+    </select>
+  
+    <label for="searchInput">חפש:</label>
+    <input type="text" [(ngModel)]="searchInput" name="searchInput" id="searchInput">
+  
+    <button (click)="search()">חיפוש</button>
+  </div>
+
+  <div>
+    <label for="sortBy">מיין לפי:</label>
+    <select [(ngModel)]="sortBy" name="sortBy" id="sortBy">
+      <option value="userId">User ID</option>
+      <option value="postId">Post ID</option>
+    </select>
+  
+    <label for="sortOrder">מיין על פי:</label>
+    <select [(ngModel)]="sortOrder" name="sortOrder" id="sortOrder">
+      <option value="asc">עולה</option>
+      <option value="desc">יורד</option>
+    </select>
+  
+    <button (click)="sort()">מיין</button>
+  </div>
+
+
+
+</section>
 
 <table>
   <thead>
     <tr>
-      <th>User ID</th>
-      <th>Post ID</th>
-      <th>Dropdown</th>
-      <th>Action</th>
+      <th>המשתמש
+      </th>
+      <th>פוסט</th>
+      <th>אפשרויות</th>
+      <th>פעולות</th>
     </tr>
   </thead>
   <tbody>
@@ -15,17 +52,172 @@
       <td>{{ item.post_id }}</td>
       <td>
         <form [formGroup]="item.formGroup">
-          <select formControlName="selectedOption">
-            <option *ngFor="let option of dropdownOptions" [value]="option.value">{{ option.text }}</option>
-          </select>
+          <mat-select formControlName="selectedOption" class="custom-select">
+            <mat-option *ngFor="let option of dropdownOptions" [value]="option.value">
+              {{ option.text }}
+            </mat-option>
+          </mat-select>
         </form>
       </td>
       <td>
-        <button (click)="send(item.formGroup.value.selectedOption, item.post_user_id, item.post_id)">Submit</button>
+        <button (click)="send(item.formGroup.value.selectedOption, item.post_user_id, item.post_id)">עדכן</button>
       </td>
     </tr>
   </tbody>
 </table>
 
+<app-nav-bar></app-nav-bar> -->
 
-<app-nav-bar ></app-nav-bar>
+
+
+
+
+<!-- 
+<p>dashboard works!</p>
+
+<div>
+  <label for="searchType">Search Type:</label>
+  <select [(ngModel)]="searchType" name="searchType" id="searchType">
+    <option value="userId">User ID</option>
+    <option value="postId">Post ID</option>
+  </select>
+
+  <label for="searchInput">Search:</label>
+  <input type="text" [(ngModel)]="searchInput" name="searchInput" id="searchInput">
+
+  <button (click)="search()">Search</button>
+</div>
+
+<div>
+  <label for="sortBy">Sort By:</label>
+  <select [(ngModel)]="sortBy" name="sortBy" id="sortBy">
+    <option value="userId">User ID</option>
+    <option value="postId">Post ID</option>
+  </select>
+
+  <label for="sortOrder">Sort Order:</label>
+  <select [(ngModel)]="sortOrder" name="sortOrder" id="sortOrder">
+    <option value="asc">Ascending</option>
+    <option value="desc">Descending</option>
+  </select>
+
+  <button (click)="sort()">Sort</button>
+</div>
+
+<div *ngIf="filteredData.length > 0; else noResults">
+  <table>
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Post ID</th>
+        <th>Dropdown</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let item of filteredData">
+        <td>{{ item.post_user_id }}</td>
+        <td>{{ item.post_id }}</td>
+        <td>
+          <form [formGroup]="item.formGroup">
+            <select formControlName="selectedOption" class="option">
+              <option *ngFor="let option of dropdownOptions" [value]="option.value">{{ option.text }}</option>
+            </select>
+          </form>
+        </td>
+        <td>
+          <button (click)="send(item.formGroup.value.selectedOption, item.post_user_id, item.post_id)">Submit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noResults>
+  <p>No results found.</p>
+</ng-template> -->
+
+<!-- <p>dashboard works!</p> -->
+
+<section class="search-filter">
+  <div class="search">
+
+    <div class="searchType">
+      <label for="searchType">Search Type:</label>
+      <select [(ngModel)]="searchType" name="searchType" id="searchType">
+        <option value="userId">User ID</option>
+        <option value="postId">Post ID</option>
+      </select>
+    </div>
+  
+    <div class="searchInput">
+      <label for="searchInput">Search:</label>
+      <input type="text" [(ngModel)]="searchInput" name="searchInput" id="searchInput">
+    
+    </div>
+
+    <div class="btn">
+      <button (click)="search()">Search</button>
+    </div>
+  </div>
+  
+  <div class="filter">
+
+    <div class="sortBy">
+      <label for="sortBy">Sort By:</label>
+      <select [(ngModel)]="sortBy" name="sortBy" id="sortBy">
+        <option value="userId">User ID</option>
+        <option value="postId">Post ID</option>
+      </select>
+    </div>
+  
+    <div class="sortOrder">
+      <label for="sortOrder">Sort Order:</label>
+      <select [(ngModel)]="sortOrder" name="sortOrder" id="sortOrder">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+
+    <div class="btn">
+      <button (click)="sort()">Sort</button>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="filteredData.length > 0; else noResults">
+  <table>
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Post ID</th>
+        <th>Dropdown</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let item of filteredData">
+        <td>{{ item.post_user_id }}</td>
+        <td>{{ item.post_id }}</td>
+        <td>
+          <form [formGroup]="item.formGroup">
+            <select formControlName="selectedOption" class="option">
+              <option *ngFor="let option of dropdownOptions" [value]="option.value">{{ option.text }}</option>
+            </select>
+          </form>
+        </td>
+        <td>
+          <button (click)="send(item.formGroup.value.selectedOption, item.post_user_id, item.post_id)">Submit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noResults>
+  <p>No results found.</p>
+</ng-template>
+
+<app-nav-bar></app-nav-bar>
