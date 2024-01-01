@@ -111,14 +111,6 @@ export class PostService {
 
 
 
-  //! save to local only for check
-  // savePostsToLocal(posts: any[]): void {
-  //   localStorage.setItem('apartmentPosts', JSON.stringify(posts));
-  // }
 
-  // getPostsFromLocal(): any[] {
-  //   const storedPosts = localStorage.getItem('apartmentPosts');
-  //   return storedPosts ? JSON.parse(storedPosts) : [];
-  // }
 }
 

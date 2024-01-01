@@ -2,7 +2,7 @@
 
 <!-- post-details.component.html -->
 
-<div *ngIf="status === 2">
+<!-- <div *ngIf="status === 2"> -->
     <div>
       <label for="post_city">City</label>
       <input type="text" id="post_city" formControlName="post_city" />
@@ -19,101 +19,38 @@
       <label for="post_apartment_number">Apartment Number</label>
       <input type="text" id="post_apartment_number" formControlName="post_apartment_number" />
     </div>
-  </div>
+  <!-- </div> -->
   
-  <div *ngIf="status === 3">
-    <!-- Step 2: Show fields for status 3 -->
+  <!-- <div *ngIf="status === 3"> -->
+   
     <div>
-      <label for="entryDate">Entry Date</label>
-      <input type="text" id="entryDate" formControlName="entryDate" />
+      <label for="post_rent_start">Entry Date</label>
+      <input type="text" id="post_rent_start" formControlName="post_rent_start" />
     </div>
     <div>
-      <label for="exitDate">Exit Date</label>
-      <input type="text" id="exitDate" formControlName="exitDate" />
+      <label for="post_rent_end">Exit Date</label>
+      <input type="text" id="exipost_rent_endtDate" formControlName="post_rent_end" />
     </div>
-  </div>
+  <!-- </div> -->
   
-  <div *ngIf="status === 4">
-    <!-- Step 3: Show fields for status 4 -->
+  <!-- <div *ngIf="status === 4"> -->
     <div>
-      <label for="leaseField">Lease Field</label>
-      <input type="text" id="leaseField" formControlName="leaseField" />
+      <label for="rent_agreement">Lease Field</label>
+      <input type="text" id="rent_agreement" formControlName="rent_agreement" />
     </div>
-  </div>
+  <!-- </div> -->
   
-  <div *ngIf="status === 5">
-    <!-- Step 4: Show fields for status 5 -->
+  <!-- <div *ngIf="status === 5"> -->
     <div>
-      <label for="idCardField">ID Card Field</label>
-      <input type="text" id="idCardField" formControlName="idCardField" />
+      <label for="driving_license">ID Card Field</label>
+      <input type="text" id="driving_license" formControlName="driving_license" />
     </div>
-  </div>
+  <!-- </div> -->
   
-  <div *ngIf="status === 6">
-    <!-- Redirect the user to another location for status 6 -->
-    <a routerLink="/another-location">Go to another location</a>
-  </div>
+  <!-- <div *ngIf="status === 6"> -->
+    <a [routerLink]="['/post-details',  this.currPost.post_id]">Go to another location</a>
+
+  <!-- </div> -->
   
-  <!-- Always show the general update button -->
   <button type="button" (click)="submitForm()" [disabled]="!enableButton">Update</button>
   
-<!-- 
-<div *ngIf="currPost.confirmation_status == 2"></div>
-
-<div *ngIf="currPost.confirmation_status == 3"></div>
-
-<div *ngIf="currPost.confirmation_status == 4"></div>
-
-<div *ngIf="currPost.confirmation_status == 5"></div>
-
-<div *ngIf="currPost.confirmation_status == 6"></div> -->
-<!-- 
-<form [formGroup]="postForm" (ngSubmit)="submitForm()">
-    <div>
-      <label>Message:</label>
-      <textarea formControlName="message"></textarea>
-    </div>
-  
-    <div *ngIf="status === 2">
-      <div>
-        <label>Detail 1:</label>
-        <input formControlName="detail1" />
-      </div>
-      <div>
-        <label>Detail 2:</label>
-        <input formControlName="detail2" />
-      </div>
-      <div>
-        <label>Detail 3:</label>
-        <input formControlName="detail3" />
-      </div>
-      <div>
-        <label>Detail 4:</label>
-        <input formControlName="detail4" />
-      </div>
-    </div>
-  
-    <div *ngIf="status === 3">
-      <div>
-        <label>Date 1:</label>
-        <input type="date" formControlName="date1" />
-      </div>
-      <div>
-        <label>Date 2:</label>
-        <input type="date" formControlName="date2" />
-      </div>
-    </div>
-  
-    <div *ngIf="status === 4 || status === 5">
-      <div>
-        <label>Uploaded Picture:</label>
-        <img *ngIf="postForm.value.uploadedPicture" [src]="postForm.value.uploadedPicture" alt="Uploaded Picture" />
-      </div>
-      <div>
-        <label>New Picture:</label>
-        <input type="file" formControlName="newPicture" />
-      </div>
-    </div>
-  
-    <button type="submit" [disabled]="!enableButton">Save Changes</button>
-  </form> -->

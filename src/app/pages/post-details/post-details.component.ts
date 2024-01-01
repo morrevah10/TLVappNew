@@ -63,5 +63,27 @@ export class PostDetailsComponent {
 
   submitForm(): void {
     console.log('this.postForm.value', this.postForm.value);
+
+    
+      if (this.postForm.valid) {
+      
+        const newPost = {
+          ...this.currPost,
+          ...this.postForm.value
+        };
+    
+        console.log('newPost',newPost)
+        // this.postService.updateApartmentDetails(this.postId, newPost).subscribe(
+        //   () => {
+        //     // Handle successful update
+        //     console.log('Apartment details updated successfully');
+        //   },
+        //   (error) => {
+        //     // Handle error
+        //     console.error('Error updating apartment details', error);
+        //   }
+        // );
+      }
+    
   }
 }
