@@ -28,6 +28,9 @@ export class EditDescriptionComponent implements OnInit {
   isOpinionEditable: boolean = true;
 
 
+  showGallery: boolean = false;
+  galleryImages: string[] = [];
+
   needApproval: boolean = false;
   aprovelText = '';
   modalImg = '';
@@ -145,6 +148,21 @@ export class EditDescriptionComponent implements OnInit {
     this.isApproved = isApproved;
     console.log(this.isApproved);
   }
+
+  openGallery() {
+    this.galleryImages = [
+      this.apartmentData.apartment_pic_1,
+      this.apartmentData.apartment_pic_2,
+      this.apartmentData.apartment_pic_3,
+      this.apartmentData.apartment_pic_4,
+    ];
+    this.showGallery = true;
+  }
+
+  closeGallery() {
+    this.showGallery = false;
+  }
+
 
 }
 

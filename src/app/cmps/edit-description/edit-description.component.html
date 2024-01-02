@@ -1,68 +1,9 @@
-<!-- <section class="edit-container">
-  <div class="edit-contant">
-    <p>you can edit your review here : </p>
-    <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="post_city">{{"my_post_edit_review_page_city_txt"| translate}}:</label>
-          <input type="text" class="form-control" id="post_city" name="post_city" [(ngModel)]="this.apartmentData.post_city"  [disabled]="true"/>
-        </div>
-    
-        <div class="form-group">
-            <label for="post_street">{{"my_post_edit_review_page_street_txt"| translate}}:</label>
-            <input type="text" class="form-control" id="post_street" name="post_street" [(ngModel)]="this.apartmentData.post_street" [disabled]="true"/>
-          </div>
-    
-          <div class="form-group">
-            <label for="post_building_number">{{"post_details_page_building_txt"| translate}}:</label>
-            <input type="text" class="form-control" id="post_building_number" name="post_building_number" [(ngModel)]="this.apartmentData.post_building_number" [disabled]="true"/>
-          </div>
-    
-          <div class="form-group">
-            <label for=" post_apartment_number">{{"my_post_edit_review_page_apartment_number_txt"| translate}}:</label>
-            <input type="text" class="form-control" id=" post_apartment_number" name="post_apartment_number" [(ngModel)]="this.apartmentData.post_apartment_number"  [disabled]="true"/>
-          </div>
-    
-          <div class="form-group">
-            <label for="post_apartment_price">{{"my_post_edit_review_page_rent_price_txt"| translate}}:</label>
-            <input type="text" class="form-control" id="post_apartment_price" name="post_apartment_price" [(ngModel)]="this.apartmentData.post_apartment_price" [disabled]="true"/>
-          </div>
-    
-          
-          <div class="form-group">
-              <label for="post_rent_end">{{"my_post_edit_review_page_rent_price_txt"| translate}}:</label>
-              <input type="text" class="form-control" id="post_rent_end" name="post_rent_end" [(ngModel)]="this.apartmentData.post_rent_end" [disabled]="true" />
-            </div>
-            
-            
-            <div class="form-group">
-                <label for="post_rent_start">{{"my_post_edit_review_page_entry_date_txt"| translate}}:</label>
-                <input type="text" class="form-control" id=" post_rent_start" name="post_rent_start" [(ngModel)]="this.apartmentData.post_rent_start" [disabled]="true" />
-            </div>
-    
-            <div class="form-group">
-                <label for="apartment_pic_1">apartment pic:</label>
-                <img class="img-description" src="{{this.apartmentData.apartment_pic_1}}" alt="">
-            </div>
-            
-            <div class="form-group">
-              <label for="post_description">{{"my_post_edit_review_page_review_txt"| translate}}:</label>
-              <input type="text" class="form-control" id="post_description" name="post_description" (click)="enableButton()" [(ngModel)]="this.apartmentData.post_description" />
-            </div>
-            
-        <button type="submit" class="btn" [disabled]="isButtonDisabled" >{{"my_post_edit_review_page_update_btn"| translate}}</button>
-    
-        <div *ngIf="errorMessage" class="error-message">
-          {{ errorMessage }}
-        </div>
-      </form>
-  </div>
-</section>
-<app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar> -->
 
 <section class="edit-container">
   <div class="edit-contant">
     <div class="edit-card">
-      <div class="edit-card-img">
+      <div class="edit-card-img" (click)="openGallery()">
+
         <img src="{{ this.apartmentData.apartment_pic_1 }}" alt="" />
       </div>
       <div class="edit-card-details">
@@ -95,11 +36,7 @@
     </div>
 
     <div class="edit-description">
-      <!-- <div class="edit-btn">
-        <button (click)="enableButton()">
-            <img src="../../../assets/icons/edit-btn.png" alt="">
-          </button>
-      </div> -->
+
       <p> חוות דעת</p>
       <div class="edit-input">
         <textarea
@@ -109,29 +46,10 @@
           (click)="enableButton()"
           [(ngModel)]="apartmentData.post_description"
         ></textarea>
-        <!-- <input type="text" class="input-text" id="post_description" name="post_description" (click)="enableButton()" [(ngModel)]="this.apartmentData.post_description" /> -->
       </div>
     </div>
 
-    <!-- <div class="rating">
-      דירוג :       {{ apartmentData.post_rating }}
-    <img src="../../../../assets/icons/star.png" alt="" />
-  </div> -->
-
-
-  <!-- <div class="slider-container">
-    <label class="slider-value" for="slider"> דירוג: {{ mainForm.get('stepFour.post_rating')!.value }}</label>
-    <input
-      type="range"
-      id="slider"
-      name="slider"
-      step="0.1"
-      min="0"
-      max="5"
-      formControlName="post_rating"
-      (input)="onSliderChange($event)"
-    />
-  </div> -->
+   
 
     <div class="edit-btn">
       <button (click)="onSubmit()"  type="submit" class="btn-large" [disabled]="isButtonDisabled" [ngClass]="{
@@ -146,6 +64,9 @@
       {{ errorMessage }}
     </div>
   </div>
+
+  <app-gallery *ngIf="showGallery" [images]="galleryImages" (close)="closeGallery()"></app-gallery>
+  
 </section>
 
 <app-modal

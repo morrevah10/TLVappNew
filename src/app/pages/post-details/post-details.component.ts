@@ -89,7 +89,7 @@ export class PostDetailsComponent {
     
   }
 
-
+  
   onImageSelectedStep(
     event: any,
     controlName: string,
@@ -105,6 +105,8 @@ export class PostDetailsComponent {
           if (files[0]) {
             const key = `${controlName}`;
             this.selectedFileNames[key] = files[0].name;
+            this.enableButton =true
+
           }
         };
 

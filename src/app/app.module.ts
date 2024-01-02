@@ -87,6 +87,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UserMessagesComponent } from './pages/user-messages/user-messages.component';
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
+import { GalleryComponent } from './pages/gallery/gallery.component';
 
 
 
@@ -128,6 +129,7 @@ import { PostDetailsComponent } from './pages/post-details/post-details.componen
     UserMessagesComponent,
     DashbordComponent,
     PostDetailsComponent,
+    GalleryComponent,
   ],
   imports: [
     BrowserModule,

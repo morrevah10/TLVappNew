@@ -169,11 +169,7 @@
 
     <div class="form-section" *ngIf="status === 5">
       <label for="driving_license"></label>
-      <img
-        *ngIf="postForm.get('driving_license')!.value"
-        [src]="postForm.get('driving_license')!.value"
-        alt="driving license"
-      />
+      
       <input
         type="file"
         #drivinglicense
@@ -190,12 +186,6 @@
         Upload
       </label>
      
-      <button
-        class="remove-btn"
-        (click)="deleteImage('driving_license')"
-      >
-        Remove
-      </button>
     </div>
     
     <div class="form-section" *ngIf="status === 6">

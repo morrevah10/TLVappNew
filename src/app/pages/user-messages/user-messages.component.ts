@@ -64,9 +64,7 @@ export class UserMessagesComponent implements OnInit {
     }
   }
 
-getPostAddress(){
-  // this.postService.getApartmentDetails()
-}
+
 
 
 

@@ -9,6 +9,7 @@
 
     <section class="cards-container" *ngIf="isApartmentsReady">
       <ng-container *ngIf="userPosts.length > 0; else noApartments">
+        
         <div class="card" *ngFor="let apartment of userPosts.slice(0, postsToShow)">
           <div (click)="editApartmentDetails(apartment.post_id)" class="card-img">
             <img [src]="apartment.apartment_pic_1" alt="Apartment Image" />
