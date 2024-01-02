@@ -95,7 +95,7 @@ export class PostService {
 
   updateConfirmStatus(update:any): Observable<any>{
     const url = this.APIurl+'update_confirm_status/'
-    const queryParams = { post_id:update.post_id  ,user_id:update.user_id ,confirm_status:update.confirm_status };
+    const queryParams = { post_id:update.post_id  ,user_id:update.user_id ,confirmation_status:update.confirm_status };
     console.log(' update works')
     console.log('queryParams',queryParams)
     return this.http.post(url, queryParams)
