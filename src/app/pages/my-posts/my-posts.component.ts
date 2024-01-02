@@ -88,7 +88,7 @@ export class myPostsComponent implements OnInit {
     this.needApproval = true;
     this.isHidden = true;
     console.log('this.isHidden', this.isHidden);
-    this.aprovelText = 'האם אתה בטוח שאתה רוצה למחוק את חוות הדעת שלך ?';
+    this.aprovelText = 'האם אתה בטוח שאתה רוצה למחוק את חוות הדעת שלך?';
 
     this.serverResponse = true;
     this.apartmentId=apartmentId;

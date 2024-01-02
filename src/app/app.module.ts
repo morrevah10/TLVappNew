@@ -88,6 +88,7 @@ import { UserMessagesComponent } from './pages/user-messages/user-messages.compo
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { GalleryComponent } from './pages/gallery/gallery.component';
+import { ImagePageComponent } from './cmps/image-page/image-page.component';
 
 
 
@@ -130,6 +131,7 @@ import { GalleryComponent } from './pages/gallery/gallery.component';
     DashbordComponent,
     PostDetailsComponent,
     GalleryComponent,
+    ImagePageComponent,
   ],
   imports: [
     BrowserModule,

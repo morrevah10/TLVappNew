@@ -108,7 +108,14 @@ export class PostService {
     return this.http.put(url, newPost );
   }
 
-  
+  updateAprtemanetPics(newPost:any): Observable<any> {
+    console.log('newPost',newPost)
+    const url = this.APIurl + `update_aprtemanet_pics/`;
+    return this.http.put(url, newPost );
+  }
+
+
+
   }
   
 

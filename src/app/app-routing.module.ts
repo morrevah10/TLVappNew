@@ -25,6 +25,7 @@ import { UserMessagesComponent } from './pages/user-messages/user-messages.compo
 import { AdminGuard } from '../app/helpers/admin.guard'; 
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
+import { ImagePageComponent } from './cmps/image-page/image-page.component';
 
 
 const routes: Routes = [
@@ -54,6 +55,7 @@ const routes: Routes = [
 {path:'messages',component:UserMessagesComponent},
 {path:'dashboard',component:DashbordComponent,canActivate: [AdminGuard]},
 { path: 'post-details/:status/:postId', component: PostDetailsComponent },
+{ path: 'image-page/:apartmentId', component: ImagePageComponent },
 ];
 
 @NgModule({

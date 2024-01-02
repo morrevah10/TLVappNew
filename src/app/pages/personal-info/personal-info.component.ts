@@ -172,7 +172,7 @@ export class PersonalInfoComponent implements OnInit {
   logout() {
     console.log('logedout!!!');
     this.needApproval = true;
-    this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק ?';
+    this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק?';
     this.modalImg = '../../../assets/img/success.png';
     this.modalText = 'התנתקת בהצלחה';
 

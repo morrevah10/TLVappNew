@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/srvices/post.service';
 import { UserService } from 'src/app/srvices/user.service';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-apartment-details',

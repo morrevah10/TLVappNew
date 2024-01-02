@@ -107,7 +107,7 @@
             </div>
 
             <label for="rent_agreement"
-              >*חוזה שכירות\חשבון חשמל\חשבון ארנונה</label
+              >*חוזה שכירות</label
             >
             <input
               type="file"
@@ -294,7 +294,7 @@
       <div *ngIf="currentStep === 3">
         <form [formGroup]="mainForm">
           <div formGroupName="stepFour">
-            <label for="post_description">*ביקורת</label>
+            <label for="post_description">*חוות דעת</label>
             <textarea
               id="post_description"
               formControlName="post_description"
@@ -314,13 +314,6 @@
                 (input)="onSliderChange($event)"
               />
             </div>
-
-            <!-- <label for="post_comments">הערות</label>
-            <textarea
-              id="post_comments"
-              formControlName="post_comments"
-              class="share-input"
-            ></textarea> -->
 
           </div>
         </form>

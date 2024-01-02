@@ -19,10 +19,10 @@
     <div class="edit-date-price">
       <div class="dates">
         <p class="small-text">
-          תאריך כניסה לדירה : {{ this.apartmentData.post_rent_start }}
+          תאריך כניסה לדירה : {{ this.apartmentData.post_rent_start| date:'dd/MM/yyyy' }}
         </p>
         <p class="small-text">
-          תאריך יציאה מהדירה : {{ this.apartmentData.post_rent_end }}
+          תאריך יציאה מהדירה : {{ this.apartmentData.post_rent_end| date:'dd/MM/yyyy' }}
         </p>
         <p class="small-text">
           שכר דירה : {{ this.apartmentData.post_apartment_price }}
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-   
+    <div (click)="updateImg()">להוספה או החלפה של תמונות לחץ כאן</div>
 
     <div class="edit-btn">
       <button (click)="onSubmit()"  type="submit" class="btn-large" [disabled]="isButtonDisabled" [ngClass]="{
@@ -66,8 +66,10 @@
   </div>
 
   <app-gallery *ngIf="showGallery" [images]="galleryImages" (close)="closeGallery()"></app-gallery>
-  
+
 </section>
+
+
 
 <app-modal
   [needAprove]="this.needApproval"

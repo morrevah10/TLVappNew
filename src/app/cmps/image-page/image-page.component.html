@@ -1,0 +1,137 @@
+
+
+<div >
+    <form [formGroup]="imageForm">
+        <div class="grid-container">
+          <div class="grid-item">
+            <label for="apartment_pic_1"></label>
+            <img
+              *ngIf="imageForm.get('apartment_pic_1')!.value"
+              [src]="imageForm.get('apartment_pic_1')!.value"
+              alt="Apartment Image 1"
+            />
+            <input
+              type="file"
+              #apartmentPic1Input
+              (change)="
+              onImageSelected(
+                  $event,
+                  'apartment_pic_1')
+              "
+              class="file-input"
+              id="file-input"
+            />
+            <label class="custom-upload-button" for="file-input">
+              Upload
+            </label>
+
+            <button
+              class="remove-btn"
+              (click)="deleteImage('apartment_pic_1')"
+            >
+              Remove
+            </button>
+          </div>
+
+          <div class="grid-item">
+            <label for="apartment_pic_2"></label>
+            <img
+              *ngIf="imageForm.get('apartment_pic_2')!.value"
+              [src]="imageForm.get('apartment_pic_2')!.value"
+              alt="Apartment Image 2"
+            />
+            <input
+              type="file"
+              #apartmentPic2Input
+              (change)="
+              onImageSelected(
+                  $event,
+                  'apartment_pic_2'
+                )
+              "
+              class="file-input"
+              id="file-input2"
+            />
+            <label class="custom-upload-button" for="file-input2">
+              Upload
+            </label>
+           
+            <button
+              class="remove-btn"
+              (click)="deleteImage('apartment_pic_2')"
+            >
+              Remove
+            </button>
+          </div>
+
+         
+
+          <div class="grid-item">
+            <label for="apartment_pic_3"></label>
+            <img
+              *ngIf="imageForm.get('apartment_pic_3')!.value"
+              [src]="imageForm.get('apartment_pic_3')!.value"
+              alt="Apartment Image 3"
+            />
+            <input
+              type="file"
+              #apartmentPic3Input
+              (change)="
+              onImageSelected(
+                  $event,
+                  'apartment_pic_3'
+                )
+              "
+              class="file-input"
+              id="file-input3"
+            />
+            <label class="custom-upload-button" for="file-input3">
+              Upload
+            </label>
+           
+            <button
+              class="remove-btn"
+              (click)="deleteImage('apartment_pic_3')"
+            >
+              Remove
+            </button>
+          </div>
+
+         
+          <div class="grid-item">
+            <label for="apartment_pic_4"></label>
+            <img
+              *ngIf="imageForm.get('apartment_pic_4')!.value"
+              [src]="imageForm.get('apartment_pic_4')!.value"
+              alt="Apartment Image 4"
+            />
+            <input
+              type="file"
+              #apartmentPic4Input
+              (change)="
+              onImageSelected(
+                  $event,
+                  'apartment_pic_4'
+                )
+              "
+              class="file-input"
+              id="file-input4"
+            />
+            <label class="custom-upload-button" for="file-input4">
+              Upload
+            </label>
+            
+            <button
+              class="remove-btn"
+              (click)="deleteImage('apartment_pic_4')"
+            >
+              Remove
+            </button>
+          </div>
+
+         
+        </div>
+    </form>
+    <button class="submit-btn" (click)="submitForm()">Submit</button>
+
+  </div>

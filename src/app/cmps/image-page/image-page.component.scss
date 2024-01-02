@@ -1,0 +1,114 @@
+@import "../../../app/styles/colors";
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid with minimum item width of 150px */
+    gap: 10px;
+    padding: 10px; /* Add some padding to the container */
+  }
+  
+  .grid-item {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+  }
+  
+  .grid-item img {
+    max-width: 100%; 
+    max-height: 150px; 
+    margin: 1rem; 
+  }
+  
+  
+  
+  .title {
+    direction: rtl;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+  
+  .form-group {
+    direction: rtl;
+    padding: 1.5rem 0 0 0;
+  }
+  
+  .text {
+    direction: rtl;
+    font-size: 20px;
+    font-weight: 500;
+    color: #888888;
+  }
+  
+  input {
+    direction: rtl;
+    // background-color: #F2F7FF;
+  }
+  
+  .color-text {
+    color: $color1;
+    cursor: pointer;
+  }
+
+  
+  .btn-large {
+    height: 3em;
+    width: 15em;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.25em;
+    transition: background-color 0.5s ease;
+  }
+  
+  .small-text {
+    color: $color4;
+    direction: rtl;
+  }
+  
+  
+  
+  
+  .custom-upload-button {
+    background-color: $color1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-upload-button:hover {
+    background-color: $color2;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .remove-btn{
+    color: #ff0000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: color 0.3s;
+    background-color: white;
+  }
+  
+  .remove-btn:hover {
+    color: #a90000;
+    background-color: white;
+  
+  }

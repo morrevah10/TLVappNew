@@ -252,4 +252,14 @@ input {
 
 .click-here{
 color: #007bff;
+margin: 0px;
 }
+
+.link-container {
+  display: flex;
+  align-items: center;
+}
+
+.link-container a {
+  margin-right: 10px; 
+  }

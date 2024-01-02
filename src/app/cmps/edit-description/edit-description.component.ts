@@ -9,6 +9,7 @@ import { UserService } from 'src/app/srvices/user.service';
 
 
 
+
 // import { HttpClient } from '@angular/common/http'; // Import HttpClient
 
 @Component({
@@ -163,8 +164,12 @@ export class EditDescriptionComponent implements OnInit {
     this.showGallery = false;
   }
 
+  updateImg(){
+    console.log('update')
+    console.log('apartmentId',this.apartmentId)
+    this.router.navigate(['/image-page', this.apartmentId]);
+  }
 
 }
 
   
-// this.errorMessage = 'Error updating post: ' + error.error;

@@ -19,15 +19,15 @@
     <ng-container *ngIf="isApartmentsReady">
       <div *ngIf="filteredApartments.length === 0">
         <div class="no-apartments-message">
-          <p>לצערנו אין תוצאות שתואמות את החיפוש שלך ..</p>
+          <p>לצערנו אין תוצאות שתואמות את החיפוש שלך...</p>
 
           <div class="no-message">
-            <p>לא מצאת את מה שחיפשת ?</p>
+            <p>לא מצאת את מה שחיפשת?</p>
             <a routerLink="/home">לחזרה לחיפוש</a>
           </div>
 
           <div class="no-message">
-            <p>רוצה להוסיף את החוויה שלך ?</p>
+            <p>רוצה להוסיף את החוויה שלך?</p>
             <a routerLink="/rantal">להוספת חוויה</a>
           </div>
         </div>
@@ -179,17 +179,3 @@
   </div>
 </section>
 
-<!-- <ng-template #noApartments >
-  <div class="no-apartments-message">
-   <p>לא מצאת את מה שחיפשת ?</p>
-   <a routerLink="/home">לחזרה לחיפוש</a>
-   <p>רוצה להוסיף את החוויה שלך ?</p>
-   <a routerLink="/rantal">להוספת חוויה</a>
-  </div>
-</ng-template> -->
-
-<!-- <section *ngIf="!isApartmentsReady">
-  <div class="no-apartments-message">
-  <p>טוען את תוצאות החיוש שלך ...</p>
-   </div>
-</section> -->
