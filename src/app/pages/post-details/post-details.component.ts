@@ -16,6 +16,8 @@ export class PostDetailsComponent {
   postForm!: FormGroup;
   enableButton: boolean = false;
 
+  selectedFileNames: { [key: string]: string } = {};
+
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
@@ -85,5 +87,34 @@ export class PostDetailsComponent {
         );
       }
     
+  }
+
+
+  onImageSelectedStep(
+    event: any,
+    controlName: string,
+  ) {
+    if (event.target && event.target.files) {
+      const files = event.target.files;
+      if (files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageURL = e.target?.result as string;
+          this.postForm.get(`${controlName}`)?.setValue(imageURL);
+          // Check if files[0] is defined before accessing its name property
+          if (files[0]) {
+            const key = `${controlName}`;
+            this.selectedFileNames[key] = files[0].name;
+          }
+        };
+
+        reader.readAsDataURL(files[0]);
+      }
+    }
+  }
+
+  deleteImage(controlName: string) {
+    // Reset the form control value and the selected image URL
+    this.postForm.get(`${controlName}`)?.setValue(null);
   }
 }
