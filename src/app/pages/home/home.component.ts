@@ -69,7 +69,6 @@ export class HomeComponent implements OnInit {
 
   filteredCities$!: Observable<string[]>;
   filteredStreets$!: Observable<string[]>;
-
   selectedCity: string = '';
   filteredStreets: string[] = [];
 
@@ -78,6 +77,10 @@ export class HomeComponent implements OnInit {
 
   isAuthenticated = false;
   windowWidth!: number;
+  isInputValid = false;
+  isStreetInputValid = false;
+
+
 
   constructor(
     private router: Router,
@@ -93,21 +96,20 @@ export class HomeComponent implements OnInit {
   // Custom validator for the city control
   cityValidator(control: AbstractControl): ValidationErrors | null {
     const selectedCity = control.value;
-    const isValidCity = this.validateAutocompleteValue(selectedCity, this.filteredCities);
-    return isValidCity ? null : { invalidCity: true };
+    if (this.filteredCities.length > 0 && !this.filteredCities.includes(selectedCity)) {
+      return { invalidCity: true };
+    }
+    return null;
   }
 
   // Custom validator for the street control
   streetValidator(control: AbstractControl): ValidationErrors | null {
     const selectedStreet = control.value;
-    const isValidStreet = this.validateAutocompleteValue(selectedStreet, this.filteredStreets);
-    return isValidStreet ? null : { invalidStreet: true };
+    if (this.filteredStreets.length > 0 && !this.filteredStreets.includes(selectedStreet)) {
+      return { invalidStreet: true };
+    }
+    return null;
   }
-
-  validateAutocompleteValue(value: string, options: string[]): boolean {
-    return !!value && options.includes(value);
-  }
-  
   ngOnInit() {
     console.log('HomeComponent initialized');
     this.userService.user$.subscribe((user) => {
@@ -141,6 +143,7 @@ export class HomeComponent implements OnInit {
 
     this.cityFilterControl.valueChanges.subscribe((selectedCity) => {
       this.selectedCity = selectedCity!;
+      this.isDisable = false;
     });
 
     combineLatest([
@@ -150,9 +153,14 @@ export class HomeComponent implements OnInit {
       if (selectedCity !== null) {
         const trimmedFilter = filterValue!.trim();
         this.dataService.updateStreetFilter(selectedCity, trimmedFilter);
+
+        console.log('Filtered Streets:', this.filteredStreets);
       }
     });
 
+    this.streetFilterControl.valueChanges.subscribe((value) => {
+      this.isStreetInputValid = this.filteredStreets.includes(value!);
+    });
 
     console.log('Subscribing to filteredStreets$');
     this.dataService.streetSubject.asObservable().subscribe((streets) => {
@@ -171,6 +179,19 @@ export class HomeComponent implements OnInit {
     });
 
 
+
+    // this.cityFilterControl.valueChanges.subscribe((value) => {
+    //   console.log('value',value)
+    //   this.isInputValid = this.filteredCities.includes(value!);
+    //   console.log('this.isInputValid',this.isInputValid)
+    // });
+    
+    // this.streetFilterControl.valueChanges.subscribe((value) => {
+    //   console.log('value',value)
+    //   this.isInputValid = this.filteredStreets.includes(value!);
+    //   console.log('this.isInputValid',this.isInputValid)
+
+    // });
 
 
   }
@@ -204,7 +225,18 @@ export class HomeComponent implements OnInit {
     // if (!filteredCities.length && !isHebrewLetter) {
     //   filteredCities.push('נא להקליד בעברית'); // Replace with the desired message or option
     // }
+
   
+    if(filteredCities.includes(filterValue)){
+      this.isInputValid=true
+      this.isDisable=true
+      this.toggleDisable()
+    }else{
+      this.isInputValid=false
+      this.isDisable=false
+    }
+    
+  console.log('this.isInputValid',this.isInputValid)
     console.log('filteredCities', filteredCities);
     return filteredCities;
   }
@@ -212,12 +244,18 @@ export class HomeComponent implements OnInit {
   
   
   
-  
+  onStreetOptionSelected(): void {
+    this.isStreetInputValid = true;
+  }
   
 
   toggleDisable() {
-    this.streetFilterControl.enable();
     this.isDisable = !this.isDisable;
+    if (!this.isDisable) {
+      this.streetFilterControl.enable();
+    } else {
+      this.streetFilterControl.disable();
+    }
     this.streetFilterControl.setValue('');
   }
 

@@ -1,85 +1,3 @@
-<!-- <section [appLanguage]="'ltr'" class="home-container">
-  <div class="home-contant">
-    <div class="searcg-img">
-      <img src="../../../assets/Illustration/search.svg" alt="" />
-    </div>
-    <div class="search-container">
-      <form class="form-container">
-        <mat-form-field class="=form-field" appearance="outline">
-          <input
-            placeholder="city"
-            matInput
-            [formControl]="cityFilterControl"
-            [matAutocomplete]="auto"
-          />
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option
-              *ngFor="let city of filteredCities$ | async"
-              [value]="city"
-              (click)="toggleDisable()"
-            >
-              {{ city }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-
-        <mat-form-field class="=form-field" appearance="outline">
-          <input
-            placeholder="street"
-            matInput
-            [formControl]="streetFilterControl"
-            [matAutocomplete]="streetAuto"
-            matTooltip="Please select a city first"
-            [matTooltipDisabled]="isDisable"
-          />
-          <mat-autocomplete #streetAuto="matAutocomplete">
-            <mat-option *ngFor="let street of filteredStreets" [value]="street">
-              {{ street }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-
-        <mat-form-field class="=form-field" appearance="outline">
-          <input
-            matInput
-            placeholder="building number"
-            [formControl]="buildingControl"
-          />
-        </mat-form-field>
-
-        <mat-form-field class="=form-field" appearance="outline">
-          <input
-            matInput
-            placeholder="apartment number"
-            [formControl]="apartmentControl"
-          />
-        </mat-form-field>
-      </form>
-
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="css-btn" css-btn (click)="searchApartments()">
-        Look For Reviews
-      </button>
-
-      <button class="newBTN" (click)="navigateToApartmentForm()">
-        {{ "search_post_page_add_post_btn" | translate }}
-        <mat-icon>add_circle_outline</mat-icon>
-      </button>
-    </div>
-  </div>
-
-</section>
-
-<section class="list">
-  <app-apartment-list #apartmentList> </app-apartment-list>
-</section>
-
-<app-nav-bar *ngIf="this.windowWidth <= 567 "></app-nav-bar> -->
 
 <section class="home-container">
   <div class="home-contant">
@@ -94,9 +12,9 @@
       <form class="form-container">
         <div class="form-item">
           <label>*עיר</label>
-          <div class="error-message" *ngIf="searchForm.get('cityFilterControl')?.hasError('invalidCity') && searchForm.get('cityFilterControl')?.dirty && searchForm.get('cityFilterControl')?.value">
+          <div class="error-message" *ngIf="!isInputValid && selectedCity.length!=0">
             אנא בחר עיר מהרשימה בלבד
-          </div>
+            </div>
           <mat-form-field class="form-field" appearance="outline">
             <input
               class="input"
@@ -108,7 +26,6 @@
               <mat-option
                 *ngFor="let city of filteredCities$ | async"
                 [value]="city"
-                (click)="toggleDisable()"
               >
                 {{ city }}
               </mat-option>
@@ -117,16 +34,17 @@
         </div>
         <div class="form-item">
           <label>*רחוב</label>
-          <div class="error-message" *ngIf="searchForm.get('streetFilterControl')?.hasError('invalidStreet') && searchForm.get('streetFilterControl')?.dirty && searchForm.get('streetFilterControl')?.value">
+          <div class="error-message" *ngIf="!isStreetInputValid && streetFilterControl.value!.trim().length > 0">
             אנא בחר רחוב מהרשימה בלבד
           </div>
-          <mat-form-field class="=form-field" appearance="outline">
+          <mat-form-field class="form-field" appearance="outline">
             <input
               matInput
               [formControl]="streetFilterControl"
               [matAutocomplete]="streetAuto"
               matTooltip="תבחר עיר לפני רחוב"
               [matTooltipDisabled]="isDisable"
+              (optionSelected)="onStreetOptionSelected()"
             />
             <mat-autocomplete #streetAuto="matAutocomplete">
               <mat-option
