@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -15,7 +16,7 @@ import { UserService } from 'src/app/srvices/user.service';
 import { PostService } from 'src/app/srvices/post.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 import { DataService } from 'src/app/srvices/data.service';
 
 @Component({
@@ -68,6 +69,9 @@ export class RantalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
+    
+    
     this.mainForm = this.formBuilder.group({
       stepOne: this.formBuilder.group({
         post_city: ['', Validators.required],
@@ -91,11 +95,24 @@ export class RantalComponent implements OnInit {
       stepFour: this.formBuilder.group({
         post_description: ['', Validators.required],
         post_rating: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
-        // post_comments:[''],
+        post_comments:[''],
       }),
     });
+    
+    this.mainForm
+      .get('stepOne.post_city')
+      ?.setValidators([
+        Validators.required,
+        this.validateCity.bind(this), // Custom validation function
+      ]);
 
-   
+    this.mainForm
+      .get('stepOne.post_street')
+      ?.setValidators([
+        Validators.required,
+        this.validateStreet.bind(this), // Custom validation function
+      ]);
+    
     this.cityAutocomplete$ = this.dataService.getCities();
 
     // Subscribe to street autocomplete values
@@ -341,4 +358,45 @@ export class RantalComponent implements OnInit {
     this.isApproved = isApproved;
     console.log(this.isApproved);
   }
+
+
+  validateCity(control: AbstractControl) {
+    const city = control.value;
+    const isValid = this.validateAutocompleteValue(city, this.cityAutocomplete$);
+  
+    if (!isValid && (control.dirty || control.touched)) {
+      return { invalidCity: true };
+    }
+  
+    return null;
+  }
+  
+  validateStreet(control: AbstractControl) {
+    const street = control.value;
+    const isValid = this.validateAutocompleteValue(street, this.streetAutocomplete$);
+  
+    if (!isValid && (control.dirty || control.touched)) {
+      return { invalidStreet: true };
+    }
+  
+    return null;
+  }
+  
+  validateAutocompleteValue(value: string, options$: Observable<string[]>): boolean {
+    let isValid = false;
+  
+    options$.pipe(
+      take(1),
+      map((options) => {
+        isValid = options.includes(value);
+      })
+    ).subscribe();
+  
+    return isValid;
+  }
+
+
+
+
+
 }

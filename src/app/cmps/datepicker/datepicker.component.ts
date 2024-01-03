@@ -13,7 +13,7 @@ import { LanguageService } from '../../srvices/language.service';
 export class DatepickerComponent implements OnInit {
   // locale = 'he';
   locales = listLocales();
-  currentLanguage = 'en'
+  currentLanguage = 'he'
 
   colorTheme = 'theme-dark-blue';
   bsConfig?: Partial<BsDatepickerConfig>;

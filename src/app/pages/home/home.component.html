@@ -94,6 +94,9 @@
       <form class="form-container">
         <div class="form-item">
           <label>*עיר</label>
+          <div class="error-message" *ngIf="searchForm.get('cityFilterControl')?.hasError('invalidCity') && searchForm.get('cityFilterControl')?.dirty && searchForm.get('cityFilterControl')?.value">
+            אנא בחר עיר מהרשימה בלבד
+          </div>
           <mat-form-field class="form-field" appearance="outline">
             <input
               class="input"
@@ -114,6 +117,9 @@
         </div>
         <div class="form-item">
           <label>*רחוב</label>
+          <div class="error-message" *ngIf="searchForm.get('streetFilterControl')?.hasError('invalidStreet') && searchForm.get('streetFilterControl')?.dirty && searchForm.get('streetFilterControl')?.value">
+            אנא בחר רחוב מהרשימה בלבד
+          </div>
           <mat-form-field class="=form-field" appearance="outline">
             <input
               matInput
@@ -133,7 +139,7 @@
           </mat-form-field>
         </div>
         <div class="form-item">
-          <label>מספר ביניין</label>
+          <label>מספר בניין</label>
           <mat-form-field class="=form-field" appearance="outline">
             <input matInput [formControl]="buildingControl" />
           </mat-form-field>

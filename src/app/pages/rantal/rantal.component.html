@@ -16,6 +16,9 @@
         <form [formGroup]="mainForm">
           <div class="step" formGroupName="stepOne">
             <label for="post_city">*עיר</label>
+            <div class="error-message" *ngIf="mainForm.get('stepOne.post_city')?.hasError('invalidCity')">
+              אנא בחר עיר מהרשימה בלבד
+              </div>
             <input
               type="text"
               id="post_city"
@@ -31,8 +34,10 @@
                 {{ city }}
               </mat-option>
             </mat-autocomplete>
-
             <label for="post_street">*רחוב</label>
+            <div class="error-message" *ngIf="mainForm.get('stepOne.post_street')?.hasError('invalidStreet')">
+              אנא בחר רחוב מהרשימה בלבד
+            </div>
             <input
               type="text"
               id="post_street"
@@ -48,8 +53,7 @@
                 {{ street }}
               </mat-option>
             </mat-autocomplete>
-
-            <label for="post_building_number">*מספר ביניין</label>
+            <label for="post_building_number">*מספר בניין</label>
             <input
               type="text"
               id="post_building_number"
@@ -314,6 +318,13 @@
                 (input)="onSliderChange($event)"
               />
             </div>
+
+            <label for="post_comments">הערות</label>
+            <textarea
+              id="post_comments"
+              formControlName="post_comments"
+              class="share-input"
+            ></textarea>
 
           </div>
         </form>

@@ -93,19 +93,19 @@ export class HomeComponent implements OnInit {
   // Custom validator for the city control
   cityValidator(control: AbstractControl): ValidationErrors | null {
     const selectedCity = control.value;
-    if (this.filteredCities.length > 0 && !this.filteredCities.includes(selectedCity)) {
-      return { invalidCity: true };
-    }
-    return null;
+    const isValidCity = this.validateAutocompleteValue(selectedCity, this.filteredCities);
+    return isValidCity ? null : { invalidCity: true };
   }
 
   // Custom validator for the street control
   streetValidator(control: AbstractControl): ValidationErrors | null {
     const selectedStreet = control.value;
-    if (this.filteredStreets.length > 0 && !this.filteredStreets.includes(selectedStreet)) {
-      return { invalidStreet: true };
-    }
-    return null;
+    const isValidStreet = this.validateAutocompleteValue(selectedStreet, this.filteredStreets);
+    return isValidStreet ? null : { invalidStreet: true };
+  }
+
+  validateAutocompleteValue(value: string, options: string[]): boolean {
+    return !!value && options.includes(value);
   }
   
   ngOnInit() {
@@ -201,9 +201,9 @@ export class HomeComponent implements OnInit {
     }
   
     // If the input is in English, add a general option
-    if (!filteredCities.length && !isHebrewLetter) {
-      filteredCities.push('נא להקליד בעברית'); // Replace with the desired message or option
-    }
+    // if (!filteredCities.length && !isHebrewLetter) {
+    //   filteredCities.push('נא להקליד בעברית'); // Replace with the desired message or option
+    // }
   
     console.log('filteredCities', filteredCities);
     return filteredCities;
