@@ -4,7 +4,7 @@
     <div class="edit-card">
       <div class="edit-card-img" (click)="openGallery()">
 
-        <img src="{{ this.apartmentData.apartment_pic_1 }}" alt="" />
+        <img src="{{this.apartmentData.apartment_pic_1}}" alt="תמונה" />
       </div>
       <div class="edit-card-details">
         <p class="text">{{ this.apartmentData.post_city }}</p>
@@ -65,7 +65,10 @@
     </div>
   </div>
 
-  <app-gallery *ngIf="showGallery" [images]="galleryImages" (close)="closeGallery()"></app-gallery>
+
+  <div *ngIf="showGallery" class="overlay-background"></div>
+  
+  <app-gallery [images]="galleryImages" *ngIf="showGallery" (close)="closeGallery()"></app-gallery>
 
 </section>
 

@@ -15,6 +15,8 @@ export class ApartmentDetailsComponent implements OnInit {
   windowWidth!: number;
   isAuthenticated: boolean = false;
   user:any;
+  showGallery: boolean = false;
+  galleryImages: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -44,4 +46,19 @@ export class ApartmentDetailsComponent implements OnInit {
       );
     });
   }
+
+  openGallery() {
+    this.galleryImages = [
+      this.apartment.apartment_pic_1,
+      this.apartment.apartment_pic_2,
+      this.apartment.apartment_pic_3,
+      this.apartment.apartment_pic_4,
+    ];
+    this.showGallery = true;
+  }
+
+  closeGallery() {
+    this.showGallery = false;
+  }
+
 }

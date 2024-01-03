@@ -149,7 +149,7 @@
           <div formGroupName="stepThree">
             <div class="grid-container">
               <div class="grid-item">
-                <label for="apartment_pic_1"></label>
+                <label for="apartment_pic_1">תמונה ראשית</label>
                 <img
                   *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value"
                   [src]="mainForm.get('stepThree.apartment_pic_1')!.value"
@@ -170,19 +170,19 @@
                   id="file-input"
                 />
                 <label class="custom-upload-button" for="file-input">
-                  Upload
+                  בחר
                 </label>
 
                 <button
                   class="remove-btn"
                   (click)="deleteImage('apartment_pic_1', 'stepThree')"
                 >
-                  Remove
+                  מחק
                 </button>
               </div>
 
               <div class="grid-item">
-                <label for="apartment_pic_2"></label>
+                <label for="apartment_pic_2">תמונה נוספת</label>
                 <img
                   *ngIf="mainForm.get('stepThree.apartment_pic_2')!.value"
                   [src]="mainForm.get('stepThree.apartment_pic_2')!.value"
@@ -203,21 +203,21 @@
                   id="file-input2"
                 />
                 <label class="custom-upload-button" for="file-input2">
-                  Upload
+                  בחר
                 </label>
                
                 <button
                   class="remove-btn"
                   (click)="deleteImage('apartment_pic_2', 'stepThree')"
                 >
-                  Remove
+                  מחק
                 </button>
               </div>
 
              
 
               <div class="grid-item">
-                <label for="apartment_pic_3"></label>
+                <label for="apartment_pic_3">תמונה נוספת</label>
                 <img
                   *ngIf="mainForm.get('stepThree.apartment_pic_3')!.value"
                   [src]="mainForm.get('stepThree.apartment_pic_3')!.value"
@@ -238,20 +238,20 @@
                   id="file-input3"
                 />
                 <label class="custom-upload-button" for="file-input3">
-                  Upload
+                  בחר
                 </label>
                
                 <button
                   class="remove-btn"
                   (click)="deleteImage('apartment_pic_3', 'stepThree')"
                 >
-                  Remove
+                  מחק
                 </button>
               </div>
 
              
               <div class="grid-item">
-                <label for="apartment_pic_4"></label>
+                <label for="apartment_pic_4">תמונה נוספת</label>
                 <img
                   *ngIf="mainForm.get('stepThree.apartment_pic_4')!.value"
                   [src]="mainForm.get('stepThree.apartment_pic_4')!.value"
@@ -272,14 +272,14 @@
                   id="file-input4"
                 />
                 <label class="custom-upload-button" for="file-input4">
-                  Upload
+                  בחר
                 </label>
                 
                 <button
                   class="remove-btn"
                   (click)="deleteImage('apartment_pic_4', 'stepThree')"
                 >
-                  Remove
+                  מחק
                 </button>
               </div>
 

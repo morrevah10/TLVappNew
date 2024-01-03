@@ -7,18 +7,12 @@ import { PopupComponent } from '../popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/srvices/user.service';
 
-
-
-
-// import { HttpClient } from '@angular/common/http'; // Import HttpClient
-
 @Component({
   selector: 'app-edit-description',
   templateUrl: './edit-description.component.html',
   styleUrls: ['./edit-description.component.scss'],
 })
 export class EditDescriptionComponent implements OnInit {
-  // editForm: FormGroup;
   apartmentId!: number;
   apartmentData: any;
   errorMessage!: '';
@@ -87,7 +81,6 @@ export class EditDescriptionComponent implements OnInit {
     this.isHidden = true;
     this.serverResponse = true;
     if (this.apartmentData) {
-      // handle the form submission here
       console.log('Form submitted:', this.apartmentData);
     }
 
@@ -98,25 +91,10 @@ export class EditDescriptionComponent implements OnInit {
             this.serverResponse = false;
             this.modalImg = '../../../assets/img/success.png';
             this.modalText = 'חוות הדעת שלך התקבלה וממתינה לאישור';
-        // const dialogRef = this.dialog.open(PopupComponent, {
-        //   data: {
-        //     message: 'Post updated successfully!'
-        //   }
-        // });
-
-        // Navigate to 'myposts' after the dialog closes
-        // dialogRef.afterClosed().subscribe(() => {
-        //   this.router.navigate(['myposts']);
-        // });
       },
       (error) => {
         console.error('Error updating post:', error);
-        // const dialogRef = this.dialog.open(PopupComponent, {
-        //   data: {
-        //     message: 'Error updating post: ' + error.error
-        //   }
-          
-        // });
+     
         console.error('Error deleting post', error);
         this.serverResponse = false;
         this.modalImg = '../../../assets/img/eroor.png';
@@ -140,8 +118,7 @@ export class EditDescriptionComponent implements OnInit {
     this.modalImg = '';
     this.modalText = '';
     if (this.isApproved) {
-      // this.userService.clearUser();
-      // this.router.navigate(['/login']);
+
     }
   }
 
