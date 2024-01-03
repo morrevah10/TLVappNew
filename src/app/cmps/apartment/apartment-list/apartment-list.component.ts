@@ -77,11 +77,23 @@ export class ApartmentListComponent implements OnInit {
       if (searchParams.post_city != undefined) {
         this.fetchApartmentsFiltered(searchParams);
       }
-      this.searchParams =
-      searchParams.post_city +','
-      searchParams.post_street +','
-      searchParams.post_building_number +','
-      searchParams.post_apartment_number;
+
+
+      // this.searchParams =
+      // searchParams.post_city +','
+      // searchParams.post_street +','
+      // searchParams.post_building_number +','
+      // searchParams.post_apartment_number;
+      this.searchParams = [
+        searchParams.post_city,
+        searchParams.post_street,
+        searchParams.post_building_number,
+        searchParams.post_apartment_number
+      ]
+        .filter(value => value !== undefined && value !== null && value !== '')
+        .join(',');
+      
+      console.log('searchParams', this.searchParams);
     });
 
   }
