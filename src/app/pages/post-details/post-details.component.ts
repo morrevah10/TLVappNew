@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/srvices/post.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-post-details',
@@ -18,10 +20,22 @@ export class PostDetailsComponent {
 
   selectedFileNames: { [key: string]: string } = {};
 
+  needApproval: boolean = false;
+  aprovelText = '';
+  modalImg = '';
+  modalText = '';
+  isHidden: boolean = false;
+  isApproved = false;
+  serverResponse = false;
+  loading = false;
+
+
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+
   ) {}
 
   ngOnInit(): void {
@@ -66,7 +80,10 @@ export class PostDetailsComponent {
   submitForm(): void {
     console.log('this.postForm.value', this.postForm.value);
 
-    
+    this.loading = true;
+    this.isHidden = true;
+    this.serverResponse = true;
+
       if (this.postForm.valid) {
       
         const newPost = {
@@ -79,10 +96,18 @@ export class PostDetailsComponent {
           () => {
             // Handle successful update
             console.log('Apartment details updated successfully');
+            this.serverResponse = false;
+        this.modalImg = '../../../assets/img/success.png';
+        this.modalText = 'העידכון שלך התקבל בהצלחה';
           },
           (error) => {
             // Handle error
             console.error('Error updating apartment details', error);
+            this.loading = false;
+        this.serverResponse = false;
+        this.modalImg = '../../../assets/img/eroor.png';
+        this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
+        console.error('Error submitting form:', error);
           }
         );
       }
@@ -119,4 +144,30 @@ export class PostDetailsComponent {
     // Reset the form control value and the selected image URL
     this.postForm.get(`${controlName}`)?.setValue(null);
   }
+
+  onModalClosed(isHidden: boolean): void {
+    console.log(this.isApproved);
+    this.isHidden = isHidden;
+    this.aprovelText = '';
+    this.modalImg = '';
+    this.modalText = '';
+    if (!this.isApproved) {
+      // this.userService.clearUser();
+      // this.router.navigate(['/login']);
+       setTimeout(() => {
+          this.loading = false;
+        }, 1500);
+
+      this.router.navigate(['/home']);
+    }
+  }
+
+  onAprovel(isApproved: boolean): void {
+    this.isApproved = isApproved;
+    console.log(this.isApproved);
+  }
+
+
+
+
 }

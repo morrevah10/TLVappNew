@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.scss']
+  styleUrls: ['./gallery.component.scss'],
 })
 export class GalleryComponent {
   @Input() images: string[] = [];
@@ -12,18 +13,16 @@ export class GalleryComponent {
   currentImageIndex: number = 0;
   totalImages: number = 0;
   isOpen: boolean = false;
+  fadeClass: string = '';
+  isTransitioning: boolean = false;
 
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['images']) {
-      // Filter out null values from the images array
-      this.images = this.images.filter(image => image !== null);
+      this.images = this.images.filter((image) => image !== null);
 
-      // Update the total number of images
       this.totalImages = this.images.length;
-      console.log('this.totalImages',this.totalImages)
 
-      // Reset the currentImageIndex if it exceeds the total number of images
       if (this.currentImageIndex >= this.totalImages) {
         this.currentImageIndex = 0;
       }
@@ -35,17 +34,18 @@ export class GalleryComponent {
   }
 
   nextImage() {
-    this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-  }
+        this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    }
+  
 
   prevImage() {
-    this.currentImageIndex =
-      (this.currentImageIndex - 1 + this.images.length) % this.images.length;
+        this.currentImageIndex =
+          (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
 
   closeGallery() {
     this.isOpen = false;
-    this.close.emit(); 
+    this.close.emit();
   }
 
 

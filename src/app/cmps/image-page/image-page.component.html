@@ -22,14 +22,14 @@
               id="file-input"
             />
             <label class="custom-upload-button" for="file-input">
-              Upload
+              בחר
             </label>
 
             <button
               class="remove-btn"
               (click)="deleteImage('apartment_pic_1')"
             >
-              Remove
+              מחק
             </button>
           </div>
 
@@ -53,14 +53,14 @@
               id="file-input2"
             />
             <label class="custom-upload-button" for="file-input2">
-              Upload
+              בחר
             </label>
            
             <button
               class="remove-btn"
               (click)="deleteImage('apartment_pic_2')"
             >
-              Remove
+              מחק
             </button>
           </div>
 
@@ -86,14 +86,14 @@
               id="file-input3"
             />
             <label class="custom-upload-button" for="file-input3">
-              Upload
+              בחר
             </label>
            
             <button
               class="remove-btn"
               (click)="deleteImage('apartment_pic_3')"
             >
-              Remove
+              מחק
             </button>
           </div>
 
@@ -118,20 +118,35 @@
               id="file-input4"
             />
             <label class="custom-upload-button" for="file-input4">
-              Upload
+              בחר
             </label>
             
             <button
               class="remove-btn"
               (click)="deleteImage('apartment_pic_4')"
             >
-              Remove
+              מחק
             </button>
           </div>
 
          
         </div>
     </form>
-    <button class="submit-btn" (click)="submitForm()">Submit</button>
+
+    <div class="btn">
+      <button class="btn-large" (click)="submitForm()">עדכן</button>
+    </div>
 
   </div>
+
+
+  <app-modal
+  [needAprove]="this.needApproval"
+  [aprovelText]="this.aprovelText"
+  [img]="this.modalImg"
+  [text]="this.modalText"
+  [serverResponse]="this.serverResponse"
+  [(isHid)]="isHidden"
+  (isHidChange)="onModalClosed($event)"
+  (isApproved)="onAprovel($event)"
+></app-modal>

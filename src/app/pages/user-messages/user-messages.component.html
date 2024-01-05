@@ -1,33 +1,64 @@
+<h2 class="title">ההודעות שלי</h2>
 
 
-  <h2 class="title">ההודעות שלך</h2>
 
-  <mat-accordion class="container">
-    <mat-expansion-panel *ngFor="let message of messages">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ message.post_id ? message.post_id + ':פוסט' : 'No Post ID' }}
-        </mat-panel-title>
-        <mat-panel-description>
-          בכתובת: {{ message.postDetails.post_street }}, {{ message.postDetails.post_building_number }}, {{ message.postDetails.post_city }}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="panel-content">
-        <!-- {{ message.message }} -->
-       <div class="user-message">{{message.user_message}}
-        <div *ngIf="message.postDetails.confirmation_status!='0' ">
-          <a [routerLink]="['/post-details', message.postDetails.confirmation_status, message.post_id]">תקן את פרטי הפוסט</a>
-        </div>
-       </div>
-        <p>תאריך: {{ message.date | date: 'dd/MM/yyyy' }}</p>        
-        <p> שעה: {{ message.date | date: 'HH:mm:ss' }}</p>
-        <button mat-button color="primary" (click)="markAsUnread(message)">
-          סמן כלא נקרא
-        </button>
-        <button mat-button color="warn" (click)="deleteMessage(message)">
-          מחק
-        </button>
+<div class="container">
+  <div
+    class="card"
+    *ngFor="let message of messages"
+    [class.unread]="message.read_status === '0'"
+    [class.read]="message.read_status === '1'"
+  >
+    <img
+      src="../../../assets/img/messagr-img.png"
+      alt="Message Image"
+      class="card-image"
+    />
+
+    <div class="card-content">
+      <h3 class="card-title">
+        {{ message.postDetails.post_city }} •
+        {{ message.postDetails.post_street }}
+        {{ message.postDetails.post_building_number }}
+      </h3>
+
+      <div class="card-text" (click)="toggleReadStatus(message)">
+        <span *ngIf="!message.showFullText">{{
+          message.user_message.substring(0, 50) + "..."
+        }}</span>
+        <span *ngIf="message.showFullText"
+          >{{ message.user_message }}
+
+          <span *ngIf="message.postDetails.confirmation_status">
+            <span
+              (click)="
+                navigateToLink(
+                  message.postDetails.confirmation_status,
+                  message.post_id
+                )
+              "
+            >
+              {{ generateLink(message.postDetails.confirmation_status,message.post_id) }}
+            </span>
+          </span>
+        </span>
+        <span
+          *ngIf="message.user_message.length >= 50"
+          class="read-more"
+          (click)="toggleText(message)"
+        >
+          {{ message.showFullText ? "קרא פחות" : "קרא עוד" }}
+        </span>
       </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-  
+      <div class="date-delet">
+        <button mat-icon-button color="warn" (click)="deleteMessage(message)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <p class="card-date">
+          {{ message.date | date : "dd/MM/yyyy" }} •
+          {{ message.date | date : "HH:mm" }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

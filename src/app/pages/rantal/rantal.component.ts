@@ -191,7 +191,7 @@ export class RantalComponent implements OnInit {
         console.log('Form submitted successfully:', response);
         this.serverResponse = false;
         this.modalImg = '../../../assets/img/success.png';
-        this.modalText = 'חוות הדעת שלך התקבלה וממתינה לאישור';
+        this.modalText = 'העידכון שלך התקבל בהצלחה';
       },
       (error) => {
         this.loading = false;

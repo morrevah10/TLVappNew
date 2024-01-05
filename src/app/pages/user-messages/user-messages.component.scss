@@ -1,27 +1,88 @@
+
 .title {
-    direction: rtl;
-    padding-top: 16px;
-    margin: 0;
+  direction: rtl;
+  padding-top: 16px;
+  margin: 0;
+}
+
+.mat-expansion-panel-header {
+  flex-direction: row-reverse;
+}
+
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  justify-content: flex-end;
+}
+::ng-deep .mat-content {
+  flex-direction: row-reverse !important;
+}
+
+.panel-content {
+  direction: rtl;
+}
+
+
+/* system-message-card.component.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  max-width: 300px;
+  flex-direction: row;
+  align-items: center;
+
+  &.unread {
+    background-color: #e9e9e975; 
   }
 
-  .mat-expansion-panel-header{
-    flex-direction: row-reverse;
+  &.read {
+    background-color: white; 
   }
+}
 
-  
-  .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
-      justify-content: flex-end;
-    }
-    ::ng-deep .mat-content {
-       flex-direction: row-reverse !important;
-     }
+.card-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 50%;
+}
 
-   
+.card-content {
+  flex: 1;
+  direction: rtl;
+}
 
-     .panel-content{
-      direction: rtl;
-     }
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
 
-     .container{
-      padding-top: 2.5rem;
-     }
+.card-text {
+  line-height: 1.2;
+}
+
+.read-more {
+  color: blue;
+  cursor: pointer;
+}
+
+.card-date {
+  margin: 0px;
+  color: #888;
+}
+
+.date-delet{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}

@@ -127,6 +127,7 @@ height: 100%;
   padding: 1.5rem 0 0 0;
 }
 
+
 .text {
   direction: rtl;
   font-size: 7vw;
@@ -190,4 +191,13 @@ input{
 
 .new{
   padding-bottom:2em;
+}
+
+.form-check{
+  display: flex;
+  
+}
+
+.form-check-label{
+  padding-right: 2rem;
 }

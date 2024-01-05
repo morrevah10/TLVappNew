@@ -112,3 +112,19 @@
     background-color: white;
   
   }
+
+  .btn-large {
+    height: 3em;
+    width: 15em;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.25em;
+    cursor: pointer;
+  }
+
+  .btn{
+    display: flex;
+    justify-content: center;
+  }

@@ -43,6 +43,11 @@
 input {
   direction: rtl;
   font-size: 1rem;
+  border: none;
+    padding: 10px;
+    background-color: aliceblue;
+    border-radius: 1rem;
+    width: 100%;
 }
 
 .color-text {
@@ -154,7 +159,17 @@ input {
   height: 3.5em !important;
 }
 
-
 .error-message{
   padding: 0px;
+}
+
+::ng-deep.mat-mdc-text-field-wrapper::before,
+.mat-mdc-text-field-wrapper::after {
+  border: none !important;
+  content: none !important;
+}
+
+::ng-deep.mdc-text-field--outlined {
+  border: none !important;
+  box-shadow: none !important;
 }

@@ -34,4 +34,22 @@ import { Message } from '../models/message.model';
       // return this.http.get<any[]>(url,queryParams);
       return this.http.get<any>(url, { params: { user_id: user_id.toString() } })
     }
+
+    MarkAsRead(message_id: any): Observable<any>{
+      console.log('message_id from MarkAsRead',message_id)
+      const body  = { message_id: message_id };
+      console.log('queryParams.post_id',body)
+      const url =  this.APIurl + 'update_read_status/';
+      return this.http.put(url, body );
+    }
+
+    deleteMessage(message_id: any) {
+      const url = this.APIurl + 'delete_message/';
+      const queryParams = { message_id: message_id};
+      console.log('queryParams',queryParams)
+      return this.http.delete<any[]>(url, { params: queryParams })
+    }
+
+
+
   }

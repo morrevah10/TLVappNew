@@ -11,9 +11,11 @@ export class Message {
       confirmation_status:string,
       post_apartment_number:string,
       post_building_number:string,
-
-
     }
+  showFullText!: boolean;
+  isOpen!: boolean;
+  read_status!: string;
+message_id!:string;
 
   //   time!:string;
   //   post!: {

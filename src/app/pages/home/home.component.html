@@ -15,7 +15,7 @@
           <div class="error-message" *ngIf="!isInputValid && selectedCity.length!=0">
             אנא בחר עיר מהרשימה בלבד
             </div>
-          <mat-form-field class="form-field" appearance="outline">
+          <!-- <mat-form-field class="form-field" appearance="outline"> -->
             <input
               class="input"
               matInput
@@ -30,14 +30,14 @@
                 {{ city }}
               </mat-option>
             </mat-autocomplete>
-          </mat-form-field>
+          <!-- </mat-form-field> -->
         </div>
         <div class="form-item">
           <label>*רחוב</label>
           <div class="error-message" *ngIf="!isStreetInputValid && streetFilterControl.value!.trim().length > 0">
             אנא בחר רחוב מהרשימה בלבד
           </div>
-          <mat-form-field class="form-field" appearance="outline">
+          <!-- <mat-form-field class="form-field" appearance="outline"> -->
             <input
               matInput
               [formControl]="streetFilterControl"
@@ -54,19 +54,19 @@
                 {{ street }}
               </mat-option>
             </mat-autocomplete>
-          </mat-form-field>
+          <!-- </mat-form-field> -->
         </div>
         <div class="form-item">
           <label>מספר בניין</label>
-          <mat-form-field class="=form-field" appearance="outline">
+          <!-- <mat-form-field class="=form-field" appearance="outline"> -->
             <input matInput [formControl]="buildingControl" />
-          </mat-form-field>
+          <!-- </mat-form-field> -->
         </div>
         <div class="form-item">
           <label>מספר דירה</label>
-          <mat-form-field class="=form-field" appearance="outline">
+          <!-- <mat-form-field class="=form-field" appearance="outline"> -->
             <input matInput [formControl]="apartmentControl" />
-          </mat-form-field>
+          <!-- </mat-form-field> -->
         </div>
       </form>
 

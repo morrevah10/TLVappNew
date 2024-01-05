@@ -49,7 +49,12 @@
       </div>
     </div>
 
-    <div (click)="updateImg()">להוספה או החלפה של תמונות לחץ כאן</div>
+    <div class="edit-btn">
+      <button  (click)="updateImg()" type="submit" class="btn-large" >
+        עריכת תמונות
+      </button>
+    </div>
+    
 
     <div class="edit-btn">
       <button (click)="onSubmit()"  type="submit" class="btn-large" [disabled]="isButtonDisabled" [ngClass]="{
@@ -85,4 +90,4 @@
   (isApproved)="onAprovel($event)"
 ></app-modal>
 
-<app-nav-bar *ngIf="this.windowWidth <= 567"></app-nav-bar>
+<!-- <app-nav-bar *ngIf="this.windowWidth <= 567"></app-nav-bar> -->

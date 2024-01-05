@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/srvices/user.service';
 import { AuthService } from '../../srvices/auth.service';
+import * as CryptoJS from 'crypto-js';
+
 
 import { ResponsesService } from 'src/app/srvices/responses.service';
 
@@ -15,6 +17,9 @@ import { ResponsesService } from 'src/app/srvices/responses.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+
+
+
   loginForm!: FormGroup;
   loading = false;
   submitted = false;
@@ -23,6 +28,7 @@ export class LoginComponent implements OnInit {
   errorMassege = '';
   windowWidth!: number;
   greetingMessage='';
+  rememberMe: boolean = false;
 
 
   constructor(
@@ -40,19 +46,36 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    this.windowWidth = window.innerWidth;
-    
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
+      rememberMe: [false],
     });
+
+    const rememberedUser = localStorage.getItem('rememberedUser');
+    console.log(rememberedUser,'rememberedUser')
+    if (rememberedUser) {
+      const user = JSON.parse(rememberedUser);
+  
+      const decryptedPassword = CryptoJS.AES.decrypt(user.password, 'secret-key').toString(CryptoJS.enc.Utf8);
+  
+      this.fval['email'].setValue(user.email);
+      this.fval['rememberMe'].setValue(true);
+      this.fval['password'].setValue(decryptedPassword);
+  
+      this.onFormSubmit();
+    }
+
+
+    this.windowWidth = window.innerWidth;
+    
 
     this.setGreetingMessage()
 
   }
 
-  // for accessing to form fields
   get fval() {
+    console.log('this.loginForm.',this.loginForm)
     return this.loginForm.controls;
   }
 
@@ -66,7 +89,13 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     const email = this.fval['email'].value;
     const password = this.fval['password'].value;
+
+    const encryptedPassword = CryptoJS.AES.encrypt(password, 'secret-key').toString();
+
     
+    if (this.rememberMe) {
+    localStorage.setItem('rememberedUser', JSON.stringify({ email, password: encryptedPassword }));
+  }
 
 
 
@@ -78,7 +107,10 @@ export class LoginComponent implements OnInit {
         const userEmail = this.authService.getUserEmail();
 
         if (this.authService.isAdminUser(userEmail!)) {
-          this.router.navigate(['/dashboard']);
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 2000);
+          
         } else {
           setTimeout(() => {
             this.router.navigate(['/home']);
@@ -126,5 +158,12 @@ export class LoginComponent implements OnInit {
   togglePasswordVisibility(){
     this.showPassword = !this.showPassword
   }
+
+  toggleRememberMe() {
+    this.rememberMe = !this.rememberMe;
+    console.log( this.rememberMe)
+  }
+
+
 }
    

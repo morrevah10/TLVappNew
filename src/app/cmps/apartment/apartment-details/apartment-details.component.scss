@@ -88,7 +88,8 @@
 }
 
 .apartment-details-container {
-  height: 100dvh;
+  // height: 100dvh;
+  overflow-y: auto;
   // width: 100dvh;
 }
 
@@ -97,6 +98,8 @@
   flex-direction: column;
   // height: 90dvh;
   padding: 1.5rem;
+  padding-bottom: 10vh;
+
   height: 100%;
 }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PostService } from 'src/app/srvices/post.service';
 
@@ -12,10 +12,23 @@ export class ImagePageComponent implements OnInit {
   postDetails: any; 
   imageForm: FormGroup;
 
+
+  needApproval: boolean = false;
+  aprovelText = '';
+  modalImg = '';
+  modalText = '';
+  isHidden: boolean = false;
+  isApproved = false;
+  serverResponse = false;
+  errorMessage = ''
+
+
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private postService: PostService
+    private postService: PostService,
+    private router: Router,
+
   ) {
     this.imageForm = this.formBuilder.group({
       apartment_pic_1: [''],
@@ -94,18 +107,42 @@ export class ImagePageComponent implements OnInit {
     
     submitForm(): void {
       this.updateImage(); 
+      this.isHidden = true;
+      this.serverResponse = true;
     this.postService.updateAprtemanetPics(this.postDetails).subscribe(
         (response) => {
             console.log('Post updated successfully:', response);
+            this.serverResponse = false;
+            this.modalImg = '../../../assets/img/success.png';
+            this.modalText = 'העידכון שלך התקבל וממתין לאישור';
         },
         (error) => {
             console.error('Error updating post:', error);
+            this.serverResponse = false;
+            this.modalImg = '../../../assets/img/eroor.png';
+            this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
+            this.errorMessage = error.error
         }
     );
 }
 
 
+onModalClosed(isHidden: boolean): void {
+  console.log(this.isApproved);
+  this.isHidden = isHidden;
+  this.aprovelText = '';
+  this.modalImg = '';
+  this.modalText = '';
+  this.router.navigate(['/myposts']);
+  if (this.isApproved) {
 
+  }
+}
+
+onAprovel(isApproved: boolean): void {
+  this.isApproved = isApproved;
+  console.log(this.isApproved);
+}
 
 
 
