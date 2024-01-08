@@ -12,6 +12,6 @@ export class AccessDeniedComponent implements OnInit {
   ngOnInit(): void {}
 
   redirectToRegistration(): void {
-    this.router.navigate(['']); 
+    this.router.navigate(['login']); 
   }
 }

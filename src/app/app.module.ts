@@ -89,6 +89,7 @@ import { DashbordComponent } from './pages/dashbord/dashbord.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { GalleryComponent } from './pages/gallery/gallery.component';
 import { ImagePageComponent } from './cmps/image-page/image-page.component';
+import { ToolbarComponent } from './cmps/toolbar/toolbar.component';
 
 
 
@@ -132,6 +133,7 @@ import { ImagePageComponent } from './cmps/image-page/image-page.component';
     PostDetailsComponent,
     GalleryComponent,
     ImagePageComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,

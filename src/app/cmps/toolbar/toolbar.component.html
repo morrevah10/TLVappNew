@@ -1,0 +1,18 @@
+<section class="phone-container">
+  <input type="checkbox" id="menu" [checked]="opened" (change)="toggleMenu()">
+  <label for="menu" class="icon">
+    <div class="menu"></div>
+  </label>
+  <nav>
+    <ul>
+      <li><a routerLink="home">בית</a></li>
+      <li><a routerLink="myposts">הדירות שלי</a></li>
+      <li><a routerLink="messages">ההודעות שלי</a></li>
+      <li><a routerLink="profile">עריכת פרופיל</a></li>
+      <li><a routerLink="personalInfo/changPassword">שינוי סיסמא</a></li>
+      <li><a routerLink="terms">תנאי שימוש</a></li>
+      <li><a routerLink="about">אודות</a></li>
+    </ul>
+  </nav>
+  <div class="overlay" *ngIf="opened" (click)="closeMenu()"></div>
+</section>

@@ -10,14 +10,10 @@ import { UserService } from 'src/app/srvices/user.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'TLVapp';
+
   currentUser: User | null = null;
-  opened = false;
   isAuthenticated = false;
   user: any;
-  windowWidth!: number;
-  isSmallScreen!: boolean;
-  sidenavContainerClass!: string ;
 
 
 
@@ -28,30 +24,6 @@ export class AppComponent implements OnInit {
 
   ) { }
 
-  // @HostListener('window:resize', ['$event'])
-  // onResize(event: Event | null): void {
-  //   this.windowWidth = event?.target?.innerWidth;    this.checkWindowWidth();
-  //   this.sidenavContainerClass = this.calculateSidenavContainerClass();
-
-  // }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.windowWidth = event.target.innerWidth;
-    this.isSmallScreen = this.windowWidth <= 567;
-    this.sidenavContainerClass = this.calculateSidenavContainerClass();
-  }
-
- 
-
-  calculateSidenavContainerClass() {
-    if (this.windowWidth <= 567 && this.isAuthenticated) {
-      return 'mobile-auth-sidenav-container';
-    } else {
-      return 'default-sidenav-container';
-    }
-  }
-  
   ngOnInit() {
     this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isAuthenticated = isAuthenticated;
@@ -60,16 +32,6 @@ export class AppComponent implements OnInit {
       console.log('User updated:', user);
       this.user = user;
     });
-    this.windowWidth = window.innerWidth;
-    this.isSmallScreen = this.windowWidth <= 567;
-    this.sidenavContainerClass = this.calculateSidenavContainerClass();
   }
-  onLogoClicked() {
-    if(this.user){
-      this.router.navigate(['/home']);
-    }
-    else{
-      this.router.navigate(['/login']);
-    }
-  }
+  
 }

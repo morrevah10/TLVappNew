@@ -9,18 +9,17 @@
 
 .list-container {
   height: 100dvh;
-  // width: 100dvh;
   direction: rtl;
+  padding-top: 2rem;
+
 }
 
 .list-conant {
   display: flex;
   flex-direction: column;
-  // height: 90dvh;
   padding: 1.5rem;
   height: 100%;
 }
-
 .form-group {
   direction: rtl;
   padding: 1.5rem 0 0 0;
@@ -36,13 +35,12 @@
 
 input {
   direction: rtl;
-  // background-color: #F2F7FF;
 }
 
 .color-text {
   color: $color1;
   margin: 0;
-  padding-left: 1rem; // cursor: pointer;
+  padding-left: 1rem; 
 }
 
 .btn-group {
@@ -88,7 +86,6 @@ input {
     border-radius: 5px;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    // margin: 1rem;
   }
 }
 
@@ -98,23 +95,6 @@ input {
   justify-content: center;
 }
 
-// .card-actions{
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-
-//     img{
-//         height: 1rem;
-//         width: 1rem;
-//     }
-
-//     button{
-//         border: none;
-//         background-color: white;
-//     }
-
-// }
 .load-more {
   color: $color1;
   border: none;
