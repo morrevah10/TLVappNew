@@ -5,13 +5,13 @@
   </label>
   <nav>
     <ul>
-      <li><a routerLink="home">בית</a></li>
-      <li><a routerLink="myposts">הדירות שלי</a></li>
-      <li><a routerLink="messages">ההודעות שלי</a></li>
-      <li><a routerLink="profile">עריכת פרופיל</a></li>
-      <li><a routerLink="personalInfo/changPassword">שינוי סיסמא</a></li>
-      <li><a routerLink="terms">תנאי שימוש</a></li>
-      <li><a routerLink="about">אודות</a></li>
+      <li (click)="closeMenu()"><a routerLink="home" class="link-style">בית</a></li>
+      <li (click)="closeMenu()"><a routerLink="myposts" class="link-style">הדירות שלי</a></li>
+      <li (click)="closeMenu()"><a routerLink="messages" class="link-style">ההודעות שלי</a></li>
+      <li (click)="closeMenu()"><a routerLink="profile" class="link-style">עריכת פרופיל</a></li>
+      <li (click)="closeMenu()"><a routerLink="personalInfo/changPassword" class="link-style">שינוי סיסמא</a></li>
+      <li (click)="closeMenu()"><a routerLink="terms" class="link-style">תנאי שימוש</a></li>
+      <li (click)="closeMenu()"><a routerLink="about" class="link-style">אודות</a></li>
     </ul>
   </nav>
   <div class="overlay" *ngIf="opened" (click)="closeMenu()"></div>
