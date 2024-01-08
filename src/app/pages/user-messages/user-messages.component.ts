@@ -94,12 +94,13 @@ export class UserMessagesComponent implements OnInit {
     this.messageService.MarkAsRead(message).subscribe(
       (response) => {
         console.log('Post updated successfully:', response);
+        this.loadUserMessages();
               },
       (error) => {
         console.error('Error updating post:', error);
       }
     );
-    this.loadUserMessages();
+
 
   }
 
@@ -109,12 +110,12 @@ export class UserMessagesComponent implements OnInit {
     this.messageService.deleteMessage(message.message_id).subscribe(
       (response) => {
         console.log('Delete successful', response);
+        this.loadUserMessages();
       },
       (error) => {
         console.error('Error deleting post', error);
       }
     );
-    this.loadUserMessages()
 
   }
 
