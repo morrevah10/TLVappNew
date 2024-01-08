@@ -15,7 +15,7 @@ input#menu {
 label.icon {
     position: fixed;
     z-index: 200;
-    right: 0;
+    left: 0;
 }
 
 .icon .menu,
@@ -37,7 +37,7 @@ label.icon {
 }
 
 .icon .menu {
-    right: 18px;
+    left: 18px;
     top: 27px;
 }
 
@@ -75,14 +75,14 @@ nav {
     position: fixed;
     transition: width ease .6s, right ease .6s; 
     width: 0px;
-    right: 0; 
+    left: 0; 
     z-index: 100;
     overflow: hidden;
 }
 
 #menu:checked ~ nav {
     width: 160px;
-    right: 0; 
+    left: 0; 
 }
 
 nav ul {
@@ -111,7 +111,7 @@ nav i {
 .overlay {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
