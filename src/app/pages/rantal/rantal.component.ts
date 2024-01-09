@@ -18,14 +18,15 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, map, take } from 'rxjs';
 import { DataService } from 'src/app/srvices/data.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-rantal',
   templateUrl: './rantal.component.html',
   styleUrls: ['./rantal.component.scss'],
+  providers: [DatePipe],
 })
 export class RantalComponent implements OnInit {
-  
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
   currentStep: number = 0;
   mainForm!: FormGroup;
@@ -38,7 +39,6 @@ export class RantalComponent implements OnInit {
 
   formDataSnapshot: any;
   formStates: any[] = [];
-
 
   selectedStartDate: Date | null = null;
   selectedEndDate: Date | null = null;
@@ -65,13 +65,11 @@ export class RantalComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private dataService: DataService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
-
-    
-    
     this.mainForm = this.formBuilder.group({
       stepOne: this.formBuilder.group({
         post_city: ['', Validators.required],
@@ -81,8 +79,14 @@ export class RantalComponent implements OnInit {
         post_apartment_price: ['', Validators.required],
       }),
       stepTwo: this.formBuilder.group({
-        post_rent_start: ['', Validators.required],
-        post_rent_end: ['', Validators.required],
+        post_rent_start: [
+          '',
+          [Validators.required],
+        ],
+        post_rent_end: [
+          '',
+          [Validators.required],
+        ],
         rent_agreement: [null, Validators.required],
         driving_license: [null, Validators.required],
       }),
@@ -94,25 +98,24 @@ export class RantalComponent implements OnInit {
       }),
       stepFour: this.formBuilder.group({
         post_description: ['', Validators.required],
-        post_rating: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
-        post_comments:[''],
+        post_rating: [
+          0,
+          [Validators.required, Validators.min(0), Validators.max(5)],
+        ],
+        post_comments: [''],
       }),
     });
-    
-    this.mainForm
-      .get('stepOne.post_city')
-      ?.setValidators([
-        Validators.required,
-        this.validateCity.bind(this), // Custom validation function
-      ]);
 
-    this.mainForm
-      .get('stepOne.post_street')
-      ?.setValidators([
-        Validators.required,
-        this.validateStreet.bind(this), // Custom validation function
-      ]);
-    
+    this.mainForm.get('stepOne.post_city')?.setValidators([
+      Validators.required,
+      this.validateCity.bind(this), // Custom validation function
+    ]);
+
+    this.mainForm.get('stepOne.post_street')?.setValidators([
+      Validators.required,
+      this.validateStreet.bind(this), // Custom validation function
+    ]);
+
     this.cityAutocomplete$ = this.dataService.getCities();
 
     // Subscribe to street autocomplete values
@@ -147,15 +150,9 @@ export class RantalComponent implements OnInit {
           );
         }
       });
-    
 
     this.formStates.push(this.mainForm.getRawValue());
     console.log('this.formStates', this.formStates);
-
-    
-
-
-
   }
 
   onSubmit() {
@@ -203,8 +200,6 @@ export class RantalComponent implements OnInit {
     );
   }
 
-
-  
   formatDateToYyyyMmDd(inputDate: Date): string {
     // Get day, month, and year components
     const day = inputDate.getDate().toString().padStart(2, '0');
@@ -236,7 +231,7 @@ export class RantalComponent implements OnInit {
   onSliderChange(event: any) {
     // Update the form control value when the slider changes
     this.mainForm.get('stepFour.post_rating')!.setValue(event.target.value);
-    console.log(typeof(this.mainForm.get('stepFour.post_rating.target.value')))
+    console.log(typeof this.mainForm.get('stepFour.post_rating.target.value'));
   }
 
   onImageSelectedStep3(
@@ -269,18 +264,54 @@ export class RantalComponent implements OnInit {
     return this.selectedFileNames[key] || 'No file selected';
   }
 
+  // onDateSelected(selectedDate: Date, controlName: string) {
+  //   if (controlName === 'post_rent_start') {
+  //     this.selectedStartDate = selectedDate;
+  //   } else if (controlName === 'post_rent_end') {
+  //     this.selectedEndDate = selectedDate;
+  //   }
 
+  //   const formattedDate = this.formatDateToYyyyMmDd(selectedDate);
+  //   this.mainForm.get('stepTwo')?.get(controlName)?.setValue(formattedDate);
+  //   console.log('formattedDate:', formattedDate);
+  // }
 
   onDateSelected(selectedDate: Date, controlName: string) {
-    if (controlName === 'post_rent_start') {
-      this.selectedStartDate = selectedDate;
-    } else if (controlName === 'post_rent_end') {
-      this.selectedEndDate = selectedDate;
-    }
+    // Extract only the date part from the selectedDate
+    const dateWithoutTime = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      selectedDate.getDate()
+    );
 
-    const formattedDate = this.formatDateToYyyyMmDd(selectedDate);
-    this.mainForm.get('stepTwo')?.get(controlName)?.setValue(formattedDate);
-    console.log('formattedDate:', formattedDate);
+    const formattedDate = this.formatDate(dateWithoutTime);
+    console.log('Formatted Date:', formattedDate);
+    console.log('Formatted Date Length:', (formattedDate || '').length);
+
+    console.log(
+      'Before Setting Value:',
+      this.mainForm.get(`stepTwo.${controlName}`)!.value
+    );
+    this.mainForm.get(`stepTwo.${controlName}`)!.setValue(formattedDate);
+    console.log(
+      'After Setting Value:',
+      this.mainForm.get(`stepTwo.${controlName}`)!.value
+    );
+
+    console.log(
+      'Control Valid:',
+      this.mainForm.get(`stepTwo.${controlName}`)!.valid
+    );
+  }
+
+  private formatDate(date: Date): string {
+    // Implement the logic to format the date based on your form's requirements
+    // For example, you can use Angular's DatePipe or a custom formatting function
+    // Here's an example using Angular's DatePipe:
+    console.log('date', date);
+    const formattedDate = this.datePipe.transform(date, 'dd-MM-yyyy');
+    console.log('formattedDate', formattedDate);
+    return (formattedDate || '').trim(); // Handle null or undefined values
   }
 
   deleteImage(controlName: string, step: string) {
@@ -300,7 +331,6 @@ export class RantalComponent implements OnInit {
     return new File([blob], 'image.png'); // You may need to adjust the file name and type
   }
 
-
   nextStep() {
     if (this.currentStep < 3) {
       this.currentStep++;
@@ -312,7 +342,6 @@ export class RantalComponent implements OnInit {
       this.currentStep--;
     }
   }
-  
 
   getStepName(index: number) {
     if ((index = 0)) {
@@ -330,7 +359,6 @@ export class RantalComponent implements OnInit {
     return 0;
   }
 
-
   triggerFileInput() {
     if (this.fileInput) {
       this.fileInput.nativeElement.click(); // Trigger click event on the file input element
@@ -346,9 +374,9 @@ export class RantalComponent implements OnInit {
     if (!this.isApproved) {
       // this.userService.clearUser();
       // this.router.navigate(['/login']);
-       setTimeout(() => {
-          this.loading = false;
-        }, 1500);
+      setTimeout(() => {
+        this.loading = false;
+      }, 1500);
 
       this.router.navigate(['/home']);
     }
@@ -359,44 +387,49 @@ export class RantalComponent implements OnInit {
     console.log(this.isApproved);
   }
 
-
   validateCity(control: AbstractControl) {
     const city = control.value;
-    const isValid = this.validateAutocompleteValue(city, this.cityAutocomplete$);
-  
+    const isValid = this.validateAutocompleteValue(
+      city,
+      this.cityAutocomplete$
+    );
+
     if (!isValid && (control.dirty || control.touched)) {
       return { invalidCity: true };
     }
-  
+
     return null;
   }
-  
+
   validateStreet(control: AbstractControl) {
     const street = control.value;
-    const isValid = this.validateAutocompleteValue(street, this.streetAutocomplete$);
-  
+    const isValid = this.validateAutocompleteValue(
+      street,
+      this.streetAutocomplete$
+    );
+
     if (!isValid && (control.dirty || control.touched)) {
       return { invalidStreet: true };
     }
-  
+
     return null;
   }
-  
-  validateAutocompleteValue(value: string, options$: Observable<string[]>): boolean {
+
+  validateAutocompleteValue(
+    value: string,
+    options$: Observable<string[]>
+  ): boolean {
     let isValid = false;
-  
-    options$.pipe(
-      take(1),
-      map((options) => {
-        isValid = options.includes(value);
-      })
-    ).subscribe();
-  
+
+    options$
+      .pipe(
+        take(1),
+        map((options) => {
+          isValid = options.includes(value);
+        })
+      )
+      .subscribe();
+
     return isValid;
   }
-
-
-
-
-
 }

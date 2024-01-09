@@ -1,83 +1,3 @@
-// .apartment-details-container {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     // height: 100vh;
-//     // background-color: #f2f2f2;
-//   }
-  
-//   .apartment-details {
-//     max-width: 500px;
-//     padding: 20px;
-//     background-color: #ffffff;
-//     border-radius: 10px;
-//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-//   }
-  
-//   .detail-row {
-//     display: flex;
-//     align-items: center;
-//     margin-bottom: 10px;
-  
-//     label {
-//       font-weight: bold;
-//       margin-right: 10px;
-//       flex-basis: 150px;
-//     }
-  
-//     p {
-//       margin: 0;
-//     }
-
-//     img{
-//       height: 150px;
-//       width: auto;
-//     }
-//   }
-
-
-
-// .detail-row {
-//   display: flex;
-//   justify-content: space-between;
-//   margin-bottom: 10px;
-// }
-
-// .label {
-//   font-weight: bold;
-// }
-
-// /* Add more styles as needed */
-
-
-// .apartment-details-container{
-//   height: 90vh; // Occupy the entire viewport height
-//   display: flex;
-//   justify-content: center; // Center content horizontally
-//   align-items: center; // Center content vertically
-//   background-color: #f0f0f0; // Set background color as needed
-// }
-
-// .apartment-details-contant{
-//   display: flex;
-//   margin: 20px;
-//   padding: 20px;
-//   box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
-//   width: 100%;
-//   height: 100%;
-//   border-radius: 16px;
-//   flex-direction: column;
-//   justify-content: space-around;
-//   align-items: center;
-// }
-// img{
-//   width: 100%;
-//   height: 100%;
-//   border-radius: 5px;
-// }
-
-
-
 
 @import "../../../../app/styles/colors";
 
@@ -88,15 +8,12 @@
 }
 
 .apartment-details-container {
-  // height: 100dvh;
   overflow-y: auto;
-  // width: 100dvh;
 }
 
 .apartment-details-contant {
   display: flex;
   flex-direction: column;
-  // height: 90dvh;
   padding: 1.5rem;
   padding-bottom: 10vh;
 
@@ -119,7 +36,6 @@
 
 input {
   direction: rtl;
-  // background-color: #F2F7FF;
 }
 
 .color-text {
@@ -157,8 +73,7 @@ input {
   display: flex;
   border: none;
   flex-direction: row;
-  background: linear-gradient(to right, #1607ec, #406eff);
-  color: white;
+  background: linear-gradient(to right, #007acc7d, #007bff);  color: white;
   border-radius: 10px;
   justify-content: space-between;
   margin-top: 2rem;

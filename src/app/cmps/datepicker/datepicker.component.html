@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-xs-12 col-12 col-md-5 col-lg-5 form-group mb-3">
     <div class="form-group mb-3">
       <div class="input-group">
@@ -11,6 +11,26 @@
           [(ngModel)]="selectedDate"
           (ngModelChange)="onDateSelected()"
         />
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="col-xs-12 col-12 col-md-5 col-lg-5 form-group mb-3">
+    <div class="form-group mb-3">
+      <div class="input-group">
+        <select class="form-control" [(ngModel)]="selectedDay" (ngModelChange)="onDateSelected()">
+          <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+        </select>
+        
+        <select class="form-control" [(ngModel)]="selectedMonth" (ngModelChange)="onDateSelected()">
+          <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+        </select>
+        
+        <select class="form-control" [(ngModel)]="selectedYear" (ngModelChange)="onDateSelected()">
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
       </div>
     </div>
   </div>

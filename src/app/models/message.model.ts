@@ -16,6 +16,7 @@ export class Message {
   isOpen!: boolean;
   read_status!: string;
 message_id!:string;
+originalStatus?: string;
 
   //   time!:string;
   //   post!: {

@@ -59,6 +59,7 @@ export class UserMessagesComponent implements OnInit {
             postDetails: postDetails[index],
             isOpen: false,
             showFullText: false,
+            originalStatus: message.postDetails.confirmation_status,
           };
         });
         console.log('this.messages new', this.messages);
@@ -136,11 +137,6 @@ export class UserMessagesComponent implements OnInit {
     const confirmationStatusNumber = parseInt(confirmationStatus, 10);
     const postIdNumber = parseInt(postId, 10);
   
-    if (isNaN(confirmationStatusNumber) || isNaN(postIdNumber)) {
-      // Handle the case where parsing fails (e.g., if the strings are not valid numbers)
-      return '/default-link';
-    }
-  
     if (confirmationStatusNumber === 1) {
       return '/myposts';
     } else if (confirmationStatusNumber >= 2 && confirmationStatusNumber <= 5) {
@@ -148,7 +144,7 @@ export class UserMessagesComponent implements OnInit {
     } else if (confirmationStatusNumber === 6) {
       return `/apartment/edit/${postIdNumber}`;
     } else {
-      return '/default-link'; // handle other cases or provide a default link
+      return '/default-link'; 
     }
   }
 
