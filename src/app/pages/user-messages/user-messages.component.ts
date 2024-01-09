@@ -54,12 +54,14 @@ export class UserMessagesComponent implements OnInit {
       )
       .subscribe(([messages, postDetails]: [Message[], any[]]) => {
         this.messages = messages.map((message, index) => {
+          const postDetail = postDetails[index];
+      
           return {
             ...message,
-            postDetails: postDetails[index],
+            postDetails: postDetail || {},  
             isOpen: false,
             showFullText: false,
-            originalStatus: message.postDetails.confirmation_status,
+            originalStatus: postDetail ? postDetail.confirmation_status : null,
           };
         });
         console.log('this.messages new', this.messages);
@@ -95,13 +97,14 @@ export class UserMessagesComponent implements OnInit {
     this.messageService.MarkAsRead(message).subscribe(
       (response) => {
         console.log('Post updated successfully:', response);
+        const updatedUnreadCount = response.updatedUnreadCount;
+        this.messageService.updateUnreadMessagesCount(updatedUnreadCount);
         this.loadUserMessages();
               },
       (error) => {
         console.error('Error updating post:', error);
       }
     );
-
 
   }
 
@@ -122,20 +125,35 @@ export class UserMessagesComponent implements OnInit {
 
   toggleReadStatus(message: any): void {
     console.log('Toggle Read Status Clicked');
-    console.log('message.read_status',message.read_status)
-    if (message.read_status=='0') {
-      console.log('message.read_status',message.read_status)
+    console.log('message.read_status', message.read_status)
+    if (message.read_status === '0') {
+      console.log('message.read_status', message.read_status)
       this.markAsUnread(message.message_id);
-      message.read_status = true;
+      message.read_status = '1';  
     } else {
       return;
     }
   }
 
 
-  generateLink(confirmationStatus: string, postId: string): string {
-    const confirmationStatusNumber = parseInt(confirmationStatus, 10);
-    const postIdNumber = parseInt(postId, 10);
+  generateLink(message: Message): string {
+    if (message.customLink) {
+      return message.customLink;
+    }
+  
+    const confirmationStatusNumber = parseInt(message.postDetails.confirmation_status, 10);
+    const postIdNumber = parseInt(message.post_id, 10);
+  
+    console.log('confirmationStatusNumber:', confirmationStatusNumber);
+    console.log('postIdNumber:', postIdNumber);
+
+    if (isNaN(confirmationStatusNumber) || isNaN(postIdNumber)) {
+      return '/messages';
+    }
+
+    if(confirmationStatusNumber==0){
+      return '';
+    }
   
     if (confirmationStatusNumber === 1) {
       return '/myposts';
@@ -144,13 +162,13 @@ export class UserMessagesComponent implements OnInit {
     } else if (confirmationStatusNumber === 6) {
       return `/apartment/edit/${postIdNumber}`;
     } else {
-      return '/default-link'; 
+      return '/messages';
     }
   }
 
-  navigateToLink(confirmationStatus: string, postId: string): void {
-    const link = this.generateLink(confirmationStatus, postId);
-    if (link !== '/default-link') { // Check if the link is valid
+  navigateToLink(message: Message): void {
+    const link = this.generateLink(message);
+    if (link !== '/messages') {
       this.router.navigate([link]);
     }
   }

@@ -19,6 +19,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, map, take } from 'rxjs';
 import { DataService } from 'src/app/srvices/data.service';
 import { DatePipe } from '@angular/common';
+import { parse } from 'date-fns';
+
 
 @Component({
   selector: 'app-rantal',
@@ -168,7 +170,16 @@ export class RantalComponent implements OnInit {
       apartment_pic_2: this.mainForm.get('stepThree.apartment_pic_2')?.value,
       apartment_pic_3: this.mainForm.get('stepThree.apartment_pic_3')?.value,
       apartment_pic_4: this.mainForm.get('stepThree.apartment_pic_4')?.value,
+
     };
+
+    console.log('this.formData.post_rent_start',this.formData.post_rent_start.value)
+    console.log('this.formData.post_rent_end',this.formData.post_rent_end.value)
+
+    this.formData.post_rent_start = this.formatDateToYyyyMmDd(new Date(this.mainForm.get('stepTwo.post_rent_start')?.value));
+
+    this.formData.post_rent_end = this.formatDateToYyyyMmDd(new Date(this.mainForm.get('stepTwo.post_rent_end')?.value));
+
     console.log('this.formData befor user', this.formData);
 
     this.loading = true;
@@ -201,15 +212,20 @@ export class RantalComponent implements OnInit {
   }
 
   formatDateToYyyyMmDd(inputDate: Date): string {
-    // Get day, month, and year components
+    console.log('this.formData.post_rent_start',this.mainForm.get('stepTwo.post_rent_start')?.value)
+    console.log('this.formData.post_rent_end',this.mainForm.get('stepTwo.post_rent_end')?.value)
+    console.log('inputDate',inputDate)
+    if (!inputDate) {
+      return '';
+    }
+  
     const day = inputDate.getDate().toString().padStart(2, '0');
     const month = (inputDate.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-based
     const year = inputDate.getFullYear();
-
-    // Create the formatted date string in "YYYY-MM-DD" format
+  
     const formattedDate = `${year}-${month}-${day}`;
     console.log('formattedDate', formattedDate);
-
+  
     return formattedDate;
   }
 

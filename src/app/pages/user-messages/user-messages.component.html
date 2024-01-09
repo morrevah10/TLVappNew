@@ -16,9 +16,11 @@
 
     <div class="card-content">
       <h3 class="card-title">
-        {{ message.postDetails.post_city }} •
-        {{ message.postDetails.post_street }}
-        {{ message.postDetails.post_building_number }}
+        <span *ngIf="message.postDetails">
+          {{ message.postDetails.post_city }} •
+          {{ message.postDetails.post_street }}
+          {{ message.postDetails.post_building_number }}
+        </span>
       </h3>
 
       <div class="card-text" (click)="toggleReadStatus(message)">
@@ -29,15 +31,9 @@
           >{{ message.user_message }}
 
           <span *ngIf="message.postDetails.confirmation_status">
-            <span
-              (click)="
-                navigateToLink(
-                  message.postDetails.confirmation_status,
-                  message.post_id
-                )
-              "
-            >
-              {{ generateLink(message.postDetails.confirmation_status,message.post_id) }}
+            <span class="link" (click)="navigateToLink(message)" [routerLink]="generateLink(message)">
+              <!-- {{ generateLink(message) }} -->
+              כאן
             </span>
           </span>
         </span>
