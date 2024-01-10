@@ -68,8 +68,10 @@
 
 <!-- user-messages.component.html -->
 
-<section class="container">
-  <div *ngFor="let postGroup of transformedMessages">
+
+<section class="container" *ngIf="latestMessages.length > 0; else noMessages">
+  <h2>ההודעות שלי</h2>
+  <div *ngFor="let postGroup of transformedMessages" >
     <!-- Card for Post Details -->
     <div class="post-card" (click)="toggleGroupMessages(postGroup)">
       <!-- Display Post Details Here -->
@@ -114,3 +116,10 @@
   </div>
 </section>
 
+<ng-template #noMessages>
+  <div class="no-messages">
+    <img src="../../../assets/img/messages.svg" alt="">
+    <h3>אין לנו עדיין הודעות בשבילך</h3>
+    <p>אל דאגה,נעדכן אותך כשיהיה לנו משהו לספר</p>
+  </div>
+</ng-template> 
