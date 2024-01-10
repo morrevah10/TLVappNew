@@ -81,11 +81,11 @@
       <!-- Add other post details as needed -->
   
       <!-- Display the last message details in the group -->
-      <div *ngIf="postGroup.length > 0">
+      <!-- <div *ngIf="postGroup.length > 0">
         <p>User Message: {{ postGroup[postGroup.length - 1]?.user_message }}</p>
-        <p>Date: {{ postGroup[postGroup.length - 1]?.date }}</p>
+        <p>Date: {{ postGroup[postGroup.length - 1]?.date }}</p> -->
         <!-- Add other message details as needed -->
-      </div>
+      <!-- </div> -->
     </div>
   
     <!-- Open div for additional cards when the post card is clicked -->
@@ -93,8 +93,11 @@
       <!-- Card for each message in the group -->
       <div *ngFor="let message of postGroup">
         <div class="message-card">
-          <p>User Message: {{ message?.user_message }}</p>
-          <p>Date: {{ message?.date }}</p>
+          <p>{{ message?.user_message }}</p>
+          <p class="card-date">
+            {{ message.date | date : "dd/MM/yyyy" }} •
+            {{ message.date | date : "HH:mm" }}
+          </p>
           <!-- Add other message details as needed -->
         </div>
       </div>
