@@ -51,7 +51,7 @@ const routes: Routes = [
   },
   { path: 'accessDenied', component: AccessDeniedComponent,canActivate: [AuthGuard], },
 
-{path:'messages',component:UserMessagesComponent,canActivate: [AdminGuard]},
+{path:'messages',component:UserMessagesComponent,canActivate: [AuthGuard]},
 {path:'dashboard',component:DashbordComponent,canActivate: [AdminGuard]},
 { path: 'post-details/:status/:postId', component: PostDetailsComponent,canActivate: [AuthGuard], },
 { path: 'image-page/:apartmentId', component: ImagePageComponent ,canActivate: [AuthGuard],},
