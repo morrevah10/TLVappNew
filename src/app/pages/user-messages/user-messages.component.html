@@ -1,10 +1,8 @@
-
+<!-- 
 
 <h2 class="title">ההודעות שלי</h2>
-<div class="container" *ngIf="messages.length > 0; else noMessages">
-  <div
-    class="card"
-    *ngFor="let message of messages"
+<div class="container" *ngIf="latestMessages.length > 0; else noMessages">
+  <div class="card" *ngFor="let message of latestMessages"
     [class.unread]="message.read_status === '0'"
     [class.read]="message.read_status === '1'"
   >
@@ -32,7 +30,6 @@
 
           <span *ngIf="message.postDetails.confirmation_status">
             <span class="link" (click)="navigateToLink(message)" [routerLink]="generateLink(message)">
-              <!-- {{ generateLink(message) }} -->
               כאן
             </span>
           </span>
@@ -54,6 +51,9 @@
           {{ message.date | date : "HH:mm" }}
         </p>
       </div>
+
+<p class="members-count">Members: {{ message.membersCount }}</p>
+
     </div>
   </div>
 </div>
@@ -64,4 +64,50 @@
     <h3>אין לנו עדיין הודעות בשבילך</h3>
     <p>אל דאגה,נעדכן אותך כשיהיה לנו משהו לספר</p>
   </div>
-</ng-template>
+</ng-template> -->
+
+<!-- user-messages.component.html -->
+
+<section class="container">
+  <div *ngFor="let postGroup of transformedMessages">
+    <!-- Card for Post Details -->
+    <div class="post-card" (click)="toggleGroupMessages(postGroup)">
+      <!-- Display Post Details Here -->
+      <p>
+        {{ postGroup[0]?.postDetails?.post_city }},{{
+          postGroup[0]?.postDetails?.post_street
+        }},{{ postGroup[0]?.postDetails?.post_building_number }}
+      </p>
+      <!-- Add other post details as needed -->
+  
+      <!-- Display the last message details in the group -->
+      <div *ngIf="postGroup.length > 0">
+        <p>User Message: {{ postGroup[postGroup.length - 1]?.user_message }}</p>
+        <p>Date: {{ postGroup[postGroup.length - 1]?.date }}</p>
+        <!-- Add other message details as needed -->
+      </div>
+    </div>
+  
+    <!-- Open div for additional cards when the post card is clicked -->
+    <div *ngIf="postGroup[0]?.isOpen">
+      <!-- Card for each message in the group -->
+      <div *ngFor="let message of postGroup">
+        <div class="message-card">
+          <p>User Message: {{ message?.user_message }}</p>
+          <p>Date: {{ message?.date }}</p>
+          <!-- Add other message details as needed -->
+        </div>
+      </div>
+  
+      <!-- Link for the last message in the group -->
+      <div *ngIf="postGroup.length > 0">
+        <a
+          *ngIf="!postGroup[postGroup.length - 1]?.isOpen"
+          [routerLink]="generateLink(postGroup[postGroup.length - 1])"
+          >Link</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -21,6 +21,8 @@ export class UserMessagesComponent implements OnInit {
   user: any;
 
   showFullText = false;
+  transformedMessages: any[]=[];
+  latestMessages: Message[] = [];
 
   constructor(
     private messageService: MessageService,
@@ -61,9 +63,13 @@ export class UserMessagesComponent implements OnInit {
             postDetails: postDetail || {},  
             isOpen: false,
             showFullText: false,
-            originalStatus: postDetail ? postDetail.confirmation_status : null,
           };
         });
+        this.transformedMessages = this.groupMessagesByPostId(this.messages);
+        this.latestMessages = this.transformedMessages.map((group) => group[group.length - 1]);
+
+        console.log('this.transformedMessages', this.transformedMessages);
+        console.log('this.latestMessages', this.latestMessages);
         console.log('this.messages new', this.messages);
       });
   }
@@ -89,6 +95,11 @@ export class UserMessagesComponent implements OnInit {
     } else {
       console.error('User or user ID is undefined');
     }
+  }
+  toggleGroupMessages(group: Message[]): void {
+    group.forEach(message => {
+      message.isOpen = !message.isOpen;
+    });
   }
 
   markAsUnread(message: Message): void {
@@ -172,6 +183,35 @@ export class UserMessagesComponent implements OnInit {
       this.router.navigate([link]);
     }
   }
+
+
+  groupMessagesByPostId(messages: Message[]): any[] {
+    const groupedMessages: any[] = [];
+  
+    messages.forEach((message) => {
+      const postId = message.post_id;
+  
+      const index = groupedMessages.findIndex((group) => group[0]?.post_id === postId);
+  
+      if (index !== -1) {
+        groupedMessages[index].push(message);
+      } else {
+        groupedMessages.push([message]);
+      }
+    });
+  
+    // Set the membersCount and position properties for each message
+    groupedMessages.forEach((group) => {
+      group.forEach((message: { membersCount: any; positionInGroup: any; }, index: number) => {
+        message.membersCount = group.length;
+        message.positionInGroup = index + 1;
+      });
+    });
+  
+    console.log('groupedMessages',groupedMessages)
+    return groupedMessages;
+  }
+
 
 }
 

@@ -17,6 +17,7 @@ export class Message {
   read_status!: string;
 message_id!:string;
 customLink?: string;
+membersCount?: number;
   //   time!:string;
   //   post!: {
   //   post_id: string;
