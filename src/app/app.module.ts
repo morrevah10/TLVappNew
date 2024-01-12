@@ -82,7 +82,7 @@ import { SearchFormComponent } from './pages/search-form/search-form.component';
 import { DateFormatPipe } from '../app/helpers/date-format.pipe';
 import { LoadindComponent } from './cmps/loadind/loadind.component';
 import { ModalComponent } from './cmps/modal/modal.component'; 
- 
+
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UserMessagesComponent } from './pages/user-messages/user-messages.component';
 import { DashbordComponent } from './pages/dashbord/dashbord.component';

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Message } from '../../models/message.model';
 import { forkJoin, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -6,6 +6,9 @@ import { MessageService } from '../../srvices/massage.service';
 import { UserService } from 'src/app/srvices/user.service';
 import { PostService } from 'src/app/srvices/post.service';
 import { Router } from '@angular/router';
+import { MatStepper } from '@angular/material/stepper';
+import { AfterViewInit,ElementRef,  } from '@angular/core';
+
 
 
 @Component({
@@ -14,15 +17,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-messages.component.scss'],
 })
 export class UserMessagesComponent implements OnInit {
+  @ViewChild('stepper') stepper!: MatStepper;
+  @ViewChild('stepperContainer') stepperContainer!: ElementRef;
+
+
   userId: number = 42;
   messages: Message[] = [];
+
+  selectedPostGroup: any = null;
+  selectedMessageIndex: number = 0;
+  selectedStepIndex: number = 0;
+  isStepperOpen: boolean = false;
+
+  latestMessages: any[] = []; // Assuming latestMessages is an array of messages
+  transformedMessages: any[] = []; // Assuming transformedMessages is an array of message groups
 
   messages2 = [];
   user: any;
 
   showFullText = false;
-  transformedMessages: any[]=[];
-  latestMessages: Message[] = [];
 
   constructor(
     private messageService: MessageService,
@@ -96,11 +109,11 @@ export class UserMessagesComponent implements OnInit {
       console.error('User or user ID is undefined');
     }
   }
-  toggleGroupMessages(group: Message[]): void {
-    group.forEach(message => {
-      message.isOpen = !message.isOpen;
-    });
-  }
+  // toggleGroupMessages(group: Message[]): void {
+  //   group.forEach(message => {
+  //     message.isOpen = !message.isOpen;
+  //   });
+  // }
 
   markAsUnread(message: Message): void {
     console.log('Mark as Unread:', message);
@@ -212,8 +225,41 @@ export class UserMessagesComponent implements OnInit {
     return groupedMessages;
   }
 
+  getLastOpenStepIndex(postGroup: any[]): number {
+    return postGroup.findIndex((message) => message.isOpen) || 0;
+  }
+
+  // Method to toggle the stepper and open the last step
+  toggleGroupMessages(postGroup: any) {
+    this.isStepperOpen = !this.isStepperOpen;
+    this.selectedPostGroup = postGroup;
+  }
+
+  resetStepper(): void {
+    this.selectedPostGroup = null;
+    // Setting the index to -1 triggers the AfterViewInit hook
+    this.stepper.selectedIndex = -1;
+  }
+
+  ngAfterViewInit(): void {
+    if (this.isStepperOpen) {
+      // Setting the index to the last step
+      this.stepper.selectedIndex = this.selectedPostGroup.length - 1;
+      // Focus on the last step header after the view has been initialized
+      const lastStepHeader = this.stepperContainer.nativeElement.querySelectorAll(
+        '.mat-horizontal-stepper-header-container button'
+      )[this.selectedPostGroup.length - 1];
+      if (lastStepHeader) {
+        lastStepHeader.focus();
+      }
+    }
+  }
+
 
 }
+
+
+
 
 // loadUserMessages(): void {
 //   this.messageService.getUserMessages(this.userId).subscribe((messages) => {

@@ -5,11 +5,12 @@
   </label>
   <nav>
     <ul>
+      <li *ngIf=" this.isAdmin" (click)="closeMenu()"><a routerLink="dashboard" class="link-style">דאשבורד</a></li>
       <li (click)="closeMenu()"><a routerLink="home" class="link-style">בית</a></li>
       <li (click)="closeMenu()"><a routerLink="myposts" class="link-style">הדירות שלי</a></li>
       <li (click)="closeMenu()" class="messages-link">
         <a routerLink="messages" class="link-style">ההודעות שלי
-          <span *ngIf="unreadMessagesCount > 0" class="unread-badge">{{ unreadMessagesCount }}</span>
+          <!-- <span *ngIf="unreadMessagesCount > 0" class="unread-badge"></span> -->
         </a>
       </li>
       <li (click)="closeMenu()"><a routerLink="profile" class="link-style">עריכת פרופיל</a></li>

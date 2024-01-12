@@ -104,18 +104,18 @@ export class LoginComponent implements OnInit {
         console.log('response:', response);
         this.userService.setUser(response.user);
         this.authService.login(email)
-        const userEmail = this.authService.getUserEmail();
-
-        if (this.authService.isAdminUser(userEmail!)) {
-          setTimeout(() => {
-            this.router.navigate(['/dashboard']);
-          }, 2000);
+        // const userEmail = this.authService.getUserEmail();
+        this.router.navigate(['/home']);
+        // if (this.authService.isAdminUser(userEmail!)) {
+        //   setTimeout(() => {
+        //     this.router.navigate(['/dashboard']);
+        //   }, 2000);
           
-        } else {
-          setTimeout(() => {
-            this.router.navigate(['/home']);
-          }, 2000);
-        }
+        // } else {
+        //   setTimeout(() => {
+        //     this.router.navigate(['/home']);
+        //   }, 2000);
+        // }
       },
       (error) => {
         this.loading = false;

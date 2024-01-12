@@ -22,7 +22,7 @@ import { OpeningComponent } from './cmps/opening/opening.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LoadindComponent } from './cmps/loadind/loadind.component';
 import { UserMessagesComponent } from './pages/user-messages/user-messages.component';
-import { AdminGuard } from '../app/helpers/admin.guard'; 
+// import { AdminGuard } from '../app/helpers/admin.guard'; 
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { ImagePageComponent } from './cmps/image-page/image-page.component';
@@ -52,7 +52,9 @@ const routes: Routes = [
   { path: 'accessDenied', component: AccessDeniedComponent,canActivate: [AuthGuard], },
 
 {path:'messages',component:UserMessagesComponent,canActivate: [AuthGuard]},
-{path:'dashboard',component:DashbordComponent,canActivate: [AdminGuard]},
+{path:'dashboard',component:DashbordComponent},
+// {path:'dashboard',component:DashbordComponent,canActivate: [AdminGuard]},
+
 { path: 'post-details/:status/:postId', component: PostDetailsComponent,canActivate: [AuthGuard], },
 { path: 'image-page/:apartmentId', component: ImagePageComponent ,canActivate: [AuthGuard],},
 ];
