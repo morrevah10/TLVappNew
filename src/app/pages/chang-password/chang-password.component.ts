@@ -126,6 +126,6 @@ export class ChangPasswordComponent implements OnInit {
     setTimeout(() => {
       this.showPasswordTooltip = false;
       console.log('tooltip', this.showPasswordTooltip);
-    }, 1500);
+    }, 3500);
   }
 }

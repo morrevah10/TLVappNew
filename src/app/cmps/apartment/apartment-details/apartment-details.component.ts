@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from 'src/app/srvices/post.service';
 import { UserService } from 'src/app/srvices/user.service';
 import { DatePipe } from '@angular/common';
@@ -20,6 +20,7 @@ export class ApartmentDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private postService: PostService,
     private userService: UserService
   ) {}
@@ -59,6 +60,10 @@ export class ApartmentDetailsComponent implements OnInit {
 
   closeGallery() {
     this.showGallery = false;
+  }
+
+  navToForm(){
+    this.router.navigate(['/rantal']);
   }
 
 }
