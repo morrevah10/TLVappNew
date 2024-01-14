@@ -15,6 +15,13 @@ export class ToolbarComponent implements OnInit {
   logedinUser: any;
   isAdmin = false;
   @Input() unreadMessagesCount: number = 0;
+  needApproval: boolean = false;
+  aprovelText = '';
+  modalImg = '';
+  modalText = '';
+  isHidden: boolean = false;
+  isApproved = false;
+  serverResponse = false;
 
   constructor(
     private router: Router,
@@ -50,5 +57,36 @@ checkAdmin(email:string){
   return this.authService.isAdminUser(email)
 }
 
+
+logout() {
+  console.log('logedout!!!');
+  this.needApproval = true;
+  this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק?';
+  this.modalImg = '../../../assets/img/success.png';
+  this.modalText = 'התנתקת בהצלחה';
+
+  this.isHidden = true;
+}
+
+onModalClosed(isHidden: boolean): void {
+  console.log(this.isApproved);
+  this.isHidden = isHidden;
+  this.aprovelText = '';
+  this.modalImg = '';
+  this.modalText = '';
+
+  if (this.isApproved) {
+    setTimeout(() => {
+      this.userService.clearUser();
+      this.router.navigate(['/login']);
+    }, 2000);
+  }
+
+}
+
+onAprovel(isApproved: boolean): void {
+  this.isApproved = isApproved;
+  console.log(this.isApproved);
+}
 
 }

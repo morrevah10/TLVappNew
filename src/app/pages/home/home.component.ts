@@ -198,54 +198,94 @@ export class HomeComponent implements OnInit {
 
 
   
-  
   private filterCities(cityIndex: { [letter: string]: string[] }, filterValue: string): string[] {
-    console.log('cityIndex', cityIndex);
     filterValue = filterValue.trim().toLowerCase();
-    console.log('filterValue', filterValue);
     let filteredCities: string[] = [];
-    let isHebrewLetter: boolean = false; // Initialize with a default value
-  
+    
     if (this.selectedCity) {
-      // If a city is selected, only consider cities starting with the selected letter
       const selectedLetter = this.selectedCity.charAt(0).toLowerCase();
-  
-      // Check if the typed letter is in Hebrew using a regular expression
-      isHebrewLetter = /^[\u0590-\u05FF]+$/.test(filterValue);
-  
-      if (selectedLetter === filterValue[0] && isHebrewLetter) {
+    
+      if (selectedLetter === filterValue[0]) {
         // Filter and concatenate matching cities
         filteredCities = cityIndex[selectedLetter].filter((city) =>
-          city.toLowerCase().includes(filterValue)
+          this.matchCityWithMultipleWords(city.toLowerCase(), filterValue)
         );
       }
     }
   
-    // If the input is in English, add a general option
-    // if (!filteredCities.length && !isHebrewLetter) {
-    //   filteredCities.push('נא להקליד בעברית'); // Replace with the desired message or option
-    // }
-
-  
-    if(filteredCities.includes(filterValue)){
-      this.isInputValid=true
-      this.isDisable=true
-      this.toggleDisable()
-    }else{
-      this.isInputValid=false
-      this.isDisable=false
-    }
+    // Check if any city in filteredCities includes filterValue (case-insensitive)
+    this.isInputValid = filteredCities.some(city => city.toLowerCase().includes(filterValue));
     
-  console.log('this.isInputValid',this.isInputValid)
+    if (this.isInputValid) {
+      this.isDisable = true;
+      this.toggleDisable();
+    } else {
+      this.isDisable = false;
+    }
+  
+    console.log('this.isInputValid', this.isInputValid);
     console.log('filteredCities', filteredCities);
     return filteredCities;
   }
+  
+  private matchCityWithMultipleWords(city: string, filterValue: string): boolean {
+    // Normalize both city and filterValue to lowercase for case-insensitive comparison
+    const normalizedCity = city.toLowerCase();
+    const normalizedFilterValue = filterValue.toLowerCase();
+  
+    // Check if the normalized city includes the normalized filterValue
+    return normalizedCity.includes(normalizedFilterValue);
+  }
+  
+  
+  // private filterCities(cityIndex: { [letter: string]: string[] }, filterValue: string): string[] {
+  //   console.log('cityIndex', cityIndex);
+  //   filterValue = filterValue.trim().toLowerCase();
+  //   console.log('filterValue', filterValue);
+  //   let filteredCities: string[] = [];
+  //   let isHebrewLetter: boolean = false; // Initialize with a default value
+  
+  //   if (this.selectedCity) {
+  //     // If a city is selected, only consider cities starting with the selected letter
+  //     const selectedLetter = this.selectedCity.charAt(0).toLowerCase();
+  
+  //     // Check if the typed letter is in Hebrew using a regular expression
+  //     isHebrewLetter = /^[\u0590-\u05FF]+$/.test(filterValue);
+  
+  //     if (selectedLetter === filterValue[0] && isHebrewLetter) {
+  //       // Filter and concatenate matching cities
+  //       filteredCities = cityIndex[selectedLetter].filter((city) =>
+  //         city.toLowerCase().includes(filterValue)
+  //       );
+  //     }
+  //   }
+  
+  //   // If the input is in English, add a general option
+  //   // if (!filteredCities.length && !isHebrewLetter) {
+  //   //   filteredCities.push('נא להקליד בעברית'); // Replace with the desired message or option
+  //   // }
+
+  
+  //   if(filteredCities.includes(filterValue)){
+  //     this.isInputValid=true
+  //     this.isDisable=true
+  //     this.toggleDisable()
+  //   }else{
+  //     this.isInputValid=false
+  //     this.isDisable=false
+  //   }
+    
+  // console.log('this.isInputValid',this.isInputValid)
+  //   console.log('filteredCities', filteredCities);
+  //   return filteredCities;
+  // }
   
   
   
   
   onStreetOptionSelected(): void {
-    this.isStreetInputValid = true;
+    console.log('this.streetFilterControl.value',this.streetFilterControl.value)
+    this.isStreetInputValid = this.filteredStreets.includes(this.streetFilterControl.value!);
   }
   
 

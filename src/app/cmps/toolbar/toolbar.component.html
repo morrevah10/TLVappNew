@@ -17,7 +17,20 @@
       <li (click)="closeMenu()"><a routerLink="personalInfo/changPassword" class="link-style">שינוי סיסמא</a></li>
       <li (click)="closeMenu()"><a routerLink="terms" class="link-style">תנאי שימוש</a></li>
       <li (click)="closeMenu()"><a routerLink="about" class="link-style">אודות</a></li>
+      <li (click)="closeMenu()" (click)="logout()" class="link-style"> התנתק </li>
     </ul>
   </nav>
   <div class="overlay" *ngIf="opened" (click)="closeMenu()"></div>
+
+  <app-modal
+  [needAprove]="this.needApproval"
+  [aprovelText]="this.aprovelText"
+  [img]="this.modalImg"
+  [text]="this.modalText"
+  [serverResponse]="this.serverResponse"
+  [(isHid)]="isHidden"
+  (isHidChange)="onModalClosed($event)"
+  (isApproved)="onAprovel($event)"
+></app-modal>
+
 </section>
