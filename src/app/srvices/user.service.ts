@@ -11,8 +11,8 @@ export class UserService {
   private userSubject = new BehaviorSubject<User | null>(null);
   user$: Observable<User | null> = this.userSubject.asObservable();
 
-  // readonly APIurl = 'https://telavivback-production.up.railway.app/';
-  readonly APIurl = 'https://main.d1h89k09g6cz4e.amplifyapp.com/';
+  readonly APIurl = 'https://telavivback-production.up.railway.app/';
+  // readonly APIurl = 'https://main.d1h89k09g6cz4e.amplifyapp.com/';
 
 
   constructor(private http: HttpClient) {}
