@@ -66,6 +66,77 @@
   </div>
 </ng-template> -->
 
+
+
+
+
+
+
+
+<!-- user-messages.component.html -->
+<!-- <section class="container" *ngIf="latestMessages.length > 0; else noMessages">
+  <h2>ההודעות שלי</h2>
+  <div *ngFor="let postGroup of transformedMessages; let i = index">
+    <div class="post-card" (click)="toggleGroupMessages(postGroup)">
+      <p>
+        {{ postGroup[0]?.postDetails?.post_city }},
+        {{ postGroup[0]?.postDetails?.post_street }},
+        {{ postGroup[0]?.postDetails?.post_building_number }}
+      </p>
+    </div>
+
+    <div *ngIf="isStepperOpen && selectedPostGroup === postGroup" class="messages-container">
+      <mat-stepper orientation="vertical" #stepper class="custom-stepper" [selectedIndex]="selectedPostGroup?.length - 1" mode="readonly">
+        <ng-container *ngFor="let message of selectedPostGroup?.slice().reverse(); let j = index">
+          <mat-step>
+            <ng-template matStepLabel>
+              <div class="message-label-content">{{ message?.user_message }}</div>
+            </ng-template>
+            <ng-template matStepContent>
+              <div class="message-card">
+                <p class="message-content">{{ message?.user_message }}</p>
+                <p class="card-date">
+                  {{ message.date | date : "dd/MM/yyyy" }} •
+                  {{ message.date | date : "HH:mm" }}
+                </p>
+              </div>
+            </ng-template>
+          </mat-step>
+        </ng-container>
+      </mat-stepper>
+    </div>
+  </div>
+</section>
+
+<ng-template #noMessages>
+  <div class="no-messages">
+    <img src="../../../assets/img/messages.svg" alt="">
+    <h3>אין לנו עדיין הודעות בשבילך</h3>
+    <p>אל דאגה,נעדכן אותך כשיהיה לנו משהו לספר</p>
+  </div>
+</ng-template> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- user-messages.component.html -->
 <section class="container" *ngIf="latestMessages.length > 0; else noMessages">
   <h2>ההודעות שלי</h2>
@@ -82,27 +153,8 @@
 
     <!-- Open div for additional cards when the post card is clicked -->
     <div *ngIf="isStepperOpen && selectedPostGroup === postGroup" class="messages-container">
-      <!-- Mat Stepper for Messages -->
-      <mat-stepper orientation="vertical" #stepper class="custom-stepper" [selectedIndex]="selectedPostGroup?.length - 1" mode="readonly">
-        <!-- Card for each message in the group (reversed order) -->
-        <ng-container *ngFor="let message of selectedPostGroup?.slice().reverse(); let j = index">
-          <mat-step>
-            <ng-template matStepLabel>
-              <div class="message-label-content">{{ message?.user_message }}</div>
-            </ng-template>
-            <ng-template matStepContent>
-              <div class="message-card">
-                <p class="message-content">{{ message?.user_message }}</p>
-                <p class="card-date">
-                  {{ message.date | date : "dd/MM/yyyy" }} •
-                  {{ message.date | date : "HH:mm" }}
-                </p>
-                <!-- Add other message details as needed -->
-              </div>
-            </ng-template>
-          </mat-step>
-        </ng-container>
-      </mat-stepper>
+      <!-- Use app-timeline component with messages as input -->
+      <app-timeline [messages]="selectedPostGroup"></app-timeline>
     </div>
   </div>
 </section>

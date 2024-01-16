@@ -18,6 +18,7 @@
       <li (click)="closeMenu()"><a routerLink="terms" class="link-style">תנאי שימוש</a></li>
       <li (click)="closeMenu()"><a routerLink="about" class="link-style">אודות</a></li>
       <li (click)="closeMenu()" (click)="logout()" class="link-style"> התנתק </li>
+      <li (click)="closeMenu()"><a routerLink="timeline" class="link-style">חדש</a></li>
     </ul>
   </nav>
   <div class="overlay" *ngIf="opened" (click)="closeMenu()"></div>

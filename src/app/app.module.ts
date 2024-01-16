@@ -90,6 +90,7 @@ import { PostDetailsComponent } from './pages/post-details/post-details.componen
 import { GalleryComponent } from './pages/gallery/gallery.component';
 import { ImagePageComponent } from './cmps/image-page/image-page.component';
 import { ToolbarComponent } from './cmps/toolbar/toolbar.component';
+import { TimelineComponent } from './cmps/timeline/timeline.component';
 
 
 
@@ -134,6 +135,7 @@ import { ToolbarComponent } from './cmps/toolbar/toolbar.component';
     GalleryComponent,
     ImagePageComponent,
     ToolbarComponent,
+    TimelineComponent,
   ],
   imports: [
     BrowserModule,

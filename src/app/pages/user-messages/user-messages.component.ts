@@ -29,6 +29,9 @@ export class UserMessagesComponent implements OnInit {
   selectedStepIndex: number = 0;
   isStepperOpen: boolean = false;
 
+  selectedPostGroup2: any[] = [];
+
+
   latestMessages: any[] = []; // Assuming latestMessages is an array of messages
   transformedMessages: any[] = []; // Assuming transformedMessages is an array of message groups
 
@@ -233,6 +236,7 @@ export class UserMessagesComponent implements OnInit {
   toggleGroupMessages(postGroup: any) {
     this.isStepperOpen = !this.isStepperOpen;
     this.selectedPostGroup = postGroup;
+    this.selectedPostGroup2 = postGroup;
   }
 
   resetStepper(): void {

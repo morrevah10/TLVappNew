@@ -26,6 +26,7 @@ import { UserMessagesComponent } from './pages/user-messages/user-messages.compo
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { ImagePageComponent } from './cmps/image-page/image-page.component';
+import { TimelineComponent } from './cmps/timeline/timeline.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,7 @@ const routes: Routes = [
     component: RestPasswordComponent,
   },
   { path: 'accessDenied', component: AccessDeniedComponent,canActivate: [AuthGuard], },
+  { path: 'timeline', component: TimelineComponent, },
 
 {path:'messages',component:UserMessagesComponent,canActivate: [AuthGuard]},
 {path:'dashboard',component:DashbordComponent},
