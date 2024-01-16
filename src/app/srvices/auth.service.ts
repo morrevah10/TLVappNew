@@ -32,10 +32,17 @@ export class AuthService {
     this.isAuthenticatedSubject.next(true);
   }
 
-  logout() {
-    this.userEmail = null;
-    this.isAuthenticatedSubject.next(false);
+  logout(): Observable<void> {
+    return new Observable<void>((observer) => {
+      this.userService.clearUser();
+      this.userEmail = null;
+      this.isAuthenticatedSubject.next(false);
+  
+      observer.next();
+      observer.complete();
+    });
   }
+
 
   isAdminUser(email: string): boolean {
     return this.adminEmails.includes(email);

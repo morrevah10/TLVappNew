@@ -60,16 +60,19 @@ checkAdmin(email:string){
 
 logout() {
   console.log('logedout!!!');
-  this.needApproval = true;
-  this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק?';
-  this.modalImg = '../../../assets/img/success.png';
-  this.modalText = 'התנתקת בהצלחה';
+  // this.authService.logout().subscribe(() => {
+    this.needApproval = true;
+    this.aprovelText = 'האם אתה בטוח שאתה רוצה להתנתק?';
+    this.modalImg = '../../../assets/img/success.png';
+    this.modalText = 'התנתקת בהצלחה';
 
-  this.isHidden = true;
+    this.isHidden = true;
+  // });
 }
 
 onModalClosed(isHidden: boolean): void {
-  console.log(this.isApproved);
+  this.authService.logout().subscribe(() => {
+  console.log('this.isApproved',this.isApproved);
   this.isHidden = isHidden;
   this.aprovelText = '';
   this.modalImg = '';
@@ -77,10 +80,10 @@ onModalClosed(isHidden: boolean): void {
 
   if (this.isApproved) {
     setTimeout(() => {
-      this.userService.clearUser();
       this.router.navigate(['/login']);
-    }, 2000);
+    }, 1000);
   }
+});
 
 }
 
