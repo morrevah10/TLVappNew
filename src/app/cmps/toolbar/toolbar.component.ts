@@ -79,9 +79,9 @@ onModalClosed(isHidden: boolean): void {
   this.modalText = '';
 
   if (this.isApproved) {
-    setTimeout(() => {
+    // setTimeout(() => {
       this.router.navigate(['/login']);
-    }, 1000);
+    // }, 1000);
   }
 });
 
