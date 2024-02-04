@@ -1,0 +1,85 @@
+<!-- <section class="body">
+
+    <div class="timeline">
+        
+        
+        <div class="container left-container">
+            <img src="../../../assets/img/rentShare.jpg">
+            <div class="text-box">
+                <h2 class="title">some name</h2>
+                <small class="date">200100201010</small>
+                <p class="text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit suscipit accusantium repudiandae provident, voluptatum nobis a laboriosam eum. Quisquam, soluta numquam ab sunt eius officia consequatur perferendis eum optio. Quisquam.</p>
+                <span class="left-container-arrow"></span>
+            </div>
+        </div>
+        
+        
+        
+        <div class="container right-container">
+            <img src="../../../assets/img/rentShare.jpg">
+            <div class="text-box">
+                <h2 class="title">some name</h2>
+                <small class="date">200100201010</small>
+                <p class="text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit suscipit accusantium repudiandae provident, voluptatum nobis a laboriosam eum. Quisquam, soluta numquam ab sunt eius officia consequatur perferendis eum optio. Quisquam.</p>
+                <span class="right-container-arrow"></span>
+            </div>
+        </div>
+        
+
+        
+        <div class="container left-container">
+            <img src="../../../assets/img/rentShare.jpg">
+            <div class="text-box">
+                <h2 class="title">some name</h2>
+                <small class="date">200100201010</small>
+                <p class="text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit suscipit accusantium repudiandae provident, voluptatum nobis a laboriosam eum. Quisquam, soluta numquam ab sunt eius officia consequatur perferendis eum optio. Quisquam.</p>
+                <span class="left-container-arrow"></span>
+            </div>
+        </div>
+        
+        
+        
+        <div class="container right-container">
+            <img src="../../../assets/img/rentShare.jpg">
+            <div class="text-box">
+                <h2 class="title">some name</h2>
+                <small class="date">200100201010</small>
+                <p class="text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit suscipit accusantium repudiandae provident, voluptatum nobis a laboriosam eum. Quisquam, soluta numquam ab sunt eius officia consequatur perferendis eum optio. Quisquam.</p>
+                <span class="right-container-arrow"></span>
+            </div>
+        </div>
+        
+        
+    </div>
+</section> -->
+
+<section class="body">
+  <div class="timeline" [style.animation-duration]="calculateTotalDuration()">
+    <div *ngFor="let message of messages;let i = index">
+        <div
+        class="container"
+        [ngClass]="{
+          'left-container': isLeftContainer(i),
+          'right-container': isRightContainer(i)
+        }"
+        [style.animation-delay]="calculateAnimationDelay(i)"
+      >
+        <img src="../../../assets/img/rentShare.jpg" />
+        <div class="text-box">
+          <h2 class="title">{{ message.title }}</h2>
+          <small class="date">
+            {{ message.date | date : "dd/MM/yyyy" }} •
+            {{ message.date | date : "HH:mm" }}</small
+          >
+          <p class="text">{{ message.user_message }}</p>
+          <span
+            [ngClass]="{
+              'left-container-arrow': isLeftContainer(i),
+              'right-container-arrow': isRightContainer(i)
+            }"
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,83 @@
+
+<section class="container">
+  <section class="search-filter">
+    <div class="search">
+  
+      <div class="searchType">
+        <label for="searchType">חפש לפי:</label>
+        <select [(ngModel)]="searchType" name="searchType" id="searchType">
+          <option value="userId">משתמש</option>
+          <option value="postId">פוסט</option>
+        </select>
+      </div>
+    
+      <div class="searchInput">
+        <label for="searchInput">הכנס מספר:</label>
+        <input type="text" [(ngModel)]="searchInput" name="searchInput" id="searchInput">
+      
+      </div>
+  
+      <div class="btn">
+        <button (click)="search()">חפש</button>
+      </div>
+    </div>
+    
+    <div class="filter">
+  
+      <div class="sortBy">
+        <label for="sortBy">מיין:</label>
+        <select [(ngModel)]="sortBy" name="sortBy" id="sortBy">
+          <option value="userId">משתמש</option>
+          <option value="postId">פוסט</option>
+        </select>
+      </div>
+    
+      <div class="sortOrder">
+        <label for="sortOrder">מיין על פי:</label>
+        <select [(ngModel)]="sortOrder" name="sortOrder" id="sortOrder">
+          <option value="asc">סדר עולה</option>
+          <option value="desc">סדר יורד</option>
+        </select>
+      </div>
+  
+      <div class="btn">
+        <button (click)="sort()">מיין</button>
+      </div>
+    </div>
+  </section>
+  
+  <div class="table" *ngIf="filteredData.length > 0; else noResults">
+    <table>
+      <thead>
+        <tr>
+          <th>מזהה משתמש</th>
+          <th>מזהה פוסט</th>
+          <th>אפשרויות</th>
+          <th>פעולות</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr *ngFor="let item of filteredData">
+          <td>{{ item.post_user_id }}</td>
+          <td>{{ item.post_id }}</td>
+          <td>
+            <form [formGroup]="item.formGroup">
+              <select formControlName="selectedOption" class="option">
+                <option *ngFor="let option of dropdownOptions" [value]="option.value">{{ option.text }}</option>
+              </select>
+            </form>
+          </td>
+          <td>
+            <button class="btn-action" (click)="send(item.formGroup.value.selectedOption, item.post_user_id, item.post_id)">עדכן סטטוס</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #noResults>
+    <p class="no-results">אין תוצאות ...</p>
+  </ng-template>
+</section>
+

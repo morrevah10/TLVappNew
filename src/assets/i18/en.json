@@ -1,0 +1,119 @@
+{   
+
+    "home_page_login_btn" : "Login",
+    "home_page_register_btn" : "Register",
+
+
+    "register_form_title" : "Register",
+    "register_form_full_name_txt" : "Full Name",
+    "register_form_email_txt" : "Email",
+    "register_form_phone_txt" : "Phone",
+    "register_form_password_txt" : "Password",
+    "register_form_password_confirm_txt" : "Confirm Password",
+    "register_form_create_account_btn" : "Create Account",
+    "register_form_already_have_account_txt" : "Already have an account?",
+    "register_form_login_btn" : "Login",
+
+
+    "login_form_title" : "Login",
+    "login_form_email_txt" : "Email",
+    "login_form_password_txt" : "Password",
+    "login_form_login_btn" : "Login",
+    "login_form_register_btn" : "Register",
+    "login_form_forget_password_btn" : "Forget Password?",
+
+    "forget_password_form_title" : "Reset Your Password",
+    "forget_password_form_email_txt" : "Email",
+    "forget_password_form_send_btn" : "Send Email",
+
+
+    "forget_password_step_2_form_verify_code_txt" : "Verification Code",
+    "forget_password_step_2_form_new_password_txt" : "New Password",
+    "forget_password_step_2_form_confirm_new_password_txt" : "Confirm New Password",
+    "forget_password_step_2_form_reset_password_btn" : "Reset Password",
+
+
+    "search_post_page_search_btn" : "Search",
+    "search_post_page_add_post_btn" : "Add Your Experience",
+    "search_post_page_city_txt" : "City",
+    "search_post_page_street_txt" : "Street",
+    "search_post_page_apartment_number_txt" : "Apartment Number",
+
+
+    "add_post_page_city_txt" : "City",
+    "add_post_page_street_txt" : "Street",
+    "add_post_page_apartment_number_txt" : "Apartment Number",
+    "add_post_page_rent_price_txt" : "Rent Price",
+    "add_post_page_entry_date_txt" : "Entry Date",
+    "add_post_page_exit_date_txt" : "End Date",
+    "add_post_page_rental_contract_file" : "Rental Contract",
+    "add_post_page_identification_document" : "Identification Document",
+    "add_post_page_apartment_image_1" : "Apartment Image 1",
+    "add_post_page_apartment_image_2" : "Apartment Image 2",
+    "add_post_page_apartment_image_3" : "Apartment Image 3",
+    "add_post_page_apartment_image_4" : "Apartment Image 4",
+    "add_post_page_review_txt" : "Review",
+    "add_post_page_add_post_btn" : "Share Your Experience",
+
+
+    "menu_page_home_btn" : "Home",
+    "menu_page_personal_info_btn" : "Personal Info",
+    "menu_page_my_review_btn" : "My Reviews",
+    "menu_page_about_btn" : "About",
+    "menu_page_terms_and_conditions_btn" : "Terms and Conditions",
+
+
+    "personal_info_page_change_profile_image_btn" : "Change Profile Image",
+    "personal_info_page_logout_btn" : "Logout",
+    "personal_info_page_delete_account_btn" : "Delete Account",
+    "personal_info_page_full_name_txt" : "Full Name",
+    "personal_info_page_email_txt" : "Email",
+    "personal_info_page_phone_txt" : "Phone",
+    "personal_info_page_update_btn" : "Update",
+    "personal_info_page_change_password_btn" : "Change Password",
+
+
+    "change_password_old_password_txt" : "Old Password",
+    "change_password_new_password_txt" : "New Password",
+    "change_password_confirm_new_password_txt" : "Confirm New Password",
+    "change_password_change_password_btn" : "Change Password",
+
+
+    "my_post_card_city_txt" : "City",
+    "my_post_card_street_txt" : "Street",
+    "my_post_card_apartment_number_txt" : "Apartment Number",
+    "my_post_card_pending_txt" : "Pending",
+    "my_post_card_approved_txt" : "Approved",
+    "my_post_card_more_details_btn" : "More Details",
+    "my_post_card_delete_btn" : "Delete Review",
+    "my_post_card_edit_review_btn" : "Edit Review",
+
+
+    "my_post_edit_review_page_city_txt" : "City",
+    "my_post_edit_review_page_street_txt" : "Street",
+    "my_post_edit_review_page_apartment_number_txt" : "Apartment Number",
+    "my_post_edit_review_page_rent_price_txt" : "Rent Price",
+    "my_post_edit_review_page_entry_date_txt" : "Entry Date",
+    "my_post_edit_review_page_exit_date_txt" : "End Date",
+    "my_post_edit_review_page_review_txt" : "Review",
+    "my_post_edit_review_page_update_btn" : "Update",
+
+
+    "search_post_card_city_txt" : "City",
+    "search_post_card_street_txt" : "Street",
+    "search_post_card_apartment_number_txt" : "Apartment Number",
+    "search_post_card_rent_price_txt" : "Rent Price",
+    "search_post_card_more_details_btn" : "More Details",
+
+
+    "post_details_page_city_txt" : "City",
+    "post_details_page_street_txt" : "Street",
+    "post_details_page_building_txt" : "Building Number",
+    "post_details_page_apartment_number_txt" : "Apartment Number",
+    "post_details_page_rent_price_txt" : "Rent Price",
+    "post_details_page_entry_date_txt" : "Entry Date",
+    "post_details_page_exit_date_txt" : "End Date",
+    "post_details_page_rental_review_txt" : "Review",
+    "post_details_page_pics_txt" : "Pictures"
+
+}

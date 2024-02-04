@@ -1,0 +1,89 @@
+
+
+.overlay-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 9998; 
+  }
+
+.gallery {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    height: 60vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.gallery-close{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+}
+.gallery-container {
+    position: relative; 
+    display: flex;
+    flex-direction: row;
+}
+
+.image-container {
+    max-width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    display: flex;
+    align-items: center; 
+}
+
+
+
+img {
+    // width: 100%;
+    // height: auto;
+    // display: block;
+    // margin: 0 auto;
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+}
+
+
+.image-indicator {
+    margin: 1rem;
+    padding-top: 1rem;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #333;
+}
+
+.close-btn {
+    display: flex;
+    padding: 1rem
+}
+
+.arrow-btn.left {
+    padding: 0.5rem;
+}
+
+.arrow-btn.right {
+    padding: 0.5rem;
+
+}

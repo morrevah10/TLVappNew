@@ -1,0 +1,152 @@
+
+
+<div >
+    <form [formGroup]="imageForm">
+        <div class="grid-container">
+          <div class="grid-item">
+            <label for="apartment_pic_1"></label>
+            <img
+              *ngIf="imageForm.get('apartment_pic_1')!.value"
+              [src]="imageForm.get('apartment_pic_1')!.value"
+              alt="Apartment Image 1"
+            />
+            <input
+              type="file"
+              #apartmentPic1Input
+              (change)="
+              onImageSelected(
+                  $event,
+                  'apartment_pic_1')
+              "
+              class="file-input"
+              id="file-input"
+            />
+            <label class="custom-upload-button" for="file-input">
+              בחר
+            </label>
+
+            <button
+              class="remove-btn"
+              (click)="deleteImage('apartment_pic_1')"
+            >
+              מחק
+            </button>
+          </div>
+
+          <div class="grid-item">
+            <label for="apartment_pic_2"></label>
+            <img
+              *ngIf="imageForm.get('apartment_pic_2')!.value"
+              [src]="imageForm.get('apartment_pic_2')!.value"
+              alt="Apartment Image 2"
+            />
+            <input
+              type="file"
+              #apartmentPic2Input
+              (change)="
+              onImageSelected(
+                  $event,
+                  'apartment_pic_2'
+                )
+              "
+              class="file-input"
+              id="file-input2"
+            />
+            <label class="custom-upload-button" for="file-input2">
+              בחר
+            </label>
+           
+            <button
+              class="remove-btn"
+              (click)="deleteImage('apartment_pic_2')"
+            >
+              מחק
+            </button>
+          </div>
+
+         
+
+          <div class="grid-item">
+            <label for="apartment_pic_3"></label>
+            <img
+              *ngIf="imageForm.get('apartment_pic_3')!.value"
+              [src]="imageForm.get('apartment_pic_3')!.value"
+              alt="Apartment Image 3"
+            />
+            <input
+              type="file"
+              #apartmentPic3Input
+              (change)="
+              onImageSelected(
+                  $event,
+                  'apartment_pic_3'
+                )
+              "
+              class="file-input"
+              id="file-input3"
+            />
+            <label class="custom-upload-button" for="file-input3">
+              בחר
+            </label>
+           
+            <button
+              class="remove-btn"
+              (click)="deleteImage('apartment_pic_3')"
+            >
+              מחק
+            </button>
+          </div>
+
+         
+          <div class="grid-item">
+            <label for="apartment_pic_4"></label>
+            <img
+              *ngIf="imageForm.get('apartment_pic_4')!.value"
+              [src]="imageForm.get('apartment_pic_4')!.value"
+              alt="Apartment Image 4"
+            />
+            <input
+              type="file"
+              #apartmentPic4Input
+              (change)="
+              onImageSelected(
+                  $event,
+                  'apartment_pic_4'
+                )
+              "
+              class="file-input"
+              id="file-input4"
+            />
+            <label class="custom-upload-button" for="file-input4">
+              בחר
+            </label>
+            
+            <button
+              class="remove-btn"
+              (click)="deleteImage('apartment_pic_4')"
+            >
+              מחק
+            </button>
+          </div>
+
+         
+        </div>
+    </form>
+
+    <div class="btn">
+      <button class="btn-large" (click)="submitForm()">עדכן</button>
+    </div>
+
+  </div>
+
+
+  <app-modal
+  [needAprove]="this.needApproval"
+  [aprovelText]="this.aprovelText"
+  [img]="this.modalImg"
+  [text]="this.modalText"
+  [serverResponse]="this.serverResponse"
+  [(isHid)]="isHidden"
+  (isHidChange)="onModalClosed($event)"
+  (isApproved)="onAprovel($event)"
+></app-modal>

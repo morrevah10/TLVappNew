@@ -1,0 +1,93 @@
+
+<section class="edit-container">
+  <div class="edit-contant">
+    <div class="edit-card">
+      <div class="edit-card-img" (click)="openGallery()">
+
+        <img src="{{this.apartmentData.apartment_pic_1}}" alt="תמונה" />
+      </div>
+      <div class="edit-card-details">
+        <p class="text">{{ this.apartmentData.post_city }}</p>
+        <p class="text">
+          {{ this.apartmentData.post_street }}
+          {{ this.apartmentData.post_building_number }}
+        </p>
+        <p class="text">דירה {{ this.apartmentData.post_apartment_number }}</p>
+      </div>
+    </div>
+
+    <div class="edit-date-price">
+      <div class="dates">
+        <p class="small-text">
+          תאריך כניסה לדירה : {{ this.apartmentData.post_rent_start| date:'dd/MM/yyyy' }}
+        </p>
+        <p class="small-text">
+          תאריך יציאה מהדירה : {{ this.apartmentData.post_rent_end| date:'dd/MM/yyyy' }}
+        </p>
+        <p class="small-text">
+          שכר דירה : {{ this.apartmentData.post_apartment_price }}
+        </p>
+
+        <div class="small-text">
+          דירוג :       {{ apartmentData.post_rating }}
+        <img src="../../../../assets/icons/star.png" alt="" />
+      </div>
+      </div>
+    </div>
+
+    <div class="edit-description">
+
+      <p> חוות דעת</p>
+      <div class="edit-input">
+        <textarea
+          class="input-text"
+          id="post_description"
+          name="post_description"
+          (click)="enableButton()"
+          [(ngModel)]="apartmentData.post_description"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="edit-btn">
+      <button  (click)="updateImg()" type="submit" class="btn-large" >
+        עריכת תמונות
+      </button>
+    </div>
+    
+
+    <div class="edit-btn">
+      <button (click)="onSubmit()"  type="submit" class="btn-large" [disabled]="isButtonDisabled" [ngClass]="{
+        'btn-large-dis': isButtonDisabled,
+        'btn-large ': !isButtonDisabled,
+      }">
+        עדכן חוות דעת
+      </button>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+
+  <div *ngIf="showGallery" class="overlay-background"></div>
+  
+  <app-gallery [images]="galleryImages" *ngIf="showGallery" (close)="closeGallery()"></app-gallery>
+
+</section>
+
+
+
+<app-modal
+  [needAprove]="this.needApproval"
+  [aprovelText]="this.aprovelText"
+  [img]="this.modalImg"
+  [text]="this.modalText"
+  [serverResponse]="this.serverResponse"
+  [(isHid)]="isHidden"
+  (isHidChange)="onModalClosed($event)"
+  (isApproved)="onAprovel($event)"
+></app-modal>
+
+<!-- <app-nav-bar *ngIf="this.windowWidth <= 567"></app-nav-bar> -->

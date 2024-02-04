@@ -1,0 +1,42 @@
+
+<!-- <section class="switcher-section">
+  <div class="switcher-div">
+    <img *ngIf="!isEnglishSelected" src="../../../assets//img/israel_icon.png" alt="" />
+    <span *ngIf="!isEnglishSelected">Hebrew</span>
+  </div>
+  <mat-slide-toggle [(ngModel)]="isEnglishSelected" (change)="toggleLanguage()">
+  </mat-slide-toggle>
+  <div class="switcher-div">
+    <span *ngIf="isEnglishSelected">English</span>
+    <img *ngIf="isEnglishSelected" src="../../../assets//img/america_icon.png" alt="" />
+  </div>
+</section> -->
+
+<section class="switcher-section">
+  <!-- Large Screen (> 768px) -->
+  <div class="switcher-div" *ngIf="windowWidth > 768">
+    <img *ngIf="!isEnglishSelected" src="../../../assets/img/israel_icon.png" alt="" />
+    <span *ngIf="!isEnglishSelected">Hebrew</span>
+    <mat-slide-toggle [(ngModel)]="isEnglishSelected" (change)="toggleLanguage()"></mat-slide-toggle>
+    <span *ngIf="isEnglishSelected">English</span>
+    <img *ngIf="isEnglishSelected" src="../../../assets/img/america_icon.png" alt="" />
+  </div>
+
+  <!-- Medium Screen (<= 768px and > 568px) -->
+  <div class="switcher-div" *ngIf="windowWidth <= 768 && windowWidth > 568">
+    <span *ngIf="!isEnglishSelected">Hebrew</span>
+    <mat-slide-toggle [(ngModel)]="isEnglishSelected" (change)="toggleLanguage()"></mat-slide-toggle>
+    <span *ngIf="isEnglishSelected">English</span>
+  </div>
+
+  <!-- Small Screen (<= 568px) -->
+  <div class="switcher-div" *ngIf="windowWidth <= 568">
+    <mat-form-field>
+      <mat-label>Choose an option</mat-label>
+      <mat-select [(ngModel)]="isEnglishSelected" (selectionChange)="toggleLanguage()">
+        <mat-option value="hebrew">Hebrew</mat-option>
+        <mat-option value="english">English</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</section>

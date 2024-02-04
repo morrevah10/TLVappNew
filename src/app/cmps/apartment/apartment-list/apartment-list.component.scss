@@ -1,0 +1,174 @@
+
+@import "../../../styles/colors";
+
+.title {
+  direction: rtl;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.list-container {
+  height: 100dvh;
+  direction: rtl;
+  padding-top: 2rem;
+
+}
+.list-conant {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  height: 100%;
+}
+.form-group {
+  direction: rtl;
+  padding: 1.5rem 0 0 0;
+}
+
+.text {
+  direction: rtl;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  color: $color5;
+}
+
+input {
+  direction: rtl;
+}
+
+.color-text {
+  color: $color1;
+  margin: 0;
+  padding-left: 1rem; 
+}
+
+.btn-group {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 35dvh;
+  padding-top: 3rem;
+  justify-content: space-between;
+}
+
+.btn-large {
+  height: 3em;
+  width: 15em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25em;
+}
+
+.small-text {
+  color: $color4;
+  direction: rtl;
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  border: none;
+  flex-direction: row;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.card-img {
+  width: auto;
+
+  img {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.load-more {
+  color: $color1;
+  border: none;
+  background-color: transparent;
+}
+
+.list-parama {
+  display: flex;
+  justify-content: center;
+  img {
+    height: 1rem;
+    padding-left: 0.5rem;
+  }
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.normal-button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  width: 3rem;
+  height: 2rem;
+  padding: 5px 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.hidden-button {
+  visibility: hidden;
+  width: 3rem;
+  height: 2rem;
+  padding: 5px 5px;
+}
+
+.card-container {
+  padding-bottom: 1.5rem;
+}
+
+.no-apartments-message {
+  direction: rtl;
+  padding: 1.5rem;
+  border-radius: 10%;
+  text-align: center;
+
+  img{
+    width: 70%;
+  }
+
+}
+
+
+.no-message{
+
+  margin-bottom: 1rem;
+  p{
+    margin: 0;
+  }
+
+}
+
+.search-title{
+  padding-top: 1rem;
+  text-align: center;
+}

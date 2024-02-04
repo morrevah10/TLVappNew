@@ -1,0 +1,70 @@
+
+
+<section class="apartment-details-container">
+  <div class="apartment-details-contant">
+      <div class="apartment-card">
+
+        <div class="apartment-card-img" (click)="openGallery()">
+          <img src="{{ apartment?.apartment_pic_1 }}" alt="" />
+        </div>
+
+        <div class="edit-card-details">
+          <p class="text">{{ this.apartment?.post_city }}</p>
+          <p class="text">
+            {{ this.apartment?.post_street }}
+            {{ this.apartment?.post_building_number }}
+          </p>
+          <p class="text">דירה {{ this.apartment?.post_apartment_number }}</p>
+        </div>
+
+      </div>
+
+      <div class="apartment-date-price">
+        <div class="dates">
+          <p class="small-text">
+            תאריך כניסה לדירה: {{ this.apartment?.post_rent_start | date:'dd/MM/yyyy'}}
+          </p>
+          <p class="small-text">
+            תאריך יציאה מהדירה: {{ this.apartment?.post_rent_end | date:'dd/MM/yyyy'}}
+          </p>
+          <p class="small-text">
+            שכר דירה : {{ this.apartment?.post_apartment_price }}
+          </p>
+
+          <div class="small-text">
+            דירוג:       {{ this.apartment?.post_rating }}
+          <img src="../../../../assets/icons/star.png" alt="" />
+        </div>
+        </div>
+      </div>
+      
+
+      <div class="apartment-description">
+
+        <p>חוות דעת:</p>
+        <div class="edit-input">
+   
+          <div class="input-text display-text">{{ apartment?.post_description }}</div>
+      
+        </div>
+
+
+      </div>
+
+
+
+      <div class="apartment-btn">
+        <p class="small-text">השכרת דירה זו בעבר?</p>
+        <span class="color-text" (click)="navToForm()">
+          הוסף את החויה שלך
+        </span>
+      </div>
+  
+
+      </div>
+      
+    </section>
+    <div *ngIf="showGallery" class="overlay-background"></div>
+    
+    <app-gallery *ngIf="showGallery" [images]="galleryImages" (close)="closeGallery()"></app-gallery>
+    <!-- <app-nav-bar *ngIf="this.windowWidth <= 567 && isAuthenticated"></app-nav-bar> -->

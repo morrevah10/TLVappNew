@@ -1,0 +1,74 @@
+
+@import '../../../app/styles/colors';
+
+ .title {
+  direction: rtl;
+  font-size: 25px;
+  font-weight: bold;
+  color: #888888;
+
+}
+
+.title-underline {
+  direction: rtl;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: $color4;
+}
+
+.terms-container{
+  height: 100dvh;
+  overflow-y: auto;
+}
+
+.terms-content{
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  padding-top: 3rem;
+  height: 100%;
+  // overflow-y: auto;
+}
+
+.terms-headline{
+padding-top: 0.5rem;
+font-size: 18px;
+}
+
+.text-container{
+  background-color: $color3;
+  padding: 1rem;
+  border-radius: 10px;
+  // overflow-y: auto;
+
+  // height: 100%;
+}
+
+.text {
+  direction: rtl;
+  font-size: 15px;
+  color: #888888;
+}
+
+.center{
+  text-align: center;
+}
+
+.text-underline {
+  direction: rtl;
+  font-size: 15px;
+  text-decoration: underline;
+  font-weight: 600;
+  color: #888888;
+}
+
+
+.small-text{
+  color: $color4;
+  direction: rtl;
+}
+
+.space{
+  height: 20%;
+}

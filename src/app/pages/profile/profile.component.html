@@ -1,0 +1,96 @@
+<section class="profile-container">
+  <div class="profile-content">
+    <div class="profile-img">
+      <div class="profile-img">
+        <img
+          *ngIf="userImg.user_profile_pic; else defaultImage"
+          [src]="userImg.user_profile_pic"
+          alt="User Profile Picture"
+        />
+      </div>
+
+
+
+      <div class="personal-img-btn">
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onProfilePictureSelected($event)"
+          style="display: none;"
+          id="profilePictureInput"
+        />
+        <label for="profilePictureInput" class="chang-img-btn">
+          שנה תמונת פרופיל
+        </label>
+      </div>
+
+    </div>
+
+    <ng-template #defaultImage>
+      <img src="../../../assets/img/user_img.png" alt="User Profile Picture" />
+    </ng-template>
+
+    <div class="form-container">
+      <form [formGroup]="PersonalForm" (ngSubmit)="onSubmit()">
+        <div class="form-item">
+          <label class="small-text" for="user_full_name"
+            >שם מלא</label
+          >
+          <input
+            type="text"
+            id="user_full_name"
+            [(ngModel)]="user.user_full_name"
+            formControlName="user_full_name"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-item">
+          <label class="small-text" for="user_email"
+            >אימייל</label
+          >
+          <input
+            type="email"
+            id="user_email"
+            [(ngModel)]="user.user_email"
+            formControlName="user_email"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-item">
+          <label class="small-text" for="user_phone"
+            >טלפון</label
+          >
+          <input
+            type="tel"
+            id="user_phone"
+            [(ngModel)]="user.user_phone"
+            formControlName="user_phone"
+            class="form-control"
+          />
+        </div>
+
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
+      </div>
+
+      </form>
+    </div>
+
+    <div class="profile-btn">
+      <button type="button"
+      [disabled]="PersonalForm.invalid || !formChanged"
+      (click)="onSubmit()"
+      [ngClass]="{
+        'btn-large-dis': !formChanged,
+        'btn-large': formChanged,
+      }">עדכן פרטים</button>        
+    </div>
+  </div>
+</section>
+

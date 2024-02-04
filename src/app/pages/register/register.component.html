@@ -1,0 +1,239 @@
+
+<section class="register-container">
+  <div class="register-contat">
+    <div class="title center">צור משתמש</div>
+    <div class="form-container">
+      <form [formGroup]="registerForm" (ngSubmit)="onFormSubmit()">
+        <div class="form-group">
+          <label class="small-text" for="user_full_name">*שם מלא</label>
+          <input
+            type="text"
+            formControlName="user_full_name"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                submitted && registerForm.get('user_full_name')?.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && registerForm.get('user_full_name')?.errors"
+            class="invalid-feedback"
+          >
+            <div
+              class="required"
+              *ngIf="registerForm.get('user_full_name')?.hasError('required')"
+            >
+              שם מלא הוא שדה חובה
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="small-text" for="user_email">*אימייל</label>
+          <input
+            type="text"
+            formControlName="user_email"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': submitted && registerForm.get('user_email')?.errors
+            }"
+          />
+          <div
+            *ngIf="
+              submitted && registerForm.get('user_email')?.hasError('required')
+            "
+            class="invalid-feedback"
+          >
+            כתובת אימייל היא שדה חובה
+          </div>
+          <div
+            *ngIf="
+              submitted &&
+              registerForm.get('user_email')?.hasError('email') &&
+              !registerForm.get('user_email')?.hasError('required')
+            "
+            class="invalid-feedback"
+          >
+            הכנס כתובת אימייל חוקית
+          </div>
+          <div
+            *ngIf="
+              submitted &&
+              registerForm.get('user_email')?.hasError('serverError')
+            "
+            class="invalid-feedback"
+          ></div>
+        </div>
+
+        <div class="form-group">
+          <label class="small-text" for="user_phone">*טלפון נייד</label>
+          <input
+            type="tel"
+            formControlName="user_phone"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': submitted && registerForm.get('user_phone')?.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && registerForm.get('user_phone')?.errors"
+            class="invalid-feedback"
+          >
+            <div
+              class="required"
+              *ngIf="registerForm.get('user_phone')?.hasError('required')"
+            >
+              מספר טלפון הוא שדה חובה
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label-tooltip">
+            <label class="small-text" for="user_password"> *סיסמא</label>
+            <div class="pass-tooltip">
+              <div class="tooltip-img" (click)="toggleToolTipVisibility()">
+                <img src="../../../assets/icons/i.png" alt="" />
+              </div>
+              <div class="tooltip-container" *ngIf="showPasswordTooltip">
+                הסיסמא חייבת להכיל לפחות 6 ספרות כאשר בתוכן אות גדולה אות קטנה
+                ומספרים
+              </div>
+            </div>
+          </div>
+          <div class="password-input-container">
+            <input
+              type="{{ showPassword ? 'text' : 'password' }}"
+              formControlName="user_password"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  submitted && registerForm.get('user_password')?.errors
+              }"
+            />
+            <button type="button" (click)="togglePasswordVisibility()">
+              <img
+                class="showPaasImg"
+                [src]="
+                  showPassword
+                    ? '../../../assets/img/eye-open.png'
+                    : '../../../assets/img/eye-close.png'
+                "
+                alt="{{ showPassword ? 'Hide Password' : 'Show Password' }}"
+              />
+            </button>
+          </div>
+          <div
+            *ngIf="submitted && registerForm.get('user_password')?.errors"
+            class="invalid-feedback"
+          >
+            <div
+              class="required"
+              *ngIf="registerForm.get('user_password')?.hasError('required')"
+            >
+              סיסמא היא שדה חובה
+            </div>
+            <div
+              *ngIf="registerForm.get('user_password')?.hasError('minlength')"
+            >
+              הסיסמא חייבת להיות לפחות 6 ספרות
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="pass-tooltip" >
+          <div (click)="toggleToolTipVisibility()">
+            <img src="../../../assets/icons/i.png" alt="">
+          </div>
+          <div class="tooltip-container" *ngIf="showPasswordTooltip">
+            סיסמא חייבת לכלול לפחות 6 תווים ולכלול אותיות גדולות, קטנות ומספרים.
+          </div>
+        </div> -->
+
+        <div class="form-group">
+          <label class="small-text" for="user_password_2">*סיסמא חוזרת</label>
+          <div class="password-input-container">
+            <input
+              type="{{ showPasswordConfirmation ? 'text' : 'password' }}"
+              formControlName="user_password_2"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  submitted && registerForm.get('user_password_2')?.errors
+              }"
+            />
+            <button
+              type="button"
+              (click)="togglePasswordConfirmationVisibility()"
+            >
+              <img
+                class="showPaasImg"
+                [src]="
+                  showPasswordConfirmation
+                    ? '../../../assets/img/eye-open.png'
+                    : '../../../assets/img/eye-close.png'
+                "
+                alt="{{
+                  showPasswordConfirmation ? 'Hide Password' : 'Show Password'
+                }}"
+              />
+            </button>
+          </div>
+          <div
+            *ngIf="submitted && registerForm.get('user_password_2')?.errors"
+            class="invalid-feedback"
+          >
+            <div
+              class="required"
+              *ngIf="registerForm.get('user_password_2')?.hasError('required')"
+            >
+              סיסמא חוזרת היא שדה חובה
+            </div>
+            <div
+              *ngIf="registerForm.get('user_password_2')?.hasError('minlength')"
+            >
+              הסיסמא חייבת להיות לפחות 6 ספרות
+            </div>
+          </div>
+        </div>
+
+        <div class="error-message" *ngIf="this.errorMessage">
+          {{ this.errorMessage }}
+        </div>
+
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            value="terms"
+            (change)="onCheckboxChange($event)"
+          />
+          <label class="small-text checkbox" for="terms">
+            אני מסכים
+            <span routerLink="/terms">לתנאי השימוש</span>
+          </label>
+        </div>
+      </form>
+    </div>
+    <div class="buttons">
+      <button
+        (click)="onFormSubmit()"
+        [disabled]="!registerForm.valid || !isChecked"
+        [ngClass]="{
+          'btn-large-dis': !registerForm.valid || !isChecked,
+          'btn-large': registerForm.valid && isChecked
+        }"
+      >
+        הצטרף לקהילה
+      </button>
+
+      <button class="btn">
+        <span routerLink="/login" class="small-text">
+          כבר יש לך משתמש?
+          <span class="color-text">התחבר </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>

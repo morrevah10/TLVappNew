@@ -1,0 +1,37 @@
+<section class="phone-container">
+  <input type="checkbox" id="menu" [checked]="opened" (change)="toggleMenu()">
+  <label for="menu" class="icon">
+    <div class="menu"></div>
+  </label>
+  <nav>
+    <ul>
+      <li *ngIf=" this.isAdmin" (click)="closeMenu()"><a routerLink="dashboard" class="link-style">דאשבורד</a></li>
+      <li (click)="closeMenu()"><a routerLink="home" class="link-style">בית</a></li>
+      <li (click)="closeMenu()"><a routerLink="myposts" class="link-style">הדירות שלי</a></li>
+      <li (click)="closeMenu()" class="messages-link">
+        <a routerLink="messages" class="link-style">ההודעות שלי
+          <!-- <span *ngIf="unreadMessagesCount > 0" class="unread-badge"></span> -->
+        </a>
+      </li>
+      <li (click)="closeMenu()"><a routerLink="profile" class="link-style">עריכת פרופיל</a></li>
+      <li (click)="closeMenu()"><a routerLink="personalInfo/changPassword" class="link-style">שינוי סיסמא</a></li>
+      <li (click)="closeMenu()"><a routerLink="terms" class="link-style">תנאי שימוש</a></li>
+      <li (click)="closeMenu()"><a routerLink="about" class="link-style">אודות</a></li>
+      <li (click)="closeMenu()" (click)="logout()" class="link-style"> התנתק </li>
+      <li (click)="closeMenu()"><a routerLink="timeline" class="link-style">חדש</a></li>
+    </ul>
+  </nav>
+  <div class="overlay" *ngIf="opened" (click)="closeMenu()"></div>
+
+  <app-modal
+  [needAprove]="this.needApproval"
+  [aprovelText]="this.aprovelText"
+  [img]="this.modalImg"
+  [text]="this.modalText"
+  [serverResponse]="this.serverResponse"
+  [(isHid)]="isHidden"
+  (isHidChange)="onModalClosed($event)"
+  (isApproved)="onAprovel($event)"
+></app-modal>
+
+</section>

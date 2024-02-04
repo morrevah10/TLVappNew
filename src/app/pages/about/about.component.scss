@@ -1,0 +1,91 @@
+
+@import '../../../app/styles/colors';
+
+ .title {
+  direction: rtl;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.title-center {
+  direction: rtl;
+  font-size: 25px;
+  font-weight: bold;
+  color: $color4;
+  text-align: center;
+}
+
+.about-container{
+  height: 100dvh;
+}
+
+.about-headline{
+padding-top: 0.5rem;
+font-size: 18px;
+}
+
+.text-container{
+  background-color: $color3;
+  padding: 1rem;
+  border-radius: 10px;
+
+}
+
+.about-content{
+display: flex;
+flex-direction: column;
+padding:  1.5rem ;
+padding-top: 3rem;
+}
+
+.form-group{
+  direction: rtl;
+  padding: 1.5rem 0 0 0;
+}
+
+.text {
+  direction: rtl;
+  font-size: 15px;
+  // font-weight: 500;
+  color: #888888;
+}
+
+input{
+  direction: rtl;
+  // background-color: #F2F7FF;
+}
+
+.color-text{
+  color: $color1;
+  cursor: pointer;
+}
+
+.space{
+  height: 10%;
+}
+
+.btn-group {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 35dvh;
+  padding-top: 3rem;
+  justify-content: space-between;
+
+}
+
+.btn-large{
+  height: 3em;
+  width: 15em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25em;
+}
+
+.small-text{
+  color: $color4;
+  direction: rtl;
+}

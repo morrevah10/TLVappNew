@@ -1,0 +1,105 @@
+
+@import '../../../app/styles/colors';
+
+ .title {
+  direction: rtl;
+  padding-top: 16px;
+  margin: 0;
+}
+
+.login-container{
+  height: 100dvh;
+}
+
+.login-content{
+display: flex;
+flex-direction: column;
+padding: 1.5rem;
+height: 100%;
+// background: #F8F8F8;
+// background: #F5F5F5;
+// background: #F0F0F0;
+// background: #EDEDED;
+// background: #EAEAEA;
+
+
+}
+
+.form-group{
+  direction: rtl;
+  padding: 1.5rem 0 0 0;
+}
+
+
+.text {
+  direction: rtl;
+  font-size: 7vw;
+  font-weight: bold;
+  padding-top: 8px;
+  color: black;
+}
+
+input{
+  direction: rtl;
+}
+
+.color-text{
+  color: $color1;
+  cursor: pointer;
+}
+
+
+.btn-group {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 35dvh;
+  padding-top: 3rem;
+  justify-content: space-between;
+
+}
+
+.btn-large{
+  height: 3em;
+  width: 12.5em;
+  // margin: 10px 20px ;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  font-size: 5vw;
+  cursor: pointer;
+}
+
+.btn-large-dis {
+  height: 3em;
+  width: 12.5em;
+  // margin: 10px 20px ;
+  color: white;
+  background-color: $color4;
+  border: none;
+  border-radius: 5px;
+  font-size: 5vw;
+  cursor: pointer;
+} 
+
+
+.small-text{
+  color: $color4;
+  direction: rtl;
+  font-size: 4vw;
+}
+
+.new{
+  padding-bottom:2em;
+}
+
+.form-check{
+  display: flex;
+  
+}
+
+.form-check-label{
+  padding-right: 1rem;
+}

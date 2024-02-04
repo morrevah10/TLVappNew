@@ -1,0 +1,77 @@
+
+
+<section class="personal-container">
+  <div class="personal-content">
+    <div class="profile-img">
+      <img
+        *ngIf="userImg.user_profile_pic; else defaultImage"
+        [src]="userImg.user_profile_pic"
+        alt="User Profile Picture"
+      />
+      <p>{{ this.user.user_full_name }}</p>
+    </div>
+
+
+
+    <ng-template #defaultImage>
+      <img src="../../../assets/img/user.png" alt="User Profile Picture" />
+    </ng-template>
+
+    <div class="nav-item" routerLink="/profile">
+      <p class="text">עריכת פרופיל</p>
+      <img src="../../../assets/icons/next-profile.png" alt="" />
+    </div>
+
+    <div class="nav-container">
+      <div class="nav-item" routerLink="/myposts">
+        <p class="text">הדירות שלי</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+
+      <div class="nav-item" routerLink="/messages">
+        <p  class="text">ההודעות שלי</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+      
+      <div class="nav-item" routerLink="/personalInfo/changPassword">
+        <p class="text">שינוי סיסמא</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+
+      
+      <div class="nav-item" routerLink="/terms">
+        <p class="text">תנאי שימוש</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+      
+      
+      
+      <div class="nav-item" routerLink="/about">
+        <p class="text">אודות</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+      
+      <div class="nav-item">
+        <p (click)="logout()" class="text">התנתק</p>
+        <img src="../../../assets/icons/next-profile.png" alt="" />
+      </div>
+
+
+
+    </div>
+   
+
+    <app-modal
+      [needAprove]="this.needApproval"
+      [aprovelText]="this.aprovelText"
+      [img]="this.modalImg"
+      [text]="this.modalText"
+      [serverResponse]="this.serverResponse"
+      [(isHid)]="isHidden"
+      (isHidChange)="onModalClosed($event)"
+      (isApproved)="onAprovel($event)"
+    ></app-modal>
+  </div>
+  <!-- <app-nav-bar ></app-nav-bar> -->
+</section>
+

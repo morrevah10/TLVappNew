@@ -1,0 +1,57 @@
+<div class="modal-container" *ngIf="isHid" >
+    <div class="modal-contant">
+
+        <div class="close-btn-img">
+            <button class="close-btn-img" (click)="close()">
+                <img src="../../../assets/icons/close.png" alt="">
+            </button>
+        </div>
+        <div *ngIf="needAprove">
+            <div class="modal-text" *ngIf="step==1">
+                <div class="text">
+                    <p>{{aprovelText}}</p>
+                </div>
+                <div class="step-btn">
+                    <button class="btn-prev" (click)="close()">
+                      <img src="../../../assets/icons/prev.png" alt="" />
+                    </button>
+                    <button class="btn-next" (click)="onclick(true)">בטוח</button>
+                  </div>
+                <!-- <div class="action">
+                    <button (click)="onclick(true)">yes</button>
+                    <button (click)="onclick(false)">no</button>
+                </div> -->
+            </div>
+            <div class="step2-modal" *ngIf="step==2">
+                <!-- <div class="step2-modal"> -->
+                    <div class="loader" *ngIf="serverResponse">
+                        <img src="../../../assets/Illustration/opengif1.gif" alt="">
+                    </div>
+                    <div *ngIf="!serverResponse" class="step2-img">
+                        <img  src="{{img}}" alt="">
+                    </div>
+                    <div>
+                        <p class="step2-text">{{text}}</p>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div>
+
+
+        <div *ngIf="!needAprove">
+            <div class="loader" *ngIf="serverResponse">
+                <img src="../../../assets/Illustration/opengif1.gif" alt="">
+            </div>
+            <div *ngIf="!serverResponse">
+                <div class="response-img">
+                    <img src="{{img}}" alt="Response">
+                </div>
+                <p class="response-text">{{text}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" (click)="close()" *ngIf="isHid">
+    
+</div>

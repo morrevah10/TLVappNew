@@ -1,0 +1,170 @@
+
+@import "../../../../app/styles/colors";
+
+.title {
+  direction: rtl;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.apartment-details-container {
+  overflow-y: auto;
+}
+
+.apartment-details-contant {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  padding-bottom: 10vh;
+
+  height: 100%;
+}
+
+.form-group {
+  direction: rtl;
+  padding: 1.5rem 0 0 0;
+}
+
+.text {
+  direction: rtl;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  margin: 0;
+  color: white;
+}
+
+input {
+  direction: rtl;
+}
+
+.color-text {
+  color: $color1;
+  cursor: pointer;
+}
+
+.btn-group {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 35dvh;
+  padding-top: 3rem;
+  justify-content: space-between;
+}
+
+.btn-large {
+  height: 3em;
+  width: 15em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25em;
+  cursor: pointer;
+}
+
+.small-text {
+  color: $color4;
+  direction: rtl;
+}
+
+.apartment-card {
+  display: flex;
+  border: none;
+  flex-direction: row;
+  background: linear-gradient(to right, #007acc7d, #007bff);  color: white;
+  border-radius: 10px;
+  justify-content: space-between;
+  margin-top: 2rem;
+
+}
+
+.apartment-card-img {
+  img {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 5px;
+    margin: 1rem;
+  }
+}
+
+.apartment-card-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.apartment-date-price {
+  display: flex;
+  border: none;
+  flex-direction: row-reverse;
+  background: $color3;
+  border-radius: 10px;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.apartment-input {
+  height: 25dvh;
+  margin-bottom: 1rem;
+  background: $color3;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.input-text {
+  background-color: $color3;
+  color: $color4;
+  direction: rtl;
+  border: none;
+  height: 30dvh;
+  width: 100%;
+  resize: vertical;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.apartment-btn {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  direction: rtl;
+  flex-direction: column;
+  align-items: center;
+}
+
+.apartment-description {
+  p {
+    direction: rtl;
+    color: $color4;
+    padding: 10px;
+    margin: 0;
+  }
+  border-radius: 10px;
+  background-color: $color3;
+}
+
+
+.rating{
+  direction: rtl;
+  color: #888888;
+  padding: 10px;
+  margin: 1rem 0;
+  border-radius: 10px;
+  background-color: #F2F7FF;
+}
+
+.overlay-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 9998; 
+}

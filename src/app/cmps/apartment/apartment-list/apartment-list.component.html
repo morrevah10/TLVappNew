@@ -1,0 +1,167 @@
+<section class="list-container">
+  <div class="list-conant">
+    <div class="list-parama">
+      <img src="../../../../assets/icons/location.png" alt="" />
+      <p class="color-text">מיקום</p>
+      <p class="small-text">{{ this.searchParams}}</p>
+    </div>
+
+    <div class="title">
+      <p class="search-title">תוצאות חיפוש</p>
+    </div>
+
+    <section *ngIf="!isApartmentsReady">
+      <div class="no-apartments-message">
+        <p>טוען את תוצאות החיפוש שלך ...</p>
+      </div>
+    </section>
+
+    <ng-container *ngIf="isApartmentsReady">
+      <div *ngIf="filteredApartments.length === 0">
+        <div class="no-apartments-message">
+
+          <img src="../../../../assets/img/messages.svg" alt="">
+          <p>לצערנו אין תוצאות שתואמות את החיפוש שלך...</p>
+
+          <div class="no-message">
+            <p>לא מצאת את מה שחיפשת?</p>
+            <a routerLink="/home">לחזרה לחיפוש</a>
+          </div>
+
+          <div class="no-message">
+            <p>רוצה להוסיף את החוויה שלך?</p>
+            <a routerLink="/rantal">להוספת חוויה</a>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div
+      class="card-container"
+      *ngFor="
+        let subArray of filteredApartments.slice(0, postsToShow);
+        let subArrayIndex = index
+      "
+    >
+      <div
+        *ngIf="subArray.length === 1"
+        class="card"
+        (click)="viewApartmentDetails(subArray[0].post_id)"
+      >
+        <div class="card-img">
+          <img [src]="subArray[0].apartment_pic_1" alt="Image" />
+        </div>
+
+        <div class="card-details">
+          <p class="text">{{ subArray[0].post_city }}</p>
+          <p class="small-text">
+            {{ subArray[0].post_street }}
+            {{ subArray[0].post_building_number }} ,דירה
+            {{ subArray[0].post_apartment_number }}
+          </p>
+          <p class="small-text">
+            {{ subArray[0].post_rent_start | dateFormat }}
+          </p>
+        </div>
+        <div class="card-actions">
+          <div class="rating">
+            {{ subArray[0].post_rating }}
+            <img src="../../../../assets/icons/star.png" alt="" />
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngIf="subArray.length > 1">
+        <div
+          class="card"
+          (click)="
+            viewApartmentDetails(
+              subArray[getCurrentIndex(subArrayIndex)].post_id
+            )
+          "
+        >
+          <div class="card-img">
+            <img
+              [src]="subArray[getCurrentIndex(subArrayIndex)].apartment_pic_1"
+              alt="Image"
+            />
+          </div>
+
+          <div class="card-details">
+            <p class="text">
+              {{ subArray[getCurrentIndex(subArrayIndex)].post_city }}
+            </p>
+            <p class="small-text">
+              {{ subArray[getCurrentIndex(subArrayIndex)].post_street }}
+              {{
+                subArray[getCurrentIndex(subArrayIndex)].post_building_number
+              }}
+              ,דירה
+              {{
+                subArray[getCurrentIndex(subArrayIndex)].post_apartment_number
+              }}
+            </p>
+            <p class="small-text">
+              {{
+                subArray[getCurrentIndex(subArrayIndex)].post_rent_start
+                  | dateFormat
+              }}
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <div class="rating">
+              {{ subArray[0].post_rating }}
+              <img src="../../../../assets/icons/star.png" alt="" />
+            </div>
+            
+           
+          </div>
+          
+        </div>
+        <div class="card-btn">
+          <button
+            [class]="
+              getCurrentIndex(subArrayIndex) > 0
+                ? 'normal-button'
+                : 'hidden-button'
+            "
+            (click)="
+              updateCurrentIndex(
+                subArrayIndex,
+                getCurrentIndex(subArrayIndex) - 1
+              )
+            "
+          >
+            הקודם
+          </button>
+          <p class="small-text">לדירה זו יש עוד תגובות</p>
+          <button
+            [class]="
+              getCurrentIndex(subArrayIndex) < subArray.length - 1
+                ? 'normal-button'
+                : 'hidden-button'
+            "
+            (click)="
+              updateCurrentIndex(
+                subArrayIndex,
+                getCurrentIndex(subArrayIndex) + 1
+              )
+            "
+          >
+            הבא
+          </button>
+        </div>
+      </div>
+    </div>
+    <button
+      *ngIf="postsToShow < filteredApartments.length"
+      (click)="loadMorePosts()"
+      class="load-more"
+    >
+      Load More
+    </button>
+  </div>
+</section>
+

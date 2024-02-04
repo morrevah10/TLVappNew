@@ -1,0 +1,93 @@
+
+<section class="home-container">
+  <div class="home-contant">
+    <div class="title">
+      <p> 
+        {{ this.greetingMessage }}
+      </p>
+      <p class="small-title">כאן אפשר לחפש חוות דעת על דירות</p>
+    </div>
+
+    <div class="search-container">
+      <form class="form-container">
+        <div class="form-item">
+          <label>*עיר</label>
+          <div class="error-message" *ngIf="!isInputValid && selectedCity.length!=0">
+            אנא בחר עיר מהרשימה בלבד
+            </div>
+          <!-- <mat-form-field class="form-field" appearance="outline"> -->
+            <input
+              class="input"
+              matInput
+              [formControl]="cityFilterControl"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let city of filteredCities$ | async"
+                [value]="city"
+              >
+                {{ city }}
+              </mat-option>
+            </mat-autocomplete>
+          <!-- </mat-form-field> -->
+        </div>
+        <div class="form-item">
+          <label>*רחוב</label>
+          <div class="error-message" *ngIf="!isStreetInputValid && streetFilterControl.value!.trim().length > 0">
+            אנא בחר רחוב מהרשימה בלבד
+          </div>
+          <!-- <mat-form-field class="form-field" appearance="outline"> -->
+            <input
+              matInput
+              [formControl]="streetFilterControl"
+              [matAutocomplete]="streetAuto"
+              matTooltip="תבחר עיר לפני רחוב"
+              [matTooltipDisabled]="isDisable"
+              (optionSelected)="onStreetOptionSelected()"
+            />
+            <mat-autocomplete #streetAuto="matAutocomplete">
+              <mat-option
+                *ngFor="let street of filteredStreets"
+                [value]="street"
+              >
+                {{ street }}
+              </mat-option>
+            </mat-autocomplete>
+          <!-- </mat-form-field> -->
+        </div>
+        <div class="form-item">
+          <label>מספר בניין</label>
+          <!-- <mat-form-field class="=form-field" appearance="outline"> -->
+            <input matInput [formControl]="buildingControl" type="tel"/>
+          <!-- </mat-form-field> -->
+        </div>
+        <div class="form-item">
+          <label>מספר דירה</label>
+          <!-- <mat-form-field class="=form-field" appearance="outline"> -->
+            <input matInput [formControl]="apartmentControl" type="tel"/>
+          <!-- </mat-form-field> -->
+        </div>
+      </form>
+
+    </div>
+
+    <div class="actions">
+      <button
+        class="btn-large"
+        (click)="searchApartments()"
+        [disabled]="!cityFilterControl.valid"
+      >
+        חפש חוות דעת
+      </button>
+
+      <div class="share">
+        <p class="text">סיימתם חוזה? עזור לקהילה שלנו לגדול.</p>
+        <p class="color-text" (click)="navigateToApartmentForm()">
+        שתפו את החוויה שלכם
+        </p>
+      </div>
+    </div>
+  </div>
+
+</section>

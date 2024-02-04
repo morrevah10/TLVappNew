@@ -1,0 +1,41 @@
+{
+    "Updates":[
+        {
+          "user_id":"42",
+          "massage":"הפוסט שלך אושר",
+          "date" : " 15.01.2020",
+          "time" : "20:56",
+          "post":{
+            "post_id":"32",
+            "post_city":"תל אביב",
+            "post_street":"הרצל",
+            "post_bulding_number":"108"
+          }
+        },
+        {
+          "user_id":"42",
+          "massage":"הפוסט שלך נדחה",
+          "date" : " 15.01.2020",
+          "time" : "20:56",
+          "post":{
+            "post_id":"30",
+            "post_city":"תל אביב",
+            "post_street":"העלייה",
+            "post_bulding_number":"58"
+          }
+        },
+
+        {"user_id":"42",
+          "massage":"הפוסט שלך נחמק",
+          "date" : " 15.01.2020",
+          "time" : "20:56",
+          "post":{
+            "post_id":"31",
+            "post_city":"בת ים",
+            "post_street":"טבנקין",
+            "post_bulding_number":"18"
+          }
+        }
+    
+      ]
+}

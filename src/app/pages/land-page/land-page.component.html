@@ -1,0 +1,38 @@
+<section *ngIf="this.windowWidth > 567" class="landing-container">
+    <div class="logo-container">
+    </div>
+    <div class="des">
+        <div class="app-description">
+          <p>Welcome to (app name)</p>
+          <p> The place where you can check on your next home</p>
+        </div>
+        <div class="buttons-container">
+          <button class="btn btn-primary" (click)="goTo('login')">{{"home_page_login_btn"| translate}}</button>
+          <button class="btn btn-secondary" (click)="goTo('register')">{{"home_page_register_btn"| translate}}</button>
+        </div>
+    </div>
+  </section>
+
+
+  <section *ngIf="this.windowWidth <= 567" class="landing-mobile">
+    <div class="mobile-container">
+
+      <div class="welcome">
+        <img src="../../../assets/Illustration/welcom.jpg" alt="">
+      </div>
+
+
+      <div class="des-mobile">
+          <div class="app-description-mobile">
+            <p>Welcome to (rentBuzz)</p>
+            <p> The place where you can check on your next home</p>
+          </div>
+        </div>
+
+        
+        <div class="buttons-mobile">
+          <button class="btn" (click)="goTo('login')">{{"home_page_login_btn"| translate}}</button>
+          <button class="btn" (click)="goTo('register')">{{"home_page_register_btn"| translate}}</button>
+        </div>
+    </div>
+  </section>

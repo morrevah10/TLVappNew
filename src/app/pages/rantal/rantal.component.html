@@ -1,0 +1,361 @@
+
+<section class="rantal-container">
+  <div class="rental-contant">
+    <div class="stepper">
+      <div class="circle" [ngClass]="{ active: currentStep >= 0 }"></div>
+      <div class="line" [ngClass]="{ active: currentStep >= 1 }"></div>
+      <div class="circle" [ngClass]="{ active: currentStep >= 1 }"></div>
+      <div class="line" [ngClass]="{ active: currentStep >= 2 }"></div>
+      <div class="circle" [ngClass]="{ active: currentStep >= 2 }"></div>
+      <div class="line" [ngClass]="{ active: currentStep >= 3 }"></div>
+      <div class="circle" [ngClass]="{ active: currentStep >= 3 }"></div>
+    </div>
+
+    <div class="step-container">
+      <div *ngIf="currentStep === 0">
+        <form [formGroup]="mainForm">
+          <div class="step" formGroupName="stepOne">
+            <label for="post_city">*עיר</label>
+            <div class="error-message" *ngIf="mainForm.get('stepOne.post_city')?.hasError('invalidCity')">
+              אנא בחר עיר מהרשימה בלבד
+              </div>
+            <input
+              type="text"
+              id="post_city"
+              formControlName="post_city"
+              class="form-control"
+              [matAutocomplete]="cityAuto"
+            />
+            <mat-autocomplete #cityAuto="matAutocomplete">
+              <mat-option
+                *ngFor="let city of cityAutocomplete$ | async"
+                [value]="city"
+              >
+                {{ city }}
+              </mat-option>
+            </mat-autocomplete>
+            <label for="post_street">*רחוב</label>
+            <div class="error-message" *ngIf="mainForm.get('stepOne.post_street')?.hasError('invalidStreet')">
+              אנא בחר רחוב מהרשימה בלבד
+            </div>
+            <input
+              type="text"
+              id="post_street"
+              formControlName="post_street"
+              class="form-control"
+              [matAutocomplete]="streetAuto"
+            />
+            <mat-autocomplete #streetAuto="matAutocomplete">
+              <mat-option
+                *ngFor="let street of streetAutocomplete$ | async"
+                [value]="street"
+              >
+                {{ street }}
+              </mat-option>
+            </mat-autocomplete>
+            <label for="post_building_number">*מספר בניין</label>
+            <input
+            type="tel"
+              id="post_building_number"
+              formControlName="post_building_number"
+              class="form-control"
+            />
+
+            <label for="post_apartment_number">*מספר דירה</label>
+            <input
+            type="tel"
+              id="post_apartment_number"
+              formControlName="post_apartment_number"
+              class="form-control"
+            />
+            <label for="post_apartment_price">*שכר דירה</label>
+            <input
+            type="tel"
+              id="post_apartment_price"
+              formControlName="post_apartment_price"
+              class="form-control"
+            />
+          </div>
+        </form>
+        <div class="step-btn-one">
+          <button
+            (click)="nextStep()"
+            [disabled]="!this.mainForm.get('stepOne')!.valid"
+            [ngClass]="{
+              'disabled-btn1': !mainForm.get('stepOne')!.valid,
+              'btn-large': mainForm.get('stepOne')!.valid
+            }"
+          >
+            עבור לשלב הבא
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 1">
+        <form [formGroup]="mainForm">
+          <div class="step" formGroupName="stepTwo">
+            <div>
+              <label for="post_rent_start">*תאריך כניסה</label>
+              <app-datepicker
+              [selectedDate]="selectedStartDate"
+              (dateSelected)="onDateSelected($event, 'post_rent_start')"
+              ></app-datepicker>
+            </div>
+
+            <div>
+              <label for="post_rent_end">*תאריך יציאה</label>
+              <app-datepicker
+              [selectedDate]="selectedEndDate"
+              (dateSelected)="onDateSelected($event, 'post_rent_end')"
+              ></app-datepicker>
+            </div>
+
+            <label for="rent_agreement"
+              >*חוזה שכירות</label
+            >
+            <input
+              type="file"
+              (change)="onImageSelected($event, 'rent_agreement', 'stepTwo')"
+              class="form-control"
+            />
+
+            <label for="driving_license">*תעודה מזהה</label>
+            <input
+              type="file"
+              (change)="onImageSelected($event, 'driving_license', 'stepTwo')"
+              class="form-control"
+            />
+          </div>
+        </form>
+        <div class="step-btn">
+          <button
+            (click)="nextStep()"
+            [disabled]="!this.mainForm.get('stepTwo')!.valid"
+            [ngClass]="{
+              'disabled-btn': !mainForm.get('stepTwo')!.valid,
+              'btn-next': mainForm.get('stepTwo')!.valid
+            }"
+          >
+            שלב הבא
+          </button>
+          <button class="btn-prev" (click)="prevStep()">
+            <img src="../../../assets/icons/prev.png" alt="" />
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 2">
+        <form [formGroup]="mainForm">
+          <div formGroupName="stepThree">
+            <div class="grid-container">
+              <div class="grid-item">
+                <label for="apartment_pic_1">תמונה ראשית</label>
+                <img
+                  *ngIf="mainForm.get('stepThree.apartment_pic_1')!.value"
+                  [src]="mainForm.get('stepThree.apartment_pic_1')!.value"
+                  alt="Apartment Image 1"
+                />
+                <input
+                  type="file"
+                  #apartmentPic1Input
+                  (change)="
+                    onImageSelectedStep3(
+                      $event,
+                      'apartment_pic_1',
+                      'stepThree',
+                      apartmentPic1Input
+                    )
+                  "
+                  class="file-input"
+                  id="file-input"
+                />
+                <label class="custom-upload-button" for="file-input">
+                  בחר
+                </label>
+
+                <button
+                  class="remove-btn"
+                  (click)="deleteImage('apartment_pic_1', 'stepThree')"
+                >
+                  מחק
+                </button>
+              </div>
+
+              <div class="grid-item">
+                <label for="apartment_pic_2">תמונה נוספת</label>
+                <img
+                  *ngIf="mainForm.get('stepThree.apartment_pic_2')!.value"
+                  [src]="mainForm.get('stepThree.apartment_pic_2')!.value"
+                  alt="Apartment Image 2"
+                />
+                <input
+                  type="file"
+                  #apartmentPic2Input
+                  (change)="
+                    onImageSelectedStep3(
+                      $event,
+                      'apartment_pic_2',
+                      'stepThree',
+                      apartmentPic2Input
+                    )
+                  "
+                  class="file-input"
+                  id="file-input2"
+                />
+                <label class="custom-upload-button" for="file-input2">
+                  בחר
+                </label>
+               
+                <button
+                  class="remove-btn"
+                  (click)="deleteImage('apartment_pic_2', 'stepThree')"
+                >
+                  מחק
+                </button>
+              </div>
+
+             
+
+              <div class="grid-item">
+                <label for="apartment_pic_3">תמונה נוספת</label>
+                <img
+                  *ngIf="mainForm.get('stepThree.apartment_pic_3')!.value"
+                  [src]="mainForm.get('stepThree.apartment_pic_3')!.value"
+                  alt="Apartment Image 3"
+                />
+                <input
+                  type="file"
+                  #apartmentPic3Input
+                  (change)="
+                    onImageSelectedStep3(
+                      $event,
+                      'apartment_pic_3',
+                      'stepThree',
+                      apartmentPic3Input
+                    )
+                  "
+                  class="file-input"
+                  id="file-input3"
+                />
+                <label class="custom-upload-button" for="file-input3">
+                  בחר
+                </label>
+               
+                <button
+                  class="remove-btn"
+                  (click)="deleteImage('apartment_pic_3', 'stepThree')"
+                >
+                  מחק
+                </button>
+              </div>
+
+             
+              <div class="grid-item">
+                <label for="apartment_pic_4">תמונה נוספת</label>
+                <img
+                  *ngIf="mainForm.get('stepThree.apartment_pic_4')!.value"
+                  [src]="mainForm.get('stepThree.apartment_pic_4')!.value"
+                  alt="Apartment Image 4"
+                />
+                <input
+                  type="file"
+                  #apartmentPic4Input
+                  (change)="
+                    onImageSelectedStep3(
+                      $event,
+                      'apartment_pic_4',
+                      'stepThree',
+                      apartmentPic4Input
+                    )
+                  "
+                  class="file-input"
+                  id="file-input4"
+                />
+                <label class="custom-upload-button" for="file-input4">
+                  בחר
+                </label>
+                
+                <button
+                  class="remove-btn"
+                  (click)="deleteImage('apartment_pic_4', 'stepThree')"
+                >
+                  מחק
+                </button>
+              </div>
+
+             
+            </div>
+          </div>
+        </form>
+        <div class="step-btn">
+          <button class="btn-next" (click)="nextStep()">שלב הבא</button>
+          <button class="btn-prev" (click)="prevStep()">
+            <img src="../../../assets/icons/prev.png" alt="" />
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 3">
+        <form [formGroup]="mainForm">
+          <div formGroupName="stepFour">
+            <label for="post_description">*חוות דעת</label>
+            <textarea
+              id="post_description"
+              formControlName="post_description"
+              class="share-input"
+            ></textarea>
+
+            <div class="slider-container">
+              <label class="slider-value" for="slider"> דירוג: {{ mainForm.get('stepFour.post_rating')!.value }}</label>
+              <input
+                type="range"
+                id="slider"
+                name="slider"
+                step="0.1"
+                min="0"
+                max="5"
+                formControlName="post_rating"
+                (input)="onSliderChange($event)"
+              />
+            </div>
+
+            <label for="post_comments">הערות</label>
+            <textarea
+              id="post_comments"
+              formControlName="post_comments"
+              class="share-input"
+            ></textarea>
+
+          </div>
+        </form>
+        <div class="step-btn">
+          <button
+            class="btn-next share"
+            (click)="onSubmit()"
+            [ngClass]="{
+              'disabled-btn-share': !mainForm.get('stepFour')!.valid,
+              'btn-next share': mainForm.get('stepFour')!.valid
+            }"
+            [disabled]="!mainForm.get('stepFour')!.valid"
+          >
+            שתף את החוויה שלך
+          </button>
+          <button class="btn-prev" (click)="prevStep()">
+            <img src="../../../assets/icons/prev.png" alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-modal
+    [needAprove]="this.needApproval"
+    [aprovelText]="this.aprovelText"
+    [img]="this.modalImg"
+    [text]="this.modalText"
+    [serverResponse]="this.serverResponse"
+    [(isHid)]="isHidden"
+    (isHidChange)="onModalClosed($event)"
+    (isApproved)="onAprovel($event)"
+  ></app-modal>
+</section>

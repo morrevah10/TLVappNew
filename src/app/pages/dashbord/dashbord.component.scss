@@ -1,0 +1,148 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+form {
+  margin: 0;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 15%;
+}
+
+button:hover {
+  background-color: #007bff;
+}
+
+.custom-select {
+  width: 100%;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+::ng-deep div.mat-mdc-select-panel {
+  direction: rtl !important;
+}
+
+::ng-deep .mat-mdc-option {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+  margin-right: 0px !important;
+}
+
+
+
+.search {
+  // background-color: red;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  direction: rtl;
+
+}
+
+.filter {
+  // background-color: blue;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  direction: rtl;
+
+}
+
+.searchType {
+  // background-color: yellow;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ label {
+  flex: 1;
+}
+select {
+  flex: 2;
+}
+}
+.searchInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  label {
+    flex: 1;
+  }
+  input{
+    // max-width: 75px;
+    flex: 2;
+   }
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sortBy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  label {
+    flex: 1;
+  }
+  select {
+    flex: 2;
+  }
+}
+
+.sortOrder{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  label {
+    flex: 1;
+  }
+  select {
+    flex: 2;
+  }
+}
+
+table{
+  direction: rtl;
+
+}
+
+.no-results{
+  direction: rtl;
+}
+
+.container{
+  padding-top: 2rem;
+}
