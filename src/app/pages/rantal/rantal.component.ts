@@ -280,45 +280,45 @@ export class RantalComponent implements OnInit {
     return this.selectedFileNames[key] || 'No file selected';
   }
 
-  // onDateSelected(selectedDate: Date, controlName: string) {
-  //   if (controlName === 'post_rent_start') {
-  //     this.selectedStartDate = selectedDate;
-  //   } else if (controlName === 'post_rent_end') {
-  //     this.selectedEndDate = selectedDate;
-  //   }
-
-  //   const formattedDate = this.formatDateToYyyyMmDd(selectedDate);
-  //   this.mainForm.get('stepTwo')?.get(controlName)?.setValue(formattedDate);
-  //   console.log('formattedDate:', formattedDate);
-  // }
-
   onDateSelected(selectedDate: Date, controlName: string) {
-    // Extract only the date part from the selectedDate
-    const dateWithoutTime = new Date(
-      selectedDate.getFullYear(),
-      selectedDate.getMonth(),
-      selectedDate.getDate()
-    );
+    if (controlName === 'post_rent_start') {
+      this.selectedStartDate = selectedDate;
+    } else if (controlName === 'post_rent_end') {
+      this.selectedEndDate = selectedDate;
+    }
 
-    const formattedDate = this.formatDate(dateWithoutTime);
-    console.log('Formatted Date:', formattedDate);
-    console.log('Formatted Date Length:', (formattedDate || '').length);
-
-    console.log(
-      'Before Setting Value:',
-      this.mainForm.get(`stepTwo.${controlName}`)!.value
-    );
-    this.mainForm.get(`stepTwo.${controlName}`)!.setValue(formattedDate);
-    console.log(
-      'After Setting Value:',
-      this.mainForm.get(`stepTwo.${controlName}`)!.value
-    );
-
-    console.log(
-      'Control Valid:',
-      this.mainForm.get(`stepTwo.${controlName}`)!.valid
-    );
+    const formattedDate = this.formatDateToYyyyMmDd(selectedDate);
+    this.mainForm.get('stepTwo')?.get(controlName)?.setValue(formattedDate);
+    console.log('formattedDate:', formattedDate);
   }
+
+  // onDateSelected(selectedDate: Date, controlName: string) {
+  //   // Extract only the date part from the selectedDate
+  //   const dateWithoutTime = new Date(
+  //     selectedDate.getFullYear(),
+  //     selectedDate.getMonth(),
+  //     selectedDate.getDate()
+  //   );
+
+  //   const formattedDate = this.formatDate(dateWithoutTime);
+  //   console.log('Formatted Date:', formattedDate);
+  //   console.log('Formatted Date Length:', (formattedDate || '').length);
+
+  //   console.log(
+  //     'Before Setting Value:',
+  //     this.mainForm.get(`stepTwo.${controlName}`)!.value
+  //   );
+  //   this.mainForm.get(`stepTwo.${controlName}`)!.setValue(formattedDate);
+  //   console.log(
+  //     'After Setting Value:',
+  //     this.mainForm.get(`stepTwo.${controlName}`)!.value
+  //   );
+
+  //   console.log(
+  //     'Control Valid:',
+  //     this.mainForm.get(`stepTwo.${controlName}`)!.valid
+  //   );
+  // }
 
   private formatDate(date: Date): string {
     // Implement the logic to format the date based on your form's requirements
