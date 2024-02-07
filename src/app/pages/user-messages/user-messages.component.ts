@@ -17,8 +17,8 @@ import { AfterViewInit,ElementRef,  } from '@angular/core';
   styleUrls: ['./user-messages.component.scss'],
 })
 export class UserMessagesComponent implements OnInit {
-  @ViewChild('stepper') stepper!: MatStepper;
-  @ViewChild('stepperContainer') stepperContainer!: ElementRef;
+  // @ViewChild('stepper') stepper!: MatStepper;
+  // @ViewChild('stepperContainer') stepperContainer!: ElementRef;
 
 
   userId: number = 42;
@@ -164,6 +164,7 @@ export class UserMessagesComponent implements OnInit {
 
 
   generateLink(message: Message): string {
+    console.log('generateLink message message message',message)
     if (message.customLink) {
       return message.customLink;
     }
@@ -171,8 +172,8 @@ export class UserMessagesComponent implements OnInit {
     const confirmationStatusNumber = parseInt(message.postDetails.confirmation_status, 10);
     const postIdNumber = parseInt(message.post_id, 10);
   
-    console.log('confirmationStatusNumber:', confirmationStatusNumber);
-    console.log('postIdNumber:', postIdNumber);
+    console.log('generateLink confirmationStatusNumber:', confirmationStatusNumber);
+    console.log('generateLink postIdNumber:', postIdNumber);
 
     if (isNaN(confirmationStatusNumber) || isNaN(postIdNumber)) {
       return '/messages';
@@ -201,6 +202,33 @@ export class UserMessagesComponent implements OnInit {
   }
 
 
+  // groupMessagesByPostId(messages: Message[]): any[] {
+  //   const groupedMessages: any[] = [];
+  
+  //   messages.forEach((message) => {
+  //     const postId = message.post_id;
+  
+  //     const index = groupedMessages.findIndex((group) => group[0]?.post_id === postId);
+  
+  //     if (index !== -1) {
+  //       groupedMessages[index].push(message);
+  //     } else {
+  //       groupedMessages.push([message]);
+  //     }
+  //   });
+  
+  //   // Set the membersCount and position properties for each message
+  //   groupedMessages.forEach((group) => {
+  //     group.forEach((message: { membersCount: any; positionInGroup: any; }, index: number) => {
+  //       message.membersCount = group.length;
+  //       message.positionInGroup = index + 1;
+  //     });
+  //   });
+  
+  //   console.log('groupedMessages',groupedMessages)
+  //   return groupedMessages;
+  // }
+
   groupMessagesByPostId(messages: Message[]): any[] {
     const groupedMessages: any[] = [];
   
@@ -216,17 +244,16 @@ export class UserMessagesComponent implements OnInit {
       }
     });
   
-    // Set the membersCount and position properties for each message
+    // Chain customized link only to the last message of each group
     groupedMessages.forEach((group) => {
-      group.forEach((message: { membersCount: any; positionInGroup: any; }, index: number) => {
-        message.membersCount = group.length;
-        message.positionInGroup = index + 1;
-      });
+      const lastIndex = group.length - 1;
+      group[lastIndex].customLink = this.generateLink(group[lastIndex]);
     });
   
-    console.log('groupedMessages',groupedMessages)
+    console.log('groupedMessages', groupedMessages);
     return groupedMessages;
   }
+  
 
   getLastOpenStepIndex(postGroup: any[]): number {
     return postGroup.findIndex((message) => message.isOpen) || 0;
@@ -239,25 +266,25 @@ export class UserMessagesComponent implements OnInit {
     this.selectedPostGroup2 = postGroup;
   }
 
-  resetStepper(): void {
-    this.selectedPostGroup = null;
-    // Setting the index to -1 triggers the AfterViewInit hook
-    this.stepper.selectedIndex = -1;
-  }
+  // resetStepper(): void {
+  //   this.selectedPostGroup = null;
+  //   // Setting the index to -1 triggers the AfterViewInit hook
+  //   this.stepper.selectedIndex = -1;
+  // }
 
-  ngAfterViewInit(): void {
-    if (this.isStepperOpen) {
-      // Setting the index to the last step
-      this.stepper.selectedIndex = this.selectedPostGroup.length - 1;
-      // Focus on the last step header after the view has been initialized
-      const lastStepHeader = this.stepperContainer.nativeElement.querySelectorAll(
-        '.mat-horizontal-stepper-header-container button'
-      )[this.selectedPostGroup.length - 1];
-      if (lastStepHeader) {
-        lastStepHeader.focus();
-      }
-    }
-  }
+  // ngAfterViewInit(): void {
+  //   if (this.isStepperOpen) {
+  //     // Setting the index to the last step
+  //     this.stepper.selectedIndex = this.selectedPostGroup.length - 1;
+  //     // Focus on the last step header after the view has been initialized
+  //     const lastStepHeader = this.stepperContainer.nativeElement.querySelectorAll(
+  //       '.mat-horizontal-stepper-header-container button'
+  //     )[this.selectedPostGroup.length - 1];
+  //     if (lastStepHeader) {
+  //       lastStepHeader.focus();
+  //     }
+  //   }
+  // }
 
 
 }

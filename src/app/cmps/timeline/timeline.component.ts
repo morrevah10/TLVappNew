@@ -12,22 +12,4 @@ export class TimelineComponent implements OnInit{
     console.log('timeline',this.messages)
     
   }
-
-  calculateTotalDuration(): string {
-   
-    const totalDuration = this.messages.length * 1; 
-    return `${totalDuration}s`;
-  }
-
-  calculateAnimationDelay(index: number): string {
-    return `${index}s`;
-  }
-
-  isLeftContainer(index: number): boolean {
-    return index % 2 !== 0; // Check if the index is odd
-  }
-
-  isRightContainer(index: number): boolean {
-    return index % 2 === 0; // Check if the index is even
-  }
 }
