@@ -3,6 +3,7 @@
 export class Message {
     user_id!: string ;
     user_message!: string ;
+    headline?:string;
     post_id!: string;
     date!: string;
     postDetails!:{
@@ -18,6 +19,7 @@ export class Message {
 message_id!:string;
 customLink?: string;
 membersCount?: number;
+positionInGroup?: number;
   //   time!:string;
   //   post!: {
   //   post_id: string;

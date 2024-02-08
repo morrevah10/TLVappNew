@@ -1,7 +1,7 @@
 @import "../../../app/styles/colors";
 
 .modal-container {
-  z-index: 5;
+  z-index: 205;
   display: flex;
   position: fixed;
   min-width: 250px;
@@ -40,7 +40,7 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.6);
   opacity: 1;
-  z-index: 4;
+  z-index: 204;
 
   transition: opacity 0.3s;
 }

@@ -77,72 +77,136 @@ export class PostDetailsComponent {
     });
   }
 
-  submitForm(): void {
-    console.log('this.postForm.value', this.postForm.value);
+  // submitForm(): void {
+  //   console.log('this.postForm.value', this.postForm.value);
 
-    this.loading = true;
-    this.isHidden = true;
-    this.serverResponse = true;
+  //   this.loading = true;
+  //   this.isHidden = true;
+  //   this.serverResponse = true;
 
-      if (this.postForm.valid) {
+  //     if (this.postForm.valid) {
       
-        const newPost = {
-          ...this.currPost,
-          ...this.postForm.value
-        };
+  //       const newPost = {
+  //         ...this.currPost,
+  //         ...this.postForm.value
+  //       };
     
-        console.log('newPost',newPost)
-        this.postService.updateApartmentDetails(newPost).subscribe(
-          () => {
-            // Handle successful update
-            console.log('Apartment details updated successfully');
-            this.serverResponse = false;
-        this.modalImg = '../../../assets/img/success.png';
-        this.modalText = 'העידכון שלך התקבל בהצלחה';
-          },
-          (error) => {
-            // Handle error
-            console.error('Error updating apartment details', error);
-            this.loading = false;
-        this.serverResponse = false;
-        this.modalImg = '../../../assets/img/eroor.png';
-        this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
-        console.error('Error submitting form:', error);
-          }
-        );
-      }
+  //       console.log('newPost',newPost)
+  //       this.postService.updateApartmentDetails(newPost).subscribe(
+  //         () => {
+  //           // Handle successful update
+  //           console.log('Apartment details updated successfully');
+  //           this.serverResponse = false;
+  //       this.modalImg = '../../../assets/img/success.png';
+  //       this.modalText = 'העידכון שלך התקבל בהצלחה';
+  //         },
+  //         (error) => {
+  //           // Handle error
+  //           console.error('Error updating apartment details', error);
+  //           this.loading = false;
+  //       this.serverResponse = false;
+  //       this.modalImg = '../../../assets/img/eroor.png';
+  //       this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
+  //       console.error('Error submitting form:', error);
+  //         }
+  //       );
+  //     }
     
-  }
+  // }
 
+
+  submitForm(): void {
+    if (this.postForm.valid) {
+      this.loading = true;
+      this.isHidden = true;
+      this.serverResponse = true;
   
-  onImageSelectedStep(
-    event: any,
-    controlName: string,
-  ) {
+      // Prepare the form data with the selected file
+      const formData = new FormData();
+      Object.entries(this.postForm.value).forEach(([key, value]) => {
+        // Append form control values to FormData
+        if (typeof value === 'string') {
+          // If value is a string, append it directly
+          formData.append(key, value);
+        } else if (value instanceof Blob) {
+          // If value is a Blob (file), append it with the key as the name
+          formData.append(key, value, key);
+        }
+      });
+  
+      // Submit the form data with the selected file
+      this.postService.updateApartmentDetails(formData).subscribe(
+        () => {
+          // Handle successful update
+          console.log('Apartment details updated successfully');
+          this.serverResponse = false;
+          this.modalImg = '../../../assets/img/success.png';
+          this.modalText = 'העידכון שלך התקבל בהצלחה';
+        },
+        (error) => {
+          // Handle error
+          console.error('Error updating apartment details', error);
+          this.loading = false;
+          this.serverResponse = false;
+          this.modalImg = '../../../assets/img/eroor.png';
+          this.modalText = 'קרתה בעיה.. נסה שוב מאוחר יותר';
+          console.error('Error submitting form:', error);
+        }
+      );
+    }
+  }
+  
+  
+  
+  // onImageSelectedStep(
+  //   event: any,
+  //   controlName: string,
+  // ) {
+  //   if (event.target && event.target.files) {
+  //     const files = event.target.files;
+  //     if (files.length > 0) {
+  //       const reader = new FileReader();
+  //       reader.onload = (e) => {
+  //         const imageURL = e.target?.result as string;
+  //         this.postForm.get(`${controlName}`)?.setValue(imageURL);
+  //         // Check if files[0] is defined before accessing its name property
+  //         if (files[0]) {
+  //           const key = `${controlName}`;
+  //           this.selectedFileNames[key] = files[0].name;
+  //           this.enableButton =true
+
+  //         }
+  //       };
+
+  //       reader.readAsDataURL(files[0]);
+  //     }
+  //   }
+  // }
+
+  onImageSelectedStep(event: any, controlName: string) {
     if (event.target && event.target.files) {
       const files = event.target.files;
       if (files.length > 0) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const imageURL = e.target?.result as string;
-          this.postForm.get(`${controlName}`)?.setValue(imageURL);
-          // Check if files[0] is defined before accessing its name property
-          if (files[0]) {
-            const key = `${controlName}`;
-            this.selectedFileNames[key] = files[0].name;
-            this.enableButton =true
-
-          }
-        };
-
-        reader.readAsDataURL(files[0]);
+        // Store the selected file object in a variable
+        const selectedFile = files[0];
+        // Store the file object in a variable in your component
+        this.postForm.get(controlName)?.setValue(selectedFile);
+        // Optionally, store the file name for display purposes
+        const key = `${controlName}`;
+        this.selectedFileNames[key] = selectedFile.name;
+        this.enableButton = true;
       }
     }
   }
 
+  // deleteImage(controlName: string) {
+  //   // Reset the form control value and the selected image URL
+  //   this.postForm.get(`${controlName}`)?.setValue(null);
+  // }
+
   deleteImage(controlName: string) {
     // Reset the form control value and the selected image URL
-    this.postForm.get(`${controlName}`)?.setValue(null);
+    this.postForm.get(`${controlName}`)?.setValue('');
   }
 
   onModalClosed(isHidden: boolean): void {
