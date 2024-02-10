@@ -20,7 +20,9 @@ import { Message } from '../models/message.model';
     
 
     updateUnreadMessagesCount(count: number): void {
+      console.log('count1111111',count)
       this.unreadMessagesCountSubject.next(count);
+      console.log('count2222222',count)
     }
 
 
@@ -35,7 +37,7 @@ import { Message } from '../models/message.model';
     console.log('user_id from get massegse',user_id)
     const url =  this.APIurl + 'get_all_user_messages/';
     
-      return this.http.get<any>(url, { params: { user_id: user_id.toString() } })
+    return this.http.get<any>(url, { params: { user_id: user_id.toString() } })
     }
 
     MarkAsRead(message_id: any): Observable<any>{

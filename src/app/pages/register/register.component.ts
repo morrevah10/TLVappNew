@@ -63,6 +63,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     if (this.registerForm.invalid) {
       console.log('this.registerForm',this.registerForm);
+      return;
     }
     this.loading = true;
 
@@ -84,12 +85,12 @@ export class RegisterComponent implements OnInit {
         console.log(translatedMessage);
         this.errorMessage=translatedMessage
         console.log('this.errorMessage',this.errorMessage)
-
-
-
-        
+      },
+      ()=>{
+        this.submitted = false;
         this.loading = false;
       }
+
     );
   }
 

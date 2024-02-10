@@ -21,19 +21,18 @@
 .home-contant {
   display: flex;
   flex-direction: column;
-  // height: 90dvh;
   padding: 1.5rem;
   height: 100%;
 }
 .form-container {
-  width: 100%; /* Make the form fill the container */
+  width: 100%;
 }
 
 .form-item {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding-bottom: 1rem;
+  // padding-bottom: 1rem;
   padding-top: 1rem;
 }
 
@@ -62,6 +61,7 @@ input {
   font-size: 1rem;
   font-weight: 500;
   padding-top: 1rem;
+  margin-bottom: 3rem
 }
 
 .btn-group {
@@ -112,73 +112,14 @@ input {
 }
 
 .actions {
-  // padding-top: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .share {
-  // padding-top: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 1rem;
 }
-
-// .greeting{
-//   padding-right: 1rem;
-// }
-
-// .mat-mdc-form-field {
-//   --mat-mdc-form-field-floating-label-scale: 0.75;
-//   display: inline-flex;
-//   flex-direction: column;
-//   text-align: left;
-//   width: 100%;
-// }
-
-// ::ng-deep .mat-mdc-text-field-wrapper {
-//   background-color: $color3;
-//   border: none;
-//   height: 35px;
-//   padding: auto;
-// }
-
-// ::ng-deep .mat-mdc-text-field-wrapper {
-//   height: 35px;
-//   flex: auto;
-// }
-
-// ::ng-deep .mat-mdc-form-field-infix {
-//   min-height: 3rem;
-// }
-
-// ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
-//   padding: 0;
-// }
-
-// ::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input, .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
-//   height: 35px;
-// }
-
-// ::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input, .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
-//   display: flex !important;
-//   justify-content: center !important;
-//   height: 3.5em !important;
-// }
-
-.error-message {
-  padding: 0px;
-}
-
-// ::ng-deep.mat-mdc-text-field-wrapper::before,
-// .mat-mdc-text-field-wrapper::after {
-//   border: none !important;
-//   content: none !important;
-// }
-
-// ::ng-deep.mdc-text-field--outlined {
-//   border: none !important;
-//   box-shadow: none !important;
-// }

@@ -142,7 +142,7 @@
   <h2>ההודעות שלי</h2>
   <div *ngFor="let postGroup of transformedMessages; let i = index">
     <!-- Card for Post Details -->
-    <div class="post-card" (click)="toggleGroupMessages(postGroup)">
+    <div class="post-card" [ngClass]="{'unread': areAnyUnreadMessages(postGroup)}" (click)="toggleGroupMessages(postGroup)">
       <p>
         {{ postGroup[0]?.postDetails?.post_city }},
         {{ postGroup[0]?.postDetails?.post_street }},

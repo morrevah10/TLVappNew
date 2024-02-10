@@ -221,8 +221,8 @@
         (click)="onFormSubmit()"
         [disabled]="!registerForm.valid || !isChecked"
         [ngClass]="{
-          'btn-large-dis': !registerForm.valid || !isChecked,
-          'btn-large': registerForm.valid && isChecked
+          'btn-large-dis': !registerForm.valid || this.loading,
+          'btn-large': registerForm.valid 
         }"
       >
         הצטרף לקהילה

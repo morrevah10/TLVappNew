@@ -10,9 +10,14 @@
       <li (click)="closeMenu()"><a routerLink="myposts" class="link-style">הדירות שלי</a></li>
       <li (click)="closeMenu()" class="messages-link">
         <a routerLink="messages" class="link-style">ההודעות שלי
-          <!-- <span *ngIf="unreadMessagesCount > 0" class="unread-badge"></span> -->
+          <span *ngIf="unreadMessagesCount > 0" class="unread-badge">{{ unreadMessagesCount }}</span>
         </a>
       </li>
+      <!-- <li (click)="closeMenu()" class="messages-link"> -->
+        <!-- <a routerLink="messages" class="link-style">ההודעות שלי -->
+          <!-- <span *ngIf="unreadMessagesCount > 0" class="unread-badge"></span> -->
+        <!-- </a> -->
+      <!-- </li> -->
       <li (click)="closeMenu()"><a routerLink="profile" class="link-style">עריכת פרופיל</a></li>
       <li (click)="closeMenu()"><a routerLink="personalInfo/changPassword" class="link-style">שינוי סיסמא</a></li>
       <li (click)="closeMenu()"><a routerLink="terms" class="link-style">תנאי שימוש</a></li>

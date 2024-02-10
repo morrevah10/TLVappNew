@@ -155,7 +155,21 @@
       <label class="form-section-title">פרטי חוזה:</label>
       <div class="form-row">
         <label for="rent_agreement">חוזה:</label>
-        <input type="file" id="rent_agreement" formControlName="rent_agreement" />
+        <!-- <input type="file" id="rent_agreement" formControlName="rent_agreement" /> -->
+
+        <input
+        type="file"
+        #rent_agreement
+        (change)="
+        onImageSelectedStep(
+            $event,
+            'rent_agreement'
+          )
+        "
+        class="file-input"
+        id="file-rent_agreement"
+      />
+      
       </div>
     </div>
     

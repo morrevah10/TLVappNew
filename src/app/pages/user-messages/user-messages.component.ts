@@ -31,6 +31,9 @@ export class UserMessagesComponent implements OnInit {
 
   selectedPostGroup2: any[] = [];
 
+  unreadMessagesCount:number =0;
+  unreadMessagesCount2:number =0;
+  testmessages: Message[] = [];
 
   latestMessages: any[] = []; // Assuming latestMessages is an array of messages
   transformedMessages: any[] = []; // Assuming transformedMessages is an array of message groups
@@ -61,6 +64,7 @@ export class UserMessagesComponent implements OnInit {
           }
         }),
         switchMap((messages: Message[]) => {
+          console.log('all messages befor',messages)
           const postIds = messages
             .map((message) => message.post_id)
             .filter((postId) => postId);
@@ -80,13 +84,23 @@ export class UserMessagesComponent implements OnInit {
             isOpen: false,
             showFullText: false,
           };
+          
         });
+        console.log('all messages after',messages)
         this.transformedMessages = this.groupMessagesByPostId(this.messages);
         this.latestMessages = this.transformedMessages.map((group) => group[group.length - 1]);
 
         console.log('this.transformedMessages', this.transformedMessages);
         console.log('this.latestMessages', this.latestMessages);
         console.log('this.messages new', this.messages);
+
+        this.unreadMessagesCount2 = this.updateUnreadMessagesCount(this.messages);
+        console.log('this.unreadMessagesCount2',this.unreadMessagesCount2)
+      });
+
+      this.messageService.unreadMessagesCount$.subscribe((count) => {
+        this.unreadMessagesCount = count;
+        console.log(' this.unreadMessagesCount start count',count)
       });
   }
 
@@ -125,9 +139,10 @@ export class UserMessagesComponent implements OnInit {
       (response) => {
         console.log('Post updated successfully:', response);
         const updatedUnreadCount = response.updatedUnreadCount;
-        this.messageService.updateUnreadMessagesCount(updatedUnreadCount);
-        this.loadUserMessages();
-              },
+        console.log('response.updatedUnreadCount',response.updatedUnreadCount)
+        // this.messageService.updateUnreadMessagesCount(updatedUnreadCount);
+        this.loadUserMessages(); 
+      },
       (error) => {
         console.error('Error updating post:', error);
       }
@@ -164,7 +179,7 @@ export class UserMessagesComponent implements OnInit {
 
 
   generateLink(message: Message): string {
-    console.log('generateLink message message message',message)
+    // console.log('generateLink message message message',message)
     if (message.customLink) {
       return message.customLink;
     }
@@ -172,8 +187,8 @@ export class UserMessagesComponent implements OnInit {
     const confirmationStatusNumber = parseInt(message.postDetails.confirmation_status, 10);
     const postIdNumber = parseInt(message.post_id, 10);
   
-    console.log('generateLink confirmationStatusNumber:', confirmationStatusNumber);
-    console.log('generateLink postIdNumber:', postIdNumber);
+    // console.log('generateLink confirmationStatusNumber:', confirmationStatusNumber);
+    // console.log('generateLink postIdNumber:', postIdNumber);
 
     if (isNaN(confirmationStatusNumber) || isNaN(postIdNumber)) {
       return '/messages';
@@ -260,10 +275,83 @@ export class UserMessagesComponent implements OnInit {
   }
 
   // Method to toggle the stepper and open the last step
-  toggleGroupMessages(postGroup: any) {
+  // toggleGroupMessages(postGroup: any) {
+  //   this.isStepperOpen = !this.isStepperOpen;
+  //   this.selectedPostGroup = postGroup;
+  //   this.selectedPostGroup2 = postGroup;
+  // }
+
+  // toggleGroupMessages(postGroup: any): void {
+  //   this.isStepperOpen = !this.isStepperOpen;
+  //   this.selectedPostGroup = postGroup;
+
+  //   // Mark all messages in the selected post group as read
+  //   this.selectedPostGroup.forEach((message: Message) => {
+  //     message.isOpen = true;
+  //   });
+  // }
+
+  // toggleGroupMessages(postGroup: any): void {
+  //   this.isStepperOpen = !this.isStepperOpen;
+  //   this.selectedPostGroup = postGroup;
+
+  //   // Mark all messages in the selected post group as read
+  //   this.selectedPostGroup.forEach((message: Message) => {
+  //     if (!message.isOpen) {
+  //       message.isOpen = true;
+  //       // Update the read status in the database
+  //       this.messageService.MarkAsRead(message.message_id).subscribe(
+  //         (response) => {
+  //           console.log('Message read status updated successfully:', response);
+  //           // Handle success if needed
+  //         },
+  //         (error) => {
+  //           console.error('Error updating message read status:', error);
+  //           // Handle error if needed
+  //         }
+  //       );
+  //     }
+  //   });
+  // }
+
+  toggleGroupMessages(postGroup: any): void {
     this.isStepperOpen = !this.isStepperOpen;
     this.selectedPostGroup = postGroup;
-    this.selectedPostGroup2 = postGroup;
+  
+    // Mark all unread messages in the selected post group as read
+    this.selectedPostGroup.forEach((message: Message) => {
+      if (message.read_status === '0') {
+        // Update the read status in the database
+        this.messageService.MarkAsRead(message.message_id).subscribe(
+          (response) => {
+            console.log('Message read status updated successfully:', response);
+            // Update the read status locally
+            message.read_status = '1';
+          },
+          (error) => {
+            console.error('Error updating message read status:', error);
+            // Handle error if needed
+          }
+        );
+      }
+    });
+    this.loadUserMessages()
+    console.log('this.messages new 111111111',this.messages)
+    this.updateUnreadMessagesCount(this.messages)
+
+    // this.messageService.unreadMessagesCount$.subscribe((count) => {
+    //   this.unreadMessagesCount = count;
+    //   console.log('end count',count)
+    // });
+  }
+
+
+  // areAnyUnreadMessages(postGroup: Message[]): boolean {
+  //   return postGroup.some((message: Message) => !message.isOpen);
+  // }
+
+  areAnyUnreadMessages(postGroup: Message[]): boolean {
+    return postGroup.some((message: Message) => message.read_status === '0');
   }
 
   // resetStepper(): void {
@@ -286,6 +374,17 @@ export class UserMessagesComponent implements OnInit {
   //   }
   // }
 
+
+  updateUnreadMessagesCount(messages: Message[]) {
+    const unreadCount = this.countUnreadMessages(messages);
+    console.log('nedd to be on menu ',unreadCount)
+    this.messageService.updateUnreadMessagesCount(unreadCount);
+    return unreadCount
+  }
+
+  countUnreadMessages(messages: Message[]): number {
+    return messages.filter((message) => message.read_status === '0').length;
+  }
 
 }
 
