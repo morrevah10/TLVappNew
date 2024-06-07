@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+interface Stage {
+  imageUrl: string;
+  title: string;
+  text: string;
+}
+
 @Component({
   selector: 'app-opening',
   templateUrl: './opening.component.html',
   styleUrls: ['./opening.component.scss']
 })
-export class OpeningComponent implements OnInit{
-
-  isSkiped = false
-   
-  stages = [
+export class OpeningComponent implements OnInit {
+  private readonly STAGES: Stage[] = [
     {
       imageUrl: '../../../assets/img/open1.png',
       title: 'ברוכים הבאים לRent Share',
@@ -28,37 +31,41 @@ export class OpeningComponent implements OnInit{
     }
   ];
 
-  currentStage = 0;
+  currentStage: number = 0;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const hasVisited = localStorage.getItem('hasVisited');
-    if (hasVisited) {
-    this.router.navigate(['/login']);
+    if (localStorage.getItem('hasVisited')) {
+      this.navigateToLogin();
     }
   }
 
-  nextStage() {
-    console.log(this.currentStage)
-    if (this.currentStage < this.stages.length - 1) {
+  nextStage(): void {
+    if (this.currentStage < this.STAGES.length - 1) {
       this.currentStage++;
     }
-    if(this.currentStage==2){
+    if (this.currentStage === this.STAGES.length - 1) {
       localStorage.setItem('hasVisited', 'true');
     }
-    console.log(this.currentStage)
   }
 
-  previousStage() {
+  previousStage(): void {
     if (this.currentStage > 0) {
       this.currentStage--;
     }
   }
 
-  skipToLogin() {
-    this.router.navigate(['/login']);
-    this.isSkiped = true
+  skipToLogin(): void {
     localStorage.setItem('hasVisited', 'true');
+    this.navigateToLogin();
+  }
+
+  get stages(): Stage[] {
+    return this.STAGES;
+  }
+
+  private navigateToLogin(): void {
+    this.router.navigate(['/login']);
   }
 }

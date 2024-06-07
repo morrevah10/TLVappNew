@@ -1,5 +1,3 @@
-
-
 <section class="opening container">
   <div class="top-bar">
     <button class="skip-button" (click)="skipToLogin()">דלג</button>
@@ -27,19 +25,19 @@
       *ngIf="currentStage > 0"
       (click)="previousStage()"
     >
-      <img src="../../../assets/img/previus.png" alt="" />
+      <img src="../../../assets/img/previus.png" alt="Previous Stage" />
     </button>
     <button
       class="open-btn next"
       *ngIf="currentStage < stages.length - 1"
       (click)="nextStage()"
     >
-      <img src="../../../assets/img/next.png" alt="" />
+      <img src="../../../assets/img/next.png" alt="Next Stage" />
     </button>
 
     <button class="open-btn login" *ngIf="currentStage === stages.length - 1" (click)="skipToLogin()">
-        <img src="../../../assets/img/next.png" alt="" />
-        מסך התחברות
+      <img src="../../../assets/img/next.png" alt="Login" />
+      מסך התחברות
     </button>
   </div>
 </section>

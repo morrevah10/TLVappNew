@@ -1,29 +1,21 @@
-
-
 <section class="login-container">
   <div class="login-content">
-
-   
-
     <div class="title">
       <p class="text">{{greetingMessage}}</p>
       <p class="text">בוא נתחבר לחשבון שלך</p>
     </div>
-
-
     <div class="form-mobile">
       <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
-      
         <div class="form-group">
           <label class="small-text" for="email">*אימייל</label>
           <input
-            type="text"
+            type="email"
             formControlName="email"
             class="form-control"
             [ngClass]="{
               'is-invalid': submitted && loginForm.get('email')?.errors
             }"
-            />
+          />
           <div
             *ngIf="submitted && loginForm.get('email')?.errors"
             class="invalid-feedback"
@@ -35,16 +27,15 @@
               אימייל הוא שדה חובה
             </div>
             <div *ngIf="loginForm.get('email')?.hasError('email')">
-             הכנס כתובת אימייל חוקית
+              הכנס כתובת אימייל חוקית
             </div>
           </div>
         </div>
-    
         <div class="form-group">
-          <label class="small-text" for="password"> *סיסמא</label>
+          <label class="small-text" for="password">*סיסמא</label>
           <div class="password-input-container">
             <input
-              type="{{ showPassword ? 'text' : 'password' }}"
+              [type]="showPassword ? 'text' : 'password'"
               formControlName="password"
               class="form-control"
               [ngClass]="{
@@ -71,50 +62,32 @@
               class="required"
               *ngIf="loginForm.get('password')?.hasError('required')"
             >
-             סיסמא היא שדה חובה
+              סיסמא היא שדה חובה
             </div>
           </div>
         </div>
-    
-
-        <!-- <div class="form-group">
-          <div class="form-check">
-            <input type="checkbox" (click)="toggleRememberMe()" />
-            <label class="form-check-label" for="rememberMe">זכור אותי</label>
-          </div>
-        </div> -->
-
-
-        <div class="error-message" *ngIf="this.errorMassege">
-          {{ this.errorMassege }}
+        <div class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
         </div>
-    
       </form>
     </div>
-
-    
     <div class="btn-group">
-      <button [disabled]="loading" class="btn-large" (click)="onFormSubmit()"
-      [ngClass]="{
-        'btn-large-dis': loading,
-        'btn-large ': !loading,
-      }">
-        <span *ngIf="loading" class="btn-large"></span>
+      <button [disabled]="loading" class="btn-large" (click)="onFormSubmit()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
         התחברות
       </button>
-      
       <span class="small-text">
-      שחכת סיסמא?
+        שחכת סיסמא?
         <span routerLink="/forgetPassword" class="color-text">
           שחזר סיסמא
         </span>
       </span>
-        <span routerLink="/register" class="small-text new">
-          חדשים כאן? 
-          <span class="color-text">
-          צור משתמש 
-          </span>
+      <span routerLink="/register" class="small-text new">
+        חדשים כאן?
+        <span class="color-text">
+          צור משתמש
         </span>
+      </span>
     </div>
-</div>
+  </div>
 </section>
