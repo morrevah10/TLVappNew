@@ -315,6 +315,7 @@ export class UserMessagesComponent implements OnInit {
   // }
 
   toggleGroupMessages(postGroup: any): void {
+    // this.Checknotread()
     this.isStepperOpen = !this.isStepperOpen;
     this.selectedPostGroup = postGroup;
   
@@ -335,9 +336,10 @@ export class UserMessagesComponent implements OnInit {
         );
       }
     });
-    this.loadUserMessages()
-    console.log('this.messages new 111111111',this.messages)
-    this.updateUnreadMessagesCount(this.messages)
+    this.Checknotread()
+    // this.loadUserMessages()
+    // console.log('this.messages new 111111111',this.messages)
+    // this.updateUnreadMessagesCount(this.messages)
 
     // this.messageService.unreadMessagesCount$.subscribe((count) => {
     //   this.unreadMessagesCount = count;
@@ -374,6 +376,11 @@ export class UserMessagesComponent implements OnInit {
   //   }
   // }
 
+  Checknotread(){
+    this.loadUserMessages()
+    console.log('this.messages new 111111111',this.messages)
+    this.updateUnreadMessagesCount(this.messages)
+  }
 
   updateUnreadMessagesCount(messages: Message[]) {
     const unreadCount = this.countUnreadMessages(messages);
